@@ -44,26 +44,6 @@
           </template>
         </Carousel>
       </ClientOnly>
-
-      <div class="mx-auto max-w-7xl">
-        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 lg:grid-cols-2 xl:gap-x-8">
-          <div v-for="card in cardsOne" :key="card" class="relative group transit">
-            <div
-              class="block xs:min-w-full rounded-2xl bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
-              <div class="relative overflow-hidden bg-no-repeat bg-cover">
-                <img class="w-full transit" :src="card.img" />
-                <div
-                  class="absolute inset-0 flex items-center justify-center transition-opacity opacity-0 bg-black/50 group-hover:opacity-100">
-                  <div class="text-center">
-                    <p class="text-lg capitalize">{{ card.subtitle }}</p>
-                    <p class="font-semibold text-red-500 capitalize text-8xl">{{ card.title }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
