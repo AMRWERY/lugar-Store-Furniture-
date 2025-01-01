@@ -26,9 +26,9 @@
                     <div class="flex-1 w-full min-w-0 space-y-4 md:order-2">
                       <div class="flex">
                         <nuxt-link to="" class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{
-                          item.title }}</nuxt-link>
+                          $i18n.locale === 'ar' ? item.titleAr : item.title }}</nuxt-link>
                         <div class="flex justify-center text-end md:order-4 md:w-32 space-s-2 ms-auto">
-                          <p class="text-base font-bold text-gray-900 dark:text-white">${{ item.price }}</p>
+                          <p class="text-base font-bold text-gray-900 dark:text-white">${{ item.discountedPrice }}</p>
                           <p class="mt-0.5 text-sm text-gray-400 line-through dark:text-white" v-if="item.originalPrice">
                             ${{ item.originalPrice }}</p>
                         </div>
@@ -125,7 +125,7 @@
   
   const totalAmount = computed(() => {
     return cartStore.cart.reduce((total, item) => {
-      return total + (parseFloat(item.price) * item.quantity);
+      return total + (parseFloat(item.discountedPrice) * item.quantity);
     }, 0).toFixed(2);
   });
   
