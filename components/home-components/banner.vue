@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="relative w-full bg-center bg-cover hero-section"
-      :style="{ backgroundImage: `url(${heroImage})` }"
-    >
+    <div class="relative w-full bg-center bg-cover hero-section" :style="{ backgroundImage: `url(${heroImage})` }">
       <div class="absolute inset-0 opacity-50"></div>
       <div class="relative z-10 flex items-center justify-center w-full h-full text-center text-white">
         <div class="px-6 space-y-6 sm:px-8 md:px-12">

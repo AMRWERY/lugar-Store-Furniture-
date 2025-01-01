@@ -7,7 +7,7 @@
         <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
       </div>
 
-      
+
     </div>
   </div>
 </template>
