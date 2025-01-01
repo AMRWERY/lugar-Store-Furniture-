@@ -37,9 +37,9 @@
                 <p class="max-w-md mb-8 text-gray-700 dark:text-gray-400">
                   {{ $i18n.locale === 'ar' ? selectedProduct?.descriptionAr : selectedProduct?.description }}
                 </p>
-                <p class="items-center inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400">
+                <p class="items-center inline-block space-x-2 text-2xl font-semibold text-gray-700 dark:text-gray-400">
                   <span>LE {{ selectedProduct?.discountedPrice }}</span>
-                  <span class="text-lg font-normal text-gray-500 line-through me-3 dark:text-gray-400">LE {{
+                  <span class="text-lg font-normal text-gray-500 line-through dark:text-gray-400">LE {{
                     selectedProduct?.originalPrice }}</span>
                 </p>
               </div>
@@ -187,6 +187,7 @@ const handleAddToCart = async () => {
     await cartStore.addToCart(
       product.id,
       product.title,
+      product.titleAr,
       product.discountedPrice,
       product.originalPrice,
       product.imgOne,

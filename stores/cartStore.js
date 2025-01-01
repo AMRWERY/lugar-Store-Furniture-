@@ -38,6 +38,7 @@ export const useCartStore = defineStore("cart", {
     async addToCart(
       id,
       title,
+      titleAr,
       discountedPrice,
       originalPrice,
       imgOne,
@@ -46,24 +47,16 @@ export const useCartStore = defineStore("cart", {
       discount,
       quantity
     ) {
-      // const authStore = useAuthStore();
-      // const userId = authStore.userId;
-      // if (!userId) {
-      //   // console.error("User ID is not defined.");
-      //   return;
-      // }
       if (this.cart.length === 0) {
         await this.fetchCart();
       }
-      const existingProduct = this.cart.find(
-        (item) => item.productId === id && item.userId === userId
-      );
+      const existingProduct = this.cart.find((item) => item.productId === id);
       if (existingProduct) {
         try {
           const docRef = doc(db, "cart", existingProduct.docId);
           const newQuantity = (existingProduct.quantity || 0) + quantity;
           await updateDoc(docRef, { quantity: newQuantity });
-          existingProduct.quantity = newQuantity;
+          existingProduct.quantity = newQuantity; // Update local cart state
         } catch (error) {
           console.error("Error updating product quantity in Firestore:", error);
         }
@@ -71,6 +64,7 @@ export const useCartStore = defineStore("cart", {
         const product = {
           productId: id,
           title,
+          titleAr,
           discountedPrice,
           originalPrice,
           imgOne,
@@ -78,7 +72,6 @@ export const useCartStore = defineStore("cart", {
           subCategoryTitle,
           discount,
           quantity,
-          // userId,
         };
         try {
           const docRef = await addDoc(collection(db, "cart"), product);
