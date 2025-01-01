@@ -1,7 +1,7 @@
 <template>
     <div>
         <button v-if="isVisible" @click="scrollToTop"
-            class="fixed flex items-center justify-center p-3 text-white transition-all duration-300 bg-[#ba9476] border rounded-full shadow-lg bottom-20 end-8"
+            class="fixed flex items-center justify-center p-3 text-white transition-all duration-300 bg-black border rounded-full shadow-lg bottom-20 end-8"
             aria-label="Scroll to top">
             <icon name="material-symbols:arrow-upward" />
         </button>
