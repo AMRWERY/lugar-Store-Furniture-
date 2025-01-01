@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isLoginPage">
-      <header class="sticky inset-0 bg-[#c49e82] text-white h-10">
+      <header class="sticky inset-0 bg-[#c49e82] text-white h-14">
         <nav
           class="flex items-center justify-between h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
 
@@ -77,8 +77,8 @@
             </li>
             <li><nuxt-link to="/portfolio"
                 class="text-sm font-medium text-gray-700 capitalize hover:text-blue-500">Portfolio</nuxt-link></li>
-            <li><nuxt-link to="" class="text-sm font-medium text-gray-700 capitalize hover:text-blue-500">customize your
-                furniture</nuxt-link></li>
+            <!-- <li><nuxt-link to="" class="text-sm font-medium text-gray-700 capitalize hover:text-blue-500">customize your
+                furniture</nuxt-link></li> -->
           </ul>
         </nav>
       </header>
