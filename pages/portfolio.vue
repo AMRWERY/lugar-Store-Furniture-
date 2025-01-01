@@ -155,8 +155,8 @@
 
 <script setup>
 const sortOptions = [
-  { name: 'Featured', href: '#', current: true },
-  { name: 'Best Selling', href: '#', current: false },
+  { name: 'Customer Choice', href: '#', current: true },
+  { name: 'Top Seller', href: '#', current: false },
   { name: 'Alphabetically, A - Z', href: '#', current: false },
   { name: 'Alphabetically, Z - A', href: '#', current: false },
   { name: 'Price, low to high', href: '#', current: false },
