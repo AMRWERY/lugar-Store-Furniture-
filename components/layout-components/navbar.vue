@@ -23,6 +23,21 @@
 
           <!-- Sign-in -->
           <div class="flex items-center gap-7">
+            <span class="flex items-center space-s-1">
+                      <nuxt-link to="/shopping-cart" class="relative">
+                        <span
+                          class="absolute top-0 inline-flex items-center justify-center w-5 h-5 -mt-2 text-xs text-white bg-black rounded-full -me-3 end-2">
+                          {{ cartStore.cart.length }}
+                        </span>
+                        <button type="button" class="relative rounded-full" data-twe-toggle="tooltip"
+                          data-twe-placement="bottom" :title="$t('tooltip.your_cart')">
+                          <span class="absolute -inset-1.5" />
+                          <span class="sr-only">View cart</span>
+                          <icon name="clarity:shopping-cart-line" class="mt-0.5" />
+                        </button>
+                      </nuxt-link>
+                    </span>
+                    
             <nuxt-link to="https://wa.me/201023351915" target="_blank">
               <icon name="nimbus:whatsapp" size="20px" class="mt-1" />
             </nuxt-link>
@@ -122,4 +137,8 @@ const logout = async () => {
 
 const route = useRoute();
 const isLoginPage = computed(() => route.path === '/login')
+
+import { useCartStore } from '@/stores/cartStore';
+
+const cartStore = useCartStore();
 </script>

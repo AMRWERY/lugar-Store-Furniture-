@@ -43,31 +43,41 @@
                     selectedProduct?.originalPrice }}</span>
                 </p>
               </div>
-              <div class="mb-8 me-4">
-                <div class="w-28">
-                  <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
-                    <button
-                      class="w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300">
-                      <icon name="clarity:minus-line" size="20px" class="m-auto" />
-                    </button>
-                    <input type="number"
-                      class="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"
-                      placeholder="1" />
-                    <button
-                      class="w-20 h-full text-gray-600 bg-gray-100 border-l rounded-r outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:bg-gray-900 hover:text-gray-700 hover:bg-gray-300">
-                      <icon name="clarity:plus-line" size="20px" class="m-auto" />
-                    </button>
+              <div class="flex flex-wrap items-center">
+                <div class="mb-8 me-4">
+                  <div class="w-28">
+                    <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
+                      <button @click="decrementQuantity"
+                        class="flex items-center justify-center w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300">
+                        <icon name="system-uicons:minus" />
+                      </button>
+                      <input type="number" v-model="quantity"
+                        class="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"
+                        placeholder="1" />
+                      <button @click="incrementQuantity"
+                        class="flex items-center justify-center w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300">
+                        <icon name="system-uicons:plus" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="flex flex-wrap items-center">
                 <div class="mb-4 me-4 lg:mb-0">
-                  <button
+                  <button @click="handleAddToCart"
                     class="w-[300px] h-10 p-2 bg-blue-500 me-4 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 flex items-center justify-center">
-                    Buy Now
-                    <icon name="clarity:shopping-cart-line" class="ms-2" />
+                    <div class="flex items-center justify-center" v-if="loading">
+                      <span class="text-center me-2">{{ $t('loading_btn.adding_to_cart') }}...</span>
+                      <icon name="svg-spinners:270-ring-with-bg" />
+                    </div>
+                    <div class="flex items-center" v-else>
+                      <span>Buy Now</span>
+                      <icon name="clarity:shopping-cart-line" class="ms-2" />
+                    </div>
                   </button>
                 </div>
+
+                <p v-if="itemAdded" class="mt-2 mb-3 text-sm text-center text-green-500">{{ itemAdded }}</p>
               </div>
             </div>
           </div>
@@ -78,6 +88,8 @@
 </template>
 
 <script setup>
+import { useCartStore } from '@/stores/cartStore';
+
 const config = {
   itemsToShow: 4,
   wrapAround: true,
@@ -105,13 +117,13 @@ const store = useNewProductsStoreStore()
 const route = useRoute()
 const selectedImage = ref('');
 
-const selectedProduct = computed(() =>
-  store.products.find((product) => product.id === route.params.id)
-);
+const selectedProduct = computed(() => {
+  return store.products.find((product) => product.id === route.params.id);
+});
 
-onMounted(() => {
+onMounted(async () => {
   if (!store.products.length) {
-    store.fetchProducts();
+    await store.fetchProducts();
   }
 });
 
@@ -147,5 +159,74 @@ const imageList = computed(() => {
 
 const setSelectedImage = (image) => {
   selectedImage.value = image;
+};
+
+const cartStore = useCartStore();
+const itemAdded = ref('')
+const { t } = useI18n()
+const loading = ref(false);
+
+const isInCart = computed(() =>
+  cartStore.isInCart(store.selectedProduct?.id)
+);
+
+const showToast = ref(false);
+const toastTitle = ref('');
+const toastMessage = ref('');
+const toastType = ref('');
+const toastIcon = ref('')
+
+const handleAddToCart = async () => {
+  const product = selectedProduct.value;
+  if (!product) {
+    // console.error("No selected product available.");
+    return;
+  }
+  try {
+    loading.value = true;
+    await cartStore.addToCart(
+      product.id,
+      product.title,
+      product.discountedPrice,
+      product.originalPrice,
+      product.imgOne,
+      product.categoryTitle,
+      product.subCategoryTitle,
+      product.discount,
+      quantity.value,
+    );
+    itemAdded.value = "Product added to cart!";
+    setTimeout(() => (itemAdded.value = ""), 3000);
+    showToast.value = true;
+    toastTitle.value = t('toast.great');
+    toastMessage.value = t('toast.item_added_to_your_cart');
+    toastType.value = 'success';
+    toastIcon.value = 'clarity:shopping-cart-line'
+  } catch (error) {
+    console.error("Error adding product to cart:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+const quantity = ref(1);
+
+const incrementQuantity = () => {
+  quantity.value++;
+  updateQuantityInStore(quantity.value);
+};
+
+const decrementQuantity = () => {
+  if (quantity.value > 1) {
+    quantity.value--;
+    updateQuantityInStore(quantity.value);
+  }
+};
+
+const updateQuantityInStore = async (newQuantity) => {
+  const productId = store.selectedProduct?.id;
+  if (productId) {
+    await cartStore.updateQuantityInCart(productId, newQuantity);
+  }
 };
 </script>

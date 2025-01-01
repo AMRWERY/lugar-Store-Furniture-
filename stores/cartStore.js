@@ -21,16 +21,8 @@ export const useCartStore = defineStore("cart", {
     async fetchCart() {
       this.isLoading = true;
       try {
-        const authStore = useAuthStore();
-        const userId = authStore.userId;
-        if (!userId) {
-          // console.error("User ID is not defined.");
-          this.cart = [];
-          return;
-        }
         const cartRef = collection(db, "cart");
-        const cartQuery = query(cartRef, where("userId", "==", userId));
-        const querySnapshot = await getDocs(cartQuery);
+        const querySnapshot = await getDocs(cartRef);
         this.cart = querySnapshot.docs.map((doc) => ({
           docId: doc.id,
           ...doc.data(),
@@ -46,7 +38,7 @@ export const useCartStore = defineStore("cart", {
     async addToCart(
       id,
       title,
-      price,
+      discountedPrice,
       originalPrice,
       imgOne,
       categoryTitle,
@@ -54,12 +46,12 @@ export const useCartStore = defineStore("cart", {
       discount,
       quantity
     ) {
-      const authStore = useAuthStore();
-      const userId = authStore.userId;
-      if (!userId) {
-        // console.error("User ID is not defined.");
-        return;
-      }
+      // const authStore = useAuthStore();
+      // const userId = authStore.userId;
+      // if (!userId) {
+      //   // console.error("User ID is not defined.");
+      //   return;
+      // }
       if (this.cart.length === 0) {
         await this.fetchCart();
       }
@@ -79,14 +71,14 @@ export const useCartStore = defineStore("cart", {
         const product = {
           productId: id,
           title,
-          price,
+          discountedPrice,
           originalPrice,
           imgOne,
           categoryTitle,
           subCategoryTitle,
           discount,
           quantity,
-          userId,
+          // userId,
         };
         try {
           const docRef = await addDoc(collection(db, "cart"), product);
