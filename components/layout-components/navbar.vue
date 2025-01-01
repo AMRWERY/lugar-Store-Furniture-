@@ -77,8 +77,7 @@
             </li>
             <li><nuxt-link to="/portfolio"
                 class="text-sm font-medium text-gray-700 capitalize hover:text-blue-500">Portfolio</nuxt-link></li>
-            <!-- <li><nuxt-link to="" class="text-sm font-medium text-gray-700 capitalize hover:text-blue-500">customize your
-                furniture</nuxt-link></li> -->
+            <li><nuxt-link to="" class="text-sm font-medium text-gray-700 capitalize hover:text-blue-500">Contact Us</nuxt-link></li>
           </ul>
         </nav>
       </header>
