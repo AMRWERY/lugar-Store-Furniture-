@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!isLoginPage">
-      <header class="sticky inset-0 bg-[#c49e82] text-white h-14">
+      <header class="sticky inset-0 text-white bg-black h-14">
         <nav
           class="flex items-center justify-between h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
 
@@ -26,7 +26,7 @@
             <span class="flex items-center space-s-1">
               <nuxt-link to="/shopping-cart" class="relative">
                 <span
-                  class="absolute top-0 inline-flex items-center justify-center w-5 h-5 -mt-2 text-xs text-white bg-black rounded-full -me-3 end-2">
+                  class="absolute top-0 inline-flex items-center justify-center w-5 h-5 -mt-2 text-xs text-white bg-red-600 rounded-full -me-3 end-2">
                   {{ cartStore.cart.length }}
                 </span>
                 <button type="button" class="relative rounded-full" data-twe-toggle="tooltip"
