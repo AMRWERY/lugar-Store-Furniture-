@@ -80,8 +80,8 @@
             <li><nuxt-link to="/"
                 class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Home</nuxt-link>
             </li>
-            <li><nuxt-link to="/portfolio"
-                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Portfolio</nuxt-link></li>
+            <li><nuxt-link to="/all-products"
+                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Products</nuxt-link></li>
             <li><nuxt-link to="/contact-us"
                 class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Contact Us</nuxt-link></li>
           </ul>

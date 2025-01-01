@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-7xl">
       <div class="max-w-2xl py-8 mx-auto lg:max-w-none">
         <div class="space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-          <nuxt-link :to="`/portfolio/${product.id}`" v-for="product in paginatedProducts" :key="product.id" class="relative group">
+          <nuxt-link :to="`/all-products/${product.id}`" v-for="product in paginatedProducts" :key="product.id" class="relative group">
             <img :src="product.imgOne"
               class="w-full rounded-lg bg-white object-cover group-hover:opacity-75 max-sm:h-80 sm:aspect-[2/1] lg:aspect-square" />
             <h3 class="mt-6 text-lg font-semibold text-gray-700">
