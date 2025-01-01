@@ -86,7 +86,7 @@
                   <p class="text-xl font-semibold text-gray-900 dark:text-white">{{ $t('cart.subtotal') }}</p>
                   <span class="text-xl font-semibold text-gray-900 dark:text-white">${{ totalAmount }}</span>
                 </div>
-                <nuxt-link to="" type="button"
+                <nuxt-link to="/checkout" type="button"
                   class="block w-full px-5 py-2 text-sm font-medium text-center text-white transition duration-300 bg-black border border-black rounded-md hover:bg-red-600 hover:text-white">{{
                     $t('btn.proceed_to_checkout') }}</nuxt-link>
               </div>
