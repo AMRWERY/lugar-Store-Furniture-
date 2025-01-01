@@ -29,15 +29,17 @@
           <div class="w-full px-4 md:w-1/2">
             <div class="lg:ps-20">
               <div class="pb-6 mb-8 border-b border-gray-200 dark:border-gray-700">
+                <span class="text-lg font-medium text-rose-500 dark:text-rose-200">{{ selectedProduct?.categoryTitle
+                  }}</span>
                 <h2 class="max-w-xl mt-2 mb-6 text-xl font-bold dark:text-gray-300 md:text-4xl">
-                  {{ selectedProduct?.title }}
+                  {{ $i18n.locale === 'ar' ? selectedProduct?.titleAr : selectedProduct?.title }}
                 </h2>
                 <p class="max-w-md mb-8 text-gray-700 dark:text-gray-400">
-                  {{ selectedProduct?.description }}
+                  {{ $i18n.locale === 'ar' ? selectedProduct?.descriptionAr : selectedProduct?.description }}
                 </p>
-                <p class="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400">
+                <p class="items-center inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400">
                   <span>LE {{ selectedProduct?.discountedPrice }}</span>
-                  <span class="text-xl font-normal text-gray-500 line-through me-3 dark:text-gray-400">LE {{
+                  <span class="text-lg font-normal text-gray-500 line-through me-3 dark:text-gray-400">LE {{
                     selectedProduct?.originalPrice }}</span>
                 </p>
               </div>
