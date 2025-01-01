@@ -9,6 +9,7 @@
           <select id="category" v-model="selectedSubcategory" @change="applyFilter"
             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <option value="" disabled selected>{{ $t('form.select_a_category') }}</option>
+            <option value="">{{ $t('form.all_categories') }}</option>
             <option v-for="category in uniqueSubcategories" :key="category" :value="category">{{ category }}</option>
           </select>
         </div>
@@ -20,6 +21,7 @@
           <select id="category" v-model="selectedCategory" @change="applyFilter"
             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <option value="" disabled selected>{{ $t('form.select_marketing_category') }}</option>
+            <option value="">{{ $t('form.all_marketing_categories') }}</option>
             <option v-for="category in uniqueCategories" :key="category" :value="category">{{ category }}</option>
           </select>
         </div>
@@ -31,6 +33,7 @@
           <select id="availability" v-model="selectedAvailability" @change="applyFilter"
             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <option value="" disabled selected>{{ $t('form.select_availability') }}</option>
+            <option value="">{{ $t('form.all_availability') }}</option>
             <option v-for="available in uniqueAvailability" :key="available" :value="available">{{ available }}</option>
           </select>
         </div>
@@ -160,9 +163,9 @@ const uniqueAvailability = computed(() => {
 const filteredProducts = computed(() => {
   return store.products.filter((product) => {
     const matchesCategory =
-      !selectedCategory.value || product.categoryTitle === selectedCategory.value; // Corrected line
+      !selectedCategory.value || product.categoryTitle === selectedCategory.value;
     const matchesSubcategory =
-      !selectedSubcategory.value || product.subCategoryTitle === selectedSubcategory.value; // Corrected line
+      !selectedSubcategory.value || product.subCategoryTitle === selectedSubcategory.value;
     const matchesAvailability =
       !selectedAvailability.value || product.availability === selectedAvailability.value;
     return matchesCategory && matchesSubcategory && matchesAvailability;

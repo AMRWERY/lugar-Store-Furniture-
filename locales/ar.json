@@ -73,7 +73,10 @@
     "video_link": "رابط الفيديو",
      "title_ar": "العنوان (بالعربية)",
     "description_ar": "الوصف (بالعربية)",
-    "discounted_price": "سعر مخفض"
+    "discounted_price": "سعر مخفض",
+    "all_categories": "كل الفئات",
+    "all_marketing_categories": "كل فئات التسويق",
+    "all_availability": "كل التوفرات"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",

@@ -73,7 +73,10 @@
     "video_link": "Video Link",
     "title_ar": "Title (Arabic)",
     "description_ar": "Description (Arabic)",
-    "discounted_price": "Discounted Price"
+    "discounted_price": "Discounted Price",
+    "all_categories": "All Categories",
+    "all_marketing_categories": "All Marketing Categories",
+    "all_availability": "All Availability"
   },
   "btn": {
     "reset_password": "Reset Password",
