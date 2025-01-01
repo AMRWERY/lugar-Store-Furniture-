@@ -193,6 +193,6 @@ const filters = [
 const mobileFiltersOpen = ref(false)
 
 useHead({
-  titleTemplate: () => "Portfolio",
+  titleTemplate: () => "Products",
 });
 </script>
