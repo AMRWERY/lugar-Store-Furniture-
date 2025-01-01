@@ -69,9 +69,14 @@
         </nav>
       </header>
 
-      <header class="bg-white shadow-md">
-        <nav class="max-w-6xl px-6 py-4 mx-auto">
-          <ul class="flex justify-center space-s-8">
+      <nav class="bg-white shadow-md">
+        <div class="flex items-center justify-between px-10">
+          <div>
+            <nuxt-link to="">
+              <img class="h-16 cursor-pointer" src="https://justfields.com/storage/projects/7M5rV059/LOGO1-lugar.png" />
+            </nuxt-link>
+          </div>
+          <ul class="flex items-center mx-auto space-s-8">
             <li><nuxt-link to="/"
                 class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Home</nuxt-link>
             </li>
@@ -80,8 +85,8 @@
             <li><nuxt-link to="/contact-us"
                 class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Contact Us</nuxt-link></li>
           </ul>
-        </nav>
-      </header>
+        </div>
+      </nav>
 
       <!-- overlay component -->
       <overlay :visible="showOverlay" />
