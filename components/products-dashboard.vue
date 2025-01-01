@@ -2,7 +2,7 @@
   <div>
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="flex flex-col gap-4 p-4 sm:flex-row sm:gap-4">
-        <div class="w-full sm:w-1/3">
+        <div class="w-full sm:w-1/4">
           <label for="category" class="block mb-2 text-sm font-medium text-gray-700">
             {{ $t('form.category') }}
           </label>
@@ -13,7 +13,18 @@
           </select>
         </div>
 
-        <div class="w-full sm:w-1/3">
+        <div class="w-full sm:w-1/4">
+          <label for="category" class="block mb-2 text-sm font-medium text-gray-700">
+            {{ $t('form.marketing_categories') }}
+          </label>
+          <select id="category" v-model="selectedCategory" @change="applyFilter"
+            class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            <option value="" disabled selected>{{ $t('form.select_marketing_category') }}</option>
+            <option v-for="category in uniqueCategories" :key="category" :value="category">{{ category }}</option>
+          </select>
+        </div>
+
+        <div class="w-full sm:w-1/4">
           <label for="availability" class="block mb-2 text-sm font-medium text-gray-700">
             {{ $t('form.availability') }}
           </label>
@@ -48,7 +59,7 @@
           v-for="product in paginatedProducts" :key="product.id">
           <!-- Card Body with Flex Layout -->
           <div class="flex flex-col h-full">
-            <nuxt-link to="" class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl">
+            <nuxt-link to="" class="relative flex overflow-hidden h-60 rounded-xl">
               <img class="absolute top-0 right-0 object-cover w-full h-full peer" :src="product.imgOne" />
               <img
                 class="absolute top-0 object-cover w-full h-full transition-all duration-1000 delay-100 peer -right-96 hover:right-0 peer-hover:right-0"
@@ -105,6 +116,7 @@ const productStore = useProductsStore()
 const currentPage = ref(1);
 const perPage = 10;
 const selectedSubcategory = ref('');
+const selectedCategory = ref('');
 const selectedAvailability = ref('');
 const loading = ref(false);
 
@@ -135,6 +147,12 @@ const uniqueSubcategories = computed(() => {
     : [];
 });
 
+const uniqueCategories = computed(() => {
+  return store.products?.length
+    ? [...new Set(store.products.map((product) => product.categoryTitle))]
+    : [];
+});
+
 const uniqueAvailability = computed(() => {
   return [...new Set(store.products.map((product) => product.availability))];
 });
@@ -142,10 +160,12 @@ const uniqueAvailability = computed(() => {
 const filteredProducts = computed(() => {
   return store.products.filter((product) => {
     const matchesCategory =
-      !selectedSubcategory.value || product.subCategoryTitle === selectedSubcategory.value;
+      !selectedCategory.value || product.categoryTitle === selectedCategory.value; // Corrected line
+    const matchesSubcategory =
+      !selectedSubcategory.value || product.subCategoryTitle === selectedSubcategory.value; // Corrected line
     const matchesAvailability =
-      !selectedAvailability.value || product.availability === selectedAvailability.value
-    return matchesCategory && matchesAvailability;
+      !selectedAvailability.value || product.availability === selectedAvailability.value;
+    return matchesCategory && matchesSubcategory && matchesAvailability;
   });
 });
 
