@@ -7,7 +7,7 @@
           <h1 class="text-4xl font-bold text-black sm:text-5xl md:text-6xl">
             INTERIOR DESIGN IN HOME
           </h1>
-          <p class="text-lg sm:text-2xl md:text-3xl">Summer Sale</p>
+          <p class="text-lg sm:text-2xl md:text-4xl">Summer Sale</p>
         </div>
       </div>
     </div>
@@ -25,7 +25,6 @@ const heroImage = 'https://justfields.com/storage/projects/7M5rV059/banner.jpg';
   height: 60vh;
 }
 
-/* Responsive Heights */
 @media (min-width: 640px) {
   .hero-section {
     height: 70vh;
