@@ -9,7 +9,7 @@
 
       <ClientOnly>
         <Carousel v-bind="config">
-          <Slide v-for="card in cards" :key="card">
+          <Slide v-for="card in cards.filter(product => product.subCategoryTitle === 'Top Seller')" :key="card.id">
             <div class="carousel__item">
               <div class="relative flex flex-col w-[300px] max-w-xs overflow-hidden bg-white group">
                 <nuxt-link class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl" to="">
@@ -29,9 +29,11 @@
                     </h5>
                   </nuxt-link>
                   <div class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
-                    <p>
-                      <span class="text-gray-500 dark:text-gray-400 me-1">{{
-                        card.price }} LE</span>
+                    <p class="flex items-center space-s-1">
+                      <span class="text-gray-900 me-1">{{
+                        card.discountedPrice }} LE</span>
+                      <span class="text-sm text-gray-500 line-through">{{
+                        card.originalPrice }} LE</span>
                     </p>
                   </div>
                 </div>
@@ -76,15 +78,11 @@ const config = {
   },
 };
 
-const cards = ref([
-  { imgOne: "https://justfields.com/storage/projects/7M5rV059/top-01.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/top-02.jpg', title: 'white bear', price: '100' },
-  { imgOne: "https://justfields.com/storage/projects/7M5rV059/top-03.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/top-04.jpg', title: 'penguin', price: '200' },
-  { imgOne: "https://justfields.com/storage/projects/7M5rV059/top-05.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/top-06.jpg', title: 'candy', price: '300' },
-  { imgOne: "https://justfields.com/storage/projects/7M5rV059/top-07.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/top-08.jpg', title: 'three wheel', price: '400' },
-])
+const store = useNewProductsStoreStore();
+const cards = ref([]);
 
-const cardsOne = ref([
-  { title: 'sofa', subtitle: 'save 30%', img: 'https://justfields.com/storage/projects/7M5rV059/home-card-01.jpg' },
-  { title: 'chair', subtitle: 'save 30%', img: 'https://justfields.com/storage/projects/7M5rV059/home-card-02.jpg' },
-])
+onMounted(async () => {
+  await store.fetchProducts();
+  cards.value = store.products;
+});
 </script>

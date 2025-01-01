@@ -9,7 +9,8 @@
 
             <ClientOnly>
                 <Carousel v-bind="config">
-                    <Slide v-for="card in cards" :key="card">
+                    <Slide v-for="card in cards.filter(product => product.subCategoryTitle === 'Customer Choice')"
+                        :key="card.id">
                         <div class="carousel__item">
                             <div class="relative flex flex-col w-[300px] max-w-xs overflow-hidden bg-white group">
                                 <nuxt-link class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl" to="">
@@ -29,9 +30,11 @@
                                     </nuxt-link>
                                     <div
                                         class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
-                                        <p>
-                                            <span class="text-gray-500 dark:text-gray-400 me-1">{{
-                                                card.price }} LE</span>
+                                        <p class="flex items-center space-s-1">
+                                            <span class="text-gray-900 me-1">{{
+                                                card.discountedPrice }} LE</span>
+                                            <span class="text-sm text-gray-500 line-through">{{
+                                                card.originalPrice }} LE</span>
                                         </p>
                                     </div>
                                 </div>
@@ -54,7 +57,7 @@ const config = {
     wrapAround: true,
     gap: 5,
     snapAlign: "center",
-    autoplay: 4000,
+    autoplay: 3500,
     pauseAutoplayOnHover: true,
     breakpoints: {
         200: {
@@ -76,10 +79,11 @@ const config = {
     },
 };
 
-const cards = ref([
-    { imgOne: "https://justfields.com/storage/projects/7M5rV059/choice-01.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/choice-02.jpg', title: 'Curvy Comfort', price: '500' },
-    { imgOne: "https://justfields.com/storage/projects/7M5rV059/choice-03.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/choice-04.jpg', title: 'Vento Bed', price: '600' },
-    { imgOne: "https://justfields.com/storage/projects/7M5rV059/choice-05.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/choice-06.jpg', title: 'zen bed', price: '700' },
-    { imgOne: "https://justfields.com/storage/projects/7M5rV059/choice-07.jpg", imgTwo: 'https://justfields.com/storage/projects/7M5rV059/choice-08.jpg', title: 'Sink-in L-Shape Sofa', price: '800' },
-])
+const store = useNewProductsStoreStore();
+const cards = ref([]);
+
+onMounted(async () => {
+    await store.fetchProducts();
+    cards.value = store.products;
+});
 </script>
