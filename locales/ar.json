@@ -256,7 +256,11 @@
     "delete_product": "حذف المنتج",
     "delete_user": "حذف المستخدم",
     "unblock_user": "إلغاء حظر المستخدم",
-    "block_user": "حظر المستخدم"
+    "block_user": "حظر المستخدم",
+    "edit_category": "تعديل الفئة",
+    "delete_category": "حذف الفئة",
+    "edit_marketing_category": "تعديل فئة التسويق",
+    "delete_marketing_category": "حذف فئة التسويق"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حاليًا.",

@@ -28,6 +28,7 @@
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
+                                Image
                             </p>
                         </th>
                     </tr>
@@ -46,8 +47,18 @@
                         <td class="p-4 py-5">
                             <img :src="category.imgOne" class="w-12 h-12 rounded-lg">
                         </td>
-                        <td class="p-4 py-5">
-                            <p class="text-sm text-slate-500">actions</p>
+                        <td class="p-4 py-5 text-center">
+                            <div class="flex items-center justify-center space-s-4">
+                                <button type="button" class="rounded-full" data-twe-toggle="tooltip"
+                                    data-twe-placement="top" :title="$t('tooltip.edit_category')">
+                                    <icon name="ep:edit" class="w-6 h-6 text-gray-600" />
+                                </button>
+
+                                <button type="button" class="rounded-full" data-twe-toggle="tooltip"
+                                    data-twe-placement="top" :title="$t('tooltip.delete_category')">
+                                    <icon name="ep:delete" class="w-6 h-6 text-red-600" />
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
@@ -85,6 +96,11 @@ onMounted(() => {
 });
 
 const { t } = useI18n()
+
+onMounted(async () => {
+    const { Tooltip, initTWE } = await import("tw-elements");
+    initTWE({ Tooltip });
+});
 
 definePageMeta({
     layout: 'dashboard'

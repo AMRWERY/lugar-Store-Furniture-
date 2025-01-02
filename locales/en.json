@@ -256,7 +256,11 @@
     "delete_product": "Delete Product",
     "delete_user": "Delete user",
     "unblock_user": "Unblock user",
-    "block_user": "Block user"
+    "block_user": "Block user",
+    "edit_category": "Edit Category",
+    "delete_category": "Delete Category",
+    "edit_marketing_category": "Edit Marketing Category",
+    "delete_marketing_category": "Delete Marketing Category"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty.",

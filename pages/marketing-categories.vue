@@ -43,9 +43,19 @@
                         <td class="p-4 py-5">
                             <p class="block font-semibold text-md text-slate-500">{{ subcategory.title }}</p>
                         </td>
-                        <!-- <td class="p-4 py-5">
-                            <p class="text-sm text-slate-500">actions</p>
-                        </td> -->
+                        <td class="p-4 py-5 text-center">
+                            <div class="flex items-center justify-center space-s-4">
+                                <button type="button" class="rounded-full" data-twe-toggle="tooltip"
+                                    data-twe-placement="top" :title="$t('tooltip.edit_marketing_category')">
+                                    <icon name="ep:edit" class="w-6 h-6 text-gray-600" />
+                                </button>
+
+                                <button type="button" class="rounded-full" data-twe-toggle="tooltip"
+                                    data-twe-placement="top" :title="$t('tooltip.delete_marketing_category')">
+                                    <icon name="ep:delete" class="w-6 h-6 text-red-600" />
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -83,6 +93,11 @@ onMounted(() => {
 });
 
 const { t } = useI18n()
+
+onMounted(async () => {
+    const { Tooltip, initTWE } = await import("tw-elements");
+    initTWE({ Tooltip });
+});
 
 definePageMeta({
     layout: 'dashboard'
