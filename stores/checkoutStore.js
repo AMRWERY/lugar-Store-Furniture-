@@ -20,6 +20,7 @@ export const useCheckoutStore = defineStore("checkout", {
     province: "",
     phoneNumber: "",
     address: "",
+    date: "",
   }),
 
   actions: {
@@ -78,6 +79,7 @@ export const useCheckoutStore = defineStore("checkout", {
     async saveCheckoutData() {
       try {
         const orderId = this.generateOrderId();
+        const currentDate = new Date().toLocaleDateString("en-CA");
         const docRef = await addDoc(collection(db, "checkout"), {
           orderId: orderId,
           name: this.name,
@@ -85,8 +87,9 @@ export const useCheckoutStore = defineStore("checkout", {
           province: this.province,
           phoneNumber: this.phoneNumber,
           address: this.address,
+          date: currentDate,
         });
-        console.log("Document written with ID: ", docRef.id);
+        // console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }

@@ -76,7 +76,13 @@
     "discounted_price": "سعر مخفض",
     "all_categories": "كل الفئات",
     "all_marketing_categories": "كل فئات التسويق",
-    "all_availability": "كل التوفرات"
+    "all_availability": "كل التوفرات",
+    "address": "العنوان",
+    "enter_your_address": "ادخل عنوانك",
+    "order_date": "تاريخ الطلب",
+    "choose_order_date": "ادخل تاريخ الطلب",
+    "select_province": "اختر المقاطعة",
+    "enter_your_phone": "ادخل رقم الهاتف"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -345,6 +351,8 @@
     "something_went_wrong_please_try_again": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
     "order_status_updated": "تم تحديث حالة الطلب",
     "subcategory_add_failed": "فشلت إضافة الفئة الفرعية",
-    "marketing_category_added_successfully": "تمت إضافة فئة التسويق بنجاح"
+    "marketing_category_added_successfully": "تمت إضافة فئة التسويق بنجاح",
+    "order_successful": "تم الطلب بنجاح",
+    "your_order_was_processed_successfully_thank_you": "لقد تم معالجة طلبك بنجاح، شكرًا لك"
   }
 }
