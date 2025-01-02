@@ -67,7 +67,7 @@
                                 1 }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="block text-sm text-slate-500">{{ order.orderId }}</p>
+                            <p class="block text-sm font-semibold text-slate-500">{{ order.orderId }}</p>
                         </td>
                         <td class="p-4 py-5">
                             <p class="block text-sm text-slate-500">{{ order.email }}</p>
