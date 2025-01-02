@@ -88,7 +88,8 @@
                             <p class="text-sm text-slate-500">{{ order.state }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="text-sm text-blue-700">View Items</p>
+                            <p class="text-sm text-blue-700 cursor-pointer" @click="openOrderDetails(order)">View Items
+                            </p>
                         </td>
                         <td class="p-4 py-5">
                             <p class="text-sm font-semibold">
@@ -143,6 +144,9 @@
             </div>
         </div>
 
+        <!-- order-details-dialog component -->
+        <order-details-dialog v-if="isDialogOpen" :order="selectedOrder" @close="closeDialog" />
+
         <!-- dynamic-toast component -->
         <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
             <div class="pointer-events-auto">
@@ -189,6 +193,19 @@ const updateOrderStatus = async (orderId, newStatus) => {
             order.action = null;
         }
     }
+};
+
+const isDialogOpen = ref(false);
+const selectedOrder = ref({});
+
+const openOrderDetails = (order) => {
+    selectedOrder.value = order;
+    isDialogOpen.value = true;
+};
+
+const closeDialog = () => {
+    isDialogOpen.value = false;
+    selectedOrder.value = {};
 };
 
 const { t } = useI18n()
