@@ -28,13 +28,25 @@
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Card Holder Name
+                                Date
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Card Number
+                                Phone Number
                             </p>
+                        </th>
+                        <th class="p-4 border-b border-slate-200 bg-slate-50">
+                            <p class="text-sm font-normal leading-none text-slate-500">
+                                Address
+                            </p>
+                        </th>
+                        <th class="p-4 border-b border-slate-200 bg-slate-50">
+                            <p class="text-sm font-normal leading-none text-slate-500">
+                                State
+                            </p>
+                        </th>
+                        <th class="p-4 border-b border-slate-200 bg-slate-50">
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
@@ -55,19 +67,28 @@
                                 1 }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="block text-sm text-slate-500">{{ order.id }}</p>
+                            <p class="block text-sm text-slate-500">{{ order.orderId }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="block text-sm text-slate-500">{{ order.deliveryDetails.email }}</p>
+                            <p class="block text-sm text-slate-500">{{ order.email }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="text-sm text-slate-500">{{ order.deliveryDetails.name }}</p>
+                            <p class="text-sm text-slate-500">{{ order.name }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="text-sm text-slate-500">{{ order.paymentDetails.fullNameOnCard }}</p>
+                            <p class="text-sm text-slate-500">{{ order.date }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="text-sm text-slate-500">{{ order.paymentDetails.cardNumber }}</p>
+                            <p class="text-sm text-slate-500">{{ order.phoneNumber }}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                            <p class="text-sm text-slate-500">{{ order.address }}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                            <p class="text-sm text-slate-500">{{ order.state }}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                            <p class="text-sm text-blue-700">View Items</p>
                         </td>
                         <td class="p-4 py-5">
                             <p class="text-sm font-semibold">
