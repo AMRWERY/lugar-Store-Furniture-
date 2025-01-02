@@ -26,17 +26,6 @@
                     :validation="'required|length:10,500'" :required="true" v-model="checkoutStore.address" />
                 </ClientOnly>
               </div>
-
-              <div class="flex justify-end mt-6 space-s-3">
-                <button type="submit" :disabled="loading" @click="submitCheckoutForm"
-                  class="items-center justify-center btn-style px-5 py-2.5">
-                  <div class="flex items-center justify-center" v-if="loading">
-                    <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
-                    <icon name="svg-spinners:270-ring-with-bg" />
-                  </div>
-                  <span v-else>Submit</span>
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -61,8 +50,15 @@
             </div>
 
             <div class="space-y-3">
-              <nuxt-link to="/order-summary" class="flex items-center justify-center w-full btn-style px-5 py-2.5">{{
-                $t('btn.order_summary') }}</nuxt-link>
+              <nuxt-link to="" role="button" @click="submitCheckoutForm"
+                class="flex items-center justify-center w-full btn-style px-5 py-2.5">
+                <div class="flex items-center justify-center" v-if="loading">
+                  <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
+                  <icon name="svg-spinners:270-ring-with-bg" />
+                </div>
+                <span v-else>{{
+                  $t('btn.order_summary') }}</span>
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -142,6 +138,7 @@ const submitCheckoutForm = async () => {
     console.error("Error during checkout:", error);
   } finally {
     loading.value = false;
+    navigateTo('/order-summary');
   }
 };
 
