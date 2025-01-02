@@ -126,8 +126,12 @@ const toastIcon = ref('')
 const submitCheckoutForm = async () => {
   loading.value = true;
   try {
+    const cartData = [...cartStore.cart];
+    if (!cartData || cartData.length === 0) {
+      return
+    }
     await new Promise(resolve => setTimeout(resolve, 3000));
-    await checkoutStore.saveCheckoutData();
+    await checkoutStore.saveCheckoutData(cartData);
     await cartStore.clearCart();
     showToast.value = true;
     toastTitle.value = t('toast.order_successful');

@@ -7,7 +7,7 @@
 
       <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
         <div class="flex items-center justify-between">
-          <nuxt-link to="" class="inline-flex items-center text-sm cursor-pointer hover:underline ms-auto">
+          <nuxt-link to="/all-products" class="inline-flex items-center text-sm cursor-pointer hover:underline ms-auto">
             {{ $t('cart.continue_shopping') }}
             <icon name="material-symbols:keyboard-arrow-right" class="w-4 h-4 mt-0.5" />
           </nuxt-link>

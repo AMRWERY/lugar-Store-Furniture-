@@ -76,11 +76,11 @@ export const useCheckoutStore = defineStore("checkout", {
       return `ORDER-${timestamp}-${randomNum}`;
     },
 
-    async saveCheckoutData() {
+    async saveCheckoutData(cartData) {
       try {
         const orderId = this.generateOrderId();
         const currentDate = new Date().toLocaleDateString("en-CA");
-        const docRef = await addDoc(collection(db, "checkout"), {
+        const order = {
           orderId: orderId,
           name: this.name,
           email: this.email,
@@ -88,10 +88,12 @@ export const useCheckoutStore = defineStore("checkout", {
           phoneNumber: this.phoneNumber,
           address: this.address,
           date: currentDate,
-        });
-        // console.log("Document written with ID: ", docRef.id);
+          cart: cartData,
+        };
+        const docRef = await addDoc(collection(db, "checkout"), order);
+        console.log("Checkout data saved with ID:", docRef.id);
       } catch (e) {
-        console.error("Error adding document: ", e);
+        console.error("Error adding document:", e);
       }
     },
 
