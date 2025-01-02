@@ -14,7 +14,8 @@
       </div>
 
       <!-- Product Details -->
-      <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b" v-for="item in cartStore.cart" :key="item.productId">
+      <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b" v-for="item in checkoutStore.orders[0]?.cart || []"
+        :key="item.productId">
         <div class="col-span-2">
           <img :src="item.imgOne" class="w-full h-auto rounded-lg shadow-md" />
         </div>
@@ -60,34 +61,30 @@
 
 <script setup>
 import { useCheckoutStore } from '@/stores/checkoutStore';
-import { useCartStore } from '@/stores/cartStore';
 
 const checkoutStore = useCheckoutStore();
 
 const orderId = checkoutStore.generateOrderId();
 
-const cartStore = useCartStore();
-
 const subTotalAmount = computed(() => {
-  return cartStore.cart.reduce((total, item) => {
+  return checkoutStore.orders[0]?.cart.reduce((total, item) => {
     return total + (parseFloat(item.discountedPrice) * item.quantity);
-  }, 0).toFixed(2);
+  }, 0).toFixed(2) || 0;
 });
 
 const totalDiscount = computed(() => {
-  return cartStore.cart.reduce((total, item) => {
+  return checkoutStore.orders[0]?.cart.reduce((total, item) => {
     const discount = parseFloat(item.discount);
     const quantity = item.quantity;
     if (isNaN(discount) || isNaN(quantity)) {
-      // console.error('Invalid discount or quantity', item);
       return total;
     }
     return total + (discount * quantity);
-  }, 0);
+  }, 0) || 0;
 });
 
 const averageDiscount = computed(() => {
-  const totalItems = cartStore.cart.reduce((total, item) => total + item.quantity, 0);
+  const totalItems = checkoutStore.orders[0]?.cart.reduce((total, item) => total + item.quantity, 0) || 0;
   if (totalItems > 0) {
     return (totalDiscount.value / totalItems).toFixed(2);
   } else {
@@ -104,9 +101,8 @@ const totalAmount = computed(() => {
 });
 
 onMounted(async () => {
-  await cartStore.fetchCart();
+  await checkoutStore.fetchOrders();
 });
-
 
 const { t } = useI18n()
 
