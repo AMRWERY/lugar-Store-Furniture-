@@ -50,13 +50,19 @@
                                     <icon name="skill-icons:instagram" class="w-6 h-6" />
                                 </nuxt-link>
                             </li>
+
+                            <li>
+                                <nuxt-link to="https://www.tiktok.com/@lugarfurnitureinv?_t=8sj2O0ysXQo&_r=1"
+                                    target="_blank" class="transition hover:opacity-75">
+                                    <span class="sr-only">Tiktok</span>
+                                    <icon name="logos:tiktok-icon" class="w-6 h-6" />
+                                </nuxt-link>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
-                            <!-- <p class="font-medium">Services</p> -->
-
                             <ul class="mt-6 space-y-4 text-sm">
                                 <li>
                                     <nuxt-link to="" class="transition hover:opacity-75">
@@ -79,8 +85,6 @@
                         </div>
 
                         <div>
-                            <!-- <p class="font-medium">Company</p> -->
-
                             <ul class="mt-6 space-y-4 text-sm">
                                 <li>
                                     <nuxt-link to="" class="transition hover:opacity-75">

@@ -38,11 +38,27 @@
               </nuxt-link>
             </span>
 
-            <nuxt-link to="https://wa.me/201023351915" target="_blank">
-              <icon name="nimbus:whatsapp" size="20px" class="mt-1" />
+            <nuxt-link to="https://www.facebook.com/lugarinv?mibextid=ZbWKwL" target="_blank"
+              class="transition hover:opacity-75">
+              <span class="sr-only">Facebook</span>
+              <icon name="logos:facebook" class="w-6 h-6" />
             </nuxt-link>
-            <nuxt-link to="https://www.instagram.com/lugar_furniture" target="_blank">
-              <icon name="mdi:instagram" size="20px" class="mt-1" />
+
+            <nuxt-link to="https://wa.me/201023351915" target="_blank" class="transition hover:opacity-75">
+              <span class="sr-only">Instagram</span>
+              <icon name="logos:whatsapp-icon" class="w-6 h-6" />
+            </nuxt-link>
+
+            <nuxt-link to="https://www.instagram.com/lugar_furniture" target="_blank"
+              class="transition hover:opacity-75">
+              <span class="sr-only">Instagram</span>
+              <icon name="skill-icons:instagram" class="w-6 h-6" />
+            </nuxt-link>
+
+            <nuxt-link to="https://www.tiktok.com/@lugarfurnitureinv?_t=8sj2O0ysXQo&_r=1" target="_blank"
+              class="transition hover:opacity-75">
+              <span class="sr-only">Tiktok</span>
+              <icon name="logos:tiktok-icon" class="w-6 h-6" />
             </nuxt-link>
 
             <ClientOnly>
