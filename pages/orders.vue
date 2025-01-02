@@ -145,7 +145,9 @@
         </div>
 
         <!-- order-details-dialog component -->
-        <order-details-dialog v-if="isDialogOpen" :order="selectedOrder" @close="closeDialog" />
+        <transition name="dialog">
+            <order-details-dialog v-if="isDialogOpen" :order="selectedOrder" @close="closeDialog" />
+        </transition>
 
         <!-- dynamic-toast component -->
         <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
@@ -159,7 +161,6 @@
 
 <script setup>
 const checkoutStore = useCheckoutStore();
-
 const showToast = ref(false);
 const toastTitle = ref('');
 const toastMessage = ref('');
@@ -218,3 +219,15 @@ useHead({
     titleTemplate: () => t("head.orders"),
 });
 </script>
+
+<style scoped>
+.dialog-enter-active,
+.dialog-leave-active {
+    transition: opacity 1.5s;
+}
+
+.dialog-enter,
+.dialog-leave-to {
+    opacity: 0;
+}
+</style>
