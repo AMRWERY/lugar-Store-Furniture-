@@ -115,6 +115,20 @@ export const useCartStore = defineStore("cart", {
         }
       }
     },
+
+    async clearCart() {
+      try {
+        const cartRef = collection(db, "cart");
+        const querySnapshot = await getDocs(cartRef);
+        const deletePromises = querySnapshot.docs.map((doc) => {
+          return deleteDoc(doc.ref);
+        });
+        await Promise.all(deletePromises);
+        this.cart = [];
+      } catch (error) {
+        console.error("Error clearing cart from Firestore:", error);
+      }
+    },
   },
 
   getters: {

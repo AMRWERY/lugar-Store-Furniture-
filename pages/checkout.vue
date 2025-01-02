@@ -132,6 +132,7 @@ const submitCheckoutForm = async () => {
   try {
     await new Promise(resolve => setTimeout(resolve, 3000));
     await checkoutStore.saveCheckoutData();
+    await cartStore.clearCart();
     showToast.value = true;
     toastTitle.value = t('toast.order_successful');
     toastMessage.value = t('toast.your_order_was_processed_successfully_thank_you');
