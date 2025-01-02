@@ -4,7 +4,6 @@
       <header class="sticky inset-0 text-white bg-black h-14">
         <nav
           class="flex items-center justify-between h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
-
           <!-- Announcement -->
           <div class="hidden text-sm gap-7 md:flex">
             <p>Announce something here</p>
@@ -89,7 +88,10 @@
         <div class="flex items-center justify-between px-10">
           <div>
             <nuxt-link to="">
-              <img class="h-16 cursor-pointer" src="https://justfields.com/storage/projects/7M5rV059/LOGO1-lugar.png" />
+              <!-- <img class="h-16 cursor-pointer w-[460px]"
+                src="@/assets/Lugar_Furniture_Logo.svg" /> -->
+              <img class="h-16 cursor-pointer w-[100px]"
+                src="https://justfields.com/storage/projects/7M5rV059/LOGO1-lugar.png" />
             </nuxt-link>
           </div>
           <ul class="flex items-center mx-auto space-s-8">
