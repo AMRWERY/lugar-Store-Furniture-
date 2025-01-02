@@ -5,9 +5,11 @@
       <div class="flex items-center justify-between mb-12">
         <div>
           <h2 class="text-2xl font-semibold text-gray-900">{{ $t('order_summary.order_summary') }}</h2>
-          <p class="mt-1 text-sm text-gray-500">
-            {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">{{ orderId }}</span>
-          </p>
+          <ClientOnly>
+            <p class="mt-1 text-sm text-gray-500">
+              {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">{{ orderId }}</span>
+            </p>
+          </ClientOnly>
         </div>
       </div>
 
@@ -17,7 +19,7 @@
           <img :src="item.imgOne" class="w-full h-auto rounded-lg shadow-md" />
         </div>
         <div class="col-span-10">
-          <p class="text-lg font-semibold text-gray-900">{{ item.title }}</p>
+          <p class="text-lg font-semibold text-gray-900">{{ $i18n.locale === 'ar' ? item.titleAr : item.title }}</p>
           <p class="text-sm font-semibold text-gray-700"><span class="me-1">{{ $t('order_summary.category') }} </span>{{
             item.categoryTitle }}</p>
         </div>
@@ -28,8 +30,8 @@
         <div class="col-span-8">
           <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.subtotal') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
-          <dd class="text-sm font-medium text-gray-900">${{ subTotalAmount }}</dd>
+        <div class="col-span-4 text-end">
+          <dd class="text-sm font-medium text-gray-900">{{ subTotalAmount }} LE</dd>
         </div>
       </div>
 
@@ -38,7 +40,7 @@
         <div class="col-span-8">
           <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.savings') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
+        <div class="col-span-4 text-end">
           <dd class="text-sm font-medium text-green-500">%{{ averageDiscount }}</dd>
         </div>
       </div>
@@ -48,8 +50,8 @@
         <div class="col-span-8 font-semibold text-gray-900">
           <dt class="text-xl">{{ $t('order_summary.total') }}</dt>
         </div>
-        <div class="col-span-4 text-right">
-          <dd class="text-xl font-semibold text-gray-900">${{ totalAmount }}</dd>
+        <div class="col-span-4 text-end">
+          <dd class="text-xl font-semibold text-gray-900">{{ totalAmount }} LE</dd>
         </div>
       </div>
     </div>
