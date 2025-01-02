@@ -14,20 +14,12 @@ export const useCheckoutStore = defineStore("checkout", {
     paginatedOrders: [],
     currentPage: 1,
     ordersPerPage: 2,
-    deliveryDetails: {
-      name: "",
-      email: "",
-      country: "",
-      province: "",
-      phoneNumber: "",
-    },
-    paymentDetails: {
-      fullNameOnCard: "",
-      cardNumber: "",
-      cardExpiration: "",
-      cvv: "",
-    },
     totalCheckouts: 0,
+    name: "",
+    email: "",
+    province: "",
+    phoneNumber: "",
+    address: "",
   }),
 
   actions: {
@@ -88,9 +80,13 @@ export const useCheckoutStore = defineStore("checkout", {
         const orderId = this.generateOrderId();
         const docRef = await addDoc(collection(db, "checkout"), {
           orderId: orderId,
-          deliveryDetails: this.deliveryDetails,
-          paymentDetails: this.paymentDetails,
+          name: this.name,
+          email: this.email,
+          province: this.province,
+          phoneNumber: this.phoneNumber,
+          address: this.address,
         });
+        console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
