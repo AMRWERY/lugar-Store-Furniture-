@@ -31,7 +31,7 @@ export const useCheckoutStore = defineStore("checkout", {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(this.orders);
+        // console.log(this.orders);
         this.updatePagination();
         await this.fetchTotalCheckouts();
       } catch (e) {
@@ -91,7 +91,7 @@ export const useCheckoutStore = defineStore("checkout", {
           cart: cartData,
         };
         const docRef = await addDoc(collection(db, "checkout"), order);
-        console.log("Checkout data saved with ID:", docRef.id);
+        // console.log("Checkout data saved with ID:", docRef.id);
       } catch (e) {
         console.error("Error adding document:", e);
       }
