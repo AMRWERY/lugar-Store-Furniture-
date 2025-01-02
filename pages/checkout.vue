@@ -57,7 +57,7 @@
                   <icon name="svg-spinners:270-ring-with-bg" />
                 </div>
                 <span v-else>{{
-                  $t('btn.order_summary') }}</span>
+                  $t('btn.place_order') }}</span>
               </nuxt-link>
             </div>
           </div>
