@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <div class="col-span-12 md:col-span-4">
+        <div class="col-span-12 mt-0 md:col-span-4 lg:mt-12">
           <div class="w-full mt-6 space-y-6 sm:mt-8 lg:mt-0 lg:max-w-xs xl:max-w-md">
             <div class="flow-root">
               <div class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
