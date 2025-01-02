@@ -301,7 +301,12 @@
     "savings": "Savings",
     "store_pickup": "Store Pickup",
     "tax": "Tax",
-    "total": "Total"
+    "total": "Total",
+    "email": "Email",
+    "phone_number": "Phone Number",
+    "state": "State",
+    "address": "Address",
+    "order_details": "Order Details"
   },
   "social_media": {
     "share_my": "Share my",

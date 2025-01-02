@@ -13,7 +13,7 @@ export const useCheckoutStore = defineStore("checkout", {
     orders: [],
     paginatedOrders: [],
     currentPage: 1,
-    ordersPerPage: 2,
+    ordersPerPage: 5,
     totalCheckouts: 0,
     name: "",
     email: "",

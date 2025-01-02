@@ -114,7 +114,12 @@
     "view_details": "عرض التفاصيل",
     "add_product": "إضافة منتج",
     "update_product": "تحديث المنتج",
-    "add_marketing_category": "إضافة فئة التسويق"
+    "add_marketing_category": "إضافة فئة التسويق",
+    "email": "البريد الإلكتروني",
+    "phone_number": "رقم الهاتف",
+    "state": "الولاية",
+    "address": "العنوان",
+    "order_details": "تفاصيل الطلب"
   },
   "loading_btn": {
     "loading": "جاري التحميل",

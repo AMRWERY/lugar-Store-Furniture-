@@ -88,7 +88,11 @@
                             <p class="text-sm text-slate-500">{{ order.state }}</p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="text-sm text-blue-700 cursor-pointer" @click="openOrderDetails(order)">View Items
+                            <p class="text-sm text-blue-700 cursor-pointer" @click="openOrderDetails(order)">
+                            <div class="flex items-center justify-center" v-if="order.loading">
+                                <icon name="svg-spinners:tadpole" />
+                            </div>
+                            <span v-else>View Items</span>
                             </p>
                         </td>
                         <td class="p-4 py-5">
@@ -199,8 +203,11 @@ const updateOrderStatus = async (orderId, newStatus) => {
 const isDialogOpen = ref(false);
 const selectedOrder = ref({});
 
-const openOrderDetails = (order) => {
+const openOrderDetails = async (order) => {
+    order.loading = true;
     selectedOrder.value = order;
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    order.loading = false;
     isDialogOpen.value = true;
 };
 
