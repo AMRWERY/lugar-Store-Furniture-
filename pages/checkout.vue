@@ -5,38 +5,38 @@
         <div class="col-span-12 md:col-span-8">
           <div class="lg:flex lg:items-start lg:gap-12 xl:gap-16">
             <div class="flex-1 min-w-0">
-                <h2 class="mb-6 text-xl font-semibold text-gray-900 dark:text-white">{{ $t('checkout.delivery_details')
-                  }}</h2>
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <ClientOnly>
-                    <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
-                      :validation="('required|contains_alpha')" :required="true" v-model="checkoutStore.name" />
+              <h2 class="mb-6 text-xl font-semibold text-gray-900 dark:text-white">{{ $t('checkout.delivery_details')
+                }}</h2>
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <ClientOnly>
+                  <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
+                    :validation="('required|contains_alpha')" :required="true" v-model="checkoutStore.name" />
 
-                    <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
-                      :validation="('required|email')" :required="true" v-model="checkoutStore.email" />
+                  <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
+                    :validation="('required|email')" :required="true" v-model="checkoutStore.email" />
 
-                    <dynamic-inputs :label="t('form.phone_number')" :placeholder="t('form.enter_your_phone')" type="tel"
-                      :validation="('required')" :required="true" v-model="checkoutStore.phoneNumber" />
+                  <dynamic-inputs :label="t('form.phone_number')" :placeholder="t('form.enter_your_phone')" type="tel"
+                    :validation="('required')" :required="true" v-model="checkoutStore.phoneNumber" />
 
-                    <dynamic-inputs :label="t('form.province')" :placeholder="t('form.select_province')" type="select"
-                      :validation="'required'" :required="true" v-model="checkoutStore.province" :options="cities" />
+                  <dynamic-inputs :label="t('form.the_governorate')" :placeholder="t('form.select_the_governorate')"
+                    type="select" :validation="'required'" :required="true" v-model="checkoutStore.state"
+                    :options="cities" />
 
-                    <dynamic-inputs :label="t('form.address')" :placeholder="t('form.enter_your_address')"
-                      type="textarea" :validation="'required|length:10,500'" :required="true"
-                      v-model="checkoutStore.address" />
-                  </ClientOnly>
-                </div>
+                  <dynamic-inputs :label="t('form.address')" :placeholder="t('form.enter_your_address')" type="textarea"
+                    :validation="'required|length:10,500'" :required="true" v-model="checkoutStore.address" />
+                </ClientOnly>
+              </div>
 
-                <div class="flex justify-end mt-6 space-s-3">
-                  <button type="submit" :disabled="loading" @click="submitCheckoutForm"
-                    class="items-center justify-center btn-style px-5 py-2.5">
-                    <div class="flex items-center justify-center" v-if="loading">
-                      <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
-                      <icon name="svg-spinners:270-ring-with-bg" />
-                    </div>
-                    <span v-else>Submit</span>
-                  </button>
-                </div>
+              <div class="flex justify-end mt-6 space-s-3">
+                <button type="submit" :disabled="loading" @click="submitCheckoutForm"
+                  class="items-center justify-center btn-style px-5 py-2.5">
+                  <div class="flex items-center justify-center" v-if="loading">
+                    <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
+                    <icon name="svg-spinners:270-ring-with-bg" />
+                  </div>
+                  <span v-else>Submit</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -71,7 +71,7 @@
     "select_category": "اختر الفئة",
     "select_marketing_category": "اختر فئة التسويق",
     "video_link": "رابط الفيديو",
-     "title_ar": "العنوان (بالعربية)",
+    "title_ar": "العنوان (بالعربية)",
     "description_ar": "الوصف (بالعربية)",
     "discounted_price": "سعر مخفض",
     "all_categories": "كل الفئات",
@@ -82,7 +82,9 @@
     "order_date": "تاريخ الطلب",
     "choose_order_date": "ادخل تاريخ الطلب",
     "select_province": "اختر المقاطعة",
-    "enter_your_phone": "ادخل رقم الهاتف"
+    "enter_your_phone": "ادخل رقم الهاتف",
+    "the_governorate": "المحافظة",
+    "select_the_governorate": "اختر المحافظة"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
