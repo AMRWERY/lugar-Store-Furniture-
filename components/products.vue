@@ -7,12 +7,12 @@
             class="relative flex flex-col w-full max-w-xs overflow-hidden bg-white border border-gray-100 rounded-lg shadow-md">
             <nuxt-link class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl"
               :to="`/all-products/${product.id}`">
-              <img class="absolute top-0 right-0 object-cover w-full h-full peer" :src="product.imgOne" />
+              <img class="absolute top-0 object-cover w-full h-full end-0 peer" :src="product.imgOne" />
               <img
-                class="absolute top-0 object-cover w-full h-full transition-all duration-1000 delay-100 peer -right-96 hover:right-0 peer-hover:right-0"
+                class="absolute top-0 object-cover w-full h-full transition-all duration-1000 delay-100 peer -end-96 hover:end-0 peer-hover:end-0"
                 :src="product.imgTwo" />
               <span
-                class="absolute top-0 left-0 px-2 m-2 text-sm font-medium text-center text-white bg-black rounded-full">{{
+                class="absolute top-0 px-2 m-2 text-sm font-medium text-center text-white bg-black rounded-full start-0">{{
                   product.discount }}%
                 off</span>
             </nuxt-link>
