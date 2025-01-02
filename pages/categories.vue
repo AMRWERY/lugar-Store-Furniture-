@@ -44,6 +44,9 @@
                             <p class="font-semibold text-md text-slate-500">{{ category.title }}</p>
                         </td>
                         <td class="p-4 py-5">
+                            <img :src="category.imgOne" class="w-12 h-12 rounded-lg">
+                        </td>
+                        <td class="p-4 py-5">
                             <p class="text-sm text-slate-500">actions</p>
                         </td>
                     </tr>
