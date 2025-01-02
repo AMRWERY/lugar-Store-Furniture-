@@ -24,7 +24,7 @@
 
             <div class="mt-6">
               <button type="submit" :disabled="loading" @click="signIn"
-                class="block w-full px-4 py-2 font-bold text-white bg-black border border-black rounded hover:bg-white hover:text-black focus:outline focus:shadow-outline">
+                class="block w-full px-4 py-2 btn-style">
                 <div class="flex items-center justify-center" v-if="loading">
                   <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />

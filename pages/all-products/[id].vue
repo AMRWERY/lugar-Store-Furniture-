@@ -1,89 +1,95 @@
 <template>
-  <div>
-    <section class="py-20 overflow-hidden bg-white font-poppins dark:bg-gray-800">
-      <div class="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
-        <div class="flex flex-wrap -mx-4">
-          <div class="w-full px-4 md:w-1/2">
-            <div class="sticky top-0 z-50 overflow-hidden">
-              <div class="relative mb-6 lg:mb-10" style="height: 450px">
-                <img :src="selectedImage" class="object-contain w-full h-full" />
-              </div>
-              <div class="flex-wrap hidden md:flex">
-                <ClientOnly>
-                  <Carousel v-bind="config">
-                    <Slide v-for="(image, index) in imageList" :key="index">
-                      <div class="carousel__item">
-                        <button @click="setSelectedImage(image)" type="button" class="block">
-                          <img :src="image" class="object-cover w-full h-32" />
-                        </button>
-                      </div>
-                    </Slide>
-                    <template #addons>
-                      <Navigation />
-                    </template>
-                  </Carousel>
-                </ClientOnly>
+  <div class="py-6 bg-white sm:py-8 lg:py-12">
+    <div class="max-w-screen-lg px-4 mx-auto">
+      <div class="grid gap-8 md:grid-cols-2">
+        <div class="space-y-4">
+          <div class="relative overflow-hidden bg-gray-100 rounded-lg">
+            <img :src="selectedImage" loading="lazy" class="object-cover object-center w-full h-full" />
+            <span
+              class="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm tracking-wider text-white">{{
+                selectedProduct?.discount }}% off</span>
+          </div>
+          <ClientOnly>
+            <Carousel v-bind="config">
+              <Slide v-for="(image, index) in imageList" :key="index">
+                <div class="carousel__item">
+                  <button @click="setSelectedImage(image)" type="button" class="block">
+                    <img :src="image" class="object-cover w-full h-32" />
+                  </button>
+                </div>
+              </Slide>
+              <template #addons>
+                <Navigation />
+              </template>
+            </Carousel>
+          </ClientOnly>
+        </div>
+
+        <div class="md:py-8">
+          <div class="mb-2 md:mb-3">
+            <span class="mb-0.5 inline-block text-gray-500">{{ selectedProduct?.categoryTitle }}</span>
+            <h2 class="text-2xl font-bold text-gray-800 lg:text-3xl">{{ $i18n.locale === 'ar' ? selectedProduct?.titleAr
+              :
+              selectedProduct?.title }}</h2>
+          </div>
+
+          <div class="mb-4">
+            <div class="flex items-end gap-2">
+              <span class="text-xl font-bold text-gray-800 md:text-2xl">{{ selectedProduct?.discountedPrice }} LE</span>
+              <span class="mb-0.5 text-red-500 line-through" v-if="selectedProduct?.originalPrice">{{
+                selectedProduct?.originalPrice }} LE</span>
+            </div>
+          </div>
+
+          <div class="my-8 me-4">
+            <div class="mb-3 text-lg font-semibold text-gray-800">Quantity</div>
+            <div class="w-32">
+              <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
+                <button @click="decrementQuantity"
+                  class="w-32 h-full text-gray-600 bg-gray-100 border-r outline-none cursor-pointer rounded-s dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                  <icon name="ic:baseline-minus" class="w-6 h-6 m-auto" />
+                </button>
+                <input type="number" v-model="quantity"
+                  class="flex items-center w-[70px] font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-md hover:text-black"
+                  placeholder="1" />
+                <button @click="incrementQuantity"
+                  class="w-32 h-full text-gray-600 bg-gray-100 border-r outline-none cursor-pointer rounded-e dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                  <icon name="material-symbols:add" class="w-6 h-6 m-auto" />
+                </button>
               </div>
             </div>
           </div>
-          <div class="w-full px-4 md:w-1/2">
-            <div class="lg:ps-20">
-              <div class="pb-6 mb-8 border-b border-gray-200 dark:border-gray-700">
-                <span class="text-lg font-medium text-rose-500 dark:text-rose-200">{{ selectedProduct?.categoryTitle
-                  }}</span>
-                <h2 class="max-w-xl mt-2 mb-6 text-xl font-bold dark:text-gray-300 md:text-4xl">
-                  {{ $i18n.locale === 'ar' ? selectedProduct?.titleAr : selectedProduct?.title }}
-                </h2>
-                <p class="max-w-md mb-8 text-gray-700 dark:text-gray-400">
-                  {{ $i18n.locale === 'ar' ? selectedProduct?.descriptionAr : selectedProduct?.description }}
-                </p>
-                <p class="items-center inline-block space-x-2 text-2xl font-semibold text-gray-700 dark:text-gray-400">
-                  <span>LE {{ selectedProduct?.discountedPrice }}</span>
-                  <span class="text-lg font-normal text-gray-500 line-through dark:text-gray-400">LE {{
-                    selectedProduct?.originalPrice }}</span>
-                </p>
-              </div>
-              <div class="flex flex-wrap items-center">
-                <div class="mb-8 me-4">
-                  <div class="w-28">
-                    <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
-                      <button @click="decrementQuantity"
-                        class="flex items-center justify-center w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300">
-                        <icon name="system-uicons:minus" />
-                      </button>
-                      <input type="number" v-model="quantity"
-                        class="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none text-md hover:text-black"
-                        placeholder="1" />
-                      <button @click="incrementQuantity"
-                        class="flex items-center justify-center w-20 h-full text-gray-600 bg-gray-100 border-r rounded-l outline-none cursor-pointer dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300">
-                        <icon name="system-uicons:plus" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="flex flex-wrap items-center">
-                <div class="mb-4 me-4 lg:mb-0">
-                  <button @click="handleAddToCart"
-                    class="w-[300px] h-10 p-2 bg-blue-500 me-4 dark:text-gray-200 text-gray-50 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 flex items-center justify-center">
-                    <div class="flex items-center justify-center" v-if="loading">
-                      <span class="text-center me-2">{{ $t('loading_btn.adding_to_cart') }}...</span>
-                      <icon name="svg-spinners:270-ring-with-bg" />
-                    </div>
-                    <div class="flex items-center" v-else>
-                      <span>Buy Now</span>
-                      <icon name="clarity:shopping-cart-line" class="ms-2" />
-                    </div>
-                  </button>
-                </div>
 
-                <p v-if="itemAdded" class="mt-2 mb-3 text-sm text-center text-green-500">{{ itemAdded }}</p>
+          <div class="flex gap-2.5">
+            <button @click="handleAddToCart" class="w-[300px] h-10 btn-style flex items-center justify-center">
+              <div class="flex items-center justify-center" v-if="loading">
+                <span class="text-center me-2">{{ $t('loading_btn.adding_to_cart') }}...</span>
+                <icon name="svg-spinners:270-ring-with-bg" />
               </div>
-            </div>
+              <div class="flex items-center" v-else>
+                <span>Add to cart</span>
+                <icon name="clarity:shopping-cart-line" class="ms-2" />
+              </div>
+            </button>
+          </div>
+
+          <div class="mt-10 md:mt-16 lg:mt-20">
+            <div class="mb-3 text-lg font-semibold text-gray-800">Description</div>
+            <p class="text-gray-500">
+              {{ $i18n.locale === 'ar' ? selectedProduct?.descriptionAr : selectedProduct?.description }}
+            </p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- dynamic-toast component  -->
+    <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
+      <div class="pointer-events-auto">
+        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -91,7 +97,7 @@
 import { useCartStore } from '@/stores/cartStore';
 
 const config = {
-  itemsToShow: 4,
+  itemsToShow: 3,
   wrapAround: true,
   breakpoints: {
     200: {
@@ -107,7 +113,7 @@ const config = {
       snapAlign: 'center',
     },
     1024: {
-      itemsToShow: 4,
+      itemsToShow: 3,
       snapAlign: 'start',
     },
   },
