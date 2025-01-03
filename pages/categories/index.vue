@@ -54,8 +54,10 @@
                 </nuxt-link>
 
                 <button type="button" class="rounded-full" data-twe-toggle="tooltip" data-twe-placement="top"
-                  :title="$t('tooltip.delete_category')">
-                  <icon name="ep:delete" class="w-6 h-6 text-red-600" />
+                  :title="$t('tooltip.delete_category')" @click="handleDeleteCategory(category.id)">
+                  <icon v-if="deleteCat === category.id" name="svg-spinners:6-dots-rotate" size="20px"
+                    class="text-red-500" />
+                  <icon name="ep:delete" class="w-6 h-6 text-red-600" v-else />
                 </button>
               </div>
             </td>
@@ -83,6 +85,14 @@
         </div>
       </div>
     </div>
+
+    <!-- dynamic-toast component -->
+    <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
+      <div class="pointer-events-auto">
+        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -92,6 +102,26 @@ const store = useCategoriesStore();
 onMounted(() => {
   store.fetchCategories();
 });
+
+const deleteCat = ref(null);
+const showToast = ref(false);
+const toastTitle = ref('');
+const toastMessage = ref('');
+const toastType = ref('');
+const toastIcon = ref('')
+
+const handleDeleteCategory = async (categoryId) => {
+  deleteCat.value = categoryId;
+  setTimeout(async () => {
+    await store.deleteCategory(categoryId);
+    showToast.value = true;
+    toastTitle.value = t('toast.great');
+    toastMessage.value = t('toast.category_deleted_successfully');
+    toastType.value = 'success';
+    toastIcon.value = 'mdi:check-circle';
+    deleteCat.value = null;
+  }, 3000);
+};
 
 const { t } = useI18n()
 

@@ -381,6 +381,7 @@
     "order_successful": "تم الطلب بنجاح",
     "your_order_was_processed_successfully_thank_you": "لقد تم معالجة طلبك بنجاح، شكرًا لك",
     "category_updated": "تم تحديث الفئه",
-    "category_update_failed": "فشل تحديث الفئة"
+    "category_update_failed": "فشل تحديث الفئة",
+    "category_deleted_successfully": "تم حذف الفئة بنجاح"
   }
 }

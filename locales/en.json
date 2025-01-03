@@ -381,6 +381,7 @@
     "order_successful": "Order successful",
     "your_order_was_processed_successfully_thank_you": "Your order was processed successfully, Thank you",
     "category_updated": "Category updated",
-    "category_update_failed": "Category update failed"
+    "category_update_failed": "Category update failed",
+    "category_deleted_successfully": "Category deleted successfully"
   }
 }

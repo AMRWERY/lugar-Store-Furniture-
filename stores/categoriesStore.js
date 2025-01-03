@@ -6,6 +6,7 @@ import {
   addDoc,
   doc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 export const useCategoriesStore = defineStore("categoriesStore", {
@@ -61,19 +62,6 @@ export const useCategoriesStore = defineStore("categoriesStore", {
       }
     },
 
-    async fetchSubCategories() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "subCategories"));
-        this.subCategories = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.updatePagination();
-      } catch (error) {
-        console.error("Error fetching subcategories:", error);
-      }
-    },
-
     async addCategory(title, imgOne) {
       try {
         const docRef = await addDoc(collection(db, "categories"), {
@@ -85,6 +73,32 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         // console.log("Category added:", newCategory);
       } catch (error) {
         console.error("Error adding category:", error);
+      }
+    },
+
+    async deleteCategory(categoryId) {
+      try {
+        const categoryDoc = doc(db, "categories", categoryId);
+        await deleteDoc(categoryDoc);
+        this.categories = this.categories.filter(
+          (category) => category.id !== categoryId
+        );
+        this.updatePagination();
+      } catch (error) {
+        console.error("Error deleting category:", error);
+      }
+    },
+
+    async fetchSubCategories() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "subCategories"));
+        this.subCategories = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        this.updatePagination();
+      } catch (error) {
+        console.error("Error fetching subcategories:", error);
       }
     },
 
