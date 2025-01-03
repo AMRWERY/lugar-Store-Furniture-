@@ -263,7 +263,8 @@
     "edit_category": "Edit Category",
     "delete_category": "Delete Category",
     "edit_marketing_category": "Edit Marketing Category",
-    "delete_marketing_category": "Delete Marketing Category"
+    "delete_marketing_category": "Delete Marketing Category",
+    "order_status_updated": "Order status Updated"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty.",
