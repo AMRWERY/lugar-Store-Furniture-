@@ -88,7 +88,11 @@
     "start_date": "تاريخ البدء",
     "end_date": "تاريخ الانتهاء",
     "edit_category": "تعديل الفئة",
-    "add_category": "اضافه فئه"
+    "add_category": "اضافه فئه",
+    "edit_marketing_category": "تعديل فئة التسويق",
+    "marketing_category_title": "عنوان فئة التسويق",
+    "enter_marketing_category_title": "أدخل عنوان فئة التسويق",
+    "add_marketing_category": "إضافة فئة التسويق"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -125,7 +129,8 @@
     "address": "العنوان",
     "order_details": "تفاصيل الطلب",
     "filter": "تصفية",
-    "edit_category": "تعديل الفئة"
+    "edit_category": "تعديل الفئة",
+    "update_marketing_category": "تحديث فئة التسويق"
   },
   "loading_btn": {
     "loading": "جاري التحميل",
@@ -153,7 +158,10 @@
     "orders": "الطلبات",
     "sub_categories": "الفئات الفرعية",
     "edit_category": "تعديل الفئة",
-    "add_category": "اضافه فئه"
+    "add_category": "اضافه فئه",
+    "edit_marketing_category": "تعديل فئة التسويق",
+    "marketing_categories": "فئات التسويق",
+    "add_marketing_category": "اضافه فئه التسوق"
   },
   "alert": {
     "success": "نجاح",
@@ -382,6 +390,9 @@
     "your_order_was_processed_successfully_thank_you": "لقد تم معالجة طلبك بنجاح، شكرًا لك",
     "category_updated": "تم تحديث الفئه",
     "category_update_failed": "فشل تحديث الفئة",
-    "category_deleted_successfully": "تم حذف الفئة بنجاح"
+    "category_deleted_successfully": "تم حذف الفئة بنجاح",
+    "marketing_category_updated": "تم تحديث فئة التسويق",
+    "marketing_category_update_failed": "فشل في تحديث فئة التسويق",
+    "marketing_category_deleted_successfully": "تم حذف فئة التسويق بنجاح"
   }
 }

@@ -88,7 +88,11 @@
     "start_date": "Start Date",
     "end_date": "End Date",
     "edit_category": "Edit Category",
-    "add_category": "Add Category"
+    "add_category": "Add Category",
+    "edit_marketing_category": "Edit Marketing Category",
+    "marketing_category_title": "Marketing Category Title",
+    "enter_marketing_category_title": "Enter Marketing Category Title",
+    "add_marketing_category": "Add Marketing Category"
   },
   "btn": {
     "reset_password": "Reset Password",
@@ -120,7 +124,8 @@
     "update_product": "Update Product",
     "add_marketing_category": "Add Marketing Category",
     "filter": "Filter",
-    "edit_category": "Edit Category"
+    "edit_category": "Edit Category",
+    "update_marketing_category": "Update Marketing Category"
   },
   "loading_btn": {
     "loading": "Loading",
@@ -148,7 +153,10 @@
     "orders": "Orders",
     "sub_categories": "Subcategories",
     "edit_category": "Edit Category",
-    "add_category": "Add Category"
+    "add_category": "Add Category",
+    "edit_marketing_category": "Edit Marketing Category",
+    "marketing_categories": "Marketing Categories",
+    "add_marketing_category": "Add Marketing Category"
   },
   "alert": {
     "success": "Success",
@@ -382,6 +390,9 @@
     "your_order_was_processed_successfully_thank_you": "Your order was processed successfully, Thank you",
     "category_updated": "Category updated",
     "category_update_failed": "Category update failed",
-    "category_deleted_successfully": "Category deleted successfully"
+    "category_deleted_successfully": "Category deleted successfully",
+    "marketing_category_updated": "Market Category updated",
+    "marketing_category_update_failed": "Market Category update failed",
+    "marketing_category_deleted_successfully": "Market Category deleted successfully"
   }
 }

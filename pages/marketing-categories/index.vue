@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center justify-between w-full mt-1 mb-3 ps-3">
             <div class="flex items-center">
-                <h3 class="text-lg font-semibold text-slate-800">Marketing Categories</h3>
+                <h3 class="text-lg font-semibold text-slate-800">{{ $t('layout.marketing_categories') }}</h3>
             </div>
             <nuxt-link to="/marketing-categories/add-marketing-categories" type="button"
                 class="flex items-center px-4 py-2.5 btn-style">

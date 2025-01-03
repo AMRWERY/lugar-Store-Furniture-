@@ -7,7 +7,7 @@
         <div class="mb-4">
           <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
             $t('form.marketing_category_title')
-            }}</label>
+          }}</label>
           <input id="subcategory-title" type="text" v-model="newSubCategoryTitle"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_marketing_category_title')" required />
@@ -140,6 +140,6 @@ definePageMeta({
 })
 
 useHead({
-  titleTemplate: () => t("head.categories"),
+  titleTemplate: () => t("head.add_marketing_category"),
 });
 </script>

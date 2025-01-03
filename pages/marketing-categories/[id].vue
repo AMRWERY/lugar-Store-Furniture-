@@ -5,7 +5,7 @@
             <form @submit.prevent="handleUpdateMarketCategory">
                 <div class="mb-4">
                     <label for="category-title" class="block text-sm font-medium text-gray-700">{{
-                        $t('form.edit_marketing_category')
+                        $t('form.marketing_category_title')
                         }}</label>
                     <input id="category-title" type="text" v-model="newMarketCategoryTitle"
                         class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
@@ -17,7 +17,7 @@
                         <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
                         <icon name="svg-spinners:270-ring-with-bg" />
                     </div>
-                    <span v-else>{{ $t('btn.edit_marketing_category') }}</span>
+                    <span v-else>{{ $t('btn.update_marketing_category') }}</span>
                 </button>
             </form>
         </div>
@@ -42,7 +42,7 @@ const marketCategoryId = route.params.id
 onMounted(async () => {
     if (marketCategoryId) {
         await store.fetchCMarketCategoryDetails(marketCategoryId);
-        console.log(store.currentMarketCategory);
+        // console.log(store.currentMarketCategory);
         if (store.currentMarketCategory) {
             newMarketCategoryTitle.value = store.currentMarketCategory.title || "";
         }
