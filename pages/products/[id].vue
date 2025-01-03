@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="max-w-2xl px-8 py-6 mx-auto my-8 bg-white border rounded-lg">
-      <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_product')
+      <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.edit_product')
         }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
@@ -142,7 +142,7 @@
               <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
               <icon name="svg-spinners:270-ring-with-bg" />
             </div>
-            <span v-else>{{ $t('btn.add_product') }}</span>
+            <span v-else>{{ $t('btn.update_product') }}</span>
           </button>
         </div>
       </form>
@@ -162,12 +162,30 @@
 import { useProductsStore } from '@/stores/productsStore';
 
 const store = useProductsStore()
+const productStore = useNewProductsStoreStore()
 const loading = ref(false);
 const categories = ref([])
 const subCategories = ref([])
 const selectedCategory = ref('')
 const selectedSubCategory = ref('')
-const product = ref({ title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', videoLink: '', titleAr: '', descriptionAr: '' })
+const route = useRoute();
+const productId = route.params.id
+
+const product = ref({ title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', videoLink: '', titleAr: '', descriptionAr: '', categoryId: '', subCategoryId: '', productId: '' })
+
+onMounted(async () => {
+  await store.fetchCategories();
+  categories.value = store.categories;
+  await store.fetchSubCategories();
+  subCategories.value = store.subCategories;
+
+  if (productId) {
+    const productDetail = await productStore.fetchProductDetail(productId);
+    product.value = productDetail;
+    selectedCategory.value = productDetail.categoryId;
+    selectedSubCategory.value = productDetail.subCategoryId;
+  }
+});
 
 const showToast = ref(false);
 const toastTitle = ref('');
@@ -220,38 +238,20 @@ const { t } = useI18n();
 
 const handleSubmit = async () => {
   loading.value = true;
-  const category = categories.value.find(cat => cat.id === selectedCategory.value);
-  const subCategory = subCategories.value.find(subCat => subCat.id === selectedSubCategory.value);
   try {
-    if (!product.value.title || !product.value.discountedPrice || !selectedCategory.value) {
-      toastTitle.value = t('toast.error');
-      toastMessage.value = t('toast.please_fill_all_required_fields');
-      toastType.value = "error";
-      toastIcon.value = "mdi-alert-circle";
-      showToast.value = true;
-      loading.value = false;
-      return;
-    }
-    await store.createProduct({
-      ...product.value,
-      categoryId: category.id,
-      subCategoryId: subCategory.id,
-      // categoryTitle: category.title,
-      // subCategoryTitle: subCategory.title,
-    });
-    toastTitle.value = t('toast.success');
-    toastMessage.value = t('toast.product_added_successfully');
-    resetForm();
+    await store.updateProduct(productId, product.value);
+    const updatedProduct = await productStore.fetchProductDetail(productId);
+    product.value = updatedProduct;
+    showToast.value = true;
+    toastTitle.value = "Success";
+    toastMessage.value = "Product updated successfully!";
     toastType.value = "success";
-    toastIcon.value = "mdi-check-circle";
-    showToast.value = true;
   } catch (error) {
-    console.error("Error submitting product:", error);
-    toastTitle.value = t('toast.error');
-    toastMessage.value = t('toast.something_went_wrong_please_try_again');
-    toastType.value = "error";
-    toastIcon.value = "mdi-alert-circle";
+    console.error("Error updating product:", error);
     showToast.value = true;
+    toastTitle.value = "Error";
+    toastMessage.value = "Failed to update product.";
+    toastType.value = "error";
   } finally {
     loading.value = false;
   }
@@ -272,32 +272,6 @@ const isValidVideoUrl = (url) => {
   const videoRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|instagram\.com|vimeo\.com)\/.+$/;
   return videoRegex.test(url);
 };
-
-const resetForm = () => {
-  product.value = { title: '', titleAr: '', descriptionAr: '', description: '', discountedPrice: '', originalPrice: '', discount: '', videoLink: '' };
-  selectedCategory.value = '';
-  selectedSubCategory.value = '';
-};
-
-// const onCategoryChange = () => {
-//   if (selectedCategory.value) {
-//     subCategories.value = store.subCategories.filter(subCategory => subCategory.categoryId === selectedCategory.value);
-//     selectedSubCategory.value = "";
-//   }
-// };
-
-// watch(() => selectedCategory.value, onCategoryChange, { immediate: true });
-
-onMounted(async () => {
-  await store.fetchCategories();
-  categories.value = store.categories;
-});
-
-onMounted(async () => {
-  await store.fetchSubCategories();
-  subCategories.value = store.subCategories;
-  // console.log(store.subCategories);
-})
 
 const { formatDecimal, enforceTwoDecimalPlaces } = useFormatter();
 
@@ -320,6 +294,6 @@ definePageMeta({
 });
 
 useHead({
-  titleTemplate: () => t('head.add_product'),
+  titleTemplate: () => t('head.edit_product'),
 });
 </script>

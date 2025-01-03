@@ -57,6 +57,15 @@ export const useProductsStore = defineStore("products", {
       try {
         const productRef = doc(db, "products", productId);
         await updateDoc(productRef, updatedData);
+
+        if (this.products && Array.isArray(this.products)) {
+          const index = this.products.findIndex(
+            (product) => product.id === productId
+          );
+          if (index !== -1) {
+            this.products[index] = { ...this.products[index], ...updatedData };
+          }
+        }
         // console.log("Product updated successfully!");
       } catch (error) {
         console.error("Error updating product:", error);
@@ -74,7 +83,7 @@ export const useProductsStore = defineStore("products", {
         } else {
           // console.warn("Products array is not properly initialized");
         }
-        console.log("Product deleted successfully");
+        // console.log("Product deleted successfully");
       } catch (error) {
         console.error("Error deleting product:", error);
         throw new Error("Failed to delete the product. Please try again.");

@@ -67,11 +67,13 @@
               <img
                 class="absolute top-0 object-cover w-full h-full transition-all duration-1000 delay-100 peer -right-96 hover:right-0 peer-hover:right-0"
                 :src="product.imgTwo" />
-              <nuxt-link to="" type="button" class="absolute bg-white rounded-full shadow-lg top-2 end-2"
+              <ClientOnly>
+                <nuxt-link :to="'/products/' + product.id" type="button" class="absolute p-0.5 bg-white rounded-full shadow-lg top-2 end-2"
                 data-twe-toggle="tooltip" data-twe-placement="top" :title="$t('tooltip.edit_product')">
                 <icon name="ep:edit" class="text-gray-600" />
               </nuxt-link>
-              <button @click="deleteProduct(product.id)" class="absolute bg-white rounded-full shadow-lg top-10 end-2"
+              </ClientOnly>
+              <button @click="deleteProduct(product.id)" class="absolute p-0.5 bg-white rounded-full shadow-lg top-12 end-2"
                 data-twe-toggle="tooltip" data-twe-placement="top" :title="$t('tooltip.delete_product')">
                 <icon v-if="deleteProd === product.id" name="svg-spinners:6-dots-rotate" size="20px"
                   class="text-red-500" />
