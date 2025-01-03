@@ -87,7 +87,8 @@
     "select_the_governorate": "Select the governorate",
     "start_date": "Start Date",
     "end_date": "End Date",
-    "edit_category": "Edit Category"
+    "edit_category": "Edit Category",
+    "add_category": "Add Category"
   },
   "btn": {
     "reset_password": "Reset Password",
@@ -145,7 +146,9 @@
     "users": "Users",
     "order_summary": "Order Summary",
     "orders": "Orders",
-    "sub_categories": "Subcategories"
+    "sub_categories": "Subcategories",
+    "edit_category": "Edit Category",
+    "add_category": "Add Category"
   },
   "alert": {
     "success": "Success",

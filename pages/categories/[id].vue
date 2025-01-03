@@ -124,6 +124,6 @@ definePageMeta({
 })
 
 useHead({
-  titleTemplate: () => t("head.categories"),
+  titleTemplate: () => t("head.edit_category"),
 });
 </script>

@@ -87,7 +87,8 @@
     "select_the_governorate": "اختر المحافظة",
     "start_date": "تاريخ البدء",
     "end_date": "تاريخ الانتهاء",
-    "edit_category": "تعديل الفئة"
+    "edit_category": "تعديل الفئة",
+    "add_category": "اضافه فئه"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -150,7 +151,9 @@
     "users": "المستخدمين",
     "order_summary": "ملخص الطلب",
     "orders": "الطلبات",
-    "sub_categories": "الفئات الفرعية"
+    "sub_categories": "الفئات الفرعية",
+    "edit_category": "تعديل الفئة",
+    "add_category": "اضافه فئه"
   },
   "alert": {
     "success": "نجاح",

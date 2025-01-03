@@ -4,8 +4,7 @@
       <div class="flex items-center">
         <h3 class="text-lg font-semibold text-slate-800">Categories</h3>
       </div>
-      <nuxt-link to="/categories/add-category" type="button"
-        class="flex items-center px-4 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+      <nuxt-link to="/categories/add-category" type="button" class="flex items-center px-4 py-2.5 btn-style">
         <icon name="ep:plus" class="w-5 h-5 me-2" />
         <span>{{ $t('btn.add_category') }}</span>
       </nuxt-link>
