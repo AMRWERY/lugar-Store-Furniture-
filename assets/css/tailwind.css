@@ -8,6 +8,6 @@
   }
 
   .btn-style {
-    @apply font-bold text-white bg-black border border-black rounded hover:bg-white hover:text-black focus:outline focus:ring focus:ring-black;
+    @apply font-bold text-white bg-black border border-black  hover:bg-white hover:text-black focus:outline focus:ring focus:ring-black rounded-lg;
   }
 }
