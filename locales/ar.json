@@ -86,7 +86,8 @@
     "the_governorate": "المحافظة",
     "select_the_governorate": "اختر المحافظة",
     "start_date": "تاريخ البدء",
-    "end_date": "تاريخ الانتهاء"
+    "end_date": "تاريخ الانتهاء",
+    "edit_category": "تعديل الفئة"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -122,7 +123,8 @@
     "state": "الولاية",
     "address": "العنوان",
     "order_details": "تفاصيل الطلب",
-    "filter": "تصفية"
+    "filter": "تصفية",
+    "edit_category": "تعديل الفئة"
   },
   "loading_btn": {
     "loading": "جاري التحميل",
@@ -374,6 +376,8 @@
     "subcategory_add_failed": "فشلت إضافة الفئة الفرعية",
     "marketing_category_added_successfully": "تمت إضافة فئة التسويق بنجاح",
     "order_successful": "تم الطلب بنجاح",
-    "your_order_was_processed_successfully_thank_you": "لقد تم معالجة طلبك بنجاح، شكرًا لك"
+    "your_order_was_processed_successfully_thank_you": "لقد تم معالجة طلبك بنجاح، شكرًا لك",
+    "category_updated": "تم تحديث الفئه",
+    "category_update_failed": "فشل تحديث الفئة"
   }
 }

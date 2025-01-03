@@ -25,7 +25,7 @@
         </div>
 
         <div class="mb-4">
-          <div class="mx-auto overflow-hidden rounded-lg ">
+          <div class="mx-auto overflow-hidden rounded-lg">
             <div class="md:flex">
               <div class="w-full">
                 <div

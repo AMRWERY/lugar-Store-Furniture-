@@ -1,6 +1,12 @@
 import { defineStore } from "pinia";
 import { db } from "@/firebase/config";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 export const useCategoriesStore = defineStore("categoriesStore", {
   state: () => ({
@@ -11,6 +17,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     currentPage: 1,
     categoriesPerPage: 4,
     subcategoriesPerPage: 4,
+    currentCategory: null,
   }),
 
   actions: {
@@ -25,6 +32,32 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         // console.log("Fetched categories:", this.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
+      }
+    },
+
+    async fetchCategoryDetails(categoryId) {
+      try {
+        const querySnapshot = await getDocs(collection(db, "categories"));
+        const category = querySnapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .find((cat) => cat.id === categoryId);
+        if (category) {
+          this.currentCategory = category;
+        } else {
+          console.error(`Category with ID ${categoryId} not found.`);
+        }
+      } catch (error) {
+        console.error("Error fetching category details:", error);
+      }
+    },
+
+    async updateCategory(categoryId, updatedData) {
+      try {
+        const categoryDoc = doc(db, "categories", categoryId);
+        await updateDoc(categoryDoc, updatedData);
+      } catch (error) {
+        // console.error("Error updating category:", error);
+        throw error;
       }
     },
 

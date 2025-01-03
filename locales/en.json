@@ -86,7 +86,8 @@
     "the_governorate": "The governorate",
     "select_the_governorate": "Select the governorate",
     "start_date": "Start Date",
-    "end_date": "End Date"
+    "end_date": "End Date",
+    "edit_category": "Edit Category"
   },
   "btn": {
     "reset_password": "Reset Password",
@@ -117,7 +118,8 @@
     "add_product": "Add Product",
     "update_product": "Update Product",
     "add_marketing_category": "Add Marketing Category",
-    "filter": "Filter"
+    "filter": "Filter",
+    "edit_category": "Edit Category"
   },
   "loading_btn": {
     "loading": "Loading",
@@ -374,6 +376,8 @@
     "subcategory_add_failed": "Subcategory add failed",
     "marketing_category_added_successfully": "Marketing category added successfully",
     "order_successful": "Order successful",
-    "your_order_was_processed_successfully_thank_you": "Your order was processed successfully, Thank you"
+    "your_order_was_processed_successfully_thank_you": "Your order was processed successfully, Thank you",
+    "category_updated": "Category updated",
+    "category_update_failed": "Category update failed"
   }
 }

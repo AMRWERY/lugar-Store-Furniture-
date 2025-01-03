@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
+  <div>
+    <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
       <h2 class="mb-4 text-xl font-bold">{{ $t('form.add_categories') }}</h2>
       <form @submit.prevent="handleAddCategory">
         <div class="mb-4">
@@ -27,7 +27,7 @@
           :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script setup>
