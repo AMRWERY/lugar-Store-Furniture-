@@ -1,6 +1,23 @@
 <template>
     <div>
-        <h3 class="py-2 mt-5 mb-12 text-2xl font-bold text-start">{{ $t('dashboard.orders') }}</h3>
+        <div class="flex items-center justify-between">
+            <h3 class="py-2 mt-5 mb-12 text-2xl font-bold text-start">{{ $t('dashboard.orders') }}</h3>
+            <div class="flex items-end space-s-4">
+                <div class="flex flex-col">
+                    <label class="mb-1 text-sm font-medium">{{ $t('form.start_date') }}</label>
+                    <input type="date" v-model="startDate" class="p-2 border rounded"
+                        :placeholder="$t('form.start_date')" />
+                </div>
+                <div class="flex flex-col">
+                    <label class="mb-1 text-sm font-medium">{{ $t('form.end_date') }}</label>
+                    <input type="date" v-model="endDate" class="p-2 border rounded"
+                        :placeholder="$t('form.end_date')" />
+                </div>
+                <button @click="filterOrdersByDate" class="px-4 py-2 btn-style">
+                    {{ $t('btn.filter') }}
+                </button>
+            </div>
+        </div>
         <div
             class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border">
             <table class="w-full table-auto text-start min-w-max">
@@ -214,6 +231,21 @@ const openOrderDetails = async (order) => {
 const closeDialog = () => {
     isDialogOpen.value = false;
     selectedOrder.value = {};
+};
+
+const startDate = ref('');
+const endDate = ref('');
+
+const filterOrdersByDate = () => {
+    if (!startDate.value || !endDate.value) {
+        alert('Please select both start and end dates');
+        return;
+    }
+    const filteredOrders = checkoutStore.orders.filter(order => {
+        const orderDate = new Date(order.date);
+        return orderDate >= new Date(startDate.value) && orderDate <= new Date(endDate.value);
+    });
+    checkoutStore.paginatedOrders = filteredOrders;
 };
 
 const { t } = useI18n()

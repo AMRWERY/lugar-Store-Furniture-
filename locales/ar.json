@@ -84,7 +84,9 @@
     "select_province": "اختر المقاطعة",
     "enter_your_phone": "ادخل رقم الهاتف",
     "the_governorate": "المحافظة",
-    "select_the_governorate": "اختر المحافظة"
+    "select_the_governorate": "اختر المحافظة",
+    "start_date": "تاريخ البدء",
+    "end_date": "تاريخ الانتهاء"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -119,7 +121,8 @@
     "phone_number": "رقم الهاتف",
     "state": "الولاية",
     "address": "العنوان",
-    "order_details": "تفاصيل الطلب"
+    "order_details": "تفاصيل الطلب",
+    "filter": "تصفية"
   },
   "loading_btn": {
     "loading": "جاري التحميل",

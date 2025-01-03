@@ -84,7 +84,9 @@
     "select_province": "Select Province",
     "enter_your_phone": "Enter your phone number",
     "the_governorate": "The governorate",
-    "select_the_governorate": "Select the governorate"
+    "select_the_governorate": "Select the governorate",
+    "start_date": "Start Date",
+    "end_date": "End Date"
   },
   "btn": {
     "reset_password": "Reset Password",
@@ -114,7 +116,8 @@
     "view_details": "View Details",
     "add_product": "Add Product",
     "update_product": "Update Product",
-    "add_marketing_category": "Add Marketing Category"
+    "add_marketing_category": "Add Marketing Category",
+    "filter": "Filter"
   },
   "loading_btn": {
     "loading": "Loading",
