@@ -265,7 +265,10 @@
     "edit_marketing_category": "Edit Marketing Category",
     "delete_marketing_category": "Delete Marketing Category",
     "order_status_updated": "Order status Updated",
-    "failed_to_update_order": "Failed to update order"
+    "failed_to_update_order": "Failed to update order",
+    "delete_order": "Delete Order",
+    "order_deleted": "Order deleted",
+    "order_deletion_failed": "Order deletion failed"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty.",

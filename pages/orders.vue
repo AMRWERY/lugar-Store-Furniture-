@@ -121,6 +121,14 @@
                                 {{ order.status || 'Pending' }}
                             </p>
                         </td>
+                        <td class="p-4 py-5">
+                            <button type="button" @click="deleteOrder(order.id)">
+                                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="order.loading" />
+                                <icon name="material-symbols:delete-sharp" class="text-red-700"
+                                    data-twe-toggle="tooltip" data-twe-placement="top"
+                                    :title="$t('tooltip.delete_order')" v-else />
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -187,7 +195,7 @@ const updateOrderStatus = async (orderId, newStatus) => {
         await checkoutStore.fetchOrders();
         showToast.value = true;
         toastTitle.value = t('toast.great');
-        toastMessage.value = `${t('order_status_updated')}: ${orderId}`
+        toastMessage.value = t('tooltip.order_status_updated')
         toastType.value = 'success';
         toastIcon.value = 'mdi:check-circle';
     } catch (error) {
@@ -232,7 +240,40 @@ const filterOrdersByDate = () => {
     checkoutStore.paginatedOrders = filteredOrders;
 };
 
+const deleteOrder = async (orderId) => {
+    const order = checkoutStore.paginatedOrders.find(o => o.id === orderId);
+    if (order) {
+        order.loading = true;
+    }
+    try {
+        await checkoutStore.deleteOrder(orderId);
+        checkoutStore.paginatedOrders = checkoutStore.paginatedOrders.filter(order => order.id !== orderId);
+        showToast.value = true;
+        toastTitle.value = t('toast.great');
+        toastMessage.value = t('tooltip.order_deleted');
+        toastType.value = 'success';
+        toastIcon.value = 'mdi:check-circle';
+    } catch (error) {
+        showToast.value = true;
+        toastTitle.value = t('toast.error');
+        toastMessage.value = t('tooltip.order_deletion_failed');
+        toastType.value = 'error';
+        toastIcon.value = 'mdi:alert-circle';
+    } finally {
+        setTimeout(() => {
+            if (order) {
+                order.loading = false;
+            }
+        }, 3000);
+    }
+};
+
 const { t } = useI18n()
+
+onMounted(async () => {
+    const { Tooltip, initTWE } = await import("tw-elements");
+    initTWE({ Tooltip });
+});
 
 definePageMeta({
     layout: 'dashboard'

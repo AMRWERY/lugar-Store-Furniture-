@@ -5,6 +5,7 @@ import {
   getDocs,
   doc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "@/firebase/config";
 
@@ -31,7 +32,7 @@ export const useCheckoutStore = defineStore("checkout", {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(this.orders);
+        // console.log(this.orders);
         this.updatePagination();
         await this.fetchTotalCheckouts();
       } catch (e) {
@@ -104,6 +105,20 @@ export const useCheckoutStore = defineStore("checkout", {
         this.totalCheckouts = querySnapshot.size;
       } catch (e) {
         console.error("Error fetching total checkouts: ", e);
+      }
+    },
+
+    async deleteOrder(orderId) {
+      if (!orderId) {
+        return;
+      }
+      try {
+        const docRef = doc(db, "checkout", orderId);
+        await deleteDoc(docRef);
+        this.orders = this.orders.filter((order) => order.orderId !== orderId);
+        this.updatePagination();
+      } catch (error) {
+        console.error("Error removing from order:", error);
       }
     },
   },

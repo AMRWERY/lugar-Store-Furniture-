@@ -270,7 +270,10 @@
     "edit_marketing_category": "تعديل فئة التسويق",
     "delete_marketing_category": "حذف فئة التسويق",
     "order_status_updated": "تم تحديث حالة الطلب",
-    "failed_to_update_order": "فشل في تحديث الطلب"
+    "failed_to_update_order": "فشل في تحديث الطلب",
+    "delete_order": "مسح الطلب",
+    "order_deleted": "تم مسح الطلب",
+    "order_deletion_failed": "فشل مسح الطلب"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حاليًا.",
