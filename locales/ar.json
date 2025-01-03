@@ -269,7 +269,8 @@
     "delete_category": "حذف الفئة",
     "edit_marketing_category": "تعديل فئة التسويق",
     "delete_marketing_category": "حذف فئة التسويق",
-    "order_status_updated": "تم تحديث حالة الطلب"
+    "order_status_updated": "تم تحديث حالة الطلب",
+    "failed_to_update_order": "فشل في تحديث الطلب"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حاليًا.",

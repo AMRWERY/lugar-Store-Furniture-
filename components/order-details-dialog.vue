@@ -29,19 +29,26 @@
 
             <!-- Status Buttons -->
             <div class="mt-12">
-              <p>Change order status</p>
-              <div class="flex mt-4 space-x-4">
+              <p class="text-sm font-normal text-gray-600">Change order status</p>
+              <div class="flex mt-4 space-s-4">
                 <button type="button"
-                  class="focus:outline-none text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-green-600 dark:border-green-600 dark:hover:bg-green-600 dark:hover:text-white dark:focus:ring-green-800">
-                  Pending
+                  :disabled="order.status === 'Pending' || order.status === 'Delivered' || order.status === 'Confirmed'"
+                  @click="updateOrderStatus(order.id, 'Pending')"
+                  class="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-green-600 dark:border-green-600 dark:hover:bg-green-600 dark:hover:text-white dark:focus:ring-green-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <icon name="svg-spinners:90-ring" v-if="order.loading && order.targetStatus === 'Pending'" />
+                  <span v-else>Pending</span>
                 </button>
-                <button type="button"
-                  class="focus:outline-none text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-red-600 dark:border-red-600 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900">
-                  Confirmed
+                <button type="button" :disabled="order.status === 'Confirmed' || order.status === 'Delivered'"
+                  @click="updateOrderStatus(order.id, 'Confirmed')"
+                  class="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-red-600 dark:border-red-600 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <icon name="svg-spinners:90-ring" v-if="order.loading && order.targetStatus === 'Confirmed'" />
+                  <span v-else>Confirmed</span>
                 </button>
-                <button type="button"
-                  class="focus:outline-none text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-blue-600 dark:border-blue-600 dark:hover:bg-blue-600 dark:hover:text-white dark:focus:ring-blue-800">
-                  Delivered
+                <button type="button" :disabled="order.status === 'Delivered'"
+                  @click="updateOrderStatus(order.id, 'Delivered')"
+                  class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-blue-600 dark:border-blue-600 dark:hover:bg-blue-600 dark:hover:text-white dark:focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <icon name="svg-spinners:90-ring" v-if="order.loading && order.targetStatus === 'Delivered'" />
+                  <span v-else>Delivered</span>
                 </button>
               </div>
             </div>
@@ -79,6 +86,14 @@
         </div>
       </div>
     </div>
+
+    <!-- dynamic-toast component -->
+    <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
+      <div class="pointer-events-auto">
+        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -94,6 +109,43 @@ const orders = computed(() => checkoutStore?.orders || []);
 
 const closeDialog = () => {
   emit('close');
+};
+
+const showToast = ref(false);
+const toastTitle = ref('');
+const toastMessage = ref('');
+const toastType = ref('');
+const toastIcon = ref('')
+const { t } = useI18n()
+
+const updateOrderStatus = async (orderId, newStatus) => {
+  const order = checkoutStore.paginatedOrders.find((o) => o.id === orderId);
+  if (!order) return;
+  order.loading = true;
+  order.targetStatus = newStatus;
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await checkoutStore.updateOrderStatus(orderId, newStatus);
+    await checkoutStore.fetchOrders();
+    showToast.value = true;
+    toastTitle.value = t('toast.great');
+    toastMessage.value = t('tooltip.order_status_updated');
+    toastType.value = 'success';
+    toastIcon.value = 'mdi:check-circle';
+  } catch (error) {
+    console.error(error);
+    showToast.value = true;
+    toastTitle.value = t('toast.error');
+    toastMessage.value = t('tooltip.failed_to_update_order');
+    toastType.value = 'error';
+    toastIcon.value = 'mdi:alert-circle';
+  } finally {
+    const order = checkoutStore.paginatedOrders.find((o) => o.id === orderId);
+    if (order) {
+      order.loading = false;
+      order.targetStatus = null;
+    }
+  }
 };
 </script>
 

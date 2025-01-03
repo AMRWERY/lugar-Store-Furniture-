@@ -113,29 +113,13 @@
                             </p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="text-sm font-semibold">
+                            <p class="text-sm font-semibold" :class="{
+                                'text-green-700': order.status === 'Pending',
+                                'text-red-700': order.status === 'Confirmed',
+                                'text-blue-700': order.status === 'Delivered'
+                            }">
                                 {{ order.status || 'Pending' }}
                             </p>
-                        </td>
-                        <td class="p-4 py-5">
-                            <div class="flex space-s-2">
-                                <button @click="updateOrderStatus(order.id, 'Accepted')"
-                                    :disabled="order.status === 'Accepted'">
-                                    <icon v-if="order.loading && order.action === 'Accepted'"
-                                        name="svg-spinners:6-dots-rotate" size="20px" class="text-green-500" />
-                                    <icon name="material-symbols:check-circle"
-                                        class="w-8 h-8 text-white bg-green-500 rounded hover:bg-green-600 disabled:opacity-50"
-                                        v-else />
-                                </button>
-                                <button @click="updateOrderStatus(order.id, 'Rejected')"
-                                    :disabled="order.status === 'Rejected'">
-                                    <icon v-if="order.loading && order.action === 'Rejected'"
-                                        name="svg-spinners:6-dots-rotate" size="20px" class="text-red-500" />
-                                    <icon name="material-symbols:cancel"
-                                        class="w-8 h-8 text-white bg-red-500 rounded hover:bg-red-600 disabled:opacity-50"
-                                        v-else />
-                                </button>
-                            </div>
                         </td>
                     </tr>
                 </tbody>
