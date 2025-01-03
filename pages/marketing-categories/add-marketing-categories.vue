@@ -2,17 +2,18 @@
   <div>
     <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
 
-      <h2 class="mt-8 mb-4 text-xl font-bold">{{ $t('form.add_subcategory') }}</h2>
+      <h2 class="mt-8 mb-4 text-xl font-bold">{{ $t('form.add_marketing_category') }}</h2>
       <form @submit.prevent="handleAddSubCategory">
         <div class="mb-4">
-          <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{ $t('form.subcategory_title')
+          <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
+            $t('form.marketing_category_title')
             }}</label>
           <input id="subcategory-title" type="text" v-model="newSubCategoryTitle"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
-            :placeholder="$t('form.enter_subcategory_title')" required />
+            :placeholder="$t('form.enter_marketing_category_title')" required />
         </div>
 
-        <div class="mb-4">
+        <!-- <div class="mb-4">
           <div class="mx-auto overflow-hidden rounded-lg ">
             <div class="md:flex">
               <div class="w-full">
@@ -35,9 +36,9 @@
           <div v-if="product.imgOne" class="mt-4 border border-gray-200">
             <img :src="product.imgOne" class="w-48 h-32 rounded-lg">
           </div>
-        </div>
+        </div> -->
 
-        <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-lg">
+        <button type="submit" class="w-full px-4 py-2 btn-style">
           <div class="flex items-center justify-center" v-if="loadingTwo">
             <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
             <icon name="svg-spinners:270-ring-with-bg" />
@@ -71,45 +72,45 @@ const toastMessage = ref('');
 const toastType = ref('');
 const toastIcon = ref('')
 
-const handleFileChange = async (event) => {
-  const files = Array.from(event.target.files);
-  if (files.length > 4) {
-    alert("You can only upload up to 4 images.");
-    return;
-  }
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (!allowedTypes.includes(file.type)) {
-      alert('Please upload an image in JPEG, PNG, or WebP format.');
-      return;
-    }
-    const maxSize = 4 * 1024 * 1024;
-    if (file.size > maxSize) {
-      alert('Image size must not exceed 2MB.');
-      return;
-    }
-    const base64Image = await convertToBase64(file);
-    if (i === 0) {
-      product.value.imgOne = base64Image;
-    }
-  }
-};
+// const handleFileChange = async (event) => {
+//   const files = Array.from(event.target.files);
+//   if (files.length > 4) {
+//     alert("You can only upload up to 4 images.");
+//     return;
+//   }
+//   for (let i = 0; i < files.length; i++) {
+//     const file = files[i];
+//     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+//     if (!allowedTypes.includes(file.type)) {
+//       alert('Please upload an image in JPEG, PNG, or WebP format.');
+//       return;
+//     }
+//     const maxSize = 4 * 1024 * 1024;
+//     if (file.size > maxSize) {
+//       alert('Image size must not exceed 2MB.');
+//       return;
+//     }
+//     const base64Image = await convertToBase64(file);
+//     if (i === 0) {
+//       product.value.imgOne = base64Image;
+//     }
+//   }
+// };
 
-// Convert image to base64
-const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = (error) => reject(error)
-  })
-}
+// // Convert image to base64
+// const convertToBase64 = (file) => {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader()
+//     reader.readAsDataURL(file)
+//     reader.onload = () => resolve(reader.result)
+//     reader.onerror = (error) => reject(error)
+//   })
+// }
 
 const handleAddSubCategory = async () => {
   loadingTwo.value = true;
   try {
-    await store.addSubCategory(newSubCategoryTitle.value.trim(), product.value.imgOne);
+    await store.addSubCategory(newSubCategoryTitle.value.trim());
     toastTitle.value = t('toast.great');
     toastMessage.value = t('toast.marketing_category_added_successfully');
     resetForm();
@@ -129,7 +130,7 @@ const handleAddSubCategory = async () => {
 };
 
 const resetForm = () => {
-  product.value = { title: '', imgOne: '' };
+  product.value = { title: '' };
 };
 
 const { t } = useI18n()

@@ -19,6 +19,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     categoriesPerPage: 4,
     subcategoriesPerPage: 4,
     currentCategory: null,
+    currentMarketCategory: null,
   }),
 
   actions: {
@@ -102,11 +103,51 @@ export const useCategoriesStore = defineStore("categoriesStore", {
       }
     },
 
-    async addSubCategory(title, imgOne) {
+    async updateMarketCategory(categoryId, updatedData) {
+      try {
+        const marketCategoryDoc = doc(db, "subCategories", categoryId);
+        await updateDoc(marketCategoryDoc, updatedData);
+      } catch (error) {
+        // console.error("Error updating category:", error);
+        throw error;
+      }
+    },
+
+    async fetchCMarketCategoryDetails(marketCategoryId) {
+      try {
+        const querySnapshot = await getDocs(collection(db, "subCategories"));
+        const marketCategory = querySnapshot.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .find((cat) => cat.id === marketCategoryId);
+        if (marketCategory) {
+          this.currentMarketCategory = marketCategory;
+        } else {
+          console.error(
+            `Marketing Category with ID ${marketCategoryId} not found.`
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching Marketing Category details:", error);
+      }
+    },
+
+    async deleteMarketCategory(marketCategoryId) {
+      try {
+        const categoryDoc = doc(db, "subCategories", marketCategoryId);
+        await deleteDoc(categoryDoc);
+        this.subCategories = this.subCategories.filter(
+          (marketCategory) => marketCategory.id !== marketCategoryId
+        );
+        this.updatePagination();
+      } catch (error) {
+        console.error("Error deleting market category:", error);
+      }
+    },
+
+    async addSubCategory(title) {
       try {
         const docRef = await addDoc(collection(db, "subCategories"), {
           title,
-          imgOne,
         });
         const newSubCategory = { id: docRef.id, title };
         this.subCategories.push(newSubCategory);

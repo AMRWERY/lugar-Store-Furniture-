@@ -4,8 +4,8 @@
             <div class="flex items-center">
                 <h3 class="text-lg font-semibold text-slate-800">Marketing Categories</h3>
             </div>
-            <nuxt-link to="/add-marketing-categories" type="button"
-                class="flex items-center px-4 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <nuxt-link to="/marketing-categories/add-marketing-categories" type="button"
+                class="flex items-center px-4 py-2.5 btn-style">
                 <icon name="ep:plus" class="w-5 h-5 me-2" />
                 <span>{{ $t('btn.add_marketing_category') }}</span>
             </nuxt-link>
@@ -45,14 +45,18 @@
                         </td>
                         <td class="p-4 py-5 text-center">
                             <div class="flex items-center justify-center space-s-4">
-                                <button type="button" class="rounded-full" data-twe-toggle="tooltip"
-                                    data-twe-placement="top" :title="$t('tooltip.edit_marketing_category')">
+                                <nuxt-link :to="'/marketing-categories/' + subcategory.id" type="button"
+                                    class="rounded-full" data-twe-toggle="tooltip" data-twe-placement="top"
+                                    :title="$t('tooltip.edit_marketing_category')">
                                     <icon name="ep:edit" class="w-6 h-6 text-gray-600" />
-                                </button>
+                                </nuxt-link>
 
                                 <button type="button" class="rounded-full" data-twe-toggle="tooltip"
-                                    data-twe-placement="top" :title="$t('tooltip.delete_marketing_category')">
-                                    <icon name="ep:delete" class="w-6 h-6 text-red-600" />
+                                    data-twe-placement="top" :title="$t('tooltip.delete_marketing_category')"
+                                    @click="handleDeleteMarketCategory(subcategory.id)">
+                                    <icon v-if="deleteCat === subcategory.id" name="svg-spinners:6-dots-rotate"
+                                        size="20px" class="text-red-500" />
+                                    <icon name="ep:delete" class="w-6 h-6 text-red-600" v-else />
                                 </button>
                             </div>
                         </td>
@@ -82,6 +86,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- dynamic-toast component -->
+        <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
+            <div class="pointer-events-auto">
+                <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+                    :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -93,6 +105,25 @@ onMounted(() => {
 });
 
 const { t } = useI18n()
+const deleteCat = ref(null);
+const showToast = ref(false);
+const toastTitle = ref('');
+const toastMessage = ref('');
+const toastType = ref('');
+const toastIcon = ref('')
+
+const handleDeleteMarketCategory = async (marketCategoryId) => {
+    deleteCat.value = marketCategoryId;
+    setTimeout(async () => {
+        await store.deleteMarketCategory(marketCategoryId);
+        showToast.value = true;
+        toastTitle.value = t('toast.great');
+        toastMessage.value = t('toast.marketing_category_deleted_successfully');
+        toastType.value = 'success';
+        toastIcon.value = 'mdi:check-circle';
+        deleteCat.value = null;
+    }, 3000);
+};
 
 onMounted(async () => {
     const { Tooltip, initTWE } = await import("tw-elements");
@@ -104,6 +135,6 @@ definePageMeta({
 })
 
 useHead({
-    titleTemplate: () => t("head.sub_categories"),
+    titleTemplate: () => t("head.marketing_categories"),
 });
 </script>
