@@ -88,6 +88,7 @@ export const useCheckoutStore = defineStore("checkout", {
           phoneNumber: this.phoneNumber,
           address: this.address,
           date: currentDate,
+          status: "Pending",
           cart: cartData,
         };
         const docRef = await addDoc(collection(db, "checkout"), order);
