@@ -336,7 +336,8 @@
     "last_name": "الاسم الأخير",
     "status": "الحالة",
     "blocked": "محظور",
-    "active": "نشط"
+    "active": "نشط",
+    "no_orders_available": "لا توجد طلبات متاحه حاليًا"
   },
   "pagination": {
     "previous": "السابق",

@@ -74,7 +74,16 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+
+                <tbody v-if="checkoutStore.paginatedOrders.length === 0">
+                    <tr>
+                        <td colspan="10" class="p-4 text-2xl font-semibold text-center text-gray-500">
+                            {{ $t('dashboard.no_orders_available') }}
+                        </td>
+                    </tr>
+                </tbody>
+
+                <tbody v-else>
                     <tr class="border-b hover:bg-slate-50 border-slate-200"
                         v-for="(order, index) in checkoutStore.paginatedOrders" :key="order.id">
                         <td class="p-4 py-5">

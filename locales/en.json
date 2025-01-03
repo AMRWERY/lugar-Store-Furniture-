@@ -336,7 +336,8 @@
     "last_name": "Last Name",
     "status": "Status",
     "blocked": "Blocked",
-    "active": "Active"
+    "active": "Active",
+    "no_orders_available": "No orders available"
   },
   "pagination": {
     "previous": "Previous",
