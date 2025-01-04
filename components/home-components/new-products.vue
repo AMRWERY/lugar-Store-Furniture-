@@ -48,23 +48,27 @@
       <div class="mb-6">
         <div class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-sofa" role="tabpanel" aria-labelledby="tabs-sofa-tab" data-twe-tab-active>
-          <dynamic-products-cards :config="config" :subCategoryTitle="'Sofa'" />
+          <dynamic-products-cards :config="config" :categoryTitle="'Sofa'" />
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-chairs" role="tabpanel" aria-labelledby="tabs-chairs-tab">
-          Chairs tab content
+           <dynamic-products-cards :config="config" :categoryTitle="'Chairs'" />
+
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-bed-rooms" role="tabpanel" aria-labelledby="tabs-bed-rooms-tab">
-          Bed Rooms tab content
+           <dynamic-products-cards :config="config" :categoryTitle="'Bedrooms'" />
+
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-living-room" role="tabpanel" aria-labelledby="tabs-living-room-tab">
-          Living Room tab content
+           <dynamic-products-cards :config="config" :categoryTitle="'Living Room'" />
+
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-dining-room" role="tabpanel" aria-labelledby="tabs-dining-room-tab">
-          Dining Room tab content
+           <dynamic-products-cards :config="config" :categoryTitle="'Dining Room'" />
+
         </div>
       </div>
     </div>

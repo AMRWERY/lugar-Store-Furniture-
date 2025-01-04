@@ -67,21 +67,27 @@ const categories = ref([])
 const selectedCategoryId = ref('')
 
 onMounted(async () => {
-  if (props.categoryTitle) {
+  if (props.subCategoryTitle) {
     await categoryStore.fetchSubCategories();
     subCategories.value = categoryStore.subCategories;
-    selectedSubCategoryId.value = subCategories.value.find((subCat) => subCat.title === props.categoryTitle)?.id;
-    // console.log('category', props.categoryTitle);
+    selectedSubCategoryId.value = subCategories.value.find((subCat) => subCat.title === props.subCategoryTitle)?.id;
+    // console.log('categoryStore.subCategories', categoryStore.subCategories);
     await productsStore.fetchProducts();
     products.value = productsStore.products.filter((product) => product.subCategoryId === selectedSubCategoryId.value);
   }
 
-  if (props.subCategoryTitle) {
-    await categoryStore.fetchCategories();
-    categories.value = categoryStore.categories;
-    selectedCategoryId.value = categories.value.find((cat) => cat.title === props.subCategoryTitle)?.id;
-    // console.log('subcategory', props.subCategoryTitle);
-    products.value = productsStore.products.filter((product) => product.categoryId === selectedCategoryId.value);
+  if (props.categoryTitle) {
+    await categoryStore.fetchCategories().then(() => {
+      categories.value = categoryStore.categories;
+      selectedCategoryId.value = categories.value.find((cat) => cat.title == props.categoryTitle)?.id;
+      productsStore.fetchProducts().then(() => {
+
+        products.value = productsStore.products.filter((product) => product.categoryId === selectedCategoryId.value);
+
+      });
+
+    });
+
   }
 
   if (!props.categoryTitle && !props.subCategoryTitle) {
