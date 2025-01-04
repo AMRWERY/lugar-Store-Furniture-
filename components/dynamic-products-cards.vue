@@ -25,7 +25,7 @@
                   <div class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
                     <p class="flex items-center space-s-1">
                       <span class="text-gray-900 me-1">{{ card.discountedPrice }} LE</span>
-                      <span class="text-sm text-gray-500 line-through">{{ card.originalPrice }} LE</span>
+                      <span class="text-sm text-gray-500 line-through mt-0.5">{{ card.originalPrice }} LE</span>
                     </p>
                   </div>
                 </div>
@@ -51,24 +51,41 @@ const props = defineProps({
   categoryTitle: {
     type: String,
     default: ''
-  }
+  },
+  subCategoryTitle: {
+    type: String,
+    default: ''
+  },
 });
 
 const productsStore = useNewProductsStoreStore()
 const products = ref([])
 const categoryStore = useCategoriesStore()
 const subCategories = ref([])
+const selectedSubCategoryId = ref('')
+const categories = ref([])
 const selectedCategoryId = ref('')
 
 onMounted(async () => {
-  await categoryStore.fetchSubCategories();
-  subCategories.value = categoryStore.subCategories;
-  // console.log(subCategories.value)
-  selectedCategoryId.value = subCategories.value.find((subCat) => subCat.title == props.categoryTitle)?.id
-  // console.log(selectedCategoryId.value)
-  // console.log(props.categoryTitle)
-  await productsStore.fetchProducts();
-  products.value = productsStore.products
-    .filter((product) => product.subCategoryId === selectedCategoryId.value)
-})
+  if (props.categoryTitle) {
+    await categoryStore.fetchSubCategories();
+    subCategories.value = categoryStore.subCategories;
+    selectedSubCategoryId.value = subCategories.value.find((subCat) => subCat.title === props.categoryTitle)?.id;
+    // console.log('category', props.categoryTitle);
+    await productsStore.fetchProducts();
+    products.value = productsStore.products.filter((product) => product.subCategoryId === selectedSubCategoryId.value);
+  }
+
+  if (props.subCategoryTitle) {
+    await categoryStore.fetchCategories();
+    categories.value = categoryStore.categories;
+    selectedCategoryId.value = categories.value.find((cat) => cat.title === props.subCategoryTitle)?.id;
+    // console.log('subcategory', props.subCategoryTitle);
+    products.value = productsStore.products.filter((product) => product.categoryId === selectedCategoryId.value);
+  }
+
+  if (!props.categoryTitle && !props.subCategoryTitle) {
+    console.log('Neither categoryTitle nor subCategoryTitle provided.');
+  }
+});
 </script>

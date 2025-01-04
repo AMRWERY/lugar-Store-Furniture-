@@ -48,7 +48,7 @@
       <div class="mb-6">
         <div class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-sofa" role="tabpanel" aria-labelledby="tabs-sofa-tab" data-twe-tab-active>
-          <dynamic-products-cards :config="config" :categoryTitle="'New Products'" />
+          <dynamic-products-cards :config="config" :subCategoryTitle="'Sofa'" />
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-chairs" role="tabpanel" aria-labelledby="tabs-chairs-tab">
