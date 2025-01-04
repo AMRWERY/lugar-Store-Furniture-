@@ -42,8 +42,8 @@ export const useCartStore = defineStore("cart", {
       discountedPrice,
       originalPrice,
       imgOne,
-      categoryTitle,
-      subCategoryTitle,
+      categoryId,
+      subCategoryId,
       discount,
       quantity
     ) {
@@ -56,7 +56,7 @@ export const useCartStore = defineStore("cart", {
           const docRef = doc(db, "cart", existingProduct.docId);
           const newQuantity = (existingProduct.quantity || 0) + quantity;
           await updateDoc(docRef, { quantity: newQuantity });
-          existingProduct.quantity = newQuantity; // Update local cart state
+          existingProduct.quantity = newQuantity;
         } catch (error) {
           console.error("Error updating product quantity in Firestore:", error);
         }
@@ -68,8 +68,8 @@ export const useCartStore = defineStore("cart", {
           discountedPrice,
           originalPrice,
           imgOne,
-          categoryTitle,
-          subCategoryTitle,
+          categoryId,
+          subCategoryId,
           discount,
           quantity,
         };

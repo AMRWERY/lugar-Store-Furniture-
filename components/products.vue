@@ -100,7 +100,6 @@ const toastIcon = ref('');
 
 const handleAddToCart = async (product) => {
   if (!product) return;
-
   try {
     loadingProductId.value = product.id;
     await cartStore.addToCart(
@@ -110,8 +109,8 @@ const handleAddToCart = async (product) => {
       product.discountedPrice,
       product.originalPrice,
       product.imgOne,
-      product.categoryTitle,
-      product.subCategoryTitle,
+      product.categoryId,
+      product.subCategoryId,
       product.discount,
       1 // Default quantity
     );
