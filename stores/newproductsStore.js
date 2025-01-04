@@ -16,14 +16,8 @@ export const useNewProductsStoreStore = defineStore("new-products", {
           id: doc.id,
           ...doc.data(),
         }));
-        // this.products = allProducts.filter(
-        //   (product) =>
-        //     product.subCategoryTitle === "Top Seller" ||
-        //     product.subCategoryTitle === "Customer Choice" ||
-        //     product.subCategoryTitle === "New Products"
-        // );
         this.products = allProducts;
-        // console.log(this.products)
+        // console.log(this.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
