@@ -39,8 +39,7 @@
         </div>
 
         <div class="flex items-end w-full sm:w-auto ms-auto">
-          <nuxt-link to="/products/add-product" type="button"
-            class="flex items-center px-4 py-2.5 btn-style">
+          <nuxt-link to="/products/add-product" type="button" class="flex items-center px-4 py-2.5 btn-style">
             <icon name="ep:plus" class="w-5 h-5 me-2" />
             <span>{{ $t('btn.add_product') }}</span>
           </nuxt-link>
@@ -56,7 +55,9 @@
         <p class="text-2xl font-semibold">{{ $t('dashboard.no_products_available') }}</p>
       </div>
 
-      <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-6" v-else>
+      <div
+        class="grid mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-6 sm:grid-cols-1 md:grid-cols-2 sm:gap-4"
+        v-else>
         <div
           class="flex flex-col w-full max-w-xs mx-auto overflow-hidden border border-gray-100 rounded-lg shadow-md group"
           v-for="product in paginatedProducts" :key="product.id">
@@ -68,13 +69,15 @@
                 class="absolute top-0 object-cover w-full h-full transition-all duration-1000 delay-100 peer -right-96 hover:right-0 peer-hover:right-0"
                 :src="product.imgTwo" />
               <ClientOnly>
-                <nuxt-link :to="'/products/' + product.id" type="button" class="absolute p-0.5 bg-white rounded-full shadow-lg top-2 end-2"
-                data-twe-toggle="tooltip" data-twe-placement="top" :title="$t('tooltip.edit_product')">
-                <icon name="ep:edit" class="text-gray-600" />
-              </nuxt-link>
+                <nuxt-link :to="'/products/' + product.id" type="button"
+                  class="absolute p-0.5 bg-white rounded-full shadow-lg top-2 end-2" data-twe-toggle="tooltip"
+                  data-twe-placement="top" :title="$t('tooltip.edit_product')">
+                  <icon name="ep:edit" class="text-gray-600" />
+                </nuxt-link>
               </ClientOnly>
-              <button @click="deleteProduct(product.id)" class="absolute p-0.5 bg-white rounded-full shadow-lg top-12 end-2"
-                data-twe-toggle="tooltip" data-twe-placement="top" :title="$t('tooltip.delete_product')">
+              <button @click="deleteProduct(product.id)"
+                class="absolute p-0.5 bg-white rounded-full shadow-lg top-12 end-2" data-twe-toggle="tooltip"
+                data-twe-placement="top" :title="$t('tooltip.delete_product')">
                 <icon v-if="deleteProd === product.id" name="svg-spinners:6-dots-rotate" size="20px"
                   class="text-red-500" />
                 <icon name="ep:delete" class="text-red-600" v-else />
