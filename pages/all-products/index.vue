@@ -62,7 +62,7 @@
       </HeadlessDialog>
     </HeadlessTransitionRoot>
 
-    <main class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <main class="px-4 mx-auto max-w-9xl sm:px-6 lg:px-8">
       <div class="flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
         <h1 class="text-4xl font-bold tracking-tight text-gray-900 capitalize">Products</h1>
 

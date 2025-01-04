@@ -2,7 +2,8 @@
   <div>
     <div class="mx-auto max-w-7xl">
       <div class="max-w-2xl py-8 mx-auto lg:max-w-none">
-        <div class="space-y-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:space-y-0">
+        <div
+          class="grid space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 sm:grid-cols-1 md:grid-cols-2 sm:gap-4 lg:space-y-0">
           <nuxt-link to="" v-for="product in paginatedProducts" :key="product.id"
             class="relative flex flex-col w-full max-w-xs overflow-hidden bg-white border border-gray-100 rounded-lg shadow-md">
             <nuxt-link class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl"
