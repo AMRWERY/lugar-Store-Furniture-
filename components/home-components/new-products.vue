@@ -48,7 +48,7 @@
       <div class="mb-6">
         <div class="hidden opacity-100 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-sofa" role="tabpanel" aria-labelledby="tabs-sofa-tab" data-twe-tab-active>
-          Sofa tab content
+          <dynamic-products-cards :config="config" :categoryTitle="'New Products'" />
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-chairs" role="tabpanel" aria-labelledby="tabs-chairs-tab">
@@ -72,6 +72,19 @@
 </template>
 
 <script setup>
+const config = {
+  itemsToShow: 4,
+  wrapAround: true,
+  gap: 5,
+  snapAlign: 'center',
+  breakpoints: {
+    200: { itemsToShow: 1.5, snapAlign: 'center' },
+    400: { itemsToShow: 2, snapAlign: 'start' },
+    700: { itemsToShow: 3, snapAlign: 'center' },
+    1024: { itemsToShow: 4, snapAlign: 'start' },
+  },
+};
+
 onMounted(async () => {
   const { Tab, initTWE } = await import("tw-elements");
   initTWE({ Tab });
