@@ -7,10 +7,19 @@
         <div class="mb-4">
           <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
             $t('form.marketing_category_title')
-          }}</label>
+            }}</label>
           <input id="subcategory-title" type="text" v-model="newSubCategoryTitle"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_marketing_category_title')" required />
+        </div>
+
+        <div class="mb-4">
+          <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
+            $t('form.marketing_category_title_ar')
+            }}</label>
+          <input id="subcategory-title" type="text" v-model="newSubCategoryTitleAr"
+            class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
+            :placeholder="$t('form.enter_marketing_category_title_ar')" required />
         </div>
 
         <!-- <div class="mb-4">
@@ -64,6 +73,7 @@ import { useCategoriesStore } from '@/stores/categoriesStore';
 const store = useCategoriesStore();
 const loadingTwo = ref(false);
 const newSubCategoryTitle = ref('');
+const newSubCategoryTitleAr = ref('');
 const product = ref({})
 
 const showToast = ref(false);
@@ -72,45 +82,10 @@ const toastMessage = ref('');
 const toastType = ref('');
 const toastIcon = ref('')
 
-// const handleFileChange = async (event) => {
-//   const files = Array.from(event.target.files);
-//   if (files.length > 4) {
-//     alert("You can only upload up to 4 images.");
-//     return;
-//   }
-//   for (let i = 0; i < files.length; i++) {
-//     const file = files[i];
-//     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-//     if (!allowedTypes.includes(file.type)) {
-//       alert('Please upload an image in JPEG, PNG, or WebP format.');
-//       return;
-//     }
-//     const maxSize = 4 * 1024 * 1024;
-//     if (file.size > maxSize) {
-//       alert('Image size must not exceed 2MB.');
-//       return;
-//     }
-//     const base64Image = await convertToBase64(file);
-//     if (i === 0) {
-//       product.value.imgOne = base64Image;
-//     }
-//   }
-// };
-
-// // Convert image to base64
-// const convertToBase64 = (file) => {
-//   return new Promise((resolve, reject) => {
-//     const reader = new FileReader()
-//     reader.readAsDataURL(file)
-//     reader.onload = () => resolve(reader.result)
-//     reader.onerror = (error) => reject(error)
-//   })
-// }
-
 const handleAddSubCategory = async () => {
   loadingTwo.value = true;
   try {
-    await store.addSubCategory(newSubCategoryTitle.value.trim());
+    await store.addSubCategory(newSubCategoryTitle.value.trim(), newSubCategoryTitleAr.value.trim());
     toastTitle.value = t('toast.great');
     toastMessage.value = t('toast.marketing_category_added_successfully');
     resetForm();
@@ -125,12 +100,13 @@ const handleAddSubCategory = async () => {
     showToast.value = true;
   } finally {
     newSubCategoryTitle.value = '';
+    newSubCategoryTitleAr.value = '';
     loadingTwo.value = false;
   }
 };
 
 const resetForm = () => {
-  product.value = { title: '' };
+  product.value = { title: '', titleAr: '' };
 };
 
 const { t } = useI18n()

@@ -94,7 +94,9 @@
     "enter_marketing_category_title": "أدخل اسم فئة التسويق",
     "add_marketing_category": "إضافة فئة التسويق",
     "category_title_ar": "اسم الفئة بالعربية",
-    "enter_category_title_ar": "ادخل اسم الفئة بالعربية"
+    "enter_category_title_ar": "ادخل اسم الفئة بالعربية",
+    "marketing_category_title_ar": "اسم فئة التسويق بالعربية",
+    "enter_marketing_category_title_ar": "أدخل اسم فئة التسويق بالعربية"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",

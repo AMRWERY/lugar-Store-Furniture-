@@ -6,10 +6,17 @@
                 <div class="mb-4">
                     <label for="category-title" class="block text-sm font-medium text-gray-700">{{
                         $t('form.marketing_category_title')
-                        }}</label>
+                    }}</label>
                     <input id="category-title" type="text" v-model="newMarketCategoryTitle"
-                        class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
-                        :placeholder="$t('form.enter_marketing_category_title')" required />
+                        class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300" required />
+                </div>
+
+                <div class="mb-4">
+                    <label for="category-title" class="block text-sm font-medium text-gray-700">{{
+                        $t('form.marketing_category_title_ar')
+                    }}</label>
+                    <input id="category-title" type="text" v-model="newMarketCategoryTitleAr"
+                        class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300" required />
                 </div>
 
                 <button type="submit" class="w-full px-4 py-2 btn-style">
@@ -36,6 +43,7 @@
 const store = useCategoriesStore();
 const loadingOne = ref(false);
 const newMarketCategoryTitle = ref('');
+const newMarketCategoryTitleAr = ref('');
 const route = useRoute();
 const marketCategoryId = route.params.id
 
@@ -45,6 +53,7 @@ onMounted(async () => {
         // console.log(store.currentMarketCategory);
         if (store.currentMarketCategory) {
             newMarketCategoryTitle.value = store.currentMarketCategory.title || "";
+            newMarketCategoryTitleAr.value = store.currentMarketCategory.titleAr || "";
         }
     }
 });
@@ -60,6 +69,7 @@ const handleUpdateMarketCategory = async () => {
     loadingOne.value = true;
     const updatedData = {
         title: newMarketCategoryTitle.value,
+        titleAr: newMarketCategoryTitleAr.value,
     };
     try {
         await store.updateMarketCategory(marketCategoryId, updatedData);

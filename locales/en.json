@@ -94,7 +94,9 @@
     "enter_marketing_category_title": "Enter Marketing Category Title",
     "add_marketing_category": "Add Marketing Category",
     "category_title_ar": "Category Title AR",
-    "enter_category_title_ar": "Enter Category Title AR"
+    "enter_category_title_ar": "Enter Category Title AR",
+    "marketing_category_title_ar": "Marketing Category Title AR",
+    "enter_marketing_category_title_ar": "Enter Marketing Category Title AR"
   },
   "btn": {
     "reset_password": "Reset Password",

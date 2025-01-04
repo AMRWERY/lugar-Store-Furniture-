@@ -13,7 +13,7 @@
 
         <div
             class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white rounded-lg shadow-md bg-clip-border">
-            <table class="w-full text-left table-auto min-w-max">
+            <table class="w-full table-auto text-start min-w-max">
                 <thead>
                     <tr>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
@@ -23,7 +23,7 @@
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Marketing Category Title
+                                {{ $t('form.marketing_category_title') }}
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
@@ -41,7 +41,9 @@
                             </p>
                         </td>
                         <td class="p-4 py-5">
-                            <p class="block font-semibold text-md text-slate-500">{{ subcategory.title }}</p>
+                            <p class="block font-semibold text-md text-slate-500">{{ $i18n.locale === 'ar' ?
+                                subcategory.titleAr :
+                                subcategory.title }}</p>
                         </td>
                         <td class="p-4 py-5 text-center">
                             <div class="flex items-center justify-center space-s-4">
