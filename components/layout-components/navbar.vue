@@ -4,6 +4,17 @@
       <header class="sticky inset-0 text-white bg-black h-14">
         <nav
           class="flex items-center justify-between h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
+          <!-- Announcement -->
+          <div class="hidden text-sm gap-7 md:flex">
+            <div class="flex items-center space-s-2.5">
+              <icon name="material-symbols:call" size="20px" />
+              <p class="capitalize">call us: +2010-233-51915</p>
+            </div>
+          </div>
+
+          <!-- Spacer -->
+          <div class="flex-grow"></div>
+
           <div class="flex items-center gap-7 ms-auto">
             <nuxt-link to="https://www.facebook.com/lugarinv?mibextid=ZbWKwL" target="_blank"
               class="transition hover:opacity-75">
