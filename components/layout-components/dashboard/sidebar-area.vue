@@ -1,7 +1,7 @@
 <template>
     <div>
         <aside v-if="!isAuthPage"
-            class="absolute left-0 top-0 z-50 flex h-screen w-[230px] flex-col overflow-y-hidden bg-black duration-300 ease-linear lg:static lg:translate-x-0"
+            class="absolute start-0 top-0 z-50 flex h-screen w-[230px] flex-col overflow-y-hidden bg-black duration-300 ease-linear lg:static lg:translate-x-0"
             :class="{
                 'translate-x-0': sidebarStore.isSidebarOpen,
                 '-translate-x-full': !sidebarStore.isSidebarOpen
