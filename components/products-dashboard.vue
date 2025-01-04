@@ -6,7 +6,7 @@
           <label for="category" class="block mb-2 text-sm font-medium text-gray-700">
             {{ $t('form.category') }}
           </label>
-          <select id="category" v-model="selectedSubcategory" @change="applyFilter"
+          <select id="category" v-model="selectedCategory" @change="applyFilter"
             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <option value="" disabled selected>{{ $t('form.select_a_category') }}</option>
             <option value="">{{ $t('form.all_categories') }}</option>
@@ -19,7 +19,7 @@
           <label for="category" class="block mb-2 text-sm font-medium text-gray-700">
             {{ $t('form.marketing_categories') }}
           </label>
-          <select id="category" v-model="selectedCategory" @change="applyFilter"
+          <select id="category" v-model="selectedSubcategory" @change="applyFilter"
             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <option value="" disabled selected>{{ $t('form.select_marketing_category') }}</option>
             <option value="">{{ $t('form.all_marketing_categories') }}</option>
@@ -53,7 +53,7 @@
         <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
       </div>
 
-      <div v-else-if="filteredProducts.length === 0" class="flex items-center justify-center h-48 text-gray-600">
+      <div v-else-if="!filteredProducts?.length" class="flex items-center justify-center h-48 text-gray-600">
         <p class="text-2xl font-semibold">{{ $t('dashboard.no_products_available') }}</p>
       </div>
 
@@ -140,80 +140,53 @@ const deleteProd = ref(null);
 
 const categories = ref([])
 const subCategories = ref([])
-
+const filteredProducts = ref([]); 
 onMounted(() => {
-  if (store.products.length === 0) {
-    store.fetchProducts();
-  }
-
+  
+  store.fetchProducts().then(()=>{
+      filteredProducts.value = store.products
+ 
+    });
+ 
   // Fetch categories first
   categoryStore.fetchCategories().then(() => {
     categories.value = categoryStore.categories;
-    console.log('Categories:', categoryStore.categories);
-  }).then(() => {
+   }).then(() => {
     // Then fetch subcategories after categories are fetched
     return categoryStore.fetchSubCategories();  // Ensure this is a promise
   }).then(() => {
     subCategories.value = categoryStore.subCategories;
-    console.log('SubCategories:', categoryStore.subCategories);
-  }).catch((error) => {
-    console.error('Error fetching categories or subcategories:', error);
-  });
+   }).catch((error) => {
+   });
 });
-// onMounted(() => {
-//   if (store.products.length === 0) {
-//     store.fetchProducts();
-//   }
-//   categoryStore.fetchCategories()
-//   categories.value = categoryStore.categories
-//   console.log('categories', categories.value)
-//   categoryStore.fetchSubCategories()
-//   subCategories.value = categoryStore.subCategories
-// });
-
+ 
 const applyFilter = () => {
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
+  // Reset the filtered products to the full product list before applying filters
+  filteredProducts.value = store.products; // Assuming `allProducts` contains the full product list
+
+  // Filter products based on selected values
+  filteredProducts.value = filteredProducts.value.filter((product) => {
+    const matchesCategory = 
+      !selectedCategory.value || product.categoryId === selectedCategory.value;
+
+    const matchesSubcategory = 
+      !selectedSubcategory.value || product.subCategoryId === selectedSubcategory.value;
+
+    const matchesAvailability = 
+      !selectedAvailability.value || product.availability === selectedAvailability.value;
+
+    return matchesCategory && matchesSubcategory && matchesAvailability;
+  });
 };
-
-// const uniqueSubcategories = computed(() => {
-//   return store.products?.length
-//     ? [...new Set(store.products.map((product) => product.subCategoryId))]
-//     : [];
-// });
-
-// const uniqueCategories = computed(() => {
-//   return store.products?.length
-//     ? [...new Set(store.products.map((product) => product.categoryId))]
-//     : [];
-// });
-
-// const uniqueCategories = computed(() => {
-//   return store.products?.length
-//     ? [...new Set(store.products.map((product) => product.categoryId))]
-//     : [];
-// });
+ 
 
 const uniqueAvailability = computed(() => {
   return [...new Set(store.products.map((product) => product.availability))];
 });
-
-const filteredProducts = computed(() => {
-  return store.products.filter((product) => {
-    const matchesCategory =
-      !selectedCategory.value || product.categoryId === selectedCategory.value;
-    const matchesSubcategory =
-      !selectedSubcategory.value || product.subCategoryId === selectedSubcategory.value;
-    const matchesAvailability =
-      !selectedAvailability.value || product.availability === selectedAvailability.value;
-    return matchesCategory && matchesSubcategory && matchesAvailability;
-  });
-});
+ 
 
 const totalPages = computed(() => {
-  return Math.ceil(filteredProducts.value.length / perPage);
+  return Math.ceil(filteredProducts.value?.length / perPage);
 });
 
 const paginatedProducts = computed(() => {
