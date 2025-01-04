@@ -31,7 +31,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
           ...doc.data(),
         }));
         this.updatePagination();
-        // console.log("Fetched categories:", this.categories);
+        console.log("Fetched categories:", this.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
