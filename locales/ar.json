@@ -134,7 +134,8 @@
     "order_details": "تفاصيل الطلب",
     "filter": "تصفية",
     "edit_category": "تعديل الفئة",
-    "update_marketing_category": "تحديث فئة التسويق"
+    "update_marketing_category": "تحديث فئة التسويق",
+    "close": "غلق"
   },
   "loading_btn": {
     "loading": "جاري التحميل",
@@ -326,12 +327,13 @@
   "order_summary": {
     "order_summary": "ملخص الطلب",
     "order_number": "رقم الطلب:",
-    "category": "الفئة:",
+    "category": "الفئة",
     "subtotal": "المجموع الفرعي",
     "savings": "التوفير",
     "store_pickup": "الاستلام من المتجر",
     "tax": "الضريبة",
-    "total": "الإجمالي"
+    "total": "الإجمالي",
+    "order_details": "تفاصيل الطلب"
   },
   "social_media": {
     "share_my": "شارك",
@@ -355,7 +357,15 @@
     "blocked": "محظور",
     "active": "نشط",
     "no_orders_available": "لا توجد طلبات متاحه حاليًا",
-    "image": "الصوره"
+    "image": "الصوره",
+    "order_id": "رقم الطلب",
+    "customer_name": "اسم العميل",
+    "date": "التاريخ",
+    "phone_number": "رقم الهاتف",
+    "address": "العنوان",
+    "state": "المحافظه",
+    "s_information": "معلومات",
+    "change_order_status": "تغيير حاله الطلب"
   },
   "pagination": {
     "previous": "السابق",
@@ -399,5 +409,10 @@
     "marketing_category_updated": "تم تحديث فئة التسويق",
     "marketing_category_update_failed": "فشل في تحديث فئة التسويق",
     "marketing_category_deleted_successfully": "تم حذف فئة التسويق بنجاح"
+  },
+  "status": {
+    "pending": "قيد الانتظار",
+    "confirmed": "مؤكد",
+    "delivered": "تم التوصيل"
   }
 }

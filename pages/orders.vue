@@ -30,7 +30,7 @@
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Order ID
+                                {{ $t('dashboard.order_id') }}
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
@@ -40,27 +40,27 @@
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Name
+                                {{ $t('dashboard.customer_name') }}
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Date
+                                {{ $t('dashboard.date') }}
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Phone Number
+                                {{ $t('dashboard.phone_number') }}
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                Address
+                                {{ $t('dashboard.address') }}
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
                             <p class="text-sm font-normal leading-none text-slate-500">
-                                State
+                                {{ $t('dashboard.state') }}
                             </p>
                         </th>
                         <th class="p-4 border-b border-slate-200 bg-slate-50">
@@ -118,16 +118,17 @@
                             <div class="flex items-center justify-center" v-if="order.loading">
                                 <icon name="svg-spinners:tadpole" />
                             </div>
-                            <span v-else>View Items</span>
+                            <span v-else>{{ $t('btn.view_details') }}</span>
                             </p>
                         </td>
                         <td class="p-4 py-5">
                             <p class="text-sm font-semibold" :class="{
-                                'text-green-700': order.status === 'Pending',
-                                'text-red-700': order.status === 'Confirmed',
-                                'text-blue-700': order.status === 'Delivered'
+                                'text-green-700': getStatusTitle(order.statusId)?.status === 'Pending' || getStatusTitle(order.statusId)?.statusAr === 'Pending',
+                                'text-red-700': getStatusTitle(order.statusId)?.status === 'Confirmed' || getStatusTitle(order.statusId)?.statusAr === 'Confirmed',
+                                'text-blue-700': getStatusTitle(order.statusId)?.status === 'Delivered'
                             }">
-                                {{ order.status || 'Pending' }}
+                                {{ $i18n.locale === 'ar' ? getStatusTitle(order.statusId)?.statusAr :
+                                    getStatusTitle(order.statusId)?.status }}
                             </p>
                         </td>
                         <td class="p-4 py-5">
@@ -189,18 +190,23 @@ const toastMessage = ref('');
 const toastType = ref('');
 const toastIcon = ref('')
 
+const currentStatus = ref('')
+const orderStatus = ref([])
+
 onMounted(async () => {
     await checkoutStore.fetchOrders();
+    await checkoutStore.fetchStatus();
+    orderStatus.value = checkoutStore.status
 });
 
-const updateOrderStatus = async (orderId, newStatus) => {
+const updateOrderStatus = async (orderId, newStatus, newStatusAr) => {
     try {
         const order = checkoutStore.paginatedOrders.find((o) => o.id === orderId);
         if (!order) return;
         order.loading = true;
-        order.action = newStatus;
+        order.action = checkoutStore.fetchStatus()
         await new Promise((resolve) => setTimeout(resolve, 3000));
-        await checkoutStore.updateOrderStatus(orderId, newStatus);
+        await checkoutStore.updateOrderStatus(orderId, newStatus, newStatusAr);
         await checkoutStore.fetchOrders();
         showToast.value = true;
         toastTitle.value = t('toast.great');
@@ -276,6 +282,12 @@ const deleteOrder = async (orderId) => {
         }, 3000);
     }
 };
+
+const getStatusTitle = (statusId) => {
+    currentStatus.value = checkoutStore.status.find((s) => s.id === statusId);
+    // console.log(currentStatus.value)
+    return currentStatus.value
+}
 
 const { t } = useI18n()
 

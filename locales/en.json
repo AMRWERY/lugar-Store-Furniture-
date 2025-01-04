@@ -129,7 +129,8 @@
     "add_marketing_category": "Add Marketing Category",
     "filter": "Filter",
     "edit_category": "Edit Category",
-    "update_marketing_category": "Update Marketing Category"
+    "update_marketing_category": "Update Marketing Category",
+    "close": "Close"
   },
   "loading_btn": {
     "loading": "Loading",
@@ -321,7 +322,7 @@
   "order_summary": {
     "order_summary": "Order Summary",
     "order_number": "Order Number:",
-    "category": "Category:",
+    "category": "Category",
     "subtotal": "Subtotal",
     "savings": "Savings",
     "store_pickup": "Store Pickup",
@@ -355,7 +356,15 @@
     "blocked": "Blocked",
     "active": "Active",
     "no_orders_available": "No orders available",
-    "image": "Image"
+    "image": "Image",
+    "order_id": "Order ID",
+    "customer_name": "Customer Name",
+    "date": "Date",
+    "phone_number": "Phone Number",
+    "address": "Address",
+    "state": "State",
+    "s_information": "'s Information",
+    "change_order_status": "Change order status"
   },
   "pagination": {
     "previous": "Previous",
@@ -399,5 +408,10 @@
     "marketing_category_updated": "Market Category updated",
     "marketing_category_update_failed": "Market Category update failed",
     "marketing_category_deleted_successfully": "Market Category deleted successfully"
+  },
+  "status": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "delivered": "Delivered"
   }
 }

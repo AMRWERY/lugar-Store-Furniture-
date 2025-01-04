@@ -12,6 +12,7 @@ import { db } from "@/firebase/config";
 export const useCheckoutStore = defineStore("checkout", {
   state: () => ({
     orders: [],
+    status: [],
     paginatedOrders: [],
     currentPage: 1,
     ordersPerPage: 5,
@@ -25,6 +26,21 @@ export const useCheckoutStore = defineStore("checkout", {
   }),
 
   actions: {
+    async fetchStatus() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "order-status"));
+        this.status = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        // console.log(this.orders);
+        this.updatePagination();
+        // await this.fetchTotalCheckouts();
+      } catch (e) {
+        console.error("Error fetching orders: ", e);
+      }
+    },
+
     async fetchOrders() {
       try {
         const querySnapshot = await getDocs(collection(db, "checkout"));
@@ -57,12 +73,12 @@ export const useCheckoutStore = defineStore("checkout", {
     async updateOrderStatus(orderId, newStatus) {
       try {
         const orderRef = doc(collection(db, "checkout"), orderId);
-        await updateDoc(orderRef, { status: newStatus });
+        await updateDoc(orderRef, { statusId: newStatus });
         const orderIndex = this.orders.findIndex(
           (order) => order.id === orderId
         );
         if (orderIndex !== -1) {
-          this.orders[orderIndex].status = newStatus;
+          this.orders[orderIndex].statusId = newStatus;
         }
         this.updatePagination();
       } catch (error) {
@@ -89,7 +105,7 @@ export const useCheckoutStore = defineStore("checkout", {
           phoneNumber: this.phoneNumber,
           address: this.address,
           date: currentDate,
-          status: "Pending",
+          statusId: "xLNExrzubgZl81mrerlw",
           cart: cartData,
         };
         const docRef = await addDoc(collection(db, "checkout"), order);
