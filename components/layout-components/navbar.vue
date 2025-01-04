@@ -4,39 +4,7 @@
       <header class="sticky inset-0 text-white bg-black h-14">
         <nav
           class="flex items-center justify-between h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
-          <!-- Announcement -->
-          <div class="hidden text-sm gap-7 lg:flex">
-            <p>Announce something here</p>
-            <div class="flex items-center space-s-2.5">
-              <icon name="material-symbols:call" size="20px" />
-              <p>CALL US: 123-456-7890</p>
-            </div>
-            <div class="flex items-center space-s-2.5">
-              <icon name="material-symbols:mail-rounded" size="20px" />
-              <p>EMAIL: Support@Fiot.com</p>
-            </div>
-          </div>
-
-          <!-- Spacer -->
-          <div class="flex-grow"></div>
-
-          <div class="flex items-center gap-7">
-            <!-- cart -->
-            <!-- <span class="flex items-center space-s-1">
-              <nuxt-link to="/shopping-cart" class="relative">
-                <span
-                  class="absolute top-0 inline-flex items-center justify-center w-5 h-5 -mt-2 text-xs text-white bg-red-600 rounded-full -me-3 end-2">
-                  {{ cartStore.cart.length }}
-                </span>
-                <button type="button" class="relative rounded-full" data-twe-toggle="tooltip"
-                  data-twe-placement="bottom" :title="$t('tooltip.your_cart')">
-                  <span class="absolute -inset-1.5" />
-                  <span class="sr-only">View cart</span>
-                  <icon name="clarity:shopping-cart-line" class="mt-0.5" />
-                </button>
-              </nuxt-link>
-            </span> -->
-
+          <div class="flex items-center gap-7 ms-auto">
             <nuxt-link to="https://www.facebook.com/lugarinv?mibextid=ZbWKwL" target="_blank"
               class="transition hover:opacity-75">
               <span class="sr-only">Facebook</span>
@@ -101,6 +69,7 @@
             <li><nuxt-link to="/contact-us"
                 class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Contact Us</nuxt-link></li>
           </ul>
+          <!-- cart -->
           <div>
             <span class="flex items-center space-s-1">
               <nuxt-link to="/shopping-cart" class="relative">
