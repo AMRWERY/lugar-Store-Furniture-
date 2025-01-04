@@ -2,7 +2,7 @@
   <div>
     <div class="flex items-center justify-between w-full mt-1 mb-3 ps-3">
       <div class="flex items-center">
-        <h3 class="text-lg font-semibold text-slate-800">Categories</h3>
+        <h3 class="text-lg font-semibold text-slate-800">{{ $t('head.categories') }}</h3>
       </div>
       <nuxt-link to="/categories/add-category" type="button" class="flex items-center px-4 py-2.5 btn-style">
         <icon name="ep:plus" class="w-5 h-5 me-2" />
@@ -12,7 +12,7 @@
 
     <div
       class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white rounded-lg shadow-md bg-clip-border">
-      <table class="w-full text-left table-auto min-w-max">
+      <table class="w-full table-auto text-start min-w-max">
         <thead>
           <tr>
             <th class="p-4 border-b border-slate-200 bg-slate-50">
@@ -22,12 +22,12 @@
             </th>
             <th class="p-4 border-b border-slate-200 bg-slate-50">
               <p class="text-sm font-normal leading-none text-slate-500">
-                Category Title
+                {{ $t('form.category_title') }}
               </p>
             </th>
             <th class="p-4 border-b border-slate-200 bg-slate-50">
               <p class="text-sm font-normal leading-none text-slate-500">
-                Image
+                {{ $t('dashboard.image') }}
               </p>
             </th>
           </tr>
@@ -41,7 +41,8 @@
               </p>
             </td>
             <td class="p-4 py-5">
-              <p class="font-semibold text-md text-slate-500">{{ category.title }}</p>
+              <p class="font-semibold text-md text-slate-500">{{ $i18n.locale === 'ar' ? category.titleAr :
+                category.title }}</p>
             </td>
             <td class="p-4 py-5">
               <img :src="category.imgOne" class="w-12 h-12 rounded-lg">

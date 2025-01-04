@@ -63,13 +63,14 @@ export const useCategoriesStore = defineStore("categoriesStore", {
       }
     },
 
-    async addCategory(title, imgOne) {
+    async addCategory(title, titleAr, imgOne) {
       try {
         const docRef = await addDoc(collection(db, "categories"), {
           title,
+          titleAr,
           imgOne,
         });
-        const newCategory = { id: docRef.id, title, imgOne };
+        const newCategory = { id: docRef.id, title, titleAr, imgOne };
         this.categories.push(newCategory);
         // console.log("Category added:", newCategory);
       } catch (error) {

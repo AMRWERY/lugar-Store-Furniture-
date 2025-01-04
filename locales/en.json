@@ -92,7 +92,9 @@
     "edit_marketing_category": "Edit Marketing Category",
     "marketing_category_title": "Marketing Category Title",
     "enter_marketing_category_title": "Enter Marketing Category Title",
-    "add_marketing_category": "Add Marketing Category"
+    "add_marketing_category": "Add Marketing Category",
+    "category_title_ar": "Category Title AR",
+    "enter_category_title_ar": "Enter Category Title AR"
   },
   "btn": {
     "reset_password": "Reset Password",
@@ -350,7 +352,8 @@
     "status": "Status",
     "blocked": "Blocked",
     "active": "Active",
-    "no_orders_available": "No orders available"
+    "no_orders_available": "No orders available",
+    "image": "Image"
   },
   "pagination": {
     "previous": "Previous",

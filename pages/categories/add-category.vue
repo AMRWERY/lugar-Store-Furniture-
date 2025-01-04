@@ -12,6 +12,14 @@
         </div>
 
         <div class="mb-4">
+          <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.category_title_ar')
+            }}</label>
+          <input id="category-title" type="text" v-model="newCategoryTitleAr"
+            class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
+            :placeholder="$t('form.enter_category_title_ar')" required />
+        </div>
+
+        <div class="mb-4">
           <div class="mx-auto overflow-hidden rounded-lg">
             <div class="md:flex">
               <div class="w-full">
@@ -59,6 +67,7 @@ import { useCategoriesStore } from '@/stores/categoriesStore';
 const store = useCategoriesStore();
 const loadingOne = ref(false);
 const newCategoryTitle = ref('');
+const newCategoryTitleAr = ref('');
 const previewImage = ref("");
 const selectedImageBase64 = ref("");
 
@@ -85,13 +94,14 @@ const handleImageUpload = (event) => {
 const handleAddCategory = async () => {
   loadingOne.value = true;
   if (newCategoryTitle.value.trim() && selectedImageBase64.value) {
-    await store.addCategory(newCategoryTitle.value.trim(), selectedImageBase64.value);
+    await store.addCategory(newCategoryTitle.value.trim(), newCategoryTitleAr.value.trim(), selectedImageBase64.value);
     showToast.value = true;
     toastTitle.value = t('toast.great');
     toastMessage.value = t('toast.category_added_successfully');
     toastType.value = 'success';
     toastIcon.value = 'mdi:check-circle'
     newCategoryTitle.value = '';
+    newCategoryTitleAr.value = '';
     selectedImageBase64.value = '';
   }
   loadingOne.value = false;

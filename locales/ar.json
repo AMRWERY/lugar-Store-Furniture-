@@ -90,9 +90,11 @@
     "edit_category": "تعديل الفئة",
     "add_category": "اضافه فئه",
     "edit_marketing_category": "تعديل فئة التسويق",
-    "marketing_category_title": "عنوان فئة التسويق",
-    "enter_marketing_category_title": "أدخل عنوان فئة التسويق",
-    "add_marketing_category": "إضافة فئة التسويق"
+    "marketing_category_title": "اسم فئة التسويق",
+    "enter_marketing_category_title": "أدخل اسم فئة التسويق",
+    "add_marketing_category": "إضافة فئة التسويق",
+    "category_title_ar": "اسم الفئة بالعربية",
+    "enter_category_title_ar": "ادخل اسم الفئة بالعربية"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -350,7 +352,8 @@
     "status": "الحالة",
     "blocked": "محظور",
     "active": "نشط",
-    "no_orders_available": "لا توجد طلبات متاحه حاليًا"
+    "no_orders_available": "لا توجد طلبات متاحه حاليًا",
+    "image": "الصوره"
   },
   "pagination": {
     "previous": "السابق",

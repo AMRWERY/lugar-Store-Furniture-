@@ -7,8 +7,14 @@
           <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.category_title')
             }}</label>
           <input id="category-title" type="text" v-model="newCategoryTitle"
-            class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
-            :placeholder="$t('form.enter_category_title')" required />
+            class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300" required />
+        </div>
+
+        <div class="mb-4">
+          <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.category_title_ar')
+            }}</label>
+          <input id="category-title" type="text" v-model="newCategoryTitleAr"
+            class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300" required />
         </div>
 
         <div class="mb-4">
@@ -57,6 +63,7 @@
 const store = useCategoriesStore();
 const loadingOne = ref(false);
 const newCategoryTitle = ref('');
+const newCategoryTitleAr = ref('');
 const previewImage = ref("");
 const selectedImageBase64 = ref("");
 const route = useRoute();
@@ -67,6 +74,7 @@ onMounted(async () => {
     await store.fetchCategoryDetails(categoryId);
     if (store.currentCategory) {
       newCategoryTitle.value = store.currentCategory.title || "";
+      newCategoryTitleAr.value = store.currentCategory.titleAr || "";
       previewImage.value = store.currentCategory.imgOne || "";
     }
   }
@@ -95,6 +103,7 @@ const handleUpdateCategory = async () => {
   loadingOne.value = true;
   const updatedData = {
     title: newCategoryTitle.value,
+    titleAr: newCategoryTitleAr.value,
     imgOne: selectedImageBase64.value || previewImage.value,
   };
   try {
@@ -104,7 +113,7 @@ const handleUpdateCategory = async () => {
     toastMessage.value = t("toast.category_updated");
     toastType.value = "success";
     toastIcon.value = "check-circle";
-    await store.fetchCategoryDetails(categoryId); // Sync UI
+    await store.fetchCategoryDetails(categoryId);
   } catch (error) {
     console.error("Error updating category:", error);
     showToast.value = true;
