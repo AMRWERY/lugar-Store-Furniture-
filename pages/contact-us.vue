@@ -38,7 +38,7 @@
                   <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />
                 </div> -->
-                            Submit</button>
+                            Send Your Message</button>
                     </div>
                 </div>
             </div>
