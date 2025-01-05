@@ -411,7 +411,8 @@
     "category_deleted_successfully": "تم حذف الفئة بنجاح",
     "marketing_category_updated": "تم تحديث فئة التسويق",
     "marketing_category_update_failed": "فشل في تحديث فئة التسويق",
-    "marketing_category_deleted_successfully": "تم حذف فئة التسويق بنجاح"
+    "marketing_category_deleted_successfully": "تم حذف فئة التسويق بنجاح",
+    "your_message_sent_successfully": "تم ارسال رسالتك بنجاح"
   },
   "status": {
     "pending": "قيد الانتظار",

@@ -20,33 +20,80 @@
                 <div class="p-4 space-y-4 rounded-lg shadow-lg w-[430px]">
                     <ClientOnly>
                         <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
-                            :validation="('required|contains_alpha')" :required="true" />
+                            :validation="('required|contains_alpha')" :required="true" v-model="data.name" />
 
                         <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
-                            :validation="('required|email')" :required="true" />
+                            :validation="('required|email')" :required="true" v-model="data.email" />
 
                         <dynamic-inputs :label="t('form.phone_number')" :placeholder="t('form.enter_your_phone')"
-                            type="tel" :validation="('required')" :required="true" />
+                            type="tel" :validation="('required')" :required="true" v-model="data.phone" />
 
                         <dynamic-inputs :label="t('form.your_message')" :placeholder="t('form.enter_your_message')"
-                            type="textarea" :validation="'required|length:10,500'" :required="true" />
-                    </ClientOnly>
+                            type="textarea" :validation="'required|length:10,500'" :required="true"
+                            v-model="data.message" />
 
-                    <div class="mt-6">
-                        <button type="button" class="w-[400px] px-4 py-2 btn-style">
-                            <!-- <div class="flex items-center justify-center" v-if="loading">
-                  <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
-                  <icon name="svg-spinners:270-ring-with-bg" />
-                </div> -->
-                            Send Your Message</button>
-                    </div>
+
+                        <div class="mt-6">
+                            <button type="submit" class="w-[400px] px-4 py-2 btn-style" @click="sendMessage">
+                                <div class="flex items-center justify-center" v-if="loading">
+                                    <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
+                                    <icon name="svg-spinners:270-ring-with-bg" />
+                                </div>
+                                <span v-else>Send Your Message</span>
+                            </button>
+                        </div>
+                    </ClientOnly>
                 </div>
             </div>
         </section>
+
+        <!-- dynamic-toast component  -->
+        <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
+            <div class="pointer-events-auto">
+                <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+                    :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
+const store = useContactStore();
+const loading = ref(false);
+const showToast = ref(false);
+const toastTitle = ref('');
+const toastMessage = ref('');
+const toastType = ref('');
+const toastIcon = ref('')
+
+const data = ref({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+});
+
+const sendMessage = async () => {
+    loading.value = true;
+    try {
+        await store.submitForm(data.value);
+        resetForm()
+        showToast.value = true;
+        toastTitle.value = t('toast.great');
+        toastMessage.value = t('toast.your_message_sent_successfully');
+        toastType.value = 'success';
+        toastIcon.value = 'mdi:check-circle';
+    } catch (error) {
+        console.log(error)
+    } finally {
+        loading.value = false;
+    }
+};
+
+const resetForm = () => {
+    data.value = { name: '', email: '', phone: '', message: '' };
+};
+
 const { t } = useI18n()
 
 useHead({
