@@ -17,7 +17,7 @@ export const useNewProductsStoreStore = defineStore("new-products", {
           ...doc.data(),
         }));
         this.products = allProducts;
-        console.log(this.products);
+        // console.log(this.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
