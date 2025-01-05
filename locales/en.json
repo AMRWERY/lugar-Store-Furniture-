@@ -238,7 +238,16 @@
     "email": "Email",
     "sign_up_for_our_newsletter": "Sign up for our Newsletter",
     "2019_cospora_demo_all_rights_reserved_powered_by_shopify_shopify_themes_templates_by": "© 2019 Cospora Demo. All Rights Reserved. Powered by Shopify. Shopify Themes & Templates by",
-    "your_email_address": "Your email address"
+    "your_email_address": "Your email address",
+    "call_us": "Call us",
+    "damietta": "Damietta",
+    "home": "Home",
+    "products": "Products",
+    "sofa": "Sofa",
+    "chairs": "Chairs",
+    "bed_rooms": "Bed Rooms",
+    "living_rooms": "Living Rooms",
+    "dining_rooms": "Dining Rooms"
   },
   "home": {
     "milancelos": "Milancelos",
@@ -277,7 +286,9 @@
     "dining_rooms": "Dining Rooms",
     "le": "LE",
     "interior_design_in_home": "INTERIOR DESIGN IN HOME",
-    "summer_sale": "Summer Sale"
+    "summer_sale": "Summer Sale",
+    "top_seller": "Top Sale",
+    "customer_choice": "Customer Choice"
   },
   "mail": {
     "join_our_mailing_list": "Join Our Mailing List",

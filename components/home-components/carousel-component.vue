@@ -33,7 +33,7 @@
                 class="absolute bottom-0 left-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-gray-800 opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-black hover:no-underline hover:opacity-90 hover:outline-none focus:text-black focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
                 type="button" data-twe-target="#carouselExampleCaptions" data-twe-slide="prev">
                 <span class="inline-block w-8 h-8 rtl:rotate-180">
-                    <icon name="material-symbols:arrow-back-ios" class="w-6 h-6 text-black" />
+                    <icon name="material-symbols:arrow-back-ios" class="w-6 h-6 text-black rtl:rotate-180" />
                 </span>
                 <span
                     class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Previous</span>
@@ -43,7 +43,7 @@
                 class="absolute bottom-0 right-0 top-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-gray-800 opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-black hover:no-underline hover:opacity-90 hover:outline-none focus:text-black focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
                 type="button" data-twe-target="#carouselExampleCaptions" data-twe-slide="next">
                 <span class="inline-block w-8 h-8 rtl:rotate-180">
-                    <icon name="material-symbols:arrow-forward-ios-rounded" class="w-6 h-6 text-black" />
+                    <icon name="material-symbols:arrow-forward-ios-rounded" class="w-6 h-6 text-black rtl:rotate-180" />
                 </span>
                 <span
                     class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Next</span>

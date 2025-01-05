@@ -243,7 +243,16 @@
     "email": "البريد الإلكتروني",
     "sign_up_for_our_newsletter": "اشترك في نشرتنا الإخبارية",
     "2019_cospora_demo_all_rights_reserved_powered_by_shopify_shopify_themes_templates_by": "© 2019 ديمو كوسبورا. جميع الحقوق محفوظة. مدعوم من Shopify. قوالب وسمات Shopify بواسطة",
-    "your_email_address": "عنوان بريدك الإلكتروني"
+    "your_email_address": "عنوان بريدك الإلكتروني",
+    "call_us": "اتصل بنا",
+    "damietta": "دمياط",
+    "home": "الصفحة الرئيسية",
+    "products": "المنتجات",
+    "sofa": "أريكة",
+    "chairs": "كراسي",
+    "bed_rooms": "غرف النوم",
+    "living_rooms": "غرف المعيشة",
+    "dining_rooms": "غرف الطعام"
   },
   "home": {
     "milancelos": "ميلانسيلوس",
@@ -281,8 +290,10 @@
     "living_rooms": "غرف المعيشة",
     "dining_rooms": "غرف الطعام",
     "le": "ج م",
-     "interior_design_in_home": "التصميم الداخلي في المنزل",
-  "summer_sale": "تخفيضات الصيف"
+    "interior_design_in_home": "التصميم الداخلي في المنزل",
+    "summer_sale": "تخفيضات الصيف",
+    "top_seller": "الأكثر مبيعًا",
+    "customer_choice": "اختيار العملاء"
   },
   "mail": {
     "join_our_mailing_list": "انضم إلى قائمتنا البريدية",

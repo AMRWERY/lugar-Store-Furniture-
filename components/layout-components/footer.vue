@@ -11,7 +11,7 @@
                     <div>
                         <p>
                             <span class="text-xs tracking-wide capitalize">
-                                Call us
+                                {{ $t('footer.call_us') }}
                             </span>
 
                             <nuxt-link to="" class="block text-2xl font-medium hover:opacity-75 sm:text-3xl">
@@ -20,9 +20,9 @@
                         </p>
 
                         <ul class="flex items-center mt-8 space-y-1 text-sm">
-                            <li class="flex items-center space-x-2">
+                            <li class="flex items-center space-s-2">
                                 <icon name="material-symbols:add-location" class="w-4 h-4" />
-                                <span>Damietta</span>
+                                <span>{{ $t('footer.damietta') }}</span>
                             </li>
                         </ul>
 
@@ -65,20 +65,20 @@
                         <div>
                             <ul class="mt-6 space-y-4 text-sm">
                                 <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        Home
+                                    <nuxt-link to="/" class="transition hover:opacity-75">
+                                        {{ $t('footer.home') }}
                                     </nuxt-link>
                                 </li>
 
                                 <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        Products
+                                    <nuxt-link to="/all-products" class="transition hover:opacity-75">
+                                        {{ $t('footer.products') }}
                                     </nuxt-link>
                                 </li>
 
                                 <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        Contact
+                                    <nuxt-link to="/contact-us" class="transition hover:opacity-75">
+                                        {{ $t('footer.contact_us') }}
                                     </nuxt-link>
                                 </li>
                             </ul>
@@ -88,31 +88,31 @@
                             <ul class="mt-6 space-y-4 text-sm">
                                 <li>
                                     <nuxt-link to="" class="transition hover:opacity-75">
-                                        Chairs
+                                        {{ $t('footer.chairs') }}
                                     </nuxt-link>
                                 </li>
 
                                 <li>
                                     <nuxt-link to="" class="transition hover:opacity-75">
-                                        Bedrooms
+                                        {{ $t('footer.bed_rooms') }}
                                     </nuxt-link>
                                 </li>
 
                                 <li>
                                     <nuxt-link to="" class="transition hover:opacity-75">
-                                        Sofa
+                                        {{ $t('footer.sofa') }}
                                     </nuxt-link>
                                 </li>
 
                                 <li>
                                     <nuxt-link to="" class="transition hover:opacity-75">
-                                        Living Room
+                                        {{ $t('footer.living_rooms') }}
                                     </nuxt-link>
                                 </li>
 
                                 <li>
                                     <nuxt-link to="" class="transition hover:opacity-75">
-                                        Dining Room
+                                        {{ $t('footer.dining_rooms') }}
                                     </nuxt-link>
                                 </li>
                             </ul>
