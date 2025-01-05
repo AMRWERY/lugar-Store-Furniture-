@@ -26,8 +26,8 @@
               </nuxt-link>
               <div class="flex items-center justify-between mt-2 mb-5">
                 <p class="space-s-2">
-                  <span class="text-lg font-bold text-slate-900">{{ product.discountedPrice }} LE</span>
-                  <span class="text-sm line-through text-slate-900">{{ product.originalPrice }} LE</span>
+                  <span class="text-lg font-bold text-slate-900">{{ product.discountedPrice }} {{ $t('products.le') }}</span>
+                  <span class="text-sm line-through text-slate-900">{{ product.originalPrice }} {{ $t('products.le') }}</span>
                 </p>
               </div>
               <button type="button" @click="handleAddToCart(product)"

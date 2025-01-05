@@ -22,7 +22,7 @@
         <div class="col-span-10">
           <p class="text-lg font-semibold text-gray-900">{{ $i18n.locale === 'ar' ? item.titleAr : item.title }}</p>
           <p class="text-sm font-semibold text-gray-700"><span class="me-1">{{ $t('order_summary.category') }} </span>{{
-            item.categoryTitle }}</p>
+           $i18n.locale === 'ar' ? item.categoryTitleAr : item.categoryTitle}}</p>
         </div>
       </div>
 
@@ -32,7 +32,7 @@
           <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.subtotal') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-sm font-medium text-gray-900">{{ subTotalAmount }} LE</dd>
+          <dd class="text-sm font-medium text-gray-900">{{ subTotalAmount }}  {{ $t('products.le') }}</dd>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
           <dt class="text-xl">{{ $t('order_summary.total') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-xl font-semibold text-gray-900">{{ totalAmount }} LE</dd>
+          <dd class="text-xl font-semibold text-gray-900">{{ totalAmount }}  {{ $t('products.le') }}</dd>
         </div>
       </div>
     </div>

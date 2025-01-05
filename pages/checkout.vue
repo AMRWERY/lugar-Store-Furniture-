@@ -36,7 +36,7 @@
               <div class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-400">{{ $t('checkout.subtotal') }}</dt>
-                  <dd class="text-base font-medium text-gray-900 dark:text-white">{{ subTotalAmount }} LE</dd>
+                  <dd class="text-base font-medium text-gray-900 dark:text-white">{{ subTotalAmount }}  {{ $t('products.le') }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-400">{{ $t('checkout.savings') }}</dt>
@@ -44,7 +44,7 @@
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-bold text-gray-900 dark:text-white">{{ $t('checkout.total') }}</dt>
-                  <dd class="text-base font-bold text-gray-900 dark:text-white">{{ totalAmount }} LE</dd>
+                  <dd class="text-base font-bold text-gray-900 dark:text-white">{{ totalAmount }}  {{ $t('products.le') }}</dd>
                 </dl>
               </div>
             </div>
