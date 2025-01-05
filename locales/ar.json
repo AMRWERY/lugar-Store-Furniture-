@@ -202,7 +202,10 @@
     "orders": "الطلبات",
     "categories": "الفئات",
     "marketing_categories": "فئات التسويق",
-    "customer_messages": "رسائل العملاء"
+    "customer_messages": "رسائل العملاء",
+    "home": "الصفحة الرئيسية",
+    "contact_us": "اتصل بنا",
+    "call_us": "اتصل بنا:"
   },
   "footer": {
     "navigate": "تصفح",

@@ -8,7 +8,7 @@
           <div class="hidden text-sm gap-7 md:flex">
             <div class="flex items-center space-s-2.5">
               <icon name="material-symbols:call" size="20px" />
-              <p class="capitalize">call us: +2010-233-51915</p>
+              <p class="capitalize">{{ $t('layout.call_us') }} +2010-233-51915</p>
             </div>
           </div>
 
@@ -72,13 +72,15 @@
             </nuxt-link>
           </div>
           <ul class="flex items-center mx-auto space-s-8">
-            <li><nuxt-link to="/"
-                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Home</nuxt-link>
+            <li><nuxt-link to="/" class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{
+              $t('layout.home') }}</nuxt-link>
             </li>
             <li><nuxt-link to="/all-products"
-                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Products</nuxt-link></li>
+                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{ $t('layout.products')
+                }}</nuxt-link></li>
             <li><nuxt-link to="/contact-us"
-                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">Contact Us</nuxt-link></li>
+                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{ $t('layout.contact_us')
+                }}</nuxt-link></li>
           </ul>
           <!-- cart -->
           <div>

@@ -197,7 +197,10 @@
     "orders": "Orders",
     "categories": "Categories",
     "marketing_categories": "Marketing Categories",
-    "customer_messages": "Customers Messages"
+    "customer_messages": "Customers Messages",
+    "home": "Home",
+    "contact_us": "Contact Us",
+    "call_us": "Call us:"
   },
   "footer": {
     "navigate": "Navigate",
