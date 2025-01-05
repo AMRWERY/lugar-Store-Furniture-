@@ -64,9 +64,15 @@ import { useCartStore } from '@/stores/cartStore';
 
 const store = useNewProductsStoreStore()
 const cartStore = useCartStore();
+const route = useRoute();
 
-onMounted(() => {
-  store.fetchProducts();
+onMounted(async () => {
+  const categoryId = route.query.categoryId;
+  if (categoryId) {
+    await store.fetchProductsByCategory(categoryId);
+  } else {
+    await store.fetchProducts();
+  }
 });
 
 const currentPage = ref(1);

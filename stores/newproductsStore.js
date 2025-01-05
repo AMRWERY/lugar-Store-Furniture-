@@ -1,5 +1,12 @@
 import { defineStore } from "pinia";
-import { getDocs, collection, query, getDoc, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  query,
+  getDoc,
+  doc,
+  where,
+} from "firebase/firestore";
 import { db } from "@/firebase/config";
 
 export const useNewProductsStoreStore = defineStore("new-products", {
@@ -20,6 +27,28 @@ export const useNewProductsStoreStore = defineStore("new-products", {
         // console.log(this.products);
       } catch (error) {
         console.error("Error fetching products:", error);
+      }
+    },
+
+    async fetchProductsByCategory(categoryId) {
+      if (!categoryId) {
+        console.error("Category ID is required to fetch products by category");
+        return;
+      }
+      try {
+        const querySnap = await getDocs(
+          query(
+            collection(db, "products"),
+            where("categoryId", "==", categoryId)
+          )
+        );
+        const filteredProducts = querySnap.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        this.products = filteredProducts;
+      } catch (error) {
+        console.error("Error fetching products by category:", error);
       }
     },
 

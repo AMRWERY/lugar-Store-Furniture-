@@ -2,7 +2,8 @@
     <div>
         <div class="mx-auto my-12 max-w-7xl">
             <div class="flex space-x-4">
-                <div class="relative w-1/5 cursor-pointer group transit" v-for="card in store.categories" :key="card">
+                <nuxt-link class="relative w-1/5 cursor-pointer group transit" v-for="card in store.categories"
+                    :key="card" :to="{ path: '/all-products', query: { categoryId: card.id } }">
                     <div class="relative w-full h-48 overflow-hidden rounded-lg group-hover:opacity-75 sm:h-48">
                         <img :src="card?.imgOne" class="object-cover object-center w-full h-full" />
                         <div class="absolute inset-0 flex items-center justify-center">
@@ -13,7 +14,7 @@
                             </h3>
                         </div>
                     </div>
-                </div>
+                </nuxt-link>
             </div>
         </div>
     </div>
