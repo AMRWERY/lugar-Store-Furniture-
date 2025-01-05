@@ -65,45 +65,11 @@
     <main class="px-4 mx-auto max-w-9xl sm:px-6 lg:px-8">
       <div class="flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
         <h1 class="text-4xl font-bold tracking-tight text-gray-900 capitalize">Products</h1>
-
-        <div class="flex items-center">
-          <HeadlessMenu as="div" class="relative inline-block text-start">
-            <div>
-              <HeadlessMenuButton
-                class="inline-flex justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
-                Sort
-                <icon name="ic:baseline-keyboard-arrow-down"
-                  class="text-gray-400 ms-1 -me-1 shrink-0 group-hover:text-gray-500" />
-              </HeadlessMenuButton>
-            </div>
-
-            <transition enter-active-class="transition duration-100 ease-out"
-              enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
-              leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100"
-              leave-to-class="transform scale-95 opacity-0">
-              <HeadlessMenuItems
-                class="absolute z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl end-0 ring-1 ring-black/5 focus:outline-none">
-                <div class="py-1">
-                  <HeadlessMenuItem v-for="option in sortOptions" :key="option.name" v-slot="{ active }">
-                    <a :href="option.href"
-                      :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100 outline-none' : '', 'block px-4 py-2 text-sm']">{{
-                        option.name }}</a>
-                  </HeadlessMenuItem>
-                </div>
-              </HeadlessMenuItems>
-            </transition>
-          </HeadlessMenu>
-
-          <button type="button" class="p-2 -m-2 text-gray-400 ms-5 hover:text-gray-500 sm:ms-7">
-            <span class="sr-only">View grid</span>
-            <icon name="mdi:square-rounded" aria-hidden="true" />
-          </button>
-          <button type="button" class="p-2 -m-2 text-gray-400 ms-4 hover:text-gray-500 sm:ms-6 lg:hidden"
-            @click="mobileFiltersOpen = true">
-            <span class="sr-only">Filters</span>
-            <icon name="material-symbols:filter-alt" aria-hidden="true" />
-          </button>
-        </div>
+        <button type="button" class="p-2 -m-2 text-gray-400 ms-4 hover:text-gray-500 sm:ms-6 lg:hidden"
+          @click="mobileFiltersOpen = true">
+          <span class="sr-only">Filters</span>
+          <icon name="material-symbols:filter-alt" aria-hidden="true" />
+        </button>
       </div>
 
       <section aria-labelledby="products-heading" class="pt-6 pb-24">
@@ -154,38 +120,16 @@
 </template>
 
 <script setup>
-const sortOptions = [
-  { name: 'Customer Choice', href: '#', current: true },
-  { name: 'Top Seller', href: '#', current: false },
-  { name: 'Alphabetically, A - Z', href: '#', current: false },
-  { name: 'Alphabetically, Z - A', href: '#', current: false },
-  { name: 'Price, low to high', href: '#', current: false },
-  { name: 'Price, high to low', href: '#', current: false },
-]
-
 const filters = [
   {
-    id: 'color',
-    name: 'Color',
+    id: 'categories',
+    name: 'Categories',
     options: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-    ],
-  },
-  {
-    id: 'price',
-    name: 'Price',
-    options: [
-      { value: 'below-500', label: 'Below 500', checked: false },
-      { value: '500-1000', label: '500 - 1000', checked: false },
-      { value: '1001-2000', label: '1001 - 2000', checked: false },
-      { value: '2001-3000', label: '2001 - 3000', checked: false },
-      { value: '3001-4000', label: '3001 - 4000', checked: false },
-      { value: 'above-4000', label: 'Above 4000', checked: true },
+      { value: 'chairs', label: 'Chairs', checked: false },
+      { value: 'bedrooms', label: 'Bedrooms', checked: false },
+      { value: 'sofa', label: 'Sofa', checked: true },
+      { value: 'living room', label: 'Living Room', checked: false },
+      { value: 'dining room', label: 'Dining Room', checked: false },
     ],
   },
 ]
