@@ -77,7 +77,6 @@ const sendMessage = async () => {
     loading.value = true;
     try {
         await store.submitForm(data.value);
-        resetForm()
         showToast.value = true;
         toastTitle.value = t('toast.great');
         toastMessage.value = t('toast.your_message_sent_successfully');
@@ -88,10 +87,6 @@ const sendMessage = async () => {
     } finally {
         loading.value = false;
     }
-};
-
-const resetForm = () => {
-    data.value = { name: '', email: '', phone: '', message: '' };
 };
 
 const { t } = useI18n()
