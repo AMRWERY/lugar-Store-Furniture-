@@ -98,6 +98,11 @@ const menuGroups = computed(() => [
                 label: t('layout.orders'),
                 route: '/orders',
             },
+            {
+                icon: 'material-symbols:attach-email-outline-sharp',
+                label: t('layout.customer_messages'),
+                route: '/customer-messages',
+            },
         ],
     },
 ]);

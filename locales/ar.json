@@ -137,7 +137,8 @@
     "filter": "تصفية",
     "edit_category": "تعديل الفئة",
     "update_marketing_category": "تحديث فئة التسويق",
-    "close": "غلق"
+    "close": "غلق",
+    "view_message": "عرض الرسالة"
   },
   "loading_btn": {
     "loading": "جاري التحميل",
@@ -169,7 +170,8 @@
     "edit_marketing_category": "تعديل فئة التسويق",
     "marketing_categories": "فئات التسويق",
     "add_marketing_category": "اضافه فئه التسوق",
-    "contact_us": "اتصل بنا"
+    "contact_us": "اتصل بنا",
+    "customer_messages": "رسائل العملاء"
   },
   "alert": {
     "success": "نجاح",
@@ -199,7 +201,8 @@
     "users": "المستخدمون",
     "orders": "الطلبات",
     "categories": "الفئات",
-    "marketing_categories": "فئات التسويق"
+    "marketing_categories": "فئات التسويق",
+    "customer_messages": "رسائل العملاء"
   },
   "footer": {
     "navigate": "تصفح",
@@ -294,7 +297,8 @@
     "failed_to_update_order": "فشل في تحديث الطلب",
     "delete_order": "مسح الطلب",
     "order_deleted": "تم مسح الطلب",
-    "order_deletion_failed": "فشل مسح الطلب"
+    "order_deletion_failed": "فشل مسح الطلب",
+    "delete_message": "حذف الرسالة"
   },
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حاليًا.",
@@ -368,7 +372,9 @@
     "address": "العنوان",
     "state": "المحافظه",
     "s_information": "معلومات",
-    "change_order_status": "تغيير حاله الطلب"
+    "change_order_status": "تغيير حاله الطلب",
+    "customer_messages": "رسائل العملاء",
+    "no_messages_available": "لا توجد رسائل متاحة"
   },
   "pagination": {
     "previous": "السابق",
@@ -412,7 +418,9 @@
     "marketing_category_updated": "تم تحديث فئة التسويق",
     "marketing_category_update_failed": "فشل في تحديث فئة التسويق",
     "marketing_category_deleted_successfully": "تم حذف فئة التسويق بنجاح",
-    "your_message_sent_successfully": "تم ارسال رسالتك بنجاح"
+    "your_message_sent_successfully": "تم ارسال رسالتك بنجاح",
+    "message_deleted": "تم حذف الرسالة",
+    "message_deletion_failed": "فشل في حذف الرسالة"
   },
   "status": {
     "pending": "قيد الانتظار",

@@ -132,7 +132,8 @@
     "filter": "Filter",
     "edit_category": "Edit Category",
     "update_marketing_category": "Update Marketing Category",
-    "close": "Close"
+    "close": "Close",
+    "view_message": "View Message"
   },
   "loading_btn": {
     "loading": "Loading",
@@ -164,7 +165,8 @@
     "edit_marketing_category": "Edit Marketing Category",
     "marketing_categories": "Marketing Categories",
     "add_marketing_category": "Add Marketing Category",
-    "contact_us": "Contact Us"
+    "contact_us": "Contact Us",
+    "customer_messages": "Customers Messages"
   },
   "alert": {
     "success": "Success",
@@ -194,7 +196,8 @@
     "users": "Users",
     "orders": "Orders",
     "categories": "Categories",
-    "marketing_categories": "Marketing Categories"
+    "marketing_categories": "Marketing Categories",
+    "customer_messages": "Customers Messages"
   },
   "footer": {
     "navigate": "Navigate",
@@ -289,7 +292,8 @@
     "failed_to_update_order": "Failed to update order",
     "delete_order": "Delete Order",
     "order_deleted": "Order deleted",
-    "order_deletion_failed": "Order deletion failed"
+    "order_deletion_failed": "Order deletion failed",
+    "delete_message": "Delete Message"
   },
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty.",
@@ -367,7 +371,9 @@
     "address": "Address",
     "state": "State",
     "s_information": "'s Information",
-    "change_order_status": "Change order status"
+    "change_order_status": "Change order status",
+    "customer_messages": "Customer Message",
+    "no_messages_available": "No Messages Available"
   },
   "pagination": {
     "previous": "Previous",
@@ -411,7 +417,9 @@
     "marketing_category_updated": "Market Category updated",
     "marketing_category_update_failed": "Market Category update failed",
     "marketing_category_deleted_successfully": "Market Category deleted successfully",
-    "your_message_sent_successfully": "Your message was sent successfully"
+    "your_message_sent_successfully": "Your message was sent successfully",
+    "message_deleted": "Message deleted",
+    "message_deletion_failed": "Message deletion failed"
   },
   "status": {
     "pending": "Pending",
