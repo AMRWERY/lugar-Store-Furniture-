@@ -81,13 +81,9 @@ onMounted(async () => {
       categories.value = categoryStore.categories;
       selectedCategoryId.value = categories.value.find((cat) => cat.title == props.categoryTitle)?.id;
       productsStore.fetchProducts().then(() => {
-
         products.value = productsStore.products.filter((product) => product.categoryId === selectedCategoryId.value);
-
       });
-
     });
-
   }
 
   if (!props.categoryTitle && !props.subCategoryTitle) {

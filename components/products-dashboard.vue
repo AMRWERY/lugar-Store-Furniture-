@@ -140,50 +140,40 @@ const deleteProd = ref(null);
 
 const categories = ref([])
 const subCategories = ref([])
-const filteredProducts = ref([]); 
+const filteredProducts = ref([]);
+
 onMounted(() => {
-  
-  store.fetchProducts().then(()=>{
-      filteredProducts.value = store.products
- 
-    });
- 
-  // Fetch categories first
+  store.fetchProducts().then(() => {
+    filteredProducts.value = store.products
+  });
   categoryStore.fetchCategories().then(() => {
     categories.value = categoryStore.categories;
-   }).then(() => {
-    // Then fetch subcategories after categories are fetched
-    return categoryStore.fetchSubCategories();  // Ensure this is a promise
+  }).then(() => {
+    return categoryStore.fetchSubCategories();
   }).then(() => {
     subCategories.value = categoryStore.subCategories;
-   }).catch((error) => {
-   });
+  }).catch((error) => {
+  });
 });
- 
+
 const applyFilter = () => {
-  // Reset the filtered products to the full product list before applying filters
-  filteredProducts.value = store.products; // Assuming `allProducts` contains the full product list
-
-  // Filter products based on selected values
+  filteredProducts.value = store.products;
   filteredProducts.value = filteredProducts.value.filter((product) => {
-    const matchesCategory = 
+    const matchesCategory =
       !selectedCategory.value || product.categoryId === selectedCategory.value;
-
-    const matchesSubcategory = 
+    const matchesSubcategory =
       !selectedSubcategory.value || product.subCategoryId === selectedSubcategory.value;
-
-    const matchesAvailability = 
+    const matchesAvailability =
       !selectedAvailability.value || product.availability === selectedAvailability.value;
-
     return matchesCategory && matchesSubcategory && matchesAvailability;
   });
 };
- 
+
 
 const uniqueAvailability = computed(() => {
   return [...new Set(store.products.map((product) => product.availability))];
 });
- 
+
 
 const totalPages = computed(() => {
   return Math.ceil(filteredProducts.value?.length / perPage);

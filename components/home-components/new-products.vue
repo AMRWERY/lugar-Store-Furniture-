@@ -52,23 +52,22 @@
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-chairs" role="tabpanel" aria-labelledby="tabs-chairs-tab">
-           <dynamic-products-cards :config="config" :categoryTitle="'Chairs'" />
+          <dynamic-products-cards :config="config" :categoryTitle="'Chairs'" />
 
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-bed-rooms" role="tabpanel" aria-labelledby="tabs-bed-rooms-tab">
-           <dynamic-products-cards :config="config" :categoryTitle="'Bedrooms'" />
+          <dynamic-products-cards :config="config" :categoryTitle="'Bedrooms'" />
 
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-living-room" role="tabpanel" aria-labelledby="tabs-living-room-tab">
-           <dynamic-products-cards :config="config" :categoryTitle="'Living Room'" />
+          <dynamic-products-cards :config="config" :categoryTitle="'Living Room'" />
 
         </div>
         <div class="hidden opacity-0 transition-opacity duration-150 ease-linear data-[twe-tab-active]:block"
           id="tabs-dining-room" role="tabpanel" aria-labelledby="tabs-dining-room-tab">
-           <dynamic-products-cards :config="config" :categoryTitle="'Dining Room'" />
-
+          <dynamic-products-cards :config="config" :categoryTitle="'Dining Room'" />
         </div>
       </div>
     </div>
