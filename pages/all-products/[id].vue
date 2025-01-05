@@ -132,8 +132,12 @@ const selectedProduct = computed(() => {
 });
 
 onMounted(async () => {
-  if (!store.products.length) {
-    await store.fetchProducts();
+  const productId = route.query.id;
+  if (productId) {
+    if (!store.products.length) {
+      await store.fetchProducts();
+    }
+    selectedProduct.value = store.products.find((product) => product.id === productId);
   }
 });
 
