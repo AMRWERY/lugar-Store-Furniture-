@@ -15,12 +15,13 @@
               <span
                 class="absolute top-0 px-2 m-2 text-sm font-medium text-center text-white bg-black rounded-full start-0">{{
                   product.discount }}%
-                off</span>
+                {{ $t('products.off') }}</span>
             </nuxt-link>
             <div class="px-5 pb-5 mt-4">
               <nuxt-link to="">
                 <h5 class="text-xl tracking-tight text-slate-900">
-                  {{ product.title }}
+                  {{ $i18n.locale === 'ar' ? product.titleAr :
+                        product.title }}
                 </h5>
               </nuxt-link>
               <div class="flex items-center justify-between mt-2 mb-5">
@@ -37,7 +38,7 @@
                 </div>
                 <div class="flex items-center" v-else>
                   <icon name="clarity:shopping-cart-line" class="w-6 h-6 me-2" />
-                  <span>Add to cart</span>
+                  <span>{{ $t('btn.add_to_cart') }}</span>
                 </div>
               </button>
             </div>

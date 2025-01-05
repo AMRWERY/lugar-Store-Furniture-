@@ -46,9 +46,6 @@
 </template>
 
 <script setup>
-// const route = useRoute()
-// console.log('route', route.query)
-
 const props = defineProps({
   config: {
     type: Object,

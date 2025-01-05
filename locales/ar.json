@@ -295,11 +295,6 @@
     "top_seller": "الأكثر مبيعًا",
     "customer_choice": "اختيار العملاء"
   },
-  "mail": {
-    "join_our_mailing_list": "انضم إلى قائمتنا البريدية",
-    "get_the_latest_updates_on_new_products_and_upcoming_sales": "احصل على أحدث التحديثات حول المنتجات الجديدة والمبيعات القادمة.",
-    "we_promise_to_only_send_you_good_things": "نعدك بإرسال الأشياء الجيدة فقط!"
-  },
   "tooltip": {
     "your_wishlist": "قائمة الرغبات الخاصة بك",
     "your_cart": "عربتك",
@@ -448,5 +443,18 @@
     "pending": "قيد الانتظار",
     "confirmed": "مؤكد",
     "delivered": "تم التوصيل"
+  },
+  "products": {
+    "products": "المنتجات",
+    "categories": "الفئات",
+    "sofa": "أريكة",
+    "chairs": "كراسي",
+    "bed_rooms": "غرف النوم",
+    "living_rooms": "غرف المعيشة",
+    "dining_rooms": "غرف الطعام",
+    "off": "خصم",
+    "le": "ج م",
+    "quantity": "الكمية",
+    "description": "الوصف"
   }
 }

@@ -290,11 +290,6 @@
     "top_seller": "Top Sale",
     "customer_choice": "Customer Choice"
   },
-  "mail": {
-    "join_our_mailing_list": "Join Our Mailing List",
-    "get_the_latest_updates_on_new_products_and_upcoming_sales": "Get the latest updates on new products and upcoming sales.",
-    "we_promise_to_only_send_you_good_things": "We promise to only send you good things!"
-  },
   "tooltip": {
     "your_wishlist": "Your Wishlist",
     "your_cart": "Your Cart",
@@ -447,5 +442,18 @@
     "pending": "Pending",
     "confirmed": "Confirmed",
     "delivered": "Delivered"
+  },
+  "products": {
+    "products": "Products",
+    "categories": "Categories",
+    "sofa": "Sofa",
+    "chairs": "Chairs",
+    "bed_rooms": "Bed Rooms",
+    "living_rooms": "Living Rooms",
+    "dining_rooms": "Dining Rooms",
+    "off": "off",
+    "le": "LE",
+    "quantity": "Quantity",
+    "description": "Description"
   }
 }

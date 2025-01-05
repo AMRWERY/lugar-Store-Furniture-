@@ -64,7 +64,7 @@
 
     <main class="px-4 mx-auto max-w-9xl sm:px-6 lg:px-8">
       <div class="flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
-        <h1 class="text-4xl font-bold tracking-tight text-gray-900 capitalize">Products</h1>
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 capitalize">{{ $t('products.products') }}</h1>
         <button type="button" class="p-2 -m-2 text-gray-400 ms-4 hover:text-gray-500 sm:ms-6 lg:hidden"
           @click="mobileFiltersOpen = true">
           <span class="sr-only">Filters</span>
@@ -73,7 +73,7 @@
       </div>
 
       <section aria-labelledby="products-heading" class="pt-6 pb-24">
-        <h2 id="products-heading" class="sr-only">Products</h2>
+        <h2 id="products-heading" class="sr-only">{{ $t('products.products') }}</h2>
 
         <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
           <!-- Filters -->
@@ -120,23 +120,25 @@
 </template>
 
 <script setup>
-const filters = [
+const { t } = useI18n()
+
+const filters = computed(() => [
   {
     id: 'categories',
-    name: 'Categories',
+    name: t('products.categories'),
     options: [
-      { value: 'chairs', label: 'Chairs', checked: false },
-      { value: 'bedrooms', label: 'Bedrooms', checked: false },
-      { value: 'sofa', label: 'Sofa', checked: true },
-      { value: 'living room', label: 'Living Room', checked: false },
-      { value: 'dining room', label: 'Dining Room', checked: false },
+      { value: 'chairs', label: t('products.chairs'), checked: false },
+      { value: 'bedrooms', label: t('products.bed_rooms'), checked: false },
+      { value: 'sofa', label: t('products.sofa'), checked: true },
+      { value: 'living room', label: t('products.living_rooms'), checked: false },
+      { value: 'dining room', label: t('products.dining_rooms'), checked: false },
     ],
   },
-]
+]);
 
 const mobileFiltersOpen = ref(false)
 
 useHead({
-  titleTemplate: () => "Products",
+  titleTemplate: () => t('products.products'),
 });
 </script>

@@ -8,7 +8,7 @@
               <img :src="selectedImage" loading="lazy" class="object-cover object-center w-full h-full" />
               <span
                 class="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm tracking-wider text-white">{{
-                  selectedProduct?.discount }}% off</span>
+                  selectedProduct?.discount }}% {{ $t('products.off') }}</span>
             </div>
             <ClientOnly>
               <Carousel v-bind="config">
@@ -38,14 +38,14 @@
             <div class="mb-4">
               <div class="flex items-end gap-2">
                 <span class="text-xl font-bold text-gray-800 md:text-2xl">{{ selectedProduct?.discountedPrice }}
-                  LE</span>
+                  {{ $t('products.le') }}</span>
                 <span class="mb-0.5 text-red-500 line-through" v-if="selectedProduct?.originalPrice">{{
-                  selectedProduct?.originalPrice }} LE</span>
+                  selectedProduct?.originalPrice }} {{ $t('products.le') }}</span>
               </div>
             </div>
 
             <div class="my-8 me-4">
-              <div class="mb-3 text-lg font-semibold text-gray-800">Quantity</div>
+              <div class="mb-3 text-lg font-semibold text-gray-800">{{ $t('products.quantity') }}</div>
               <div class="w-32">
                 <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
                   <button @click="decrementQuantity"
@@ -70,14 +70,14 @@
                   <icon name="svg-spinners:270-ring-with-bg" />
                 </div>
                 <div class="flex items-center" v-else>
-                  <span>Add to cart</span>
+                  <span>{{ $t('btn.add_to_cart') }}</span>
                   <icon name="clarity:shopping-cart-line" class="ms-2" />
                 </div>
               </button>
             </div>
 
             <div class="mt-10 md:mt-16 lg:mt-20">
-              <div class="mb-3 text-lg font-semibold text-gray-800">Description</div>
+              <div class="mb-3 text-lg font-semibold text-gray-800">{{ $t('products.description') }}</div>
               <p class="text-gray-500">
                 {{ $i18n.locale === 'ar' ? selectedProduct?.descriptionAr : selectedProduct?.description }}
               </p>
