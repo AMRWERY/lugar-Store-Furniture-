@@ -6,7 +6,7 @@
           <Slide v-for="card in products" :key="card.id">
             <div class="carousel__item">
               <div class="relative flex flex-col w-[300px] max-w-xs overflow-hidden bg-white group">
-                <nuxt-link class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl" :to="card.link">
+                <nuxt-link class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl" to="">
                   <div class="relative w-full h-full">
                     <img class="absolute top-0 object-cover w-full h-full transition-all duration-500 ease-in-out end-0"
                       :src="card.imgOne" />
