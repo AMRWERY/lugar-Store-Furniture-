@@ -20,13 +20,15 @@
                 <div class="px-5 pb-5 mt-4">
                   <nuxt-link :to="card.link" class="capitalize">
                     <h5 class="font-bold tracking-tight truncate text-md text-slate-900">
-                      {{ card.title }}
+                      {{ $i18n.locale === 'ar' ? card.titleAr :
+                        card.title }}
                     </h5>
                   </nuxt-link>
                   <div class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
                     <p class="flex items-center space-s-1">
-                      <span class="text-gray-900 me-1">{{ card.discountedPrice }} LE</span>
-                      <span class="text-sm text-gray-500 line-through mt-0.5">{{ card.originalPrice }} LE</span>
+                      <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{ $t('home.le') }}</span>
+                      <span class="text-sm text-gray-500 line-through mt-0.5">{{ card.originalPrice }} {{ $t('home.le')
+                        }}</span>
                     </p>
                   </div>
                 </div>

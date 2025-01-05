@@ -274,7 +274,15 @@
     "loremous_cosmopolis": "لوريموس كوزموبوليس",
     "lorem_ipsum_dolor_sit_amet_consectetur_adipiscing_elit_duis_risus_leo_elementum_in_malesuada_an_darius_ut_augue_cras_sit_amet_lectus_et_justo_feugiat_euismod_sed_non_erat_nulla_non_felis_id_metus": "لوريم إيبسوم دولور سيت أميت، كونسيكتيتور أديبسينغ إليت. دويز ريسوس ليو، إليمنتوم في ماليسويدا أن داريوس أوت أغوي. كراس سيت أميت ليكتوس إيت جوستو فيوجيات إيوسيمود سيد نون إيرات. نولا نون فيليس إيد ميتوس...",
     "on_instagram": "على إنستغرام",
-    "cosmetics": "#مستحضرات-التجميل"
+    "cosmetics": "#مستحضرات-التجميل",
+    "sofa": "أريكة",
+    "chairs": "كراسي",
+    "bed_rooms": "غرف النوم",
+    "living_rooms": "غرف المعيشة",
+    "dining_rooms": "غرف الطعام",
+    "le": "ج م",
+     "interior_design_in_home": "التصميم الداخلي في المنزل",
+  "summer_sale": "تخفيضات الصيف"
   },
   "mail": {
     "join_our_mailing_list": "انضم إلى قائمتنا البريدية",

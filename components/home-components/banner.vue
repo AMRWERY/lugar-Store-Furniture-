@@ -5,9 +5,9 @@
       <div class="relative z-10 flex items-center justify-center w-full h-full text-center text-white">
         <div class="px-6 space-y-6 sm:px-8 md:px-12">
           <h1 class="text-4xl font-bold text-black sm:text-5xl md:text-6xl">
-            INTERIOR DESIGN IN HOME
+            {{ $t('home.interior_design_in_home') }}
           </h1>
-          <p class="text-lg sm:text-2xl md:text-4xl">Summer Sale</p>
+          <p class="text-lg sm:text-2xl md:text-4xl">{{ $t('home.summer_sale') }}</p>
         </div>
       </div>
     </div>

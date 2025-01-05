@@ -3,7 +3,7 @@
     <div class="mx-auto my-12 max-w-7xl">
       <div class="flex items-center justify-center mt-8 mb-3">
         <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
-        <span class="mx-4 text-2xl font-bold leading-10 capitalize">new products</span>
+        <span class="mx-4 text-2xl font-bold leading-10 capitalize">{{ $t('home.new_products') }}</span>
         <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
       </div>
 
@@ -15,31 +15,31 @@
             <a href="#tabs-sofa"
               class="my-2 block rounded-full border-2 border-gray-300 px-7 pb-3.5 pt-4 text-sm leading-tight text-neutral-600 font-semibold hover:isolate hover:border-gray-600 hover:bg-neutral-100 focus:outline-none focus:border-gray-800 data-[twe-nav-active]:border-gray-800 data-[twe-nav-active]:text-gray-800 capitalize"
               data-twe-toggle="pill" data-twe-target="#tabs-sofa" data-twe-nav-active role="tab"
-              aria-controls="tabs-sofa" aria-selected="true">Sofa</a>
+              aria-controls="tabs-sofa" aria-selected="true">{{ $t('home.sofa') }}</a>
           </li>
           <li role="presentation" class="mx-1">
             <a href="#tabs-chairs"
               class="my-2 block rounded-full border-2 border-gray-300 px-7 pb-3.5 pt-4 text-sm leading-tight text-neutral-600 font-semibold hover:isolate hover:border-gray-600 hover:bg-neutral-100 focus:outline-none focus:border-gray-800 data-[twe-nav-active]:border-gray-800 data-[twe-nav-active]:text-gray-800 capitalize"
               data-twe-toggle="pill" data-twe-target="#tabs-chairs" role="tab" aria-controls="tabs-chairs"
-              aria-selected="false">Chairs</a>
+              aria-selected="false">{{ $t('home.chairs') }}</a>
           </li>
           <li role="presentation" class="mx-1">
             <a href="#tabs-bed-rooms"
               class="my-2 block rounded-full border-2 border-gray-300 px-7 pb-3.5 pt-4 text-sm leading-tight text-neutral-600 font-semibold hover:isolate hover:border-gray-600 hover:bg-neutral-100 focus:outline-none focus:border-gray-800 data-[twe-nav-active]:border-gray-800 data-[twe-nav-active]:text-gray-800 capitalize"
               data-twe-toggle="pill" data-twe-target="#tabs-bed-rooms" role="tab" aria-controls="tabs-bed-rooms"
-              aria-selected="false">Bed Rooms</a>
+              aria-selected="false">{{ $t('home.bed_rooms') }}</a>
           </li>
           <li role="presentation" class="mx-1">
             <a href="#tabs-living-room"
               class="my-2 block rounded-full border-2 border-gray-300 px-7 pb-3.5 pt-4 text-sm leading-tight text-neutral-600 font-semibold hover:isolate hover:border-gray-600 hover:bg-neutral-100 focus:outline-none focus:border-gray-800 data-[twe-nav-active]:border-gray-800 data-[twe-nav-active]:text-gray-800 capitalize"
               data-twe-toggle="pill" data-twe-target="#tabs-living-room" role="tab" aria-controls="tabs-living-room"
-              aria-selected="false">Living Room</a>
+              aria-selected="false">{{ $t('home.living_rooms') }}</a>
           </li>
           <li role="presentation" class="mx-1">
             <a href="#tabs-dining-room"
               class="my-2 block rounded-full border-2 border-gray-300 px-7 pb-3.5 pt-4 text-sm leading-tight text-neutral-600 font-semibold hover:isolate hover:border-gray-600 hover:bg-neutral-100 focus:outline-none focus:border-gray-800 data-[twe-nav-active]:border-gray-800 data-[twe-nav-active]:text-gray-800 capitalize"
               data-twe-toggle="pill" data-twe-target="#tabs-dining-room" role="tab" aria-controls="tabs-dining-room"
-              aria-selected="false">Dining Room</a>
+              aria-selected="false">{{ $t('home.dining_rooms') }}</a>
           </li>
         </ul>
       </div>

@@ -8,7 +8,8 @@
                         <img :src="card?.imgOne" class="object-cover object-center w-full h-full" />
                         <div class="absolute inset-0 flex items-center justify-center">
                             <h3 class="relative overflow-hidden text-xl font-semibold text-white capitalize">
-                                {{ card?.title }}
+                                {{ $i18n.locale === 'ar' ? card?.titleAr :
+                                    card?.title }}
                                 <span
                                     class="absolute bottom-0 start-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
                             </h3>
