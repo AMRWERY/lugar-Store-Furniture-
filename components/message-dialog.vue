@@ -21,7 +21,10 @@
           </div>
 
           <!-- Customer message Section with Hidden Scroll -->
-          <div class="flex-1 p-6 bg-white rounded-lg shadow-md">
+          <div class="flex-1 p-6 bg-gray-100 rounded-lg shadow-md">
+            <h3 class="mb-4 text-xl font-semibold text-gray-900">
+              {{ $t('head.customer_messages') }}
+            </h3>
             <div class="space-y-4 overflow-y-auto max-h-96 custom-scroll">
               <div class="flex-1">
                 <p class="text-base font-normal text-gray-900">
