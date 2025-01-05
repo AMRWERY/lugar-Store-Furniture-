@@ -138,7 +138,8 @@
     "edit_category": "تعديل الفئة",
     "update_marketing_category": "تحديث فئة التسويق",
     "close": "غلق",
-    "view_message": "عرض الرسالة"
+    "view_message": "عرض الرسالة",
+    "send_your_message": "أرسل رسالتك"
   },
   "loading_btn": {
     "loading": "جاري التحميل",
@@ -456,5 +457,9 @@
     "le": "ج م",
     "quantity": "الكمية",
     "description": "الوصف"
+  },
+  "contact_us": {
+    "get_in_touch": "تواصل معنا",
+    "fill_in_the_form_to_start_a_conversation": "املأ النموذج لبدء محادثة"
   }
 }

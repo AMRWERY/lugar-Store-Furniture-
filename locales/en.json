@@ -133,7 +133,8 @@
     "edit_category": "Edit Category",
     "update_marketing_category": "Update Marketing Category",
     "close": "Close",
-    "view_message": "View Message"
+    "view_message": "View Message",
+    "send_your_message": "Send Your Message"
   },
   "loading_btn": {
     "loading": "Loading",
@@ -455,5 +456,9 @@
     "le": "LE",
     "quantity": "Quantity",
     "description": "Description"
+  },
+  "contact_us": {
+    "get_in_touch": "Get in touch",
+    "fill_in_the_form_to_start_a_conversation": "Fill in the form to start a conversation"
   }
 }
