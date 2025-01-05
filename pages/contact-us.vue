@@ -8,42 +8,48 @@
                     <div class="space-y-4">
                         <p class="flex items-center">
                             <icon name="material-symbols:location-on" class="w-5 h-5 me-2 sm:me-6" />
-                            <span>Fake address, 9999 City</span>
+                            <span>Damietta</span>
                         </p>
                         <p class="flex items-center">
                             <icon name="material-symbols:call" class="w-5 h-5 me-2 sm:me-6" />
-                            <span>123456789</span>
-                        </p>
-                        <p class="flex items-center">
-                            <icon name="material-symbols:alternate-email" class="w-5 h-5 me-2 sm:me-6" />
-                            <span>contact@business.com</span>
+                            <span>+2010-233-51915</span>
                         </p>
                     </div>
                 </div>
-                <form novalidate class="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
-                    <label class="block">
-                        <span class="mb-1">Full name</span>
-                        <input type="text" placeholder="Leroy Jenkins"
-                            class="block w-full rounded-md shadow-sm focus:ring focus:ri dark:bg-gray-800">
-                    </label>
-                    <label class="block">
-                        <span class="mb-1">Email address</span>
-                        <input type="email" placeholder="leroy@jenkins.com"
-                            class="block w-full rounded-md shadow-sm focus:ring focus:ri dark:bg-gray-800">
-                    </label>
-                    <label class="block">
-                        <span class="mb-1">Message</span>
-                        <textarea rows="3"
-                            class="block w-full rounded-md focus:ring focus:ri dark:bg-gray-800"></textarea>
-                    </label>
-                    <button type="button"
-                        class="self-center w-full px-8 py-3 text-lg text-white bg-black rounded">Submit</button>
-                </form>
+
+                <div class="p-4 space-y-4 rounded-lg shadow-lg w-[430px]">
+                    <ClientOnly>
+                        <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
+                            :validation="('required|contains_alpha')" :required="true" />
+
+                        <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
+                            :validation="('required|email')" :required="true" />
+
+                        <dynamic-inputs :label="t('form.phone_number')" :placeholder="t('form.enter_your_phone')"
+                            type="tel" :validation="('required')" :required="true" />
+
+                        <dynamic-inputs :label="t('form.your_message')" :placeholder="t('form.enter_your_message')"
+                            type="textarea" :validation="'required|length:10,500'" :required="true" />
+                    </ClientOnly>
+
+                    <div class="mt-6">
+                        <button type="button" class="w-[400px] px-4 py-2 btn-style">
+                            <!-- <div class="flex items-center justify-center" v-if="loading">
+                  <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
+                  <icon name="svg-spinners:270-ring-with-bg" />
+                </div> -->
+                            Submit</button>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
 </template>
 
 <script setup>
+const { t } = useI18n()
 
+useHead({
+    titleTemplate: () => t("head.contact_us"),
+});
 </script>

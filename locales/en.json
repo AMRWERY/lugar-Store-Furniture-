@@ -96,7 +96,9 @@
     "category_title_ar": "Category Title AR",
     "enter_category_title_ar": "Enter Category Title AR",
     "marketing_category_title_ar": "Marketing Category Title AR",
-    "enter_marketing_category_title_ar": "Enter Marketing Category Title AR"
+    "enter_marketing_category_title_ar": "Enter Marketing Category Title AR",
+    "your_message": "Message",
+    "enter_your_message": "Enter your message"
   },
   "btn": {
     "reset_password": "Reset Password",
@@ -161,7 +163,8 @@
     "add_category": "Add Category",
     "edit_marketing_category": "Edit Marketing Category",
     "marketing_categories": "Marketing Categories",
-    "add_marketing_category": "Add Marketing Category"
+    "add_marketing_category": "Add Marketing Category",
+    "contact_us": "Contact Us"
   },
   "alert": {
     "success": "Success",

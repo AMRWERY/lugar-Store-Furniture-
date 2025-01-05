@@ -96,7 +96,9 @@
     "category_title_ar": "اسم الفئة بالعربية",
     "enter_category_title_ar": "ادخل اسم الفئة بالعربية",
     "marketing_category_title_ar": "اسم فئة التسويق بالعربية",
-    "enter_marketing_category_title_ar": "أدخل اسم فئة التسويق بالعربية"
+    "enter_marketing_category_title_ar": "أدخل اسم فئة التسويق بالعربية",
+    "your_message": "رسالتك",
+    "enter_your_message": "أدخل رسالتك"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -166,7 +168,8 @@
     "add_category": "اضافه فئه",
     "edit_marketing_category": "تعديل فئة التسويق",
     "marketing_categories": "فئات التسويق",
-    "add_marketing_category": "اضافه فئه التسوق"
+    "add_marketing_category": "اضافه فئه التسوق",
+    "contact_us": "اتصل بنا"
   },
   "alert": {
     "success": "نجاح",
