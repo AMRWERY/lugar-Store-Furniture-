@@ -88,14 +88,16 @@
             <div class="flex flex-col justify-end flex-grow px-5 pb-2 mt-6">
               <nuxt-link to="">
                 <h5 class="text-xl tracking-tight text-slate-900">
-                  {{ product.title }}
+                  {{ $i18n.locale === 'ar' ? product.titleAr :
+                    product.title }}
                 </h5>
               </nuxt-link>
               <div class="flex items-center justify-between mt-2">
                 <p>
-                  <span class="text-3xl font-bold text-slate-900 me-2">${{ product.discountedPrice }}</span>
+                  <span class="text-3xl font-bold text-slate-900 me-2">{{ product.discountedPrice }} {{
+                    $t('products.le') }}</span>
                   <span class="text-sm line-through text-slate-900" v-if="product.originalPrice">
-                    ${{ product.originalPrice }}
+                    {{ product.originalPrice }} {{ $t('products.le') }}
                   </span>
                 </p>
               </div>
