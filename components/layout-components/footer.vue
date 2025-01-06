@@ -98,33 +98,11 @@
 
                         <div>
                             <ul class="mt-6 space-y-4 text-sm">
-                                <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        {{ $t('footer.chairs') }}
-                                    </nuxt-link>
-                                </li>
-
-                                <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        {{ $t('footer.bed_rooms') }}
-                                    </nuxt-link>
-                                </li>
-
-                                <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        {{ $t('footer.sofa') }}
-                                    </nuxt-link>
-                                </li>
-
-                                <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        {{ $t('footer.living_rooms') }}
-                                    </nuxt-link>
-                                </li>
-
-                                <li>
-                                    <nuxt-link to="" class="transition hover:opacity-75">
-                                        {{ $t('footer.dining_rooms') }}
+                                <li v-for="card in store.categories" :key="card">
+                                    <nuxt-link :to="{ path: '/all-products', query: { categoryId: card.id } }"
+                                        class="transition hover:opacity-75">
+                                        {{ $i18n.locale === 'ar' ? card?.titleAr :
+                                            card?.title }}
                                     </nuxt-link>
                                 </li>
                             </ul>
@@ -137,5 +115,9 @@
 </template>
 
 <script setup>
+const store = useCategoriesStore()
 
+onMounted(async () => {
+    await store.fetchCategories();
+});
 </script>
