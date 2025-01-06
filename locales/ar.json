@@ -98,7 +98,9 @@
     "marketing_category_title_ar": "اسم فئة التسويق بالعربية",
     "enter_marketing_category_title_ar": "أدخل اسم فئة التسويق بالعربية",
     "your_message": "رسالتك",
-    "enter_your_message": "أدخل رسالتك"
+    "enter_your_message": "أدخل رسالتك",
+    "get_started_today": "ابدأ اليوم",
+    "sign_in_to_your_account": "تسجيل الدخول إلى حسابك"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",

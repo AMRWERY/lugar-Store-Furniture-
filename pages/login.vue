@@ -2,16 +2,13 @@
   <div>
     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div class="max-w-md mx-auto">
-        <img 
-          src="@/assets/Lugar_Furniture_Logo.svg" 
-          class="mx-auto w-36 h-36"
-        />
+        <img src="@/assets/Lugar_Furniture_Logo.svg" class="mx-auto w-36 h-36" />
         <h1 class="text-2xl font-bold text-center text-black sm:text-3xl">
-          Get started today
+          {{ $t('form.get_started_today') }}
         </h1>
         <ClientOnly>
           <div class="p-4 mb-6 space-y-4 rounded-lg shadow-lg sm:p-6 lg:p-8">
-            <p class="text-lg font-medium text-center">Sign in to your account</p>
+            <p class="text-lg font-medium text-center">{{ $t('form.sign_in_to_your_account') }}</p>
             <div>
               <dynamic-inputs v-model="data.email" :label="t('form.email')" :placeholder="t('form.enter_your_email')"
                 type="email" :validation="('required|email|ends_with:lugar.com')" :required="true" />
@@ -23,8 +20,7 @@
             </div>
 
             <div class="mt-6">
-              <button type="submit" :disabled="loading" @click="signIn"
-                class="block w-full px-4 py-2 btn-style">
+              <button type="submit" :disabled="loading" @click="signIn" class="block w-full px-4 py-2 btn-style">
                 <div class="flex items-center justify-center" v-if="loading">
                   <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />
