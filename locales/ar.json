@@ -253,7 +253,10 @@
     "chairs": "كراسي",
     "bed_rooms": "غرف النوم",
     "living_rooms": "غرف المعيشة",
-    "dining_rooms": "غرف الطعام"
+    "dining_rooms": "غرف الطعام",
+    "factory_damietta_dam_road_angar_logar_furniture": "المصنع دمياط طريق السد هنجر لوجار لأثاث",
+    "damietta_exhibition_port_said_road_behind_al_baqari_cars": "معرض دمياط طريق بورسعيد خلف البقري للسيارات",
+    "fifth_settlement_lotus_exhibition_iin_front_of_platinum_club_next_to_skyline_school": "معرض التجمع الخامس اللوتس امام نادي بلاتينيوم بجوار مدرسه سكاي لاين"
   },
   "home": {
     "milancelos": "ميلانسيلوس",

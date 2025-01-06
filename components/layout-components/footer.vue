@@ -19,10 +19,22 @@
                             </nuxt-link>
                         </p>
 
-                        <ul class="flex items-center mt-8 space-y-1 text-sm">
+                        <ul class="mt-8 space-y-1 text-sm">
                             <li class="flex items-center space-s-2">
-                                <icon name="material-symbols:add-location" class="w-4 h-4" />
-                                <span>{{ $t('footer.damietta') }}</span>
+                                <icon name="material-symbols:add-location" class="w-5 h-5" />
+                                <span class="truncate">{{ $t('footer.factory_damietta_dam_road_angar_logar_furniture')
+                                    }}</span>
+                            </li>
+                            <li class="flex items-center space-s-2">
+                                <icon name="material-symbols:add-location" class="w-5 h-5" />
+                                <span class="truncate">{{
+                                    $t('footer.damietta_exhibition_port_said_road_behind_al_baqari_cars') }}</span>
+                            </li>
+                            <li class="flex items-center space-s-2">
+                                <icon name="material-symbols:add-location" class="w-6 h-6" />
+                                <span class="truncate">{{
+                                    $t('footer.fifth_settlement_lotus_exhibition_iin_front_of_platinum_club_next_to_skyline_school')
+                                    }}</span>
                             </li>
                         </ul>
 
