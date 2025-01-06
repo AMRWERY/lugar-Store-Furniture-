@@ -15,7 +15,7 @@
                             </span>
 
                             <nuxt-link to="" class="block text-2xl font-medium hover:opacity-75 sm:text-3xl">
-                                +2010-233-51915
+                                +20 122 409 1737
                             </nuxt-link>
                         </p>
 
@@ -38,7 +38,7 @@
                             <li>
                                 <nuxt-link to="https://wa.me/201023351915" target="_blank"
                                     class="transition hover:opacity-75">
-                                    <span class="sr-only">Instagram</span>
+                                    <span class="sr-only">Whatsapp</span>
                                     <icon name="logos:whatsapp-icon" class="w-6 h-6" />
                                 </nuxt-link>
                             </li>

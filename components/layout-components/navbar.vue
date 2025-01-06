@@ -8,7 +8,7 @@
           <div class="hidden text-sm gap-7 md:flex">
             <div class="flex items-center space-s-2.5">
               <icon name="material-symbols:call" size="20px" />
-              <p class="capitalize">{{ $t('layout.call_us') }} +2010-233-51915</p>
+              <p class="capitalize">{{ $t('layout.call_us') }} +20 122 409 1737</p>
             </div>
           </div>
 
@@ -23,7 +23,7 @@
             </nuxt-link>
 
             <nuxt-link to="https://wa.me/201023351915" target="_blank" class="transition hover:opacity-75">
-              <span class="sr-only">Instagram</span>
+              <span class="sr-only">Whatsapp</span>
               <icon name="logos:whatsapp-icon" class="w-6 h-6" />
             </nuxt-link>
 
@@ -41,7 +41,7 @@
 
             <ClientOnly>
               <nuxt-link to="/login" role="button" class="text-sm font-medium font-dm"
-                v-if="!store.isUserAuthenticated">Sign in</nuxt-link>
+                v-if="!store.isUserAuthenticated">{{ $t('layout.sign_in') }}</nuxt-link>
               <nuxt-link to="" role="button" class="text-sm font-medium font-dm" @click="logout"
                 v-if="store.isUserAuthenticated">{{ $t('btn.logout') }}</nuxt-link>
             </ClientOnly>
