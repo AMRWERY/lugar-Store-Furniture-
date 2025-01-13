@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="mx-auto max-w-7xl">
-      <div class="max-w-2xl py-8 mx-auto lg:max-w-none">
+
+      <div v-if="loading" class="flex justify-center py-8">
+        <icon name="svg-spinners:blocks-scale" class="w-24 h-24 text-gray-600" />
+      </div>
+
+      <div class="max-w-2xl py-8 mx-auto lg:max-w-none" v-else>
         <div
           class="grid space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 sm:grid-cols-1 md:grid-cols-2 sm:gap-4 lg:space-y-0">
           <nuxt-link to="" v-for="product in paginatedProducts" :key="product.id"
@@ -13,7 +18,8 @@
                 class="absolute top-0 object-cover w-full h-full transition-all duration-1000 delay-100 peer -end-96 hover:end-0 peer-hover:end-0"
                 :src="product.imgTwo" />
               <span
-                class="absolute top-0 px-2 m-2 text-sm font-medium text-center text-white bg-black rounded-full start-0">{{
+                class="absolute top-0 px-2 m-2 text-sm font-medium text-center text-white bg-black rounded-full start-0"
+                v-if="product.discount">{{
                   product.discount }}%
                 {{ $t('products.off') }}</span>
             </nuxt-link>
@@ -21,13 +27,16 @@
               <nuxt-link to="">
                 <h5 class="text-xl tracking-tight text-slate-900">
                   {{ $i18n.locale === 'ar' ? product.titleAr :
-                        product.title }}
+                    product.title }}
                 </h5>
               </nuxt-link>
               <div class="flex items-center justify-between mt-2 mb-5">
                 <p class="space-s-2">
-                  <span class="text-lg font-bold text-slate-900">{{ product.discountedPrice }} {{ $t('products.le') }}</span>
-                  <span class="text-sm line-through text-slate-900">{{ product.originalPrice }} {{ $t('products.le') }}</span>
+                  <span class="text-lg font-bold text-slate-900">{{ product.discountedPrice }} {{ $t('products.le')
+                    }}</span>
+                  <span class="text-sm line-through text-slate-900" v-if="product.originalPrice">{{
+                    product.originalPrice }} {{ $t('products.le')
+                    }}</span>
                 </p>
               </div>
               <button type="button" @click="handleAddToCart(product)"
@@ -66,13 +75,21 @@ import { useCartStore } from '@/stores/cartStore';
 const store = useNewProductsStoreStore()
 const cartStore = useCartStore();
 const route = useRoute();
+const loading = ref(true);
 
 onMounted(async () => {
   const categoryId = route.query.categoryId;
-  if (categoryId) {
-    await store.fetchProductsByCategory(categoryId);
-  } else {
-    await store.fetchProducts();
+  loading.value = true;
+  try {
+    if (categoryId) {
+      await store.fetchProductsByCategory(categoryId);
+    } else {
+      await store.fetchProducts();
+    }
+  } catch (error) {
+    console.error("Error fetching products:", error);
+  } finally {
+    loading.value = false;
   }
 });
 
