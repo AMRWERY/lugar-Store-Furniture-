@@ -66,7 +66,7 @@
       <nav class="bg-white shadow-md">
         <div class="flex items-center justify-between px-10">
           <div>
-            <nuxt-link to="">
+            <nuxt-link to="/">
               <img class="h-16 cursor-pointer w-[100px]"
                 src="https://justfields.com/storage/projects/7M5rV059/LOGO1-lugar.png" />
             </nuxt-link>
