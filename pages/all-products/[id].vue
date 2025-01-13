@@ -6,8 +6,8 @@
           <div class="space-y-4">
             <div class="relative overflow-hidden bg-gray-100 rounded-lg">
               <img :src="selectedImage" loading="lazy" class="object-cover object-center w-full h-full" />
-              <span
-                class="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm tracking-wider text-white">{{
+              <span class="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm tracking-wider text-white"
+                v-if="selectedProduct?.discount">{{
                   selectedProduct?.discount }}% {{ $t('products.off') }}</span>
             </div>
             <ClientOnly>
@@ -205,8 +205,10 @@ const handleAddToCart = async () => {
       product.discountedPrice,
       product.originalPrice,
       product.imgOne,
-      product.categoryTitle,
-      product.subCategoryTitle,
+      product.categoryId,
+      product.subCategoryId,
+      // product.categoryTitle,
+      // product.subCategoryTitle,
       product.discount,
       quantity.value,
     );
