@@ -19,12 +19,12 @@
                 <!--First item-->
                 <div class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-twe-carousel-active data-twe-carousel-item style="backface-visibility: hidden">
-                    <img src="https://justfields.com/storage/projects/7M5rV059/carousel-01.jpg" class="block w-full" />
+                    <img src="@/assets/banner-img-01.jpg" class="block w-full" />
                 </div>
                 <!--Second item-->
                 <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-twe-carousel-item style="backface-visibility: hidden">
-                    <img src="https://justfields.com/storage/projects/7M5rV059/carousel-02.jpg" class="block w-full" />
+                    <img src="@/assets/banner-img-02.jpg" class="block w-full" />
                 </div>
             </div>
 
