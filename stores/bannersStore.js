@@ -43,9 +43,8 @@ export const useBannersStore = defineStore("banners", {
     async addNewBanner(file) {
       try {
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("fileToUpload", file);
         // console.log("Uploading file:", file.name);
-        // https://api.escuelajs.co/api/v1/files/upload
         const createBanner = await $fetch("https://lugarstore.com/upload.php", {
           method: "POST",
           body: formData,
@@ -53,7 +52,8 @@ export const useBannersStore = defineStore("banners", {
         console.log("Full server response:", createBanner);
         if (createBanner.success) {
           this.banners.push(createBanner.file_url);
-          console.log(createBanner.file_url);
+          // console.log(createBanner.file_url);
+          console("banners", this.banners);
         } else {
           console.error(
             "Upload failed:",
