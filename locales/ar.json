@@ -174,7 +174,8 @@
     "marketing_categories": "فئات التسويق",
     "add_marketing_category": "اضافه فئه التسوق",
     "contact_us": "اتصل بنا",
-    "customer_messages": "رسائل العملاء"
+    "customer_messages": "رسائل العملاء",
+    "banners": "لافتات"
   },
   "alert": {
     "success": "نجاح",
@@ -208,7 +209,8 @@
     "customer_messages": "رسائل العملاء",
     "home": "الصفحة الرئيسية",
     "contact_us": "اتصل بنا",
-    "call_us": "اتصل بنا:"
+    "call_us": "اتصل بنا:",
+    "banners": "لافتات"
   },
   "footer": {
     "navigate": "تصفح",
@@ -397,7 +399,8 @@
     "s_information": "معلومات",
     "change_order_status": "تغيير حاله الطلب",
     "customer_messages": "رسائل العملاء",
-    "no_messages_available": "لا توجد رسائل متاحة"
+    "no_messages_available": "لا توجد رسائل متاحة",
+    "banners": "لافتات"
   },
   "pagination": {
     "previous": "السابق",

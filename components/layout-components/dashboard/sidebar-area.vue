@@ -103,6 +103,11 @@ const menuGroups = computed(() => [
                 label: t('layout.customer_messages'),
                 route: '/customer-messages',
             },
+            {
+                icon: 'material-symbols:image',
+                label: t('layout.banners'),
+                route: '/banners',
+            },
         ],
     },
 ]);

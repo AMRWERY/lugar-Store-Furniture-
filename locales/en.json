@@ -169,7 +169,8 @@
     "marketing_categories": "Marketing Categories",
     "add_marketing_category": "Add Marketing Category",
     "contact_us": "Contact Us",
-    "customer_messages": "Customers Messages"
+    "customer_messages": "Customers Messages",
+    "banners": "Banners"
   },
   "alert": {
     "success": "Success",
@@ -203,7 +204,8 @@
     "customer_messages": "Customers Messages",
     "home": "Home",
     "contact_us": "Contact Us",
-    "call_us": "Call us:"
+    "call_us": "Call us:",
+    "banners": "Banners"
   },
   "footer": {
     "navigate": "Navigate",
@@ -396,7 +398,8 @@
     "s_information": "'s Information",
     "change_order_status": "Change order status",
     "customer_messages": "Customer Message",
-    "no_messages_available": "No Messages Available"
+    "no_messages_available": "No Messages Available",
+    "banners": "Banners"
   },
   "pagination": {
     "previous": "Previous",
