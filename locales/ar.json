@@ -141,7 +141,8 @@
     "update_marketing_category": "تحديث فئة التسويق",
     "close": "غلق",
     "view_message": "عرض الرسالة",
-    "send_your_message": "أرسل رسالتك"
+    "send_your_message": "أرسل رسالتك",
+    "upload": "رفع"
   },
   "loading_btn": {
     "loading": "جاري التحميل",

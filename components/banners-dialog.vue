@@ -14,7 +14,7 @@
                       <span class="block font-normal text-gray-400">{{ $t('form.attach_your_files_here') }}</span>
                     </div>
                   </div>
-                  <input type="file" class="w-full h-full opacity-0" multiple>
+                  <input type="file" class="w-full h-full opacity-0" multiple @change="handleFileChange">
                 </div>
               </div>
             </div>
@@ -22,13 +22,16 @@
         </div>
 
         <div class="flex items-center justify-center mb-4 space-s-6">
-          <div class="mt-4 border border-gray-200">
-            <img src="@/assets/banner-img-01.jpg" class="w-48 h-32 rounded-lg">
+          <div v-if="previewImage" class="mt-4 border border-gray-200">
+            <img :src="previewImage" class="w-48 h-32 rounded-lg" />
           </div>
         </div>
 
         <!-- Close Button -->
-        <div class="flex justify-end mt-6">
+        <div class="flex justify-end mt-6 space-s-4">
+          <button class="px-6 py-2.5 btn-style" @click="uploadFile" :disabled="!selectedFile">
+            {{ $t("btn.upload") }}
+          </button>
           <button class="px-6 py-2.5 btn-style" @click="closeDialog">
             {{ $t('btn.close') }}
           </button>
@@ -39,6 +42,26 @@
 </template>
 
 <script setup>
+const bannerStore = useBannersStore()
+const selectedFile = ref(null);
+const previewImage = ref(null);
+
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    selectedFile.value = file;
+    previewImage.value = URL.createObjectURL(file);
+  }
+};
+
+const uploadFile = async () => {
+  if (selectedFile.value) {
+    await bannerStore.addNewBanner(selectedFile.value);
+    selectedFile.value = null;
+    previewImage.value = null;
+  }
+};
+
 const emit = defineEmits(['close']);
 
 const closeDialog = () => {
