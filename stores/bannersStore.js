@@ -31,27 +31,23 @@ export const useBannersStore = defineStore("banners", {
         body: formData,
       })
         .then((createBanner) => {
-          console.log("Full server response:", createBanner);
-          const fileUrl = createBanner.file_url.replace(/\\/g, "");
-          console.log("Clean File URL:", fileUrl);
-          if (createBanner && createBanner.success && createBanner.file_url) {
-            this.banners.push(fileUrl);
+          debugger;
+          console.log("type of:",typeof(createBanner));
+          let response = JSON.parse(createBanner);
+          if (response && response?.success && response?.file_url ) {
+             
+             this.banners.push(response?.file_url);
             const bannerRef = collection(db, "banners");
             console.log("Preparing to add to Firestore...");
             return addDoc(bannerRef, {
-              fileUrl: fileUrl,
+              fileUrl: response?.file_url,
               timestamp: new Date(),
             });
-          } else {
-            console.error("Unexpected server response:", createBanner);
-            throw new Error(
-              createBanner.message || "Invalid response from server."
-            );
           }
         })
-        .then((docRef) => {
-          console.log("Banner saved to Firestore with ID:", docRef.id);
-        })
+        // .then((docRef) => {
+        //   console.log("Banner saved to Firestore with ID:", docRef.id);
+        // })
         .catch((error) => {
           console.error("Error during upload or saving:", error);
         });
