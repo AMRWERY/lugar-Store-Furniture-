@@ -26,9 +26,15 @@ export const useBannersStore = defineStore("banners", {
         const bannerSnapshot = await getDocs(bannerRef);
         const bannerList = bannerSnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          fileUrl: doc.data().fileUrl,
+          // ...doc.data(),
+          // visible: false,
+          visible: doc.data().visible ?? false,
+          selected: doc.data().selected ?? false,
+          // selected: false,
         }));
         this.banners = bannerList;
+        console.log("banners store", this.banners);
         this.updatePagination();
       } catch (error) {
         console.error("Error fetching banners:", error);
@@ -59,6 +65,8 @@ export const useBannersStore = defineStore("banners", {
             return addDoc(bannerRef, {
               fileUrl: response?.file_url,
               timestamp: new Date(),
+              visible: false,
+              selected: false,
             });
           }
         })
@@ -68,6 +76,15 @@ export const useBannersStore = defineStore("banners", {
         .catch((error) => {
           console.error("Error during upload or saving:", error);
         });
+    },
+
+    toggleVisibility(bannerId) {
+      const banner = this.banners.find((banner) => banner.id === bannerId);
+      if (banner) {
+        banner.visible = !banner.visible;
+        const bannerRef = doc(db, "banners", banner.id);
+        updateDoc(bannerRef, { visible: banner.visible });
+      }
     },
 
     updatePagination() {
