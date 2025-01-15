@@ -54,7 +54,7 @@
       </div>
 
       <div v-else-if="!filteredProducts?.length" class="flex items-center justify-center h-48 text-gray-600">
-        <p class="text-2xl font-semibold">{{ $t('dashboard.no_products_available') }}</p>
+        <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
       </div>
 
       <div
@@ -198,8 +198,9 @@ const deleteProduct = async (productId) => {
   try {
     await productStore.deleteProduct(productId);
     setTimeout(() => {
-      store.products = store.products.filter(product => product.id !== productId);
       deleteProd.value = null;
+      store.products = store.products.filter(product => product.id !== productId);
+      applyFilter();
       showToast.value = true;
       toastTitle.value = t('toast.great');
       toastMessage.value = t('toast.product_deleted_successfully');

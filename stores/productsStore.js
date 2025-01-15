@@ -72,22 +72,23 @@ export const useProductsStore = defineStore("products", {
       }
     },
 
-    async deleteProduct(productId) {
-      try {
-        const productRef = doc(db, "products", productId);
-        await deleteDoc(productRef);
-        if (this.products && Array.isArray(this.products)) {
-          this.products = this.products.filter(
-            (product) => product.id !== productId
-          );
-        } else {
-          // console.warn("Products array is not properly initialized");
-        }
-        // console.log("Product deleted successfully");
-      } catch (error) {
-        console.error("Error deleting product:", error);
-        throw new Error("Failed to delete the product. Please try again.");
-      }
+    deleteProduct(productId) {
+      const productRef = doc(db, "products", productId);
+      deleteDoc(productRef)
+        .then(() => {
+          if (this.products && Array.isArray(this.products)) {
+            this.products = this.products.filter(
+              (product) => product.id !== productId
+            );
+          } else {
+            // console.warn("Products array is not properly initialized");
+          }
+          // console.log("Product deleted successfully");
+        })
+        .catch((error) => {
+          console.error("Error deleting product:", error);
+          throw new Error("Failed to delete the product. Please try again.");
+        });
     },
   },
 });
