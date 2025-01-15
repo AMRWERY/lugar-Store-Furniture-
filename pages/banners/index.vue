@@ -39,11 +39,11 @@
                       bannersStore.bannersPerPage + index + 1 }}</p>
                   </td>
                   <td class="p-4 py-5">
-                    <img :src="banner.fileUrl" class="w-16 h-12 rounded-lg">
+                    <img :src="banner.fileUrl" class="w-16 h-12 rounded-lg image-zoom">
                   </td>
-                  <td class="p-4 py-5">
+                  <!-- <td class="p-4 py-5">
                     <p class="text-sm text-blue-700 cursor-pointer" @click="openDialog">View Banner</p>
-                  </td>
+                  </td> -->
                   <td class="p-4 py-5">
                     <p class="text-sm text-blue-700 cursor-pointer" @click="openDialog">Add Banner</p>
                   </td>
@@ -110,3 +110,15 @@ useHead({
   titleTemplate: () => t("head.banners"),
 });
 </script>
+
+<style scoped>
+.image-zoom {
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.image-zoom:hover {
+  transform: scale(5);
+  transform-origin: center center;
+}
+</style>
