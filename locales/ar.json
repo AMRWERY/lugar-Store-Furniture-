@@ -142,7 +142,8 @@
     "close": "غلق",
     "view_message": "عرض الرسالة",
     "send_your_message": "أرسل رسالتك",
-    "upload": "رفع"
+    "upload": "رفع",
+    "add_banner": "إضافة لافته"
   },
   "loading_btn": {
     "loading": "جاري التحميل",

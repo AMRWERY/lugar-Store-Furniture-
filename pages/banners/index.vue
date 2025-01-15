@@ -2,6 +2,13 @@
   <div>
     <div class="flex items-center justify-between">
       <h3 class="py-2 mt-5 mb-12 text-2xl font-bold text-start">{{ $t('dashboard.banners') }}</h3>
+      <div class="flex items-end w-full sm:w-auto ms-auto">
+        <nuxt-link to="" type="button" class="flex items-center px-4 py-2.5 btn-style cursor-pointer"
+          @click="openDialog">
+          <icon name="ep:plus" class="w-5 h-5 me-2" />
+          <span>{{ $t('btn.add_banner') }}</span>
+        </nuxt-link>
+      </div>
     </div>
     <div class="flex flex-col">
       <div class="overflow-x-auto shadow-md sm:rounded-lg">
@@ -44,9 +51,6 @@
                   <!-- <td class="p-4 py-5">
                     <p class="text-sm text-blue-700 cursor-pointer" @click="openDialog">View Banner</p>
                   </td> -->
-                  <td class="p-4 py-5">
-                    <p class="text-sm text-blue-700 cursor-pointer" @click="openDialog">Add Banner</p>
-                  </td>
                 </tr>
               </tbody>
             </table>

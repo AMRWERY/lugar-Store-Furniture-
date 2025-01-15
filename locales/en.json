@@ -137,7 +137,8 @@
     "close": "Close",
     "view_message": "View Message",
     "send_your_message": "Send Your Message",
-    "upload": "Upload"
+    "upload": "Upload",
+    "add_banner": "Add Banner"
   },
   "loading_btn": {
     "loading": "Loading",
