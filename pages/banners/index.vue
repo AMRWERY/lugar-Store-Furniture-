@@ -37,7 +37,7 @@
                 <tr class="border-b hover:bg-slate-50 border-slate-200"
                   v-for="(banner, index) in bannersStore.paginatedBanners" :key="banner.id">
                   <td class="p-4 py-5">
-                    <input id="checkbox-table-1" type="checkbox" v-model="banner.selected"
+                    <input id="checkbox-table-1" type="checkbox" v-model="banner.visible"
                       @change="bannersStore.toggleVisibility(banner.id)"
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="checkbox-table-1" class="sr-only">checkbox</label>

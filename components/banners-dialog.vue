@@ -62,11 +62,45 @@ const handleFileChange = (event) => {
 const uploadFile = async () => {
   loading.value = true;
   if (selectedFile.value) {
-    await bannerStore.addNewBanner(selectedFile.value);
-    selectedFile.value = null;
-    previewImage.value = null;
+    await bannerStore.addNewBanner(selectedFile.value)
+      .then((createBanner) => {
+        debugger;
+        // console.log("type of:", typeof createBanner);
+        if (createBanner) {
+          let response = JSON.parse(createBanner);
+          if (response && response?.success && response?.file_url) {
+            loading.value = false;
+              closeDialog();
+
+
+            bannerStore.uploadImageToBannerCollection(response?.file_url)
+              .then((docRef) => {
+                debugger;
+                closeDialog();
+                selectedFile.value = null;
+                previewImage.value = null;
+                console.log("Banner saved to Firestore with ID:", docRef.id);
+              })
+              .catch((error) => {
+                loading.value = false;
+
+                console.error("Error during upload or saving:", error);
+              })
+          }
+        } else {
+          loading.value = false;
+        }
+
+
+      })
+      .catch((error) => {
+        loading.value = false;
+
+        console.error("Error during upload or saving:", error);
+      })
+
+
   }
-  loading.value = false;
 };
 
 const emit = defineEmits(['close']);

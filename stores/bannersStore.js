@@ -41,7 +41,7 @@ export const useBannersStore = defineStore("banners", {
       }
     },
 
-    addNewBanner(file) {
+   async addNewBanner(file) {
       const formData = new FormData();
       const timestamp = Date.now();
       const fileExtension = file.name.split(".").pop();
@@ -50,40 +50,35 @@ export const useBannersStore = defineStore("banners", {
         ""
       )}_${timestamp}.${fileExtension}`;
       formData.append("fileToUpload", file, newFileName);
-      $fetch("https://lugarstore.com/upload.php", {
+        return  $fetch("https://lugarstore.com/upload.php", {
         method: "POST",
         body: formData,
       })
-        .then((createBanner) => {
-          // debugger;
-          // console.log("type of:", typeof createBanner);
-          let response = JSON.parse(createBanner);
-          if (response && response?.success && response?.file_url) {
-            this.banners.push(response?.file_url);
-            const bannerRef = collection(db, "banners");
-            // console.log("Preparing to add to Firestore...");
-            return addDoc(bannerRef, {
-              fileUrl: response?.file_url,
-              timestamp: new Date(),
-              visible: false,
-              selected: false,
-            });
-          }
-        })
-        // .then((docRef) => {
-        //   console.log("Banner saved to Firestore with ID:", docRef.id);
-        // })
-        .catch((error) => {
-          console.error("Error during upload or saving:", error);
-        });
+        
+    },
+ 
+
+  async uploadImageToBannerCollection(file) {
+      this.banners.push(file);
+      const bannerRef = collection(db, "banners");
+      // console.log("Preparing to add to Firestore...");
+      return addDoc(bannerRef, {
+        fileUrl: file,
+        timestamp: new Date(),
+        visible: false,
+        selected: false,
+      });
     },
 
     toggleVisibility(bannerId) {
+      debugger
       const banner = this.banners.find((banner) => banner.id === bannerId);
       if (banner) {
         banner.visible = !banner.visible;
         const bannerRef = doc(db, "banners", banner.id);
-        updateDoc(bannerRef, { visible: banner.visible });
+        updateDoc(bannerRef, { visible: banner.visible }).then(() => {
+
+        });
       }
     },
 
