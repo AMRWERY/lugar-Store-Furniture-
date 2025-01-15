@@ -27,17 +27,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-b hover:bg-slate-50 border-slate-200">
+                <tr class="border-b hover:bg-slate-50 border-slate-200"
+                  v-for="(banner, index) in bannersStore.paginatedBanners" :key="banner.id">
                   <td class="p-4 py-5">
                     <input id="checkbox-table-1" type="checkbox"
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="checkbox-table-1" class="sr-only">checkbox</label>
                   </td>
                   <td class="p-4 py-5">
-                    <p class="block text-sm text-slate-500">1</p>
+                    <p class="block text-sm text-slate-500">{{ (bannersStore.currentPage - 1) *
+                      bannersStore.bannersPerPage + index + 1 }}</p>
                   </td>
                   <td class="p-4 py-5">
-                    <img src="@/assets/banner-img-01.jpg" class="w-16 h-12 rounded-lg">
+                    <img :src="banner.fileUrl" class="w-16 h-12 rounded-lg">
                   </td>
                   <td class="p-4 py-5">
                     <p class="text-sm text-blue-700 cursor-pointer" @click="openDialog">View Banner</p>
@@ -48,6 +50,29 @@
                 </tr>
               </tbody>
             </table>
+
+            <div class="flex items-center justify-end px-4 py-3 mt-4">
+              <div class="flex mt-3 space-s-1 ms-auto">
+                <button @click="bannersStore.changePage(bannersStore.currentPage - 1)"
+                  :disabled="bannersStore.currentPage === 1"
+                  class="px-3 py-1 text-sm font-normal transition duration-200 bg-white border rounded min-w-9 min-h-9 text-slate-500 border-slate-200 hover:bg-slate-50 hover:border-slate-400 ease">
+                  {{ $t('pagination.previous') }}
+                </button>
+                <button v-for="page in bannersStore.totalPages" :key="page" @click="bannersStore.changePage(page)"
+                  :class="{
+                    'bg-slate-800 text-white': page === bannersStore.currentPage,
+                    'bg-white text-slate-500': page !== bannersStore.currentPage,
+                  }"
+                  class="px-3 py-1 text-sm font-normal transition duration-200 border rounded min-w-9 min-h-9 border-slate-200 hover:bg-slate-50 hover:border-slate-400 ease">
+                  {{ page }}
+                </button>
+                <button @click="bannersStore.changePage(bannersStore.currentPage + 1)"
+                  :disabled="bannersStore.currentPage === bannersStore.totalPages"
+                  class="px-3 py-1 text-sm font-normal transition duration-200 bg-white border rounded min-w-9 min-h-9 text-slate-500 border-slate-200 hover:bg-slate-50 hover:border-slate-400 ease">
+                  {{ $t('pagination.next') }}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -57,18 +82,16 @@
     <transition name="dialog">
       <banners-dialog v-if="isDialogOpen" @close="closeDialog" />
     </transition>
-
-    <!-- dynamic-toast component -->
-    <!-- <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
-            <div class="pointer-events-auto">
-                <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
-                    :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
-            </div>
-        </div> -->
   </div>
 </template>
 
 <script setup>
+const bannersStore = useBannersStore();
+
+onMounted(() => {
+  bannersStore.fetchBanners();
+});
+
 const isDialogOpen = ref(false);
 const { t } = useI18n()
 

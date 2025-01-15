@@ -30,7 +30,11 @@
         <!-- Close Button -->
         <div class="flex justify-end mt-6 space-s-4">
           <button class="px-6 py-2.5 btn-style" @click="uploadFile" :disabled="!selectedFile">
-            {{ $t("btn.upload") }}
+            <div class="flex items-center justify-center" v-if="loading">
+              <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
+              <icon name="svg-spinners:270-ring-with-bg" />
+            </div>
+            <span v-else>{{ $t("btn.upload") }}</span>
           </button>
           <button class="px-6 py-2.5 btn-style" @click="closeDialog">
             {{ $t('btn.close') }}
@@ -45,6 +49,7 @@
 const bannerStore = useBannersStore()
 const selectedFile = ref(null);
 const previewImage = ref(null);
+const loading = ref(false)
 
 const handleFileChange = (event) => {
   const file = event.target.files[0];
@@ -55,11 +60,13 @@ const handleFileChange = (event) => {
 };
 
 const uploadFile = async () => {
+  loading.value = true;
   if (selectedFile.value) {
     await bannerStore.addNewBanner(selectedFile.value);
     selectedFile.value = null;
     previewImage.value = null;
   }
+  loading.value = false;
 };
 
 const emit = defineEmits(['close']);
