@@ -2,19 +2,21 @@
     <div>
 
         <body class="text-gray-800 bg-gray-100 dark:bg-gray-900 dark:text-white">
-            <div class="mx-auto max-w-7xl">
-                <!-- Carousel Wrapper -->
-                <div class="overflow-hidden rounded-lg shadow-lg">
-                    <!-- Carousel -->
-                    <div class="carousel">
-                        <!-- Slide 1 -->
-                        <div class="bg-white carousel-item dark:bg-gray-800" v-for="banner in filteredBanners"
-                            :key="banner">
-                            <img :src="banner?.fileUrl" class="object-cover w-full rounded-md h-96">
+            <ClientOnly>
+                <div class="mx-auto max-w-7xl">
+                    <!-- Carousel Wrapper -->
+                    <div class="overflow-hidden rounded-lg shadow-lg">
+                        <!-- Carousel -->
+                        <div class="carousel">
+                            <!-- Slide 1 -->
+                            <div class="bg-white carousel-item dark:bg-gray-800" v-for="banner in filteredBanners"
+                                :key="banner">
+                                <img :src="banner?.fileUrl" class="object-cover w-full rounded-md h-96">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </ClientOnly>
         </body>
     </div>
 </template>
