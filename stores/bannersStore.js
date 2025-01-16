@@ -41,7 +41,7 @@ export const useBannersStore = defineStore("banners", {
       }
     },
 
-   async addNewBanner(file) {
+    async addNewBanner(file) {
       const formData = new FormData();
       const timestamp = Date.now();
       const fileExtension = file.name.split(".").pop();
@@ -50,15 +50,13 @@ export const useBannersStore = defineStore("banners", {
         ""
       )}_${timestamp}.${fileExtension}`;
       formData.append("fileToUpload", file, newFileName);
-        return  $fetch("https://lugarstore.com/upload.php", {
+      return $fetch("https://lugarstore.com/upload.php", {
         method: "POST",
         body: formData,
-      })
-        
+      });
     },
- 
 
-  async uploadImageToBannerCollection(file) {
+    async uploadImageToBannerCollection(file) {
       this.banners.push(file);
       const bannerRef = collection(db, "banners");
       // console.log("Preparing to add to Firestore...");
@@ -71,14 +69,12 @@ export const useBannersStore = defineStore("banners", {
     },
 
     toggleVisibility(bannerId) {
-      debugger
+      debugger;
       const banner = this.banners.find((banner) => banner.id === bannerId);
       if (banner) {
         banner.visible = !banner.visible;
         const bannerRef = doc(db, "banners", banner.id);
-        updateDoc(bannerRef, { visible: banner.visible }).then(() => {
-
-        });
+        updateDoc(bannerRef, { visible: banner.visible }).then(() => {});
       }
     },
 
