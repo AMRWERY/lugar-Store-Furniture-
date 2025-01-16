@@ -32,7 +32,16 @@
             </th>
           </tr>
         </thead>
-        <tbody>
+
+        <tbody v-if="store.paginatedCategories.length === 0">
+          <tr>
+            <td colspan="10" class="p-4 text-center">
+              <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
+            </td>
+          </tr>
+        </tbody>
+
+        <tbody v-else>
           <tr class="border-b hover:bg-slate-50 border-slate-200" v-for="(category, index) in store.paginatedCategories"
             :key="category.id">
             <td class="p-4 py-5">

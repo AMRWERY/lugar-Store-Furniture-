@@ -77,8 +77,8 @@
 
                 <tbody v-if="checkoutStore.paginatedOrders.length === 0">
                     <tr>
-                        <td colspan="10" class="p-4 text-2xl font-semibold text-center text-gray-500">
-                            {{ $t('dashboard.no_orders_available') }}
+                        <td colspan="10" class="p-4 text-center">
+                            <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
                         </td>
                     </tr>
                 </tbody>
