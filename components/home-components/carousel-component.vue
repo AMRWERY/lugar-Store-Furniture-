@@ -62,7 +62,6 @@ let filteredBanners = ref();
 //     return bannersStore.paginatedBanners.filter(banner => banner.visible);
 // });
 
-
 onMounted(async () => {
     await bannersStore.fetchBanners().then(res => {
         // debugger

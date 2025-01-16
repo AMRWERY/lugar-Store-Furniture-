@@ -69,7 +69,7 @@ export const useBannersStore = defineStore("banners", {
     },
 
     toggleVisibility(bannerId) {
-      debugger;
+      // debugger;
       const banner = this.banners.find((banner) => banner.id === bannerId);
       if (banner) {
         banner.visible = !banner.visible;

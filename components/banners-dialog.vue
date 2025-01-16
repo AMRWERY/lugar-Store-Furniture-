@@ -64,15 +64,13 @@ const uploadFile = async () => {
   if (selectedFile.value) {
     await bannerStore.addNewBanner(selectedFile.value)
       .then((createBanner) => {
-        debugger;
+        // debugger;
         // console.log("type of:", typeof createBanner);
         if (createBanner) {
           let response = JSON.parse(createBanner);
           if (response && response?.success && response?.file_url) {
             loading.value = false;
-              closeDialog();
-
-
+            closeDialog();
             bannerStore.uploadImageToBannerCollection(response?.file_url)
               .then((docRef) => {
                 debugger;
@@ -83,23 +81,17 @@ const uploadFile = async () => {
               })
               .catch((error) => {
                 loading.value = false;
-
                 console.error("Error during upload or saving:", error);
               })
           }
         } else {
           loading.value = false;
         }
-
-
       })
       .catch((error) => {
         loading.value = false;
-
         console.error("Error during upload or saving:", error);
       })
-
-
   }
 };
 
