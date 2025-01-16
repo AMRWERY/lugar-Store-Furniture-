@@ -17,7 +17,8 @@
             <!--Carousel items-->
             <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
                 <!--First item-->
-                <div v-for="banner in filteredBanners" class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                <div v-for="banner in filteredBanners"
+                    class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
                     data-twe-carousel-active data-twe-carousel-item style="backface-visibility: hidden">
                     <img :src="banner?.fileUrl" class="block w-full" />
                     <!-- <img src="@/assets/banner-img-02.jpg" class="block w-full" /> -->
@@ -56,20 +57,18 @@
 
 <script setup>
 const bannersStore = useBannersStore();
-let filteredBanners= ref();
+let filteredBanners = ref();
 // const filteredBanners = computed(() => {
 //     return bannersStore.paginatedBanners.filter(banner => banner.visible);
 // });
 
 
 onMounted(async () => {
-    await bannersStore.fetchBanners().then(res=>{
-    debugger
-
-       filteredBanners.value = bannersStore.banners.filter(banner => banner.visible);
-
+    await bannersStore.fetchBanners().then(res => {
+        // debugger
+        filteredBanners.value = bannersStore.banners.filter(banner => banner.visible);
     })
-    const { Carousel, initTWE } = await import("tw-elements") 
+    const { Carousel, initTWE } = await import("tw-elements")
     initTWE({ Carousel })
     console.log('banners', filteredBanners.value);
 });
