@@ -49,12 +49,17 @@
       </div>
 
       <!-- Loading Spinner -->
-      <div v-if="loading" class="flex items-center justify-center h-48 text-gray-600">
+      <!-- <div v-if="loading" class="flex items-center justify-center h-48 text-gray-600">
         <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
       </div>
 
       <div v-else-if="!filteredProducts?.length" class="flex items-center justify-center h-48 text-gray-600">
         <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
+      </div> -->
+
+      <div v-if="filteredProducts?.length === 0">
+        <!-- skeleton-loader component -->
+        <skeleton-loader />
       </div>
 
       <div

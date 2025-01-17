@@ -2,7 +2,7 @@
   <div>
     <section class="py-8 dark:bg-gray-900 md:py-7">
       <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
-        <p class="text-[13px] text-center text-gray-800">{{ $t('cart.your_cart_is_currently_empty') }}</p>
+        <p class="text-lg font-semibold text-center text-gray-800">{{ $t('cart.your_cart_is_currently_empty') }}</p>
       </div>
 
       <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">

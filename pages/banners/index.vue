@@ -36,8 +36,10 @@
 
               <tbody v-if="bannersStore.paginatedBanners.length === 0">
                 <tr>
-                  <td colspan="10" class="p-4 text-center text-slate-500">
-                    <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
+                  <td colspan="10" class="p-4 text-center">
+                    <!-- skeleton-loader component -->
+                    <skeleton-loader />
+                    <!-- <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" /> -->
                   </td>
                 </tr>
               </tbody>

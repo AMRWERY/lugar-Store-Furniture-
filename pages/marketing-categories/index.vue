@@ -36,7 +36,9 @@
                 <tbody v-if="store.paginatedSubcategories.length === 0">
                     <tr>
                         <td colspan="10" class="p-4 text-center">
-                            <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
+                            <!-- skeleton-loader component -->
+                            <skeleton-loader />
+                            <!-- <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" /> -->
                         </td>
                     </tr>
                 </tbody>

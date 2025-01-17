@@ -1,7 +1,13 @@
 <template>
   <div>
     <div class="mx-auto max-w-7xl">
-      <ClientOnly>
+
+      <div v-if="products.length === 0">
+        <!-- skeleton-loader component -->
+        <skeleton-loader />
+      </div>
+
+      <ClientOnly v-else>
         <Carousel v-bind="config">
           <Slide v-for="card in products" :key="card.id">
             <div class="carousel__item">

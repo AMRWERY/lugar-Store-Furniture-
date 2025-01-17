@@ -2,8 +2,13 @@
   <div>
     <div class="mx-auto max-w-7xl">
 
-      <div v-if="loading" class="flex justify-center py-8">
+      <!-- <div v-if="loading" class="flex justify-center py-8">
         <icon name="svg-spinners:blocks-scale" class="w-24 h-24 text-gray-600" />
+      </div> -->
+
+      <div v-if="paginatedProducts.length === 0">
+        <!-- skeleton-loader component -->
+        <skeleton-loader />
       </div>
 
       <div class="max-w-2xl py-8 mx-auto lg:max-w-none" v-else>
