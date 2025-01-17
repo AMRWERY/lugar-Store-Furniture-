@@ -133,11 +133,7 @@ const selectedCategory = ref('');
 const selectedAvailability = ref('');
 const loading = ref(false);
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const deleteProd = ref(null);
 
 const categories = ref([])
@@ -201,19 +197,21 @@ const deleteProduct = async (productId) => {
       deleteProd.value = null;
       store.products = store.products.filter(product => product.id !== productId);
       applyFilter();
-      showToast.value = true;
-      toastTitle.value = t('toast.great');
-      toastMessage.value = t('toast.product_deleted_successfully');
-      toastType.value = 'success';
-      toastIcon.value = 'mdi:check-circle';
+      triggerToast({
+        title: t('toast.great'),
+        message: t('toast.product_deleted_successfully'),
+        type: 'success',
+        icon: 'mdi-check-circle',
+      });
     }, 3000);
   } catch (error) {
     deleteProd.value = null;
-    showToast.value = true;
-    toastTitle.value = t('toast.error');
-    toastMessage.value = t('toast.failed_to_delete_the_product');
-    toastType.value = 'error';
-    toastIcon.value = 'mdi:alert-circle';
+    triggerToast({
+      title: t('toast.error'),
+      message: t('toast.failed_to_delete_the_product'),
+      type: 'error',
+      icon: 'mdi-alert-circle',
+    });
   }
 };
 

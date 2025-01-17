@@ -58,11 +58,8 @@ onMounted(async () => {
     }
 });
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
+const { t } = useI18n()
 
 const handleUpdateMarketCategory = async () => {
     if (!marketCategoryId) return;
@@ -73,25 +70,25 @@ const handleUpdateMarketCategory = async () => {
     };
     try {
         await store.updateMarketCategory(marketCategoryId, updatedData);
-        showToast.value = true;
-        toastTitle.value = t("toast.success");
-        toastMessage.value = t("toast.marketing_category_updated");
-        toastType.value = "success";
-        toastIcon.value = "check-circle";
+        triggerToast({
+            title: t('toast.success'),
+            message: t('toast.marketing_category_updated'),
+            type: 'success',
+            icon: 'mdi:check-circle',
+        });
         await store.fetchCMarketCategoryDetails(marketCategoryId);
     } catch (error) {
-        console.error("Error updating category:", error);
-        showToast.value = true;
-        toastTitle.value = t("toast.error");
-        toastMessage.value = t("toast.marketing_category_update_failed");
-        toastType.value = "error";
-        toastIcon.value = "error";
+        // console.error("Error updating category:", error);
+        triggerToast({
+            title: t('toast.error'),
+            message: t('toast.marketing_category_update_failed'),
+            type: 'error',
+            icon: 'mdi:alert-circle',
+        });
     } finally {
         loadingOne.value = false;
     }
 };
-
-const { t } = useI18n()
 
 definePageMeta({
     layout: 'dashboard'

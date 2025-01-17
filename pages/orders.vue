@@ -184,11 +184,7 @@
 
 <script setup>
 const checkoutStore = useCheckoutStore();
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const currentStatus = ref('')
 const orderStatus = ref([])
@@ -208,11 +204,12 @@ const updateOrderStatus = async (orderId, newStatus, newStatusAr) => {
         await new Promise((resolve) => setTimeout(resolve, 3000));
         await checkoutStore.updateOrderStatus(orderId, newStatus, newStatusAr);
         await checkoutStore.fetchOrders();
-        showToast.value = true;
-        toastTitle.value = t('toast.great');
-        toastMessage.value = t('tooltip.order_status_updated')
-        toastType.value = 'success';
-        toastIcon.value = 'mdi:check-circle';
+        triggerToast({
+            title: t('toast.great'),
+            message: t('toast.order_status_updated'),
+            type: 'success',
+            icon: 'mdi:check-circle',
+        });
     } catch (error) {
         console.error(error);
     } finally {
@@ -263,17 +260,19 @@ const deleteOrder = async (orderId) => {
     try {
         await checkoutStore.deleteOrder(orderId);
         checkoutStore.paginatedOrders = checkoutStore.paginatedOrders.filter(order => order.id !== orderId);
-        showToast.value = true;
-        toastTitle.value = t('toast.great');
-        toastMessage.value = t('tooltip.order_deleted');
-        toastType.value = 'success';
-        toastIcon.value = 'mdi:check-circle';
+        triggerToast({
+            title: t('toast.great'),
+            message: t('tooltip.order_deleted'),
+            type: 'success',
+            icon: 'mdi:check-circle',
+        });
     } catch (error) {
-        showToast.value = true;
-        toastTitle.value = t('toast.error');
-        toastMessage.value = t('tooltip.order_deletion_failed');
-        toastType.value = 'error';
-        toastIcon.value = 'mdi:alert-circle';
+        triggerToast({
+            title: t('toast.error'),
+            message: t('tooltip.order_deletion_failed'),
+            type: 'error',
+            icon: 'mdi:alert-circle',
+        });
     } finally {
         setTimeout(() => {
             if (order) {

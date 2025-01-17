@@ -71,11 +71,8 @@ const newCategoryTitleAr = ref('');
 const previewImage = ref("");
 const selectedImageBase64 = ref("");
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
+const { t } = useI18n()
 
 const handleImageUpload = (event) => {
   const file = event.target.files[0];
@@ -95,20 +92,18 @@ const handleAddCategory = async () => {
   loadingOne.value = true;
   if (newCategoryTitle.value.trim() && selectedImageBase64.value) {
     await store.addCategory(newCategoryTitle.value.trim(), newCategoryTitleAr.value.trim(), selectedImageBase64.value);
-    showToast.value = true;
-    toastTitle.value = t('toast.great');
-    toastMessage.value = t('toast.category_added_successfully');
-    toastType.value = 'success';
-    toastIcon.value = 'mdi:check-circle'
+    triggerToast({
+      title: t('toast.great'),
+      message: t('toast.category_added_successfully'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
     newCategoryTitle.value = '';
     newCategoryTitleAr.value = '';
     selectedImageBase64.value = '';
   }
   loadingOne.value = false;
-  showToast.value = true;
 };
-
-const { t } = useI18n()
 
 definePageMeta({
   layout: 'dashboard'

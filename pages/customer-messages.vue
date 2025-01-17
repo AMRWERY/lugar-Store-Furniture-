@@ -139,11 +139,7 @@
 
 <script setup>
 const store = useContactStore();
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 onMounted(() => {
   store.fetchMessages()
@@ -175,17 +171,19 @@ const deleteMessage = async (messageId) => {
   try {
     await store.deleteMessage(messageId);
     store.paginatedMessages = store.paginatedMessages.filter(message => message.id !== messageId);
-    showToast.value = true;
-    toastTitle.value = t('toast.great');
-    toastMessage.value = t('toast.message_deleted');
-    toastType.value = 'success';
-    toastIcon.value = 'mdi:check-circle';
+    triggerToast({
+      title: t('toast.great'),
+      message: t('toast.message_deleted'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
   } catch (error) {
-    showToast.value = true;
-    toastTitle.value = t('toast.error');
-    toastMessage.value = t('toast.message_deletion_failed');
-    toastType.value = 'error';
-    toastIcon.value = 'mdi:alert-circle';
+    triggerToast({
+      title: t('toast.error'),
+      message: t('toast.message_deletion_failed'),
+      type: 'error',
+      icon: 'mdi:alert-circle',
+    });
   } finally {
     setTimeout(() => {
       if (message) {

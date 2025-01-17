@@ -415,7 +415,8 @@
     "marketing_category_deleted_successfully": "تم حذف فئة التسويق بنجاح",
     "your_message_sent_successfully": "تم ارسال رسالتك بنجاح",
     "message_deleted": "تم حذف الرسالة",
-    "message_deletion_failed": "فشل في حذف الرسالة"
+    "message_deletion_failed": "فشل في حذف الرسالة",
+    "failed_to_update_product": "فشل تحديث المنتج"
   },
   "status": {
     "pending": "قيد الانتظار",

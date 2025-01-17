@@ -169,11 +169,7 @@ const selectedCategory = ref('')
 const selectedSubCategory = ref('')
 const product = ref({ title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', videoLink: '', titleAr: '', descriptionAr: '' })
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const handleFileChange = async (event) => {
   const files = Array.from(event.target.files);
@@ -224,11 +220,12 @@ const handleSubmit = async () => {
   const subCategory = subCategories.value.find(subCat => subCat.id === selectedSubCategory.value);
   try {
     if (!product.value.title || !product.value.discountedPrice || !selectedCategory.value) {
-      toastTitle.value = t('toast.error');
-      toastMessage.value = t('toast.please_fill_all_required_fields');
-      toastType.value = "error";
-      toastIcon.value = "mdi-alert-circle";
-      showToast.value = true;
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.please_fill_all_required_fields'),
+        type: 'error',
+        icon: 'mdi:alert-circle',
+      });
       loading.value = false;
       return;
     }
@@ -239,19 +236,21 @@ const handleSubmit = async () => {
       // categoryTitle: category.title,
       // subCategoryTitle: subCategory.title,
     });
-    toastTitle.value = t('toast.success');
-    toastMessage.value = t('toast.product_added_successfully');
+    triggerToast({
+      title: t('toast.success'),
+      message: t('toast.product_added_successfully'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
     resetForm();
-    toastType.value = "success";
-    toastIcon.value = "mdi-check-circle";
-    showToast.value = true;
   } catch (error) {
-    console.error("Error submitting product:", error);
-    toastTitle.value = t('toast.error');
-    toastMessage.value = t('toast.something_went_wrong_please_try_again');
-    toastType.value = "error";
-    toastIcon.value = "mdi-alert-circle";
-    showToast.value = true;
+    // console.error("Error submitting product:", error);
+    triggerToast({
+      title: t('toast.error'),
+      message: t('toast.something_went_wrong_please_try_again'),
+      type: 'error',
+      icon: 'mdi:alert-circle',
+    });
   } finally {
     loading.value = false;
   }

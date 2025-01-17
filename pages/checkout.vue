@@ -36,7 +36,8 @@
               <div class="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-400">{{ $t('checkout.subtotal') }}</dt>
-                  <dd class="text-base font-medium text-gray-900 dark:text-white">{{ subTotalAmount }}  {{ $t('products.le') }}</dd>
+                  <dd class="text-base font-medium text-gray-900 dark:text-white">{{ subTotalAmount }} {{
+                    $t('products.le') }}</dd>
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-normal text-gray-500 dark:text-gray-400">{{ $t('checkout.savings') }}</dt>
@@ -44,7 +45,8 @@
                 </dl>
                 <dl class="flex items-center justify-between gap-4 py-3">
                   <dt class="text-base font-bold text-gray-900 dark:text-white">{{ $t('checkout.total') }}</dt>
-                  <dd class="text-base font-bold text-gray-900 dark:text-white">{{ totalAmount }}  {{ $t('products.le') }}</dd>
+                  <dd class="text-base font-bold text-gray-900 dark:text-white">{{ totalAmount }} {{ $t('products.le')
+                    }}</dd>
                 </dl>
               </div>
             </div>
@@ -117,11 +119,7 @@ const { t } = useI18n()
 const loading = ref(false);
 
 const checkoutStore = useCheckoutStore();
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 const submitCheckoutForm = async () => {
   loading.value = true;
@@ -133,11 +131,12 @@ const submitCheckoutForm = async () => {
     await new Promise(resolve => setTimeout(resolve, 3000));
     await checkoutStore.saveCheckoutData(cartData);
     await cartStore.clearCart();
-    showToast.value = true;
-    toastTitle.value = t('toast.order_successful');
-    toastMessage.value = t('toast.your_order_was_processed_successfully_thank_you');
-    toastType.value = 'success';
-    toastIcon.value = 'mdi:check-circle'
+    triggerToast({
+      title: t('toast.order_successful'),
+      message: t('toast.your_order_was_processed_successfully_thank_you'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
   } catch (error) {
     console.error("Error during checkout:", error);
   } finally {

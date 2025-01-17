@@ -54,11 +54,7 @@ const errorMessage = ref('');
 const router = useRouter()
 const { t } = useI18n()
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const data = ref({
   email: '',
@@ -72,11 +68,12 @@ const signIn = async () => {
       email: data.value.email,
       password: data.value.password,
     });
-    showToast.value = true;
-    toastTitle.value = t('toast.successfully_logged_in');
-    toastMessage.value = t('toast.your_account_has_been_successfully_logged_in');
-    toastType.value = 'success';
-    toastIcon.value = 'mdi:check-circle';
+    triggerToast({
+      title: t('toast.successfully_logged_in'),
+      message: t('toast.your_account_has_been_successfully_logged_in'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
     setTimeout(() => {
       router.replace('/products');
     }, 3000);
@@ -93,6 +90,6 @@ const signIn = async () => {
 };
 
 useHead({
-  titleTemplate: () => "Login",
+  titleTemplate: () => t("head.login"),
 });
 </script>

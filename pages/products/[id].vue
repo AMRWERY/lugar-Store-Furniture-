@@ -187,11 +187,7 @@ onMounted(async () => {
   }
 });
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const handleFileChange = async (event) => {
   const files = Array.from(event.target.files);
@@ -242,16 +238,24 @@ const handleSubmit = async () => {
     await store.updateProduct(productId, product.value);
     const updatedProduct = await productStore.fetchProductDetail(productId);
     product.value = updatedProduct;
-    showToast.value = true;
-    toastTitle.value = "Success";
-    toastMessage.value = "Product updated successfully!";
-    toastType.value = "success";
+    triggerToast({
+      title: t('toast.success'),
+      message: t('toast.product_updated_successfully'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
   } catch (error) {
     console.error("Error updating product:", error);
     showToast.value = true;
     toastTitle.value = "Error";
     toastMessage.value = "Failed to update product.";
     toastType.value = "error";
+    triggerToast({
+      title: t('toast.error'),
+      message: t('toast.failed_to_update_product'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
   } finally {
     loading.value = false;
   }

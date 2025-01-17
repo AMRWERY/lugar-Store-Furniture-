@@ -59,11 +59,7 @@
 <script setup>
 const store = useContactStore();
 const loading = ref(false);
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 const data = ref({
     name: '',
@@ -76,11 +72,12 @@ const sendMessage = async () => {
     loading.value = true;
     try {
         await store.submitForm(data.value);
-        showToast.value = true;
-        toastTitle.value = t('toast.great');
-        toastMessage.value = t('toast.your_message_sent_successfully');
-        toastType.value = 'success';
-        toastIcon.value = 'mdi:check-circle';
+        triggerToast({
+            title: t('toast.great'),
+            message: t('toast.your_message_sent_successfully'),
+            type: 'success',
+            icon: 'mdi:check-circle',
+        });
     } catch (error) {
         console.log(error)
     } finally {

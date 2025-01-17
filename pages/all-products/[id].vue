@@ -184,11 +184,7 @@ const isInCart = computed(() =>
   cartStore.isInCart(store.selectedProduct?.id)
 );
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const handleAddToCart = async () => {
   const product = selectedProduct.value;
@@ -214,11 +210,12 @@ const handleAddToCart = async () => {
     );
     itemAdded.value = "Product added to cart!";
     setTimeout(() => (itemAdded.value = ""), 3000);
-    showToast.value = true;
-    toastTitle.value = t('toast.great');
-    toastMessage.value = t('toast.item_added_to_your_cart');
-    toastType.value = 'success';
-    toastIcon.value = 'clarity:shopping-cart-line'
+    triggerToast({
+      title: t('toast.great'),
+      message: t('toast.item_added_to_your_cart'),
+      type: 'success',
+      icon: 'clarity:shopping-cart-line',
+    });
   } catch (error) {
     console.error("Error adding product to cart:", error);
   } finally {

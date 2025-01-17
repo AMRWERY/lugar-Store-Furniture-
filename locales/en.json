@@ -414,7 +414,8 @@
     "marketing_category_deleted_successfully": "Market Category deleted successfully",
     "your_message_sent_successfully": "Your message was sent successfully",
     "message_deleted": "Message deleted",
-    "message_deletion_failed": "Message deletion failed"
+    "message_deletion_failed": "Message deletion failed",
+    "failed_to_update_product": "Failed to update product"
   },
   "status": {
     "pending": "Pending",

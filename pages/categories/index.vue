@@ -114,21 +114,18 @@ onMounted(() => {
 });
 
 const deleteCat = ref(null);
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const handleDeleteCategory = async (categoryId) => {
   deleteCat.value = categoryId;
   setTimeout(async () => {
     await store.deleteCategory(categoryId);
-    showToast.value = true;
-    toastTitle.value = t('toast.great');
-    toastMessage.value = t('toast.category_deleted_successfully');
-    toastType.value = 'success';
-    toastIcon.value = 'mdi:check-circle';
+    triggerToast({
+      title: t('toast.great'),
+      message: t('toast.category_deleted_successfully'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
     deleteCat.value = null;
   }, 3000);
 };

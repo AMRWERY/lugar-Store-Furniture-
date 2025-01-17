@@ -117,11 +117,7 @@ const closeDialog = () => {
   emit('close');
 };
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const { t } = useI18n()
 
 const updateOrderStatus = async (orderId, newStatus) => {
@@ -133,20 +129,22 @@ const updateOrderStatus = async (orderId, newStatus) => {
   await checkoutStore.updateOrderStatus(orderId, newStatus)
     .then((rss) => {
       checkoutStore.fetchOrders();
-      showToast.value = true;
-      toastTitle.value = t('toast.great');
-      toastMessage.value = t('tooltip.order_status_updated');
-      toastType.value = 'success';
-      toastIcon.value = 'mdi:check-circle';
+      triggerToast({
+        title: t('toast.great'),
+        message: t('toast.order_status_updated'),
+        type: 'success',
+        icon: 'mdi-check-circle',
+      });
       order.loading = false
     })
     .catch((error) => {
       console.error(error);
-      showToast.value = true;
-      toastTitle.value = t('toast.error');
-      toastMessage.value = t('tooltip.failed_to_update_order');
-      toastType.value = 'error';
-      toastIcon.value = 'mdi:alert-circle';
+      triggerToast({
+        title: t('toast.error'),
+        message: t('tooltip.failed_to_update_order'),
+        type: 'error',
+        icon: 'mdi:alert-circle',
+      });
     })
     .finally(() => {
       const order = checkoutStore.paginatedOrders.find((o) => o.id === orderId);

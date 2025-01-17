@@ -7,7 +7,7 @@
         <div class="mb-4">
           <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
             $t('form.marketing_category_title')
-            }}</label>
+          }}</label>
           <input id="subcategory-title" type="text" v-model="newSubCategoryTitle"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_marketing_category_title')" required />
@@ -16,7 +16,7 @@
         <div class="mb-4">
           <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
             $t('form.marketing_category_title_ar')
-            }}</label>
+          }}</label>
           <input id="subcategory-title" type="text" v-model="newSubCategoryTitleAr"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_marketing_category_title_ar')" required />
@@ -76,28 +76,26 @@ const newSubCategoryTitle = ref('');
 const newSubCategoryTitleAr = ref('');
 const product = ref({})
 
-const showToast = ref(false);
-const toastTitle = ref('');
-const toastMessage = ref('');
-const toastType = ref('');
-const toastIcon = ref('')
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const handleAddSubCategory = async () => {
   loadingTwo.value = true;
   try {
     await store.addSubCategory(newSubCategoryTitle.value.trim(), newSubCategoryTitleAr.value.trim());
-    toastTitle.value = t('toast.great');
-    toastMessage.value = t('toast.marketing_category_added_successfully');
     resetForm();
-    toastType.value = 'success';
-    toastIcon.value = 'mdi:check-circle';
-    showToast.value = true;
+    triggerToast({
+      title: t('toast.great'),
+      message: t('toast.marketing_category_added_successfully'),
+      type: 'success',
+      icon: 'mdi:check-circle',
+    });
   } catch (error) {
-    toastTitle.value = t('toast.error');
-    toastMessage.value = t('toast.subcategory_add_failed');
-    toastType.value = 'error';
-    toastIcon.value = 'mdi:alert-circle';
-    showToast.value = true;
+    triggerToast({
+      title: t('toast.error'),
+      message: t('toast.subcategory_add_failed'),
+      type: 'error',
+      icon: 'mdi:alert-circle',
+    });
   } finally {
     newSubCategoryTitle.value = '';
     newSubCategoryTitleAr.value = '';
