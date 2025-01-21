@@ -15,7 +15,7 @@
 <script setup>
 const config = {
   itemsToShow: 4,
-  wrapAround: true,
+  wrapAround: false,
   gap: 5,
   snapAlign: 'center',
   breakpoints: {
