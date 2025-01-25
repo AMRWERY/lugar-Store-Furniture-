@@ -14,14 +14,15 @@
 
 <script setup>
 const config = {
-    wrapAround: true,
-    gap: 5,
-    snapAlign: 'center',
-    breakpoints: {
-        200: { itemsToShow: 1.5, snapAlign: 'center' },
-        400: { itemsToShow: 2, snapAlign: 'start' },
-        700: { itemsToShow: 3, snapAlign: 'center' },
-        1024: { snapAlign: 'start' },
-    },
+    itemsToShow: 4,
+  wrapAround: false,
+  gap: 5,
+  snapAlign: 'center',
+  breakpoints: {
+    200: { itemsToShow: 1.5, snapAlign: 'center' },
+    400: { itemsToShow: 2, snapAlign: 'start' },
+    700: { itemsToShow: 3, snapAlign: 'center' },
+    1024: { itemsToShow: 4, snapAlign: 'start' },
+  },
 };
 </script>

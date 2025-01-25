@@ -6,7 +6,7 @@
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
           <label for="main-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.category') }}</label>
-          <select id="main-category" name="main-category" v-model="selectedCategory"
+          <select id="main-category" name="main-category" v-model="product.categoryId"
             class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
             <option value="" disabled>{{ $t('form.select_category') }}</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option>
@@ -16,7 +16,7 @@
         <div class="mb-4">
           <label for="sub-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.marketing_categories')
             }}</label>
-          <select id="sub-category" name="sub-category" v-model="selectedSubCategory"
+          <select id="sub-category" name="sub-category" v-model="product.subCategoryId"
             class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
             <option value="" disabled>{{ $t('form.select_marketing_category') }}</option>
             <option v-for="subCategory in subCategories" :key="subCategory.id" :value="subCategory.id">{{
