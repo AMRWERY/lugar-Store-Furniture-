@@ -34,7 +34,7 @@ export const useBannersStore = defineStore("banners", {
           // selected: false,
         }));
         this.banners = bannerList;
-        console.log("banners store", this.banners);
+        // console.log("banners store", this.banners);
         this.updatePagination();
       } catch (error) {
         console.error("Error fetching banners:", error);

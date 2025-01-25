@@ -77,7 +77,7 @@ const uploadFile = async () => {
                 closeDialog();
                 selectedFile.value = null;
                 previewImage.value = null;
-                console.log("Banner saved to Firestore with ID:", docRef.id);
+                // console.log("Banner saved to Firestore with ID:", docRef.id);
               })
               .catch((error) => {
                 loading.value = false;

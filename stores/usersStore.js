@@ -64,7 +64,7 @@ export const useUserStore = defineStore("users", {
         } else {
           console.warn("User not found in local store while blocking:", userId);
         }
-        console.log(`User with ID ${userId} blocked successfully.`);
+        // console.log(`User with ID ${userId} blocked successfully.`);
       } catch (error) {
         console.error("Failed to block user:", error);
       }
@@ -79,11 +79,11 @@ export const useUserStore = defineStore("users", {
           const userRef = doc(db, "users", userId);
           await updateDoc(userRef, { isBlocked: newStatus });
           this.users[userIndex].isBlocked = newStatus;
-          console.log(
-            `User with ID ${userId} ${
-              newStatus ? "blocked" : "unblocked"
-            } successfully.`
-          );
+          // console.log(
+          //   `User with ID ${userId} ${
+          //     newStatus ? "blocked" : "unblocked"
+          //   } successfully.`
+          // );
         } else {
           console.warn("User not found in local store:", userId);
         }

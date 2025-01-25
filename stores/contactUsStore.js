@@ -32,9 +32,9 @@ export const useContactStore = defineStore("contact", {
           date: currentDate,
         });
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       } finally {
-        console.log("Message saved");
+        // console.log("Message saved");
       }
     },
 
@@ -49,7 +49,7 @@ export const useContactStore = defineStore("contact", {
         // console.log(messages);
         this.updatePagination();
       } catch (e) {
-        console.log("Error fetching messages: ", e);
+        // console.log("Error fetching messages: ", e);
       }
     },
 

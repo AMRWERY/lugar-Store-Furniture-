@@ -79,7 +79,7 @@ const sendMessage = async () => {
             icon: 'mdi:check-circle',
         });
     } catch (error) {
-        console.log(error)
+        // console.log(error)
     } finally {
         loading.value = false;
     }

@@ -96,7 +96,7 @@ onMounted(async () => {
   }
 
   if (!props.categoryTitle && !props.subCategoryTitle) {
-    console.log('Neither categoryTitle nor subCategoryTitle provided.');
+    // console.log('Neither categoryTitle nor subCategoryTitle provided.');
   }
 });
 </script>

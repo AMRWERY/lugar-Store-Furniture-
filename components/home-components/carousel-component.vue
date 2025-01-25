@@ -26,10 +26,9 @@ let filteredBanners = ref();
 
 onMounted(async () => {
     await bannersStore.fetchBanners().then(res => {
-        // debugger
         filteredBanners.value = bannersStore.banners.filter(banner => banner.visible);
     })
-    console.log('banners', filteredBanners.value);
+    // console.log('banners', filteredBanners.value);
 });
 </script>
 
