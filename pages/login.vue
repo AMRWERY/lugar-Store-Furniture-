@@ -16,7 +16,7 @@
             <div>
               <dynamic-inputs v-model="data.password" :label="t('form.password')"
                 :placeholder="t('form.enter_your_password')" type="password"
-                :validation="'required|password|length:6,7'" :required="true" />
+                :validation="'required|password'" :required="true" />
             </div>
 
             <div class="mt-6">
