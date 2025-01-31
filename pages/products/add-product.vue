@@ -169,35 +169,39 @@ const product = ref({ title: '', description: '', discountedPrice: '', originalP
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
-const handleFileChange = async (event) => {
+const handleFileChange = (event) => {
   const files = Array.from(event.target.files);
   if (files.length > 4) {
     alert("You can only upload up to 4 images.");
     return;
   }
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (!allowedTypes.includes(file.type)) {
-      alert('Please upload an image in JPEG, PNG, or WebP format.');
-      return;
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const maxSize = 4 * 1024 * 1024;
+  files.reduce((promiseChain, file, index) => {
+    return promiseChain.then(() => {
+      if (!allowedTypes.includes(file.type)) {
+        alert('Please upload an image in JPEG, PNG, or WebP format.');
+        return Promise.reject(new Error('Invalid file type'));
+      }
+      if (file.size > maxSize) {
+        alert('Image size must not exceed 2MB.');
+        return Promise.reject(new Error('File size too large'));
+      }
+      return convertToBase64(file).then(base64Image => {
+        switch(index) {
+          case 0: product.value.imgOne = base64Image; break;
+          case 1: product.value.imgTwo = base64Image; break;
+          case 2: product.value.imgThree = base64Image; break;
+          case 3: product.value.imgFour = base64Image; break;
+        }
+      });
+    });
+  }, Promise.resolve())
+  .catch(error => {
+    if (!error.message.includes('Invalid') && !error.message.includes('size')) {
+      alert('File processing error: ' + error.message);
     }
-    const maxSize = 4 * 1024 * 1024;
-    if (file.size > maxSize) {
-      alert('Image size must not exceed 2MB.');
-      return;
-    }
-    const base64Image = await convertToBase64(file);
-    if (i === 0) {
-      product.value.imgOne = base64Image;
-    } else if (i === 1) {
-      product.value.imgTwo = base64Image;
-    } else if (i === 2) {
-      product.value.imgThree = base64Image;
-    } else if (i === 3) {
-      product.value.imgFour = base64Image;
-    }
-  }
+  });
 };
 
 // Convert image to base64
@@ -212,11 +216,11 @@ const convertToBase64 = (file) => {
 
 const { t } = useI18n();
 
-const handleSubmit = async () => {
+const handleSubmit = () => {
   loading.value = true;
   const category = categories.value.find(cat => cat.id === selectedCategory.value);
   const subCategory = subCategories.value.find(subCat => subCat.id === selectedSubCategory.value);
-  try {
+  new Promise((resolve, reject) => {
     if (!product.value.title || !product.value.discountedPrice || !selectedCategory.value) {
       triggerToast({
         title: t('toast.error'),
@@ -224,16 +228,19 @@ const handleSubmit = async () => {
         type: 'error',
         icon: 'mdi:alert-circle',
       });
-      loading.value = false;
+      reject(new Error('Validation failed'));
       return;
     }
-    await store.createProduct({
+    resolve();
+  })
+  .then(() => {
+    return store.createProduct({
       ...product.value,
       categoryId: category.id,
       subCategoryId: subCategory.id,
-      // categoryTitle: category.title,
-      // subCategoryTitle: subCategory.title,
     });
+  })
+  .then(() => {
     triggerToast({
       title: t('toast.success'),
       message: t('toast.product_added_successfully'),
@@ -241,17 +248,20 @@ const handleSubmit = async () => {
       icon: 'mdi:check-circle',
     });
     resetForm();
-  } catch (error) {
-    // console.error("Error submitting product:", error);
-    triggerToast({
-      title: t('toast.error'),
-      message: t('toast.something_went_wrong_please_try_again'),
-      type: 'error',
-      icon: 'mdi:alert-circle',
-    });
-  } finally {
+  })
+  .catch((error) => {
+    if (error.message !== 'Validation failed') {
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.something_went_wrong_please_try_again'),
+        type: 'error',
+        icon: 'mdi:alert-circle',
+      });
+    }
+  })
+  .finally(() => {
     loading.value = false;
-  }
+  });
 };
 
 const isValidInstagramUrl = (url) => {
@@ -276,25 +286,13 @@ const resetForm = () => {
   selectedSubCategory.value = '';
 };
 
-// const onCategoryChange = () => {
-//   if (selectedCategory.value) {
-//     subCategories.value = store.subCategories.filter(subCategory => subCategory.categoryId === selectedCategory.value);
-//     selectedSubCategory.value = "";
-//   }
-// };
-
-// watch(() => selectedCategory.value, onCategoryChange, { immediate: true });
-
-onMounted(async () => {
-  await store.fetchCategories();
+onMounted( () => {
+   store.fetchCategories();
   categories.value = store.categories;
-});
-
-onMounted(async () => {
-  await store.fetchSubCategories();
+  
+   store.fetchSubCategories();
   subCategories.value = store.subCategories;
-  // console.log(store.subCategories);
-})
+});
 
 const { formatDecimal, enforceTwoDecimalPlaces } = useFormatter();
 

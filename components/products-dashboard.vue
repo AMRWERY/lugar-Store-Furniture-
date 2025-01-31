@@ -136,7 +136,7 @@ const perPage = 10;
 const selectedSubcategory = ref('');
 const selectedCategory = ref('');
 const selectedAvailability = ref('');
-const loading = ref(false);
+// const loading = ref(false);
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 const deleteProd = ref(null);
@@ -156,6 +156,7 @@ onMounted(() => {
   }).then(() => {
     subCategories.value = categoryStore.subCategories;
   }).catch((error) => {
+    return error
   });
 });
 
@@ -172,11 +173,9 @@ const applyFilter = () => {
   });
 };
 
-
 const uniqueAvailability = computed(() => {
   return [...new Set(store.products.map((product) => product.availability))];
 });
-
 
 const totalPages = computed(() => {
   return Math.ceil(filteredProducts.value?.length / perPage);
@@ -194,11 +193,17 @@ const onPageChanged = (pageNumber) => {
 
 const { t } = useI18n()
 
-const deleteProduct = async (productId) => {
+const deleteProduct = (productId) => {
   deleteProd.value = productId;
-  try {
-    await productStore.deleteProduct(productId);
-    setTimeout(() => {
+  productStore.deleteProduct(productId)
+    .then(() => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 3000);
+      });
+    })
+    .then(() => {
       deleteProd.value = null;
       store.products = store.products.filter(product => product.id !== productId);
       applyFilter();
@@ -208,16 +213,16 @@ const deleteProduct = async (productId) => {
         type: 'success',
         icon: 'mdi-check-circle',
       });
-    }, 3000);
-  } catch (error) {
-    deleteProd.value = null;
-    triggerToast({
-      title: t('toast.error'),
-      message: t('toast.failed_to_delete_the_product'),
-      type: 'error',
-      icon: 'mdi-alert-circle',
+    })
+    .catch((error) => {
+      deleteProd.value = null;
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.failed_to_delete_the_product'),
+        type: 'error',
+        icon: 'mdi-alert-circle',
+      });
     });
-  }
 };
 
 onMounted(async () => {

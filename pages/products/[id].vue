@@ -171,14 +171,14 @@ const productId = route.params.id
 
 const product = ref({ title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', videoLink: '', titleAr: '', descriptionAr: '', categoryId: '', subCategoryId: '', productId: '' })
 
-onMounted(async () => {
-  await store.fetchCategories();
+onMounted(() => {
+   store.fetchCategories();
   categories.value = store.categories;
-  await store.fetchSubCategories();
+   store.fetchSubCategories();
   subCategories.value = store.subCategories;
 
   if (productId) {
-    const productDetail = await productStore.fetchProductDetail(productId);
+    const productDetail = productStore.fetchProductDetail(productId);
     product.value = productDetail;
     selectedCategory.value = productDetail.categoryId;
     selectedSubCategory.value = productDetail.subCategoryId;
@@ -187,35 +187,39 @@ onMounted(async () => {
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
-const handleFileChange = async (event) => {
+const handleFileChange = (event) => {
   const files = Array.from(event.target.files);
   if (files.length > 4) {
     alert("You can only upload up to 4 images.");
     return;
   }
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    if (!allowedTypes.includes(file.type)) {
-      alert('Please upload an image in JPEG, PNG, or WebP format.');
-      return;
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  const maxSize = 4 * 1024 * 1024;
+  files.reduce((promiseChain, file, index) => {
+    return promiseChain.then(() => {
+      if (!allowedTypes.includes(file.type)) {
+        alert('Please upload an image in JPEG, PNG, or WebP format.');
+        return Promise.reject(new Error('Invalid file type'));
+      }
+      if (file.size > maxSize) {
+        alert('Image size must not exceed 2MB.');
+        return Promise.reject(new Error('File size too large'));
+      }
+      return convertToBase64(file).then(base64Image => {
+        switch(index) {
+          case 0: product.value.imgOne = base64Image; break;
+          case 1: product.value.imgTwo = base64Image; break;
+          case 2: product.value.imgThree = base64Image; break;
+          case 3: product.value.imgFour = base64Image; break;
+        }
+      });
+    });
+  }, Promise.resolve())
+  .catch(error => {
+    if (!error.message.includes('Invalid') && !error.message.includes('size')) {
+      alert('File processing error: ' + error.message);
     }
-    const maxSize = 4 * 1024 * 1024;
-    if (file.size > maxSize) {
-      alert('Image size must not exceed 2MB.');
-      return;
-    }
-    const base64Image = await convertToBase64(file);
-    if (i === 0) {
-      product.value.imgOne = base64Image;
-    } else if (i === 1) {
-      product.value.imgTwo = base64Image;
-    } else if (i === 2) {
-      product.value.imgThree = base64Image;
-    } else if (i === 3) {
-      product.value.imgFour = base64Image;
-    }
-  }
+  });
 };
 
 // Convert image to base64
@@ -230,34 +234,65 @@ const convertToBase64 = (file) => {
 
 const { t } = useI18n();
 
-const handleSubmit = async () => {
+const handleSubmit = () => {
   loading.value = true;
-  try {
-    await store.updateProduct(productId, product.value);
-    const updatedProduct = await productStore.fetchProductDetail(productId);
-    product.value = updatedProduct;
-    triggerToast({
-      title: t('toast.success'),
-      message: t('toast.product_updated_successfully'),
-      type: 'success',
-      icon: 'mdi:check-circle',
+  store.updateProduct(productId, product.value)
+    .then(() => productStore.fetchProductDetail(productId))
+    .then(updatedProduct => {
+      product.value = updatedProduct;
+      triggerToast({
+        title: t('toast.success'),
+        message: t('toast.product_updated_successfully'),
+        type: 'success',
+        icon: 'mdi:check-circle',
+      });
+    })
+    .catch(error => {
+      console.error("Error updating product:", error);
+      showToast.value = true;
+      toastTitle.value = "Error";
+      toastMessage.value = "Failed to update product.";
+      toastType.value = "error";
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.failed_to_update_product'),
+        type: 'success',
+        icon: 'mdi:check-circle',
+      });
+    })
+    .finally(() => {
+      loading.value = false;
     });
-  } catch (error) {
-    console.error("Error updating product:", error);
-    showToast.value = true;
-    toastTitle.value = "Error";
-    toastMessage.value = "Failed to update product.";
-    toastType.value = "error";
-    triggerToast({
-      title: t('toast.error'),
-      message: t('toast.failed_to_update_product'),
-      type: 'success',
-      icon: 'mdi:check-circle',
-    });
-  } finally {
-    loading.value = false;
-  }
 };
+
+// const handleSubmit = async () => {
+//   loading.value = true;
+//   try {
+//     await store.updateProduct(productId, product.value);
+//     const updatedProduct = await productStore.fetchProductDetail(productId);
+//     product.value = updatedProduct;
+//     triggerToast({
+//       title: t('toast.success'),
+//       message: t('toast.product_updated_successfully'),
+//       type: 'success',
+//       icon: 'mdi:check-circle',
+//     });
+//   } catch (error) {
+//     console.error("Error updating product:", error);
+//     showToast.value = true;
+//     toastTitle.value = "Error";
+//     toastMessage.value = "Failed to update product.";
+//     toastType.value = "error";
+//     triggerToast({
+//       title: t('toast.error'),
+//       message: t('toast.failed_to_update_product'),
+//       type: 'success',
+//       icon: 'mdi:check-circle',
+//     });
+//   } finally {
+//     loading.value = false;
+//   }
+// };
 
 const isValidInstagramUrl = (url) => {
   const regex = /^(https?:\/\/)?(www\.)?(instagram\.com|instagr\.am)\/p\/[A-Za-z0-9-_]+\/?$/;
