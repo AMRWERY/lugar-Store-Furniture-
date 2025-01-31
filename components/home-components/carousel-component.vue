@@ -28,7 +28,7 @@ onMounted(async () => {
     await bannersStore.fetchBanners();
     filteredBanners.value = bannersStore.banners.filter(banner => banner.visible && banner.selected);
 
-    console.log('Filtered Banners:', filteredBanners.value.length);
+    // console.log('Filtered Banners:', filteredBanners.value.length);
 });
 </script>
 
