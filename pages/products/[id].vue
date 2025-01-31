@@ -159,8 +159,6 @@
 </template>
 
 <script setup>
-import { useProductsStore } from '@/stores/productsStore';
-
 const store = useProductsStore()
 const productStore = useNewProductsStoreStore()
 const loading = ref(false);

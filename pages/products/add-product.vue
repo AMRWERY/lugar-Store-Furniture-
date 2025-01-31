@@ -159,8 +159,6 @@
 </template>
 
 <script setup>
-import { useProductsStore } from '@/stores/productsStore';
-
 const store = useProductsStore()
 const loading = ref(false);
 const categories = ref([])
