@@ -157,7 +157,5 @@ const logout = async () => {
 const route = useRoute();
 const isLoginPage = computed(() => route.path === '/login')
 
-import { useCartStore } from '@/stores/cartStore';
-
 const cartStore = useCartStore();
 </script>

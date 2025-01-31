@@ -28,9 +28,10 @@
                       <nuxt-link to="" class="text-base font-medium text-gray-900 hover:underline dark:text-white">{{
                         $i18n.locale === 'ar' ? item.titleAr : item.title }}</nuxt-link>
                       <div class="flex justify-center text-end md:order-4 md:w-44 space-s-2 ms-auto">
-                        <p class="text-base font-bold text-gray-900 dark:text-white">{{ item.discountedPrice }} {{ $t('products.le') }}</p>
+                        <p class="text-base font-bold text-gray-900 dark:text-white">{{ item.discountedPrice }} {{
+                          $t('products.le') }}</p>
                         <p class="mt-0.5 text-sm text-gray-400 line-through dark:text-white" v-if="item.originalPrice">
-                          {{ item.originalPrice }}  {{ $t('products.le') }}</p>
+                          {{ item.originalPrice }} {{ $t('products.le') }}</p>
                       </div>
                     </div>
 
@@ -84,7 +85,8 @@
               class="p-4 space-y-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6">
               <div class="text-center">
                 <p class="text-xl font-semibold text-gray-900 dark:text-white">{{ $t('cart.subtotal') }}</p>
-                <span class="text-xl font-semibold text-gray-900 dark:text-white">{{ totalAmount }}  {{ $t('products.le') }}</span>
+                <span class="text-xl font-semibold text-gray-900 dark:text-white">{{ totalAmount }} {{ $t('products.le')
+                  }}</span>
               </div>
               <nuxt-link to="/checkout" type="button" class="block w-full px-5 py-2 text-center btn-style">{{
                 $t('btn.proceed_to_checkout') }}</nuxt-link>
@@ -97,8 +99,6 @@
 </template>
 
 <script setup>
-import { useCartStore } from '@/stores/cartStore';
-
 const cartStore = useCartStore();
 const removingItem = ref(null);
 
@@ -118,8 +118,8 @@ const removeItem = async (docId) => {
   }
 };
 
-onMounted(async () => {
-  await cartStore.fetchCart();
+onMounted(() => {
+  cartStore.fetchCart();
 });
 
 const totalAmount = computed(() => {
@@ -142,9 +142,9 @@ const decrementQuantity = (item) => {
   }
 };
 
-const updateQuantityInStore = async (productId, newQuantity) => {
+const updateQuantityInStore = (productId, newQuantity) => {
   if (productId) {
-    await cartStore.updateQuantityInCart(productId, newQuantity);
+    cartStore.updateQuantityInCart(productId, newQuantity);
   }
 };
 </script>

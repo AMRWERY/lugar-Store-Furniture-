@@ -98,8 +98,6 @@
 </template>
 
 <script setup>
-import { useCartStore } from '@/stores/cartStore';
-
 const config = {
   itemsToShow: 3,
   wrapAround: true,
@@ -131,11 +129,11 @@ const selectedProduct = computed(() => {
   return store.products.find((product) => product.id === route.params.id);
 });
 
-onMounted(async () => {
+onMounted(() => {
   const productId = route.query.id;
   if (productId) {
     if (!store.products.length) {
-      await store.fetchProducts();
+       store.fetchProducts();
     }
     selectedProduct.value = store.products.find((product) => product.id === productId);
   }
@@ -237,10 +235,10 @@ const decrementQuantity = () => {
   }
 };
 
-const updateQuantityInStore = async (newQuantity) => {
+const updateQuantityInStore = (newQuantity) => {
   const productId = store.selectedProduct?.id;
   if (productId) {
-    await cartStore.updateQuantityInCart(productId, newQuantity);
+     cartStore.updateQuantityInCart(productId, newQuantity);
   }
 };
 </script>

@@ -46,7 +46,7 @@
               </div>
               <button type="button" @click="handleAddToCart(product)"
                 class="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300 w-full">
-                <div class="flex items-center justify-center" v-if="loadingProductId === product.id">
+                <div class="flex items-center justify-center" v-if="loadingProductId[product.id]">
                   <span class="text-center me-2">{{ $t('loading_btn.adding_to_cart') }}...</span>
                   <icon name="svg-spinners:270-ring-with-bg" />
                 </div>
@@ -75,26 +75,32 @@
 </template>
 
 <script setup>
-import { useCartStore } from '@/stores/cartStore';
-
 const store = useNewProductsStoreStore()
 const cartStore = useCartStore();
 const route = useRoute();
 const loading = ref(true);
 
-onMounted(async () => {
+onMounted(() => {
   const categoryId = route.query.categoryId;
   loading.value = true;
-  try {
-    if (categoryId) {
-      await store.fetchProductsByCategory(categoryId);
-    } else {
-      await store.fetchProducts();
-    }
-  } catch (error) {
-    console.error("Error fetching products:", error);
-  } finally {
-    loading.value = false;
+  if (categoryId) {
+    store.fetchProductsByCategory(categoryId)
+      .then(() => {
+        loading.value = false;
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        loading.value = false;
+      });
+  } else {
+    store.fetchProducts()
+      .then(() => {
+        loading.value = false;
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        loading.value = false;
+      });
   }
 });
 
@@ -120,14 +126,14 @@ const onPageChanged = (pageNumber) => {
 };
 
 const { t } = useI18n();
-const loadingProductId = ref(null);
+const loadingProductId = ref({});
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 const handleAddToCart = async (product) => {
   if (!product) return;
   try {
-    loadingProductId.value = product.id;
+    loadingProductId.value[product.id] = true;
     await cartStore.addToCart(
       product.id,
       product.title,
@@ -149,7 +155,7 @@ const handleAddToCart = async (product) => {
   } catch (error) {
     console.error("Error adding product to cart:", error);
   } finally {
-    loadingProductId.value = null;
+    loadingProductId.value[product.id] = false;
   }
 };
 </script>

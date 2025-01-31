@@ -78,13 +78,14 @@
 </template>
 
 <script setup>
-import { useCartStore } from '@/stores/cartStore';
-import { useCheckoutStore } from '@/stores/checkoutStore';
 import citiesData from "@/assets/country.json";
 
 const cities = citiesData.find((country) => country.country === "Egypt")?.cities || [];
 
 const cartStore = useCartStore();
+const checkoutStore = useCheckoutStore();
+const { t } = useI18n()
+const loading = ref(false);
 
 const subTotalAmount = computed(() => {
   return cartStore.cart.reduce((total, item) => {
@@ -110,15 +111,10 @@ const totalAmount = computed(() => {
   return total.toFixed(2);
 });
 
-onMounted(async () => {
-  await cartStore.fetchCart();
+onMounted(() => {
+   cartStore.fetchCart();
 });
 
-const { t } = useI18n()
-
-const loading = ref(false);
-
-const checkoutStore = useCheckoutStore();
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
 const submitCheckoutForm = async () => {
