@@ -9,7 +9,7 @@
                         <div class="carousel">
                             <!-- Slide -->
                             <div class="bg-white carousel-item dark:bg-gray-800" v-for="banner in filteredBanners"
-                                :key="banner">
+                                :key="banner.id">
                                 <img :src="banner?.fileUrl" class="object-cover w-full rounded-md h-96">
                             </div>
                         </div>
@@ -22,13 +22,13 @@
 
 <script setup>
 const bannersStore = useBannersStore();
-let filteredBanners = ref();
+let filteredBanners = ref([]);
 
 onMounted(async () => {
-    await bannersStore.fetchBanners().then(res => {
-        filteredBanners.value = bannersStore.banners.filter(banner => banner.visible);
-    })
-    // console.log('banners', filteredBanners.value);
+    await bannersStore.fetchBanners();
+    filteredBanners.value = bannersStore.banners.filter(banner => banner.visible && banner.selected);
+
+    console.log('Filtered Banners:', filteredBanners.value.length);
 });
 </script>
 

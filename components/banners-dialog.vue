@@ -59,39 +59,31 @@ const handleFileChange = (event) => {
   }
 };
 
-const uploadFile = async () => {
+const uploadFile = () => {
   loading.value = true;
   if (selectedFile.value) {
-    await bannerStore.addNewBanner(selectedFile.value)
+    bannerStore.addNewBanner(selectedFile.value)
       .then((createBanner) => {
-        // debugger;
-        // console.log("type of:", typeof createBanner);
         if (createBanner) {
           let response = JSON.parse(createBanner);
-          if (response && response?.success && response?.file_url) {
+          if (response?.success && response?.file_url) {
             loading.value = false;
             closeDialog();
-            bannerStore.uploadImageToBannerCollection(response?.file_url)
-              .then((docRef) => {
-                debugger;
-                closeDialog();
-                selectedFile.value = null;
-                previewImage.value = null;
-                // console.log("Banner saved to Firestore with ID:", docRef.id);
-              })
-              .catch((error) => {
-                loading.value = false;
-                console.error("Error during upload or saving:", error);
-              })
+            return bannerStore.uploadImageToBannerCollection(response.file_url);
           }
-        } else {
-          loading.value = false;
         }
+        return Promise.reject("Invalid response");
+      })
+      .then(() => bannerStore.fetchBanners())
+      .then(() => {
+        closeDialog();
+        selectedFile.value = null;
+        previewImage.value = null;
       })
       .catch((error) => {
         loading.value = false;
         console.error("Error during upload or saving:", error);
-      })
+      });
   }
 };
 

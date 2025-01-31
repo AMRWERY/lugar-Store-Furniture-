@@ -3,12 +3,11 @@ import { db } from "@/firebase/config";
 import {
   collection,
   addDoc,
-  deleteDoc,
   getDocs,
   doc,
   updateDoc,
   query,
-  where,
+  orderBy,
 } from "firebase/firestore";
 
 export const useBannersStore = defineStore("banners", {
@@ -20,28 +19,26 @@ export const useBannersStore = defineStore("banners", {
   }),
 
   actions: {
-    async fetchBanners() {
-      try {
-        const bannerRef = collection(db, "banners");
-        const bannerSnapshot = await getDocs(bannerRef);
-        const bannerList = bannerSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          fileUrl: doc.data().fileUrl,
-          // ...doc.data(),
-          // visible: false,
-          visible: doc.data().visible ?? false,
-          selected: doc.data().selected ?? false,
-          // selected: false,
-        }));
-        this.banners = bannerList;
-        // console.log("banners store", this.banners);
-        this.updatePagination();
-      } catch (error) {
-        console.error("Error fetching banners:", error);
-      }
+    fetchBanners() {
+      const bannerRef = collection(db, "banners");
+      const q = query(bannerRef, orderBy("timestamp", "desc"));
+      return getDocs(q)
+        .then((bannerSnapshot) => {
+          const bannerList = bannerSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            fileUrl: doc.data().fileUrl,
+            visible: doc.data().visible ?? false,
+            selected: doc.data().selected ?? false,
+          }));
+          this.banners = bannerList;
+          this.updatePagination();
+        })
+        .catch((error) => {
+          console.error("Error fetching banners:", error);
+        });
     },
 
-    async addNewBanner(file) {
+    addNewBanner(file) {
       const formData = new FormData();
       const timestamp = Date.now();
       const fileExtension = file.name.split(".").pop();
@@ -56,10 +53,9 @@ export const useBannersStore = defineStore("banners", {
       });
     },
 
-    async uploadImageToBannerCollection(file) {
-      this.banners.push(file);
+    uploadImageToBannerCollection(file) {
+      // this.banners.push(file);
       const bannerRef = collection(db, "banners");
-      // console.log("Preparing to add to Firestore...");
       return addDoc(bannerRef, {
         fileUrl: file,
         timestamp: new Date(),
@@ -69,12 +65,19 @@ export const useBannersStore = defineStore("banners", {
     },
 
     toggleVisibility(bannerId) {
-      // debugger;
       const banner = this.banners.find((banner) => banner.id === bannerId);
       if (banner) {
         banner.visible = !banner.visible;
-        const bannerRef = doc(db, "banners", banner.id);
-        updateDoc(bannerRef, { visible: banner.visible }).then(() => {});
+        banner.selected = !banner.selected;
+        const bannerRef = doc(db, "banners", bannerId);
+        updateDoc(bannerRef, {
+          visible: banner.visible,
+          selected: banner.selected,
+        }).catch((error) => {
+          console.error("Error updating visibility:", error);
+          banner.visible = !banner.visible;
+          banner.selected = !banner.selected;
+        });
       }
     },
 
