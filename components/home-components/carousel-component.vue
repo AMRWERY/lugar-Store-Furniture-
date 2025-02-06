@@ -1,13 +1,13 @@
-<template>
+<!-- <template>
     <div>
         <div class="text-gray-800 bg-gray-100 dark:bg-gray-900 dark:text-white">
             <ClientOnly>
                 <div class="mx-auto max-w-7xl">
-                    <!-- Carousel Wrapper -->
+                    Carousel Wrapper
                     <div class="overflow-hidden rounded-lg shadow-lg">
-                        <!-- Carousel -->
+                        Carousel
                         <div class="carousel">
-                            <!-- Slide -->
+                            Slide
                             <div class="bg-white carousel-item dark:bg-gray-800" v-for="banner in filteredBanners"
                                 :key="banner.id">
                                 <img :src="banner?.fileUrl" class="object-cover w-full rounded-md h-96">
@@ -75,4 +75,19 @@ onMounted(async () => {
 .carousel-item {
     flex: 0 0 100%;
 }
-</style>
+</style> -->
+
+<template>
+    <div>
+        <section class="flex items-center justify-center bg-gray-200 hover:bg-gray-400 transition-colors duration-300
+           h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px]">
+            <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl">
+                {{ $t('home.coming_soon') }}
+            </h1>
+        </section>
+    </div>
+</template>
+
+<script setup>
+
+</script>
