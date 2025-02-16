@@ -1,43 +1,62 @@
 <template>
   <div>
+    <!-- overlay Component -->
+    <overlay :visible="authStore.isOverlayVisible" />
+
     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div class="max-w-md mx-auto">
         <img src="@/assets/Lugar_Furniture_Logo.svg" class="mx-auto w-36 h-36" />
         <h1 class="text-2xl font-bold text-center text-black sm:text-3xl">
           {{ $t('form.get_started_today') }}
         </h1>
-        <ClientOnly>
-          <div class="p-4 mb-6 space-y-4 rounded-lg shadow-lg sm:p-6 lg:p-8">
-            <p class="text-lg font-medium text-center">{{ $t('form.sign_in_to_your_account') }}</p>
-            <div>
-              <dynamic-inputs v-model="data.email" :label="t('form.email')" :placeholder="t('form.enter_your_email')"
-                type="email" :validation="('required|email|ends_with:lugar.com')" :required="true" />
-            </div>
-            <div>
-              <dynamic-inputs v-model="data.password" :label="t('form.password')"
-                :placeholder="t('form.enter_your_password')" type="password"
-                :validation="'required|password'" :required="true" />
-            </div>
+        <p class="text-lg font-medium text-center">{{ $t('form.sign_in_to_your_account') }}</p>
 
-            <div class="mt-6">
-              <button type="submit" :disabled="loading" @click="signIn" class="block w-full px-4 py-2 btn-style">
-                <div class="flex items-center justify-center" v-if="loading">
-                  <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
-                  <icon name="svg-spinners:270-ring-with-bg" />
-                </div>
-                <span v-else>{{ $t('form.login') }}</span>
-              </button>
-
+        <form class="space-y-6" @submit.prevent="signIn">
+          <div>
+            <label for="email" class="block font-medium text-gray-900 text-sm/6">{{ $t('form.email') }}</label>
+            <div class="mt-2">
+              <input type="email" name="email" id="email" autocomplete="email"
+                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                v-model="data.email" />
             </div>
-            <div v-if="errorMessage" class="mt-2 text-sm text-center text-red-500">
-              {{ errorMessage }}
-            </div>
+            <p v-if="emailError" class="mt-1 text-sm font-semibold text-red-500">{{ emailError }}</p>
           </div>
-        </ClientOnly>
+
+          <div>
+            <div class="flex items-center justify-between">
+              <label for="password" class="block font-medium text-gray-900 text-sm/6">{{ $t('form.password') }}</label>
+            </div>
+            <div class="relative mt-2">
+              <input :type="showPassword ? 'text' : 'password'" name="password" id="password"
+                autocomplete="current-password"
+                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 pr-10"
+                v-model="data.password" />
+              <button type="button" class="absolute inset-y-0 flex items-center text-gray-500 end-3 hover:text-gray-700"
+                @click="togglePassword">
+                <icon :name="showPassword ? 'mdi:eye-off' : 'mdi:eye'" class="w-5 h-5" />
+              </button>
+            </div>
+            <p v-if="passwordError" class="mt-1 text-sm font-semibold text-red-500">{{ passwordError }}</p>
+          </div>
+
+          <div class="mt-6">
+            <button type="submit" :disabled="loading" class="block w-full px-4 py-2 btn-style">
+              <div class="flex items-center justify-center" v-if="loading">
+                <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
+                <icon name="svg-spinners:270-ring-with-bg" />
+              </div>
+              <span v-else>{{ $t('form.login') }}</span>
+            </button>
+
+          </div>
+          <div v-if="errorMessage" class="mt-2 text-sm text-center text-red-500">
+            {{ errorMessage }}
+          </div>
+        </form>
       </div>
     </div>
 
-    <!-- dynamic-toast component  -->
+    <!-- dynamic-toast component -->
     <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
       <div class="pointer-events-auto">
         <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
@@ -48,10 +67,9 @@
 </template>
 
 <script setup>
-const store = useAuthStore()
+const authStore = useAuthStore()
 const loading = ref(false);
 const errorMessage = ref('');
-const router = useRouter()
 const { t } = useI18n()
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
@@ -61,10 +79,30 @@ const data = ref({
   password: '',
 });
 
+const emailError = ref('');
+const passwordError = ref('');
+
+const validateForm = () => {
+  emailError.value = '';
+  passwordError.value = '';
+  if (!data.value.email) {
+    emailError.value = t('form.email_is_required');
+  } else if (!data.value.email.endsWith("@lugar.com")) {
+    emailError.value = t('form.email_must_end_with_lugar');
+  }
+  if (!data.value.password) {
+    passwordError.value = t('form.password_is_required');
+  }
+  return !emailError.value && !passwordError.value;
+};
+
 const signIn = async () => {
+  if (!validateForm()) {
+    return;
+  }
   loading.value = true;
   try {
-    await store.userSignIn({
+    await authStore.loginUser({
       email: data.value.email,
       password: data.value.password,
     });
@@ -75,18 +113,19 @@ const signIn = async () => {
       icon: 'mdi:check-circle',
     });
     setTimeout(() => {
-      router.replace('/products');
+      navigateTo('/products');
     }, 3000);
   } catch (error) {
-    if (error === 'Your account has been blocked.') {
-      errorMessage.value = t('form.account_blocked_please_contact_support');
-      // console.log(error)
-    } else {
-      errorMessage.value = t('form.login_failed_please_check_your_information_and_try_again');
-    }
+    errorMessage.value = t('toast.login_failed_please_check_your_information_and_try_again');
   } finally {
     loading.value = false;
   }
+};
+
+const showPassword = ref(false);
+
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
 };
 
 useHead({

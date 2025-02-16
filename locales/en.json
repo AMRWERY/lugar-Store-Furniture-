@@ -67,7 +67,10 @@
     "your_message": "Message",
     "enter_your_message": "Enter your message",
     "get_started_today": "Get started today",
-    "sign_in_to_your_account": "Sign in to your account"
+    "sign_in_to_your_account": "Sign in to your account",
+    "email_is_required": "Email is required",
+    "email_must_end_with_lugar": "Email must end with @lugar.com",
+    "password_is_required": "Password is required"
   },
   "btn": {
     "reset_password": "Reset Password",
@@ -418,7 +421,8 @@
     "your_message_sent_successfully": "Your message was sent successfully",
     "message_deleted": "Message deleted",
     "message_deletion_failed": "Message deletion failed",
-    "failed_to_update_product": "Failed to update product"
+    "failed_to_update_product": "Failed to update product",
+    "login_failed_please_check_your_information_and_try_again": "Login failed. Please check your information and try again"
   },
   "status": {
     "pending": "Pending",

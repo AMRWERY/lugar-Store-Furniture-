@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- overlay Component -->
+    <overlay :visible="localeStore.isOverlayVisible" />
+
     <div v-if="!isLoginPage">
       <header class="sticky inset-0 text-white bg-black h-14">
         <nav
@@ -41,21 +44,19 @@
 
             <ClientOnly>
               <nuxt-link to="/login" role="button" class="text-sm font-medium font-dm"
-                v-if="!store.isUserAuthenticated">{{ $t('layout.sign_in') }}</nuxt-link>
+                v-if="!authStore.isAuthenticated">{{ $t('layout.sign_in') }}</nuxt-link>
               <nuxt-link to="" role="button" class="text-sm font-medium font-dm" @click="logout"
-                v-if="store.isUserAuthenticated">{{ $t('btn.logout') }}</nuxt-link>
+                v-if="authStore.isAuthenticated">{{ $t('btn.logout') }}</nuxt-link>
             </ClientOnly>
 
-            <!-- Toggle Language -->
-            <nuxt-link class="text-white me-4" to="" role="button" v-if="isRTL"
-              @click="updateLocale('en'); changeLocale('en')">
-              <span class="[&>svg]:w-5">
+            <!-- toggle locales -->
+            <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-if="localeStore.isRTL">
+              <span class="[&>svg]:w-5" @click="setLocale('en')">
                 En
               </span>
             </nuxt-link>
-            <nuxt-link class="text-white me-4" to="" role="button" v-else
-              @click="updateLocale('ar'); changeLocale('ar')">
-              <span class="[&>svg]:w-5">
+            <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-else>
+              <span class="[&>svg]:w-5" @click="setLocale('ar')">
                 العربية
               </span>
             </nuxt-link>
@@ -101,61 +102,34 @@
           </div>
         </div>
       </nav>
-
-      <!-- overlay component -->
-      <overlay :visible="showOverlay" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { changeLocale } from '@formkit/vue'
+const localeStore = useLocaleStore();
+const cartStore = useCartStore();
+const authStore = useAuthStore()
+const route = useRoute();
+const { locale } = useI18n();
 
-const { locale, setLocale } = useI18n();
-const isRTL = ref(false);
-
-const updateLocale = (value) => {
-  setLocale(value);
-  changeLocale(value);
-  sessionStorage.setItem('locale', value);
-  isRTL.value = value === 'ar';
-  setTimeout(() => {
-    location.reload();
-  }, 1000);
+const setLocale = (value) => {
+  locale.value = value;
+  localeStore.updateLocale(value);
 };
 
-onMounted(() => {
-  const storedLocale = sessionStorage.getItem('locale') || 'en';
+computed(() => {
+  const storedLocale = localeStore.locale;
   setLocale(storedLocale);
-  changeLocale(storedLocale);
-  isRTL.value = storedLocale === 'ar';
 });
-
-watch(locale, (newVal) => {
-  isRTL.value = newVal === 'ar';
-});
-
-const showOverlay = ref(false);
-const store = useAuthStore()
 
 const logout = async () => {
   try {
-    showOverlay.value = true;
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    await store.logout();
-    sessionStorage.removeItem("isAuthenticated");
-  } catch (error) {
-    console.error("Logout error:", error);
-  } finally {
-    showOverlay.value = false;
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    await authStore.logoutUser();
+  } catch (err) {
+    console.error('Error during logout:', err);
   }
 };
 
-const route = useRoute();
 const isLoginPage = computed(() => route.path === '/login')
-
-const cartStore = useCartStore();
 </script>

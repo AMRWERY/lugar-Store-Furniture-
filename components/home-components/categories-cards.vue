@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div v-if="store.categories.length === 0">
+            <!-- skeleton-loader component -->
+            <skeleton-loader />
+        </div>
+        
         <div class="mx-auto my-12 max-w-7xl">
             <div class="flex space-x-4">
                 <nuxt-link class="relative w-1/5 cursor-pointer group transit" v-for="card in store.categories"

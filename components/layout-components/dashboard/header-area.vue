@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- overlay Component -->
+    <overlay :visible="localeStore.isOverlayVisible" />
+
     <header class="sticky top-0 flex w-full bg-white z-999 drop-shadow-1">
       <div class="flex items-center justify-between flex-grow px-4 py-4 shadow-2 md:px-6 2xl:px-11">
         <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
@@ -14,20 +17,18 @@
 
         <ClientOnly>
           <div class="flex ms-auto">
-            <nuxt-link class="me-4 text-neutral-600 dark:text-white" to="" role="button" v-if="isRTL"
-              @click="updateLocale('en'); changeLocale('en')">
-              <span class="[&>svg]:w-5">
+            <nuxt-link to="" class="font-semibold text-black me-4" role="button" v-if="localeStore.isRTL">
+              <span class="[&>svg]:w-5" @click="setLocale('en')">
                 En
               </span>
             </nuxt-link>
-            <nuxt-link class="me-4 text-neutral-600 dark:text-white" to="" role="button" v-else
-              @click="updateLocale('ar'); changeLocale('ar')">
-              <span class="[&>svg]:w-5">
+            <nuxt-link to="" class="font-semibold text-black me-4" role="button" v-else>
+              <span class="[&>svg]:w-5" @click="setLocale('ar')">
                 العربية
               </span>
             </nuxt-link>
 
-            <nuxt-link to="/login" v-if="!store.isUserAuthenticated" class="text-neutral-600 dark:text-white">{{
+            <nuxt-link to="/login" v-if="!authStore.isAuthenticated" class="text-neutral-600 dark:text-white">{{
               $t('form.login') }}</nuxt-link>
           </div>
         </ClientOnly>
@@ -37,38 +38,27 @@
 </template>
 
 <script setup>
-import { changeLocale } from '@formkit/vue'
-
 const { toggleSidebar } = useSidebarStore()
+const localeStore = useLocaleStore();
+const authStore = useAuthStore()
+const { locale } = useI18n();
 
-const { locale, setLocale } = useI18n();
-const isRTL = ref(false);
-
-const updateLocale = (value) => {
-  setLocale(value);
-  changeLocale(value);
-  sessionStorage.setItem('locale', value);
-  isRTL.value = value === 'ar';
-  setTimeout(() => {
-    location.reload();
-  }, 1000);
+const setLocale = (value) => {
+  locale.value = value;
+  localeStore.updateLocale(value);
 };
 
-onMounted(() => {
-  const storedLocale = sessionStorage.getItem('locale') || 'en';
+computed(() => {
+  const storedLocale = localeStore.locale;
   setLocale(storedLocale);
-  changeLocale(storedLocale);
-  isRTL.value = storedLocale === 'ar';
-});
-
-watch(locale, (newVal) => {
-  isRTL.value = newVal === 'ar';
 });
 
 //hide routes composable
 const { isAuthPage } = useAuthPage();
 
-const store = useAuthStore()
+onMounted(async () => {
+  await authStore.init();
+});
 
 onMounted(async () => {
   const { Tooltip, initTWE } = await import("tw-elements");

@@ -67,7 +67,10 @@
     "your_message": "رسالتك",
     "enter_your_message": "أدخل رسالتك",
     "get_started_today": "ابدأ اليوم",
-    "sign_in_to_your_account": "تسجيل الدخول إلى حسابك"
+    "sign_in_to_your_account": "تسجيل الدخول إلى حسابك",
+    "email_is_required": "البريد الإلكتروني مطلوب",
+    "email_must_end_with_lugar": "يجب أن ينتهي البريد الإلكتروني بـ @lugar.com",
+    "password_is_required": "كلمة المرور مطلوبة"
   },
   "btn": {
     "reset_password": "إعادة تعيين كلمة المرور",
@@ -419,7 +422,8 @@
     "your_message_sent_successfully": "تم ارسال رسالتك بنجاح",
     "message_deleted": "تم حذف الرسالة",
     "message_deletion_failed": "فشل في حذف الرسالة",
-    "failed_to_update_product": "فشل تحديث المنتج"
+    "failed_to_update_product": "فشل تحديث المنتج",
+    "login_failed_please_check_your_information_and_try_again": "فشل تسجيل الدخول. يرجى التحقق من معلوماتك والمحاولة مرة أخرى"
   },
   "status": {
     "pending": "قيد الانتظار",

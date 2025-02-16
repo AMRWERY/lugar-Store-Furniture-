@@ -1,5 +1,8 @@
 <template>
     <div>
+        <!-- overlay Component -->
+        <overlay :visible="authStore.isOverlayVisible" />
+
         <aside v-if="!isAuthPage"
             class="absolute left-0 top-0 z-50 flex h-screen w-[230px] flex-col overflow-y-hidden bg-black duration-300 ease-linear lg:static lg:translate-x-0"
             :class="{
@@ -39,9 +42,6 @@
                 </nuxt-link>
             </div>
         </aside>
-
-        <!-- overlay component -->
-        <overlay :visible="showOverlay" />
     </div>
 </template>
 
@@ -54,19 +54,14 @@ onClickOutside(target, () => {
     sidebarStore.isSidebarOpen = false
 })
 
-const store = useAuthStore()
+const authStore = useAuthStore()
 const showOverlay = ref(false);
 
 const logout = async () => {
     try {
-        showOverlay.value = true;
-        await new Promise((resolve) => setTimeout(resolve, 3000));
-        await store.logout();
-        sessionStorage.removeItem("isAuthenticated");
-    } catch (error) {
-        console.error("Logout error:", error);
-    } finally {
-        showOverlay.value = false;
+        await authStore.logoutUser();
+    } catch (err) {
+        console.error('Error during logout:', err);
     }
 };
 
