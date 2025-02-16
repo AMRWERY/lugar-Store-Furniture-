@@ -2,6 +2,8 @@
   <div>
     <carousel-component />
     <top-seller />
+    <items-delivery />
+    <special-offers />
     <categories-cards />
     <banner />
     <new-products />

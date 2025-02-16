@@ -3,6 +3,7 @@
     <NuxtLayout>
       <progress-bar />
       <NuxtPage />
+      <whatsapp-componenet />
       <scroll-to-top />
     </NuxtLayout>
   </div>
