@@ -1,11 +1,7 @@
-import { defineStore } from "pinia";
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-  // updatePassword,
-  getIdToken,
-  // onAuthStateChanged,
 } from "firebase/auth";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/config";
@@ -81,36 +77,9 @@ export const useAuthStore = defineStore("auth", {
           });
       });
     },
-
-    resetUserPassword(payload) {
-      return new Promise(async (resolve, reject) => {
-        const { email } = payload;
-        try {
-          await sendPasswordResetEmail(auth, email);
-          // console.log("Password reset email sent successfully.");
-          resolve("Success");
-        } catch (error) {
-          console.error("Failed to send password reset email:", error);
-          reject(error);
-        }
-      });
-    },
-
-    setWelcomeMessageVisibility(visible) {
-      this.showWelcomeMessage = visible;
-    },
-
-    setUserDetails({ firstName, lastName }) {
-      this.firstName = firstName;
-      this.lastName = lastName;
-    },
   },
 
   getters: {
-    getUsername: (state) => state.firstName,
-    getGoogleUsername: (state) => state.username,
-    getUserEmail: (state) => state.email,
-    getSuggestions: (state) => state.suggestions,
     isUserAuthenticated(state) {
       return (
         state.isAuthenticated ||
