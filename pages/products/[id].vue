@@ -171,17 +171,23 @@ const productId = route.params.id
 
 const product = ref({ title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', videoLink: '', titleAr: '', descriptionAr: '', categoryId: '', subCategoryId: '', productId: '' })
 
-onMounted(() => {
-   store.fetchCategories();
+onMounted(async () => {
+  // Fetch categories and sub-categories
+  await store.fetchCategories();
   categories.value = store.categories;
-   store.fetchSubCategories();
+  await store.fetchSubCategories();
   subCategories.value = store.subCategories;
 
+  // Fetch product details if productId exists
   if (productId) {
-    const productDetail = productStore.fetchProductDetail(productId);
-    product.value = productDetail;
-    selectedCategory.value = productDetail.categoryId;
-    selectedSubCategory.value = productDetail.subCategoryId;
+    const productDetail = await productStore.fetchProductDetail(productId);
+    if (productDetail) {
+      product.value = productDetail;
+      selectedCategory.value = productDetail.categoryId;
+      selectedSubCategory.value = productDetail.subCategoryId;
+    } else {
+      console.error("Product not found or an error occurred.");
+    }
   }
 });
 
