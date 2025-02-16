@@ -6,7 +6,6 @@
         </div>
 
         <div class="mx-auto my-12 max-w-7xl">
-            <!-- Grid container: 1 column by default, 3 on medium screens, 5 on large screens -->
             <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5">
                 <nuxt-link v-for="card in store.categories" :key="card.id"
                     :to="{ path: '/all-products', query: { categoryId: card.id } }" class="relative group transit">
