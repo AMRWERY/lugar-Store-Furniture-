@@ -276,7 +276,12 @@
     "top_seller": "الأكثر مبيعًا",
     "customer_choice": "اختيار العملاء",
     "24h_delivery_items": "منتجات للتوصيل خلال 24 ساعة",
-    "special_offers": "عروض خاصة"
+    "special_offers": "عروض خاصة",
+    "cash_on_delivery": "الدفع عند الاستلام",
+    "45_Day_return": "إرجاع خلال 45 يومًا",
+    "shop_with_confidence": "تسوق بثقة",
+    "guarantee": "ضمان",
+    "5_years_warranty": "ضمان لمدة 5 سنوات"
   },
   "tooltip": {
     "your_wishlist": "قائمة الرغبات الخاصة بك",

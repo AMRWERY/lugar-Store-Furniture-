@@ -2,6 +2,9 @@
     <div>
         <div class="max-w-full py-6 mx-auto space-y-6 sm:px-6 lg:px-8">
 
+            <!-- features componenet -->
+            <features />
+
             <!-- dynamic-products-carousel component -->
             <dynamic-products-carousel :config="config" :subCategoryTitle="'Top Seller'"
                 :title="$t('home.top_seller')" />
