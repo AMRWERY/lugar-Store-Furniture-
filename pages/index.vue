@@ -1,10 +1,10 @@
 <template>
   <div>
     <carousel-component />
-    <categories-cards />
-    <new-products />
-    <banner />
     <top-seller />
+    <categories-cards />
+    <banner />
+    <new-products />
     <customer-choice />
   </div>
 </template>
