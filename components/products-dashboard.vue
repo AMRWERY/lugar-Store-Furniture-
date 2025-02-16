@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="flex flex-col gap-4 p-4 sm:flex-row sm:gap-4">
-        <div class="w-full sm:w-1/4">
+      <div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-4">
+        <div>
           <label for="category" class="block mb-2 text-sm font-medium text-gray-700">
             {{ $t('form.category') }}
           </label>
@@ -10,16 +10,15 @@
             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <option value="" disabled selected>{{ $t('form.select_a_category') }}</option>
             <option value="">{{ $t('form.all_categories') }}</option>
-            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}
-            </option>
+            <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option>
           </select>
         </div>
 
-        <div class="w-full sm:w-1/4">
-          <label for="category" class="block mb-2 text-sm font-medium text-gray-700">
+        <div>
+          <label for="subcategory" class="block mb-2 text-sm font-medium text-gray-700">
             {{ $t('form.marketing_categories') }}
           </label>
-          <select id="category" v-model="selectedSubcategory" @change="applyFilter"
+          <select id="subcategory" v-model="selectedSubcategory" @change="applyFilter"
             class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             <option value="" disabled selected>{{ $t('form.select_marketing_category') }}</option>
             <option value="">{{ $t('form.all_marketing_categories') }}</option>
@@ -28,7 +27,7 @@
           </select>
         </div>
 
-        <div class="w-full sm:w-1/4">
+        <div>
           <label for="availability" class="block mb-2 text-sm font-medium text-gray-700">
             {{ $t('form.availability') }}
           </label>
@@ -40,13 +39,15 @@
           </select>
         </div>
 
-        <div class="flex items-end w-full sm:w-auto ms-auto">
-          <nuxt-link to="/products/add-product" type="button" class="flex items-center px-4 py-2.5 btn-style">
+        <div class="flex items-end justify-end">
+          <nuxt-link to="/products/add-product" type="button"
+            class="flex items-center px-4 py-2.5 btn-style w-full sm:w-auto justify-center">
             <icon name="ep:plus" class="w-5 h-5 me-2" />
             <span>{{ $t('btn.add_product') }}</span>
           </nuxt-link>
         </div>
       </div>
+
 
       <!-- Loading Spinner -->
       <!-- <div v-if="loading" class="flex items-center justify-center h-48 text-gray-600">

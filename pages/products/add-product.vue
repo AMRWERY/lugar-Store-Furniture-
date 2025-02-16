@@ -2,7 +2,7 @@
   <div>
     <div class="max-w-2xl px-8 py-6 mx-auto my-8 bg-white border rounded-lg">
       <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_product')
-        }}</h2>
+      }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
           <label for="main-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.category') }}</label>
@@ -15,7 +15,7 @@
 
         <div class="mb-4">
           <label for="sub-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.marketing_categories')
-            }}</label>
+          }}</label>
           <select id="sub-category" name="sub-category" v-model="selectedSubCategory"
             class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
             <option value="" disabled>{{ $t('form.select_marketing_category') }}</option>
@@ -107,7 +107,7 @@
 
         <div class="mb-4">
           <label for="original-price" class="block mb-2 font-medium text-gray-700">{{ $t('form.original_price')
-            }}</label>
+          }}</label>
           <input type="text" id="original-price" name="original-price" v-model="product.originalPrice"
             @input="(event) => handleInput(event, 'originalPrice')" @blur="() => handleBlur('originalPrice')"
             class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
@@ -188,7 +188,7 @@ const handleFileChange = (event) => {
         return Promise.reject(new Error('File size too large'));
       }
       return convertToBase64(file).then(base64Image => {
-        switch(index) {
+        switch (index) {
           case 0: product.value.imgOne = base64Image; break;
           case 1: product.value.imgTwo = base64Image; break;
           case 2: product.value.imgThree = base64Image; break;
@@ -197,11 +197,11 @@ const handleFileChange = (event) => {
       });
     });
   }, Promise.resolve())
-  .catch(error => {
-    if (!error.message.includes('Invalid') && !error.message.includes('size')) {
-      alert('File processing error: ' + error.message);
-    }
-  });
+    .catch(error => {
+      if (!error.message.includes('Invalid') && !error.message.includes('size')) {
+        alert('File processing error: ' + error.message);
+      }
+    });
 };
 
 // Convert image to base64
@@ -233,35 +233,35 @@ const handleSubmit = () => {
     }
     resolve();
   })
-  .then(() => {
-    return store.createProduct({
-      ...product.value,
-      categoryId: category.id,
-      subCategoryId: subCategory.id,
-    });
-  })
-  .then(() => {
-    triggerToast({
-      title: t('toast.success'),
-      message: t('toast.product_added_successfully'),
-      type: 'success',
-      icon: 'mdi:check-circle',
-    });
-    resetForm();
-  })
-  .catch((error) => {
-    if (error.message !== 'Validation failed') {
-      triggerToast({
-        title: t('toast.error'),
-        message: t('toast.something_went_wrong_please_try_again'),
-        type: 'error',
-        icon: 'mdi:alert-circle',
+    .then(() => {
+      return store.createProduct({
+        ...product.value,
+        categoryId: category.id,
+        subCategoryId: subCategory.id,
       });
-    }
-  })
-  .finally(() => {
-    loading.value = false;
-  });
+    })
+    .then(() => {
+      triggerToast({
+        title: t('toast.success'),
+        message: t('toast.product_added_successfully'),
+        type: 'success',
+        icon: 'mdi:check-circle',
+      });
+      resetForm();
+    })
+    .catch((error) => {
+      if (error.message !== 'Validation failed') {
+        triggerToast({
+          title: t('toast.error'),
+          message: t('toast.something_went_wrong_please_try_again'),
+          type: 'error',
+          icon: 'mdi:alert-circle',
+        });
+      }
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 };
 
 const isValidInstagramUrl = (url) => {
@@ -286,11 +286,11 @@ const resetForm = () => {
   selectedSubCategory.value = '';
 };
 
-onMounted( () => {
-   store.fetchCategories();
+onMounted(() => {
+  store.fetchCategories();
   categories.value = store.categories;
-  
-   store.fetchSubCategories();
+
+  store.fetchSubCategories();
   subCategories.value = store.subCategories;
 });
 
