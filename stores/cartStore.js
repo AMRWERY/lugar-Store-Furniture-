@@ -26,6 +26,7 @@ export const useCartStore = defineStore("cart", {
             ...doc.data(),
             quantity: doc.data().quantity || 1,
           }));
+          // console.log('cart data', this.cart)
         })
         .catch((error) => {
           console.error("Error fetching cart:", error);

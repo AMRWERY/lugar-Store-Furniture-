@@ -99,6 +99,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
           ...doc.data(),
         }));
         this.updatePagination();
+        // console.log("Fetched sub categories:", this.subCategories);
       } catch (error) {
         console.error("Error fetching subcategories:", error);
       }

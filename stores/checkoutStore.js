@@ -119,6 +119,7 @@ export const useCheckoutStore = defineStore("checkout", {
       try {
         const querySnapshot = await getDocs(collection(db, "checkout"));
         this.totalCheckouts = querySnapshot.size;
+        // console.log('orders', this.orders)
       } catch (e) {
         console.error("Error fetching total checkouts: ", e);
       }

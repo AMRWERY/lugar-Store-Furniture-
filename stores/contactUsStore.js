@@ -46,7 +46,7 @@ export const useContactStore = defineStore("contact", {
           ...doc.data(),
         }));
         this.messages = messages;
-        // console.log(messages);
+        // console.log('messages', messages);
         this.updatePagination();
       } catch (e) {
         // console.log("Error fetching messages: ", e);
