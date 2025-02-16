@@ -132,4 +132,8 @@ const logout = async () => {
 };
 
 const isLoginPage = computed(() => route.path === '/login')
+
+onMounted(async () => {
+  await authStore.init();
+});
 </script>
