@@ -1,14 +1,3 @@
-import { defineStore } from "pinia";
-import { db } from "@/firebase/config";
-import {
-  collection,
-  getDocs,
-  addDoc,
-  doc,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
-
 export const useCategoriesStore = defineStore("categoriesStore", {
   state: () => ({
     categories: [],
@@ -92,15 +81,6 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         throw error;
       }
     },
-    // async updateCategory(categoryId, updatedData) {
-    //   try {
-    //     const categoryDoc = doc(db, "categories", categoryId);
-    //     await updateDoc(categoryDoc, updatedData);
-    //   } catch (error) {
-    //     // console.error("Error updating category:", error);
-    //     throw error;
-    //   }
-    // },
 
     async addCategory(title, titleAr, imgOne) {
       try {
@@ -151,19 +131,6 @@ export const useCategoriesStore = defineStore("categoriesStore", {
       }
     },
 
-    // async deleteCategory(categoryId) {
-    //   try {
-    //     const categoryDoc = doc(db, "categories", categoryId);
-    //     await deleteDoc(categoryDoc);
-    //     this.categories = this.categories.filter(
-    //       (category) => category.id !== categoryId
-    //     );
-    //     this.updatePagination();
-    //   } catch (error) {
-    //     console.error("Error deleting category:", error);
-    //   }
-    // },
-
     async fetchSubCategories() {
       try {
         const config = useRuntimeConfig();
@@ -179,13 +146,6 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     async updateMarketCategory(categoryId, updatedData) {
-      // try {
-      //   const marketCategoryDoc = doc(db, "subCategories", categoryId);
-      //   await updateDoc(marketCategoryDoc, updatedData);
-      // } catch (error) {
-      //   // console.error("Error updating sub category:", error);
-      //   throw error;
-      // }
       try {
         const config = useRuntimeConfig();
         const endpoint =
