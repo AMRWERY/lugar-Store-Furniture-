@@ -5,7 +5,7 @@
       <form @submit.prevent="handleAddCategory">
         <div class="mb-4">
           <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.category_title')
-            }}</label>
+          }}</label>
           <input id="category-title" type="text" v-model="newCategoryTitle"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_category_title')" required />
@@ -13,7 +13,7 @@
 
         <div class="mb-4">
           <label for="category-title" class="block text-sm font-medium text-gray-700">{{ $t('form.category_title_ar')
-            }}</label>
+          }}</label>
           <input id="category-title" type="text" v-model="newCategoryTitleAr"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_category_title_ar')" required />
@@ -31,7 +31,8 @@
                       <span class="block font-normal text-gray-400">{{ $t('form.attach_your_files_here') }}</span>
                     </div>
                   </div>
-                  <input type="file" class="w-full h-full opacity-0" @change="handleImageUpload">
+                  <input type="file" ref="fileInput" id="fileInput" class="w-full h-full opacity-0"
+                    @change="uploadFile">
                 </div>
               </div>
             </div>
@@ -62,36 +63,68 @@
 </template>
 
 <script setup>
-import { useCategoriesStore } from '@/stores/categoriesStore';
-
 const store = useCategoriesStore();
 const loadingOne = ref(false);
 const newCategoryTitle = ref('');
 const newCategoryTitleAr = ref('');
 const previewImage = ref("");
-const selectedImageBase64 = ref("");
+const uploadedImageUrl = ref('');
+const fileInput = ref(null);
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 const { t } = useI18n()
 
-const handleImageUpload = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      selectedImageBase64.value = e.target.result;
-      previewImage.value = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  } else {
-    previewImage.value = "";
+async function uploadFile() {
+  if (!fileInput.value) {
+    // console.error("File input element not found");
+    return;
   }
-};
+  const file = fileInput.value.files[0];
+  if (!file) {
+    alert('Please select a file.');
+    return;
+  }
+  const formData = new FormData();
+  formData.append('fileToUpload', file);
+  try {
+    const config = useRuntimeConfig();
+    const uploadEndpoint = config.public.uploadImgApiEndpoint;
+    const response = await fetch(uploadEndpoint, {
+      method: 'POST',
+      body: formData
+    });
+    const result = await response.json();
+    const responseEl = document.getElementById('response');
+    if (responseEl) {
+      responseEl.innerText = JSON.stringify(result, null, 2);
+    }
+    if (result.success) {
+      triggerToast({
+        title: t('toast.great'),
+        message: t('toast.image_uploaded_successfully'),
+        type: 'success',
+        icon: 'mdi:check-circle',
+      });
+      uploadedImageUrl.value = result.file_url;
+      previewImage.value = result.file_url;
+    } else {
+      alert('Error: ' + result.message);
+    }
+  } catch (error) {
+    // console.error('Error uploading file:', error);
+    triggerToast({
+      title: t('toast.error'),
+      message: t('toast.faield_to_upload_image'),
+      type: 'error',
+      icon: 'mdi:alert-circle',
+    });
+  }
+}
 
 const handleAddCategory = async () => {
   loadingOne.value = true;
-  if (newCategoryTitle.value.trim() && selectedImageBase64.value) {
-    await store.addCategory(newCategoryTitle.value.trim(), newCategoryTitleAr.value.trim(), selectedImageBase64.value);
+  if (newCategoryTitle.value.trim() && uploadedImageUrl.value) {
+    await store.addCategory(newCategoryTitle.value.trim(), newCategoryTitleAr.value.trim(), uploadedImageUrl.value);
     triggerToast({
       title: t('toast.great'),
       message: t('toast.category_added_successfully'),
@@ -100,7 +133,7 @@ const handleAddCategory = async () => {
     });
     newCategoryTitle.value = '';
     newCategoryTitleAr.value = '';
-    selectedImageBase64.value = '';
+    uploadedImageUrl.value = '';
   }
   loadingOne.value = false;
 };

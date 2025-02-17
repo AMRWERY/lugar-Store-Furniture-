@@ -23,13 +23,26 @@ export const useCategoriesStore = defineStore("categoriesStore", {
   }),
 
   actions: {
+    // async fetchCategories() {
+    //   try {
+    //     const querySnapshot = await getDocs(collection(db, "categories"));
+    //     this.categories = querySnapshot.docs.map((doc) => ({
+    //       id: doc.id,
+    //       ...doc.data(),
+    //     }));
+    //     this.updatePagination();
+    //     // console.log("Fetched categories:", this.categories);
+    //   } catch (error) {
+    //     console.error("Error fetching categories:", error);
+    //   }
+    // },
     async fetchCategories() {
       try {
-        const querySnapshot = await getDocs(collection(db, "categories"));
-        this.categories = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.categoriesApiEndpoint + "get_categories.php";
+        const response = await $fetch(endpoint, { responseType: "json" });
+        this.categories = response;
         this.updatePagination();
         // console.log("Fetched categories:", this.categories);
       } catch (error) {
@@ -65,31 +78,80 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     async addCategory(title, titleAr, imgOne) {
       try {
-        const docRef = await addDoc(collection(db, "categories"), {
-          title,
-          titleAr,
-          imgOne,
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.categoriesApiEndpoint + "add_category.php";
+        const response = await $fetch(endpoint, {
+          method: "POST",
+          body: { title, titleAr, imgOne },
+          responseType: "json",
         });
-        const newCategory = { id: docRef.id, title, titleAr, imgOne };
+        const newCategory = { id: response.id, title, titleAr, imgOne };
         this.categories.push(newCategory);
-        // console.log("Category added:", newCategory);
+        this.updatePagination();
+        console.log("Category added:", newCategory);
       } catch (error) {
         console.error("Error adding category:", error);
       }
     },
 
+    // async addCategory(title, titleAr, imgOne) {
+    //   try {
+    //     const docRef = await addDoc(collection(db, "categories"), {
+    //       title,
+    //       titleAr,
+    //       imgOne,
+    //     });
+    //     const newCategory = { id: docRef.id, title, titleAr, imgOne };
+    //     this.categories.push(newCategory);
+    //     // console.log("Category added:", newCategory);
+    //   } catch (error) {
+    //     console.error("Error adding category:", error);
+    //   }
+    // },
+
     async deleteCategory(categoryId) {
       try {
-        const categoryDoc = doc(db, "categories", categoryId);
-        await deleteDoc(categoryDoc);
-        this.categories = this.categories.filter(
-          (category) => category.id !== categoryId
-        );
-        this.updatePagination();
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.categoriesApiEndpoint + "delete_category.php";
+        const response = await $fetch(endpoint, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: categoryId }),
+          responseType: "json",
+        });
+        if (response.success) {
+          this.categories = this.categories.filter(
+            (category) => category.id !== categoryId
+          );
+          this.updatePagination();
+          console.log("Category deleted successfully");
+        } else {
+          console.error(
+            "API error during deletion:",
+            response.error || response.message || response
+          );
+        }
       } catch (error) {
         console.error("Error deleting category:", error);
       }
     },
+
+    // async deleteCategory(categoryId) {
+    //   try {
+    //     const categoryDoc = doc(db, "categories", categoryId);
+    //     await deleteDoc(categoryDoc);
+    //     this.categories = this.categories.filter(
+    //       (category) => category.id !== categoryId
+    //     );
+    //     this.updatePagination();
+    //   } catch (error) {
+    //     console.error("Error deleting category:", error);
+    //   }
+    // },
 
     async fetchSubCategories() {
       try {

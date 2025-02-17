@@ -47,21 +47,21 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  runtimeConfig: {
+    // Private variables (server only) go here
+    // ...
+    public: {
+      // Variables available on both client and server
+      categoriesApiEndpoint: process.env.NUXT_PUBLIC_CATEGORIES_API_ENDPOINT,
+      uploadImgApiEndpoint: process.env.NUXT_PUBLIC_UPLOAD_IMG_API_ENDPOINT,
+    },
+  },
   app: {
     head: {
       title: "Lugar Store",
-      script: [
-        {
-          // src: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js",
-        },
-      ],
+      script: [{}],
       noscript: [],
-      link: [
-        {
-          // rel: "stylesheet",
-          // href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
-        },
-      ],
+      link: [{}],
       meta: [
         {
           name: "viewport",

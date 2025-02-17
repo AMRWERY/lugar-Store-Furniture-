@@ -410,7 +410,9 @@
     "message_deleted": "Message deleted",
     "message_deletion_failed": "Message deletion failed",
     "failed_to_update_product": "Failed to update product",
-    "login_failed_please_check_your_information_and_try_again": "Login failed. Please check your information and try again"
+    "login_failed_please_check_your_information_and_try_again": "Login failed. Please check your information and try again",
+    "image_uploaded_successfully": "Image uploaded successfully",
+    "faield_to_upload_image": "Faield to upload image"
   },
   "status": {
     "pending": "Pending",

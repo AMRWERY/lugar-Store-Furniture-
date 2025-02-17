@@ -411,7 +411,9 @@
     "message_deleted": "تم حذف الرسالة",
     "message_deletion_failed": "فشل في حذف الرسالة",
     "failed_to_update_product": "فشل تحديث المنتج",
-    "login_failed_please_check_your_information_and_try_again": "فشل تسجيل الدخول. يرجى التحقق من معلوماتك والمحاولة مرة أخرى"
+    "login_failed_please_check_your_information_and_try_again": "فشل تسجيل الدخول. يرجى التحقق من معلوماتك والمحاولة مرة أخرى",
+    "image_uploaded_successfully": "تم تحميل الصورة بنجاح",
+    "faield_to_upload_image": "فشل تحميل الصورة"
   },
   "status": {
     "pending": "قيد الانتظار",
