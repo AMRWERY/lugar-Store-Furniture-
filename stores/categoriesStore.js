@@ -16,26 +16,13 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     paginatedCategories: [],
     paginatedSubcategories: [],
     currentPage: 1,
-    categoriesPerPage: 4,
-    subcategoriesPerPage: 4,
+    categoriesPerPage: 5,
+    subcategoriesPerPage: 6,
     currentCategory: null,
     currentMarketCategory: null,
   }),
 
   actions: {
-    // async fetchCategories() {
-    //   try {
-    //     const querySnapshot = await getDocs(collection(db, "categories"));
-    //     this.categories = querySnapshot.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     this.updatePagination();
-    //     // console.log("Fetched categories:", this.categories);
-    //   } catch (error) {
-    //     console.error("Error fetching categories:", error);
-    //   }
-    // },
     async fetchCategories() {
       try {
         const config = useRuntimeConfig();
@@ -52,12 +39,16 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     async fetchCategoryDetails(categoryId) {
       try {
-        const querySnapshot = await getDocs(collection(db, "categories"));
-        const category = querySnapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .find((cat) => cat.id === categoryId);
-        if (category) {
-          this.currentCategory = category;
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.categoriesApiEndpoint +
+          "get_category.php?id=" +
+          encodeURIComponent(categoryId);
+        const response = await $fetch(endpoint, { responseType: "json" });
+        if (response) {
+          // Assuming the API returns the category object
+          this.currentCategory = response;
+          // console.log("Fetched category details:", response);
         } else {
           console.error(`Category with ID ${categoryId} not found.`);
         }
@@ -68,13 +59,48 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     async updateCategory(categoryId, updatedData) {
       try {
-        const categoryDoc = doc(db, "categories", categoryId);
-        await updateDoc(categoryDoc, updatedData);
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.categoriesApiEndpoint + "update_category.php";
+        const response = await $fetch(endpoint, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: categoryId, ...updatedData }),
+          responseType: "json",
+        });
+        if (response.success) {
+          const index = this.categories.findIndex(
+            (category) => category.id === categoryId
+          );
+          if (index !== -1) {
+            this.categories[index] = {
+              ...this.categories[index],
+              ...updatedData,
+            };
+          }
+          console.log("Category updated successfully");
+        } else {
+          console.error(
+            "API error during update:",
+            response.error || response.message || response
+          );
+        }
       } catch (error) {
-        // console.error("Error updating category:", error);
+        console.error("Error updating category:", error);
         throw error;
       }
     },
+    // async updateCategory(categoryId, updatedData) {
+    //   try {
+    //     const categoryDoc = doc(db, "categories", categoryId);
+    //     await updateDoc(categoryDoc, updatedData);
+    //   } catch (error) {
+    //     // console.error("Error updating category:", error);
+    //     throw error;
+    //   }
+    // },
 
     async addCategory(title, titleAr, imgOne) {
       try {
@@ -94,21 +120,6 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         console.error("Error adding category:", error);
       }
     },
-
-    // async addCategory(title, titleAr, imgOne) {
-    //   try {
-    //     const docRef = await addDoc(collection(db, "categories"), {
-    //       title,
-    //       titleAr,
-    //       imgOne,
-    //     });
-    //     const newCategory = { id: docRef.id, title, titleAr, imgOne };
-    //     this.categories.push(newCategory);
-    //     // console.log("Category added:", newCategory);
-    //   } catch (error) {
-    //     console.error("Error adding category:", error);
-    //   }
-    // },
 
     async deleteCategory(categoryId) {
       try {
@@ -155,70 +166,129 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     async fetchSubCategories() {
       try {
-        const querySnapshot = await getDocs(collection(db, "subCategories"));
-        this.subCategories = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.subCategoriesApiEndpoint + "get_subcategories.php";
+        const response = await $fetch(endpoint, { responseType: "json" });
+        this.subCategories = response;
         this.updatePagination();
         // console.log("Fetched sub categories:", this.subCategories);
       } catch (error) {
-        console.error("Error fetching subcategories:", error);
+        console.error("Error fetching sub categories:", error);
       }
     },
 
     async updateMarketCategory(categoryId, updatedData) {
+      // try {
+      //   const marketCategoryDoc = doc(db, "subCategories", categoryId);
+      //   await updateDoc(marketCategoryDoc, updatedData);
+      // } catch (error) {
+      //   // console.error("Error updating sub category:", error);
+      //   throw error;
+      // }
       try {
-        const marketCategoryDoc = doc(db, "subCategories", categoryId);
-        await updateDoc(marketCategoryDoc, updatedData);
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.subCategoriesApiEndpoint + "update_subcategory.php";
+        const response = await $fetch(endpoint, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: categoryId, ...updatedData }),
+          responseType: "json",
+        });
+        if (response.success) {
+          const index = this.categories.findIndex(
+            (category) => category.id === categoryId
+          );
+          if (index !== -1) {
+            this.subCategories[index] = {
+              ...this.subCategories[index],
+              ...updatedData,
+            };
+          }
+          console.log("sub Category updated successfully");
+        } else {
+          console.error(
+            "API error during update:",
+            response.error || response.message || response
+          );
+        }
       } catch (error) {
-        // console.error("Error updating category:", error);
+        console.error("Error updating category:", error);
         throw error;
       }
     },
 
     async fetchCMarketCategoryDetails(marketCategoryId) {
       try {
-        const querySnapshot = await getDocs(collection(db, "subCategories"));
-        const marketCategory = querySnapshot.docs
-          .map((doc) => ({ id: doc.id, ...doc.data() }))
-          .find((cat) => cat.id === marketCategoryId);
-        if (marketCategory) {
-          this.currentMarketCategory = marketCategory;
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.subCategoriesApiEndpoint +
+          "get_subcategory.php?id=" +
+          encodeURIComponent(marketCategoryId);
+        const response = await $fetch(endpoint, { responseType: "json" });
+        if (Array.isArray(response) && response.length > 0) {
+          this.currentMarketCategory = response[0];
         } else {
-          console.error(
-            `Marketing Category with ID ${marketCategoryId} not found.`
-          );
+          this.currentMarketCategory = response;
         }
+        // console.log(
+        //   "Fetched sub category details:",
+        //   this.currentMarketCategory
+        // );
       } catch (error) {
-        console.error("Error fetching Marketing Category details:", error);
+        console.error("Error fetching sub category details:", error);
       }
     },
 
     async deleteMarketCategory(marketCategoryId) {
       try {
-        const categoryDoc = doc(db, "subCategories", marketCategoryId);
-        await deleteDoc(categoryDoc);
-        this.subCategories = this.subCategories.filter(
-          (marketCategory) => marketCategory.id !== marketCategoryId
-        );
-        this.updatePagination();
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.subCategoriesApiEndpoint + "delete_subcategory.php";
+        const response = await $fetch(endpoint, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: marketCategoryId }),
+          responseType: "json",
+        });
+        if (response.success) {
+          this.subCategories = this.subCategories.filter(
+            (marketCategory) => marketCategory.id !== marketCategoryId
+          );
+          this.updatePagination();
+          console.log("sub Category deleted successfully");
+        } else {
+          console.error(
+            "API error during deletion:",
+            response.error || response.message || response
+          );
+        }
       } catch (error) {
-        console.error("Error deleting market category:", error);
+        console.error("Error deleting sub category:", error);
       }
     },
 
     async addSubCategory(title, titleAr) {
       try {
-        const docRef = await addDoc(collection(db, "subCategories"), {
-          title,
-          titleAr,
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.subCategoriesApiEndpoint + "create_subcategory.php";
+        const response = await $fetch(endpoint, {
+          method: "POST",
+          body: { title, titleAr },
+          responseType: "json",
         });
-        const newSubCategory = { id: docRef.id, title, titleAr };
+        const newSubCategory = { id: response.id, title, titleAr };
         this.subCategories.push(newSubCategory);
-        // console.log("Subcategory added:", newSubCategory);
+        this.updatePagination();
+        console.log("sub Category added:", newSubCategory);
       } catch (error) {
-        console.error("Error adding subcategory:", error);
+        console.error("Error adding sub category:", error);
       }
     },
 

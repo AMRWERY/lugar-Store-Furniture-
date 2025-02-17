@@ -53,6 +53,8 @@ export default defineNuxtConfig({
     public: {
       // Variables available on both client and server
       categoriesApiEndpoint: process.env.NUXT_PUBLIC_CATEGORIES_API_ENDPOINT,
+      subCategoriesApiEndpoint:
+        process.env.NUXT_PUBLIC_SUB_CATEGORIES_API_ENDPOINT,
       uploadImgApiEndpoint: process.env.NUXT_PUBLIC_UPLOAD_IMG_API_ENDPOINT,
     },
   },
