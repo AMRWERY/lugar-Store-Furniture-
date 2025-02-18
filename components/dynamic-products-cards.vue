@@ -17,7 +17,7 @@
                   <div class="relative w-full h-full">
                     <img class="absolute top-0 object-cover w-full h-full transition-all duration-500 ease-in-out end-0"
                       :src="card.imgOne" />
-                    <img
+                    <img v-if="card.imgTwo"
                       class="absolute top-0 object-cover w-full h-full transition-all duration-500 ease-in-out opacity-0 end-0 group-hover:opacity-100"
                       :src="card.imgTwo" />
                   </div>

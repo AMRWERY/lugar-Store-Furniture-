@@ -10,12 +10,8 @@
 </template>
 
 <script setup>
-// tailwind-elements referance
-
-// onMounted(async () => {
-//   const { Tooltip, initTWE } = await import("tw-elements");
-//   initTWE({ Tooltip });
-// });
+// Use SSR-safe IDs for Headless UI
+provideHeadlessUseId(() => useId())
 
 useHead({
   titleTemplate: 'Lugar Store',

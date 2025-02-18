@@ -278,8 +278,6 @@
     "order_status_updated": "Order status Updated",
     "failed_to_update_order": "Failed to update order",
     "delete_order": "Delete Order",
-    "order_deleted": "Order deleted",
-    "order_deletion_failed": "Order deletion failed",
     "delete_message": "Delete Message"
   },
   "cart": {
@@ -359,7 +357,9 @@
     "faield_to_upload_image": "Faield to upload image",
     "category_add_failed": "Category add failed",
     "failed_to_delete_category": "Failed to delete category",
-    "failed_to_delete_market_category": "Failed to delete market category"
+    "failed_to_delete_market_category": "Failed to delete market category",
+    "order_deleted": "Order deleted",
+    "order_deletion_failed": "Order deletion failed"
   },
   "products": {
     "products": "Products",

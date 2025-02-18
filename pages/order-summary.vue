@@ -109,9 +109,4 @@ const { t } = useI18n()
 useHead({
   titleTemplate: () => t("head.order_summary"),
 });
-
-onMounted(async () => {
-  const { Tooltip, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip });
-});
 </script>

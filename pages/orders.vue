@@ -136,9 +136,7 @@
                         <td class="p-4 py-5">
                             <button type="button" @click="deleteOrder(order.id)">
                                 <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="order.loading" />
-                                <icon name="material-symbols:delete-sharp" class="text-red-700"
-                                    data-twe-toggle="tooltip" data-twe-placement="top"
-                                    :title="$t('tooltip.delete_order')" v-else />
+                                <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
                             </button>
                         </td>
                     </tr>
@@ -264,14 +262,14 @@ const deleteOrder = async (orderId) => {
         checkoutStore.paginatedOrders = checkoutStore.paginatedOrders.filter(order => order.id !== orderId);
         triggerToast({
             title: t('toast.great'),
-            message: t('tooltip.order_deleted'),
+            message: t('toast.order_deleted'),
             type: 'success',
             icon: 'mdi:check-circle',
         });
     } catch (error) {
         triggerToast({
             title: t('toast.error'),
-            message: t('tooltip.order_deletion_failed'),
+            message: t('toast.order_deletion_failed'),
             type: 'error',
             icon: 'mdi:alert-circle',
         });
@@ -291,11 +289,6 @@ const getStatusTitle = (statusId) => {
 }
 
 const { t } = useI18n()
-
-onMounted(async () => {
-    const { Tooltip, initTWE } = await import("tw-elements");
-    initTWE({ Tooltip });
-});
 
 definePageMeta({
     layout: 'dashboard'

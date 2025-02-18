@@ -60,13 +60,11 @@
             </td>
             <td class="p-4 py-5 text-center">
               <div class="flex items-center justify-center space-s-4">
-                <nuxt-link :to="'/categories/' + category.id" type="button" class="rounded-full"
-                  data-twe-toggle="tooltip" data-twe-placement="top" :title="$t('tooltip.edit_category')">
+                <nuxt-link :to="'/categories/' + category.id" type="button" class="rounded-full">
                   <icon name="ep:edit" class="w-6 h-6 text-gray-600" />
                 </nuxt-link>
 
-                <button type="button" class="rounded-full" data-twe-toggle="tooltip" data-twe-placement="top"
-                  :title="$t('tooltip.delete_category')" @click="handleDeleteCategory(category.id)">
+                <button type="button" class="rounded-full" @click="handleDeleteCategory(category.id)">
                   <icon v-if="deleteCat === category.id" name="svg-spinners:6-dots-rotate" size="20px"
                     class="text-red-500" />
                   <icon name="ep:delete" class="w-6 h-6 text-red-600" v-else />
@@ -148,11 +146,6 @@ const handleDeleteCategory = (categoryId) => {
 };
 
 const { t } = useI18n()
-
-onMounted(async () => {
-  const { Tooltip, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip });
-});
 
 definePageMeta({
   layout: 'dashboard'

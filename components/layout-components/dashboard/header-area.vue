@@ -59,9 +59,4 @@ const { isAuthPage } = useAuthPage();
 onMounted(async () => {
   await authStore.init();
 });
-
-onMounted(async () => {
-  const { Tooltip, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip });
-});
 </script>

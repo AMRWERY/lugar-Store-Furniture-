@@ -59,13 +59,11 @@
                         <td class="p-4 py-5 text-center">
                             <div class="flex items-center justify-center space-s-4">
                                 <nuxt-link :to="'/marketing-categories/' + subcategory.id" type="button"
-                                    class="rounded-full" data-twe-toggle="tooltip" data-twe-placement="top"
-                                    :title="$t('tooltip.edit_marketing_category')">
+                                    class="rounded-full">
                                     <icon name="ep:edit" class="w-6 h-6 text-gray-600" />
                                 </nuxt-link>
 
-                                <button type="button" class="rounded-full" data-twe-toggle="tooltip"
-                                    data-twe-placement="top" :title="$t('tooltip.delete_marketing_category')"
+                                <button type="button" class="rounded-full"
                                     @click="handleDeleteMarketCategory(subcategory.id)">
                                     <icon v-if="deleteCat === subcategory.id" name="svg-spinners:6-dots-rotate"
                                         size="20px" class="text-red-500" />
@@ -149,11 +147,6 @@ const handleDeleteMarketCategory = (marketCategoryId) => {
             });
         });
 };
-
-onMounted(async () => {
-    const { Tooltip, initTWE } = await import("tw-elements");
-    initTWE({ Tooltip });
-});
 
 definePageMeta({
     layout: 'dashboard'

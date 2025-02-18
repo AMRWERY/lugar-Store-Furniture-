@@ -7,7 +7,6 @@ export default {
     "./plugins/**/*.{js,ts}",
     "./app.vue",
     "./error.vue",
-    "./node_modules/tw-elements/js/**/*.js",
   ],
   theme: {
     extend: {},
@@ -22,6 +21,5 @@ export default {
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/container-queries"),
     require("tailwindcss-rtl"),
-    require("tw-elements/plugin.cjs"),
   ],
 };

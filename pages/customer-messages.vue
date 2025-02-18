@@ -95,8 +95,7 @@
             <td class="p-4 py-5">
               <button type="button" @click="deleteMessage(message.id)">
                 <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="message.loading" />
-                <icon name="material-symbols:delete-sharp" class="text-red-700" data-twe-toggle="tooltip"
-                  data-twe-placement="top" :title="$t('tooltip.delete_message')" v-else />
+                <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
               </button>
             </td>
           </tr>
@@ -209,11 +208,6 @@ const filterOrdersByDate = () => {
   });
   store.paginatedMessages = filteredMessages;
 };
-
-onMounted(async () => {
-  const { Tooltip, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip });
-});
 
 definePageMeta({
   layout: 'dashboard'

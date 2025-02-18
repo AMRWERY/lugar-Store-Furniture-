@@ -283,8 +283,6 @@
     "order_status_updated": "تم تحديث حالة الطلب",
     "failed_to_update_order": "فشل في تحديث الطلب",
     "delete_order": "مسح الطلب",
-    "order_deleted": "تم مسح الطلب",
-    "order_deletion_failed": "فشل مسح الطلب",
     "delete_message": "حذف الرسالة"
   },
   "cart": {
@@ -364,7 +362,9 @@
     "faield_to_upload_image": "فشل تحميل الصورة",
     "category_add_failed": "فشل إضافة الفئة",
     "failed_to_delete_category": "فشل حذف الفئة",
-    "failed_to_delete_market_category": "فشل حذف فئة التسويق"
+    "failed_to_delete_market_category": "فشل حذف فئة التسويق",
+    "order_deleted": "تم مسح الطلب",
+    "order_deletion_failed": "فشل مسح الطلب"
   },
   "products": {
     "products": "المنتجات",

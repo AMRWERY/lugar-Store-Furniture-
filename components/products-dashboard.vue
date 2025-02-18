@@ -78,14 +78,12 @@
                 :src="product.imgTwo" />
               <ClientOnly>
                 <nuxt-link :to="'/products/' + product.id" type="button"
-                  class="absolute p-0.5 bg-white rounded-full shadow-lg top-2 end-2" data-twe-toggle="tooltip"
-                  data-twe-placement="top" :title="$t('tooltip.edit_product')">
+                  class="absolute p-0.5 bg-white rounded-full shadow-lg top-2 end-2">
                   <icon name="ep:edit" class="text-gray-600" />
                 </nuxt-link>
               </ClientOnly>
               <button @click="deleteProduct(product.id)"
-                class="absolute p-0.5 bg-white rounded-full shadow-lg top-12 end-2" data-twe-toggle="tooltip"
-                data-twe-placement="top" :title="$t('tooltip.delete_product')">
+                class="absolute p-0.5 bg-white rounded-full shadow-lg top-12 end-2">
                 <icon v-if="deleteProd === product.id" name="svg-spinners:6-dots-rotate" size="20px"
                   class="text-red-500" />
                 <icon name="ep:delete" class="text-red-600" v-else />
@@ -225,9 +223,4 @@ const deleteProduct = (productId) => {
       });
     });
 };
-
-onMounted(async () => {
-  const { Tooltip, initTWE } = await import("tw-elements");
-  initTWE({ Tooltip });
-});
 </script>
