@@ -18,9 +18,9 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         const endpoint =
           config.public.categoriesApiEndpoint + "get_categories.php";
         const response = await $fetch(endpoint, { responseType: "json" });
-        this.categories = response;
+        this.categories = response.data || response;
         this.updatePagination();
-        // console.log("Fetched categories:", this.categories);
+        console.log("Fetched categories:", this.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }

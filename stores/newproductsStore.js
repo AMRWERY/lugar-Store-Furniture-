@@ -64,7 +64,8 @@ export const useNewProductsStoreStore = defineStore("new-products", {
         const response = await $fetch(endpoint, { responseType: "json" });
         if (response) {
           this.selectedProduct = response;
-          console.log("Fetched product details:", response);
+          // console.log("Fetched product details:", response);
+          return response;
         } else {
           console.error(`product with ID ${productId} not found.`);
         }

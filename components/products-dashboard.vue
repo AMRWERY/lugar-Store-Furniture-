@@ -73,7 +73,7 @@
           <div class="flex flex-col h-full">
             <nuxt-link to="" class="relative flex overflow-hidden h-60 rounded-xl">
               <img class="absolute top-0 right-0 object-cover w-full h-full peer" :src="product.imgOne" />
-              <img
+              <img v-if="product.imgTwo"
                 class="absolute top-0 object-cover w-full h-full transition-all duration-1000 delay-100 peer -right-96 hover:right-0 peer-hover:right-0"
                 :src="product.imgTwo" />
               <ClientOnly>

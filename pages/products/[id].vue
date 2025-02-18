@@ -2,7 +2,7 @@
   <div>
     <div class="max-w-2xl px-8 py-6 mx-auto my-8 bg-white border rounded-lg">
       <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.edit_product')
-        }}</h2>
+      }}</h2>
       <form @submit.prevent="handleSubmit">
         <div class="mb-4">
           <label for="main-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.category') }}</label>
@@ -15,7 +15,7 @@
 
         <div class="mb-4">
           <label for="sub-category" class="block mb-2 font-medium text-gray-700">{{ $t('form.marketing_categories')
-            }}</label>
+          }}</label>
           <select id="sub-category" name="sub-category" v-model="product.subCategoryId"
             class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
             <option value="" disabled>{{ $t('form.select_marketing_category') }}</option>
@@ -107,7 +107,7 @@
 
         <div class="mb-4">
           <label for="original-price" class="block mb-2 font-medium text-gray-700">{{ $t('form.original_price')
-            }}</label>
+          }}</label>
           <input type="text" id="original-price" name="original-price" v-model="product.originalPrice"
             @input="(event) => handleInput(event, 'originalPrice')" @blur="() => handleBlur('originalPrice')"
             class="w-full p-2 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-400">
@@ -160,6 +160,7 @@
 
 <script setup>
 const store = useProductsStore()
+const categoryStore = useProductsStore()
 const productStore = useNewProductsStoreStore()
 const loading = ref(false);
 const categories = ref([])
@@ -173,10 +174,12 @@ const product = ref({ title: '', description: '', discountedPrice: '', originalP
 
 onMounted(async () => {
   // Fetch categories and sub-categories
-  await store.fetchCategories();
-  categories.value = store.categories;
-  await store.fetchSubCategories();
-  subCategories.value = store.subCategories;
+  categoryStore.fetchCategories();
+  categories.value = categoryStore.categories;
+  console.log('category value', categories.value)
+  categoryStore.fetchSubCategories();
+  subCategories.value = categoryStore.subCategories;
+  console.log('sub category value', subCategories.value)
 
   // Fetch product details if productId exists
   if (productId) {
@@ -184,7 +187,9 @@ onMounted(async () => {
     if (productDetail) {
       product.value = productDetail;
       selectedCategory.value = productDetail.categoryId;
+      console.log('category value', productDetail.categoryId)
       selectedSubCategory.value = productDetail.subCategoryId;
+      console.log('sub category value', productDetail.subCategoryId)
     } else {
       console.error("Product not found or an error occurred.");
     }
@@ -212,7 +217,7 @@ const handleFileChange = (event) => {
         return Promise.reject(new Error('File size too large'));
       }
       return convertToBase64(file).then(base64Image => {
-        switch(index) {
+        switch (index) {
           case 0: product.value.imgOne = base64Image; break;
           case 1: product.value.imgTwo = base64Image; break;
           case 2: product.value.imgThree = base64Image; break;
@@ -221,11 +226,11 @@ const handleFileChange = (event) => {
       });
     });
   }, Promise.resolve())
-  .catch(error => {
-    if (!error.message.includes('Invalid') && !error.message.includes('size')) {
-      alert('File processing error: ' + error.message);
-    }
-  });
+    .catch(error => {
+      if (!error.message.includes('Invalid') && !error.message.includes('size')) {
+        alert('File processing error: ' + error.message);
+      }
+    });
 };
 
 // Convert image to base64
