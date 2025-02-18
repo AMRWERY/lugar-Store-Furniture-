@@ -258,7 +258,7 @@ const handleSubmit = () => {
       });
     })
     .catch(error => {
-      console.error("Error updating product:", error);
+      // console.error("Error updating product:", error);
       showToast.value = true;
       toastTitle.value = "Error";
       toastMessage.value = "Failed to update product.";
