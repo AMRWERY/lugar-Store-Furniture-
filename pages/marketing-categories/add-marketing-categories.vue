@@ -7,7 +7,7 @@
         <div class="mb-4">
           <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
             $t('form.marketing_category_title')
-          }}</label>
+            }}</label>
           <input id="subcategory-title" type="text" v-model="newSubCategoryTitle"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_marketing_category_title')" required />
@@ -16,7 +16,7 @@
         <div class="mb-4">
           <label for="subcategory-title" class="block text-sm font-medium text-gray-700">{{
             $t('form.marketing_category_title_ar')
-          }}</label>
+            }}</label>
           <input id="subcategory-title" type="text" v-model="newSubCategoryTitleAr"
             class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300"
             :placeholder="$t('form.enter_marketing_category_title_ar')" required />
@@ -68,8 +68,6 @@
 </template>
 
 <script setup>
-import { useCategoriesStore } from '@/stores/categoriesStore';
-
 const store = useCategoriesStore();
 const loadingTwo = ref(false);
 const newSubCategoryTitle = ref('');
@@ -78,29 +76,35 @@ const product = ref({})
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
-const handleAddSubCategory = async () => {
+const handleAddSubCategory = () => {
   loadingTwo.value = true;
-  try {
-    await store.addSubCategory(newSubCategoryTitle.value.trim(), newSubCategoryTitleAr.value.trim());
-    resetForm();
-    triggerToast({
-      title: t('toast.great'),
-      message: t('toast.marketing_category_added_successfully'),
-      type: 'success',
-      icon: 'mdi:check-circle',
+  store
+    .addSubCategory(
+      newSubCategoryTitle.value.trim(),
+      newSubCategoryTitleAr.value.trim()
+    )
+    .then(() => {
+      resetForm();
+      triggerToast({
+        title: t('toast.great'),
+        message: t('toast.marketing_category_added_successfully'),
+        type: 'success',
+        icon: 'mdi:check-circle',
+      });
+    })
+    .catch((error) => {
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.subcategory_add_failed'),
+        type: 'error',
+        icon: 'mdi:alert-circle',
+      });
+    })
+    .finally(() => {
+      newSubCategoryTitle.value = '';
+      newSubCategoryTitleAr.value = '';
+      loadingTwo.value = false;
     });
-  } catch (error) {
-    triggerToast({
-      title: t('toast.error'),
-      message: t('toast.subcategory_add_failed'),
-      type: 'error',
-      icon: 'mdi:alert-circle',
-    });
-  } finally {
-    newSubCategoryTitle.value = '';
-    newSubCategoryTitleAr.value = '';
-    loadingTwo.value = false;
-  }
 };
 
 const resetForm = () => {

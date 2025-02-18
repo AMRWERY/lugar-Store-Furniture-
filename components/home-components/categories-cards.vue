@@ -41,8 +41,8 @@
 <script setup>
 const store = useCategoriesStore()
 
-onMounted(async () => {
-    await store.fetchCategories();
+onMounted(() => {
+    store.fetchCategories();
 });
 
 const positions = [

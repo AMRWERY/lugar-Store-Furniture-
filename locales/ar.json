@@ -361,7 +361,10 @@
     "failed_to_update_product": "فشل تحديث المنتج",
     "login_failed_please_check_your_information_and_try_again": "فشل تسجيل الدخول. يرجى التحقق من معلوماتك والمحاولة مرة أخرى",
     "image_uploaded_successfully": "تم تحميل الصورة بنجاح",
-    "faield_to_upload_image": "فشل تحميل الصورة"
+    "faield_to_upload_image": "فشل تحميل الصورة",
+    "category_add_failed": "فشل إضافة الفئة",
+    "failed_to_delete_category": "فشل حذف الفئة",
+    "failed_to_delete_market_category": "فشل حذف فئة التسويق"
   },
   "products": {
     "products": "المنتجات",

@@ -38,7 +38,7 @@
                                         class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
                                         <p class="flex items-center space-s-1">
                                             <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{ $t('home.le')
-                                            }}</span>
+                                                }}</span>
                                             <span class="text-sm text-gray-500 line-through mt-0.5">{{
                                                 card.originalPrice }} {{ $t('home.le')
                                                 }}</span>

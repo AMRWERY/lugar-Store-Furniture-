@@ -171,28 +171,30 @@ const productId = route.params.id
 
 const product = ref({ title: '', description: '', discountedPrice: '', originalPrice: '', discount: '', videoLink: '', titleAr: '', descriptionAr: '', categoryId: '', subCategoryId: '', productId: '' })
 
-onMounted(async () => {
-  // Fetch categories and sub-categories
-  categoryStore.fetchCategories();
-  categories.value = categoryStore.categories;
-  // console.log('category value', categories.value)
-  categoryStore.fetchSubCategories();
-  subCategories.value = categoryStore.subCategories;
-  // console.log('sub category value', subCategories.value)
-
-  // Fetch product details if productId exists
-  if (productId) {
-    const productDetail = await productStore.fetchProductDetail(productId);
-    if (productDetail) {
-      product.value = productDetail;
-      selectedCategory.value = productDetail.categoryId;
-      // console.log('category value', productDetail.categoryId)
-      selectedSubCategory.value = productDetail.subCategoryId;
-      // console.log('sub category value', productDetail.subCategoryId)
-    } else {
-      console.error("Product not found or an error occurred.");
-    }
-  }
+onMounted(() => {
+  categoryStore.fetchCategories()
+    .then(() => {
+      categories.value = categoryStore.categories;
+      return categoryStore.fetchSubCategories();
+    })
+    .then(() => {
+      subCategories.value = categoryStore.subCategories;
+      if (productId) {
+        return productStore.fetchProductDetail(productId);
+      } else {
+        return null;
+      }
+    })
+    .then((productDetail) => {
+      if (productDetail) {
+        product.value = productDetail;
+        selectedCategory.value = productDetail.categoryId;
+        selectedSubCategory.value = productDetail.subCategoryId;
+      }
+    })
+    .catch((error) => {
+      console.error("Error in onMounted chain:", error);
+    });
 });
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()

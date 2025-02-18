@@ -121,21 +121,41 @@ async function uploadFile() {
   }
 }
 
-const handleAddCategory = async () => {
+const handleAddCategory = () => {
   loadingOne.value = true;
   if (newCategoryTitle.value.trim() && uploadedImageUrl.value) {
-    await store.addCategory(newCategoryTitle.value.trim(), newCategoryTitleAr.value.trim(), uploadedImageUrl.value);
-    triggerToast({
-      title: t('toast.great'),
-      message: t('toast.category_added_successfully'),
-      type: 'success',
-      icon: 'mdi:check-circle',
-    });
-    newCategoryTitle.value = '';
-    newCategoryTitleAr.value = '';
-    uploadedImageUrl.value = '';
+    store
+      .addCategory(
+        newCategoryTitle.value.trim(),
+        newCategoryTitleAr.value.trim(),
+        uploadedImageUrl.value
+      )
+      .then(() => {
+        triggerToast({
+          title: t('toast.great'),
+          message: t('toast.category_added_successfully'),
+          type: 'success',
+          icon: 'mdi:check-circle',
+        });
+        newCategoryTitle.value = '';
+        newCategoryTitleAr.value = '';
+        uploadedImageUrl.value = '';
+      })
+      .catch((error) => {
+        console.error("Error adding category:", error);
+        triggerToast({
+          title: t('toast.error'),
+          message: t('toast.category_add_failed'),
+          type: 'error',
+          icon: 'mdi:alert-circle',
+        });
+      })
+      .finally(() => {
+        loadingOne.value = false;
+      });
+  } else {
+    loadingOne.value = false;
   }
-  loadingOne.value = false;
 };
 
 definePageMeta({

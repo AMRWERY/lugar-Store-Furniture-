@@ -356,7 +356,10 @@
     "failed_to_update_product": "Failed to update product",
     "login_failed_please_check_your_information_and_try_again": "Login failed. Please check your information and try again",
     "image_uploaded_successfully": "Image uploaded successfully",
-    "faield_to_upload_image": "Faield to upload image"
+    "faield_to_upload_image": "Faield to upload image",
+    "category_add_failed": "Category add failed",
+    "failed_to_delete_category": "Failed to delete category",
+    "failed_to_delete_market_category": "Failed to delete market category"
   },
   "products": {
     "products": "Products",

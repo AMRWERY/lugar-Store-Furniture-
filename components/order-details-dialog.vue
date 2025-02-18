@@ -158,14 +158,23 @@ const updateOrderStatus = async (orderId, newStatus) => {
 const orderStatus = ref([])
 const categories = ref([])
 const currentStatus = ref('')
-const categoryTitle = ref('')
 
-onMounted(async () => {
-  await checkoutStore.fetchStatus();
-  orderStatus.value = checkoutStore.status
-  await categoryStore.fetchCategories();
-  categories.value = categoryStore.categories;
-  currentStatus.value = checkoutStore.status.find((s) => s.id === props.order.statusId)?.status;
+onMounted(() => {
+  checkoutStore
+    .fetchStatus()
+    .then(() => {
+      orderStatus.value = checkoutStore.status;
+      return categoryStore.fetchCategories();
+    })
+    .then(() => {
+      categories.value = categoryStore.categories;
+      currentStatus.value = checkoutStore.status.find(
+        (s) => s.id === props.order.statusId
+      )?.status;
+    })
+    .catch((error) => {
+      console.error("Error in onMounted chain:", error);
+    });
 });
 </script>
 

@@ -9,249 +9,275 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     subcategoriesPerPage: 6,
     currentCategory: null,
     currentMarketCategory: null,
-    image1Url: "",
-    image2Url: "",
   }),
 
   actions: {
-    async fetchCategories() {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.categoriesApiEndpoint + "get_categories.php";
-        const response = await $fetch(endpoint, { responseType: "json" });
-        this.categories = response.data || response;
-        this.updatePagination();
-        // console.log("Fetched categories:", this.categories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    },
-
-    async fetchCategoryDetails(categoryId) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.categoriesApiEndpoint +
-          "get_category.php?id=" +
-          encodeURIComponent(categoryId);
-        const response = await $fetch(endpoint, { responseType: "json" });
-        if (response) {
-          // Assuming the API returns the category object
-          this.currentCategory = response;
-          // console.log("Fetched category details:", response);
-        } else {
-          console.error(`Category with ID ${categoryId} not found.`);
-        }
-      } catch (error) {
-        console.error("Error fetching category details:", error);
-      }
-    },
-
-    async updateCategory(categoryId, updatedData) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.categoriesApiEndpoint + "update_category.php";
-        const response = await $fetch(endpoint, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id: categoryId, ...updatedData }),
-          responseType: "json",
-        });
-        if (response.success) {
-          const index = this.categories.findIndex(
-            (category) => category.id === categoryId
-          );
-          if (index !== -1) {
-            this.categories[index] = {
-              ...this.categories[index],
-              ...updatedData,
-            };
+    fetchCategories() {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.categoriesApiEndpoint + "get_categories.php";
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          this.categories = response.data || response;
+          if (typeof this.updatePagination === "function") {
+            this.updatePagination();
           }
-          // console.log("Category updated successfully");
-        } else {
-          console.error(
-            "API error during update:",
-            response.error || response.message || response
-          );
-        }
-      } catch (error) {
-        console.error("Error updating category:", error);
-        throw error;
-      }
-    },
-
-    async addCategory(title, titleAr, imgOne) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.categoriesApiEndpoint + "add_category.php";
-        const response = await $fetch(endpoint, {
-          method: "POST",
-          body: { title, titleAr, imgOne },
-          responseType: "json",
+          // console.log("Fetched categories:", this.categories);
+          return this.categories;
+        })
+        .catch((error) => {
+          console.error("Error fetching categories:", error);
+          throw error;
         });
-        const newCategory = { id: response.id, title, titleAr, imgOne };
-        this.categories.push(newCategory);
-        this.updatePagination();
-        // console.log("Category added:", newCategory);
-      } catch (error) {
-        console.error("Error adding category:", error);
-      }
     },
 
-    async deleteCategory(categoryId) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.categoriesApiEndpoint + "delete_category.php";
-        const response = await $fetch(endpoint, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id: categoryId }),
-          responseType: "json",
-        });
-        if (response.success) {
-          this.categories = this.categories.filter(
-            (category) => category.id !== categoryId
-          );
-          this.updatePagination();
-          // console.log("Category deleted successfully");
-        } else {
-          console.error(
-            "API error during deletion:",
-            response.error || response.message || response
-          );
-        }
-      } catch (error) {
-        console.error("Error deleting category:", error);
-      }
-    },
-
-    async fetchSubCategories() {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.subCategoriesApiEndpoint + "get_subcategories.php";
-        const response = await $fetch(endpoint, { responseType: "json" });
-        this.subCategories = response;
-        this.updatePagination();
-        // console.log("Fetched sub categories:", this.subCategories);
-      } catch (error) {
-        console.error("Error fetching sub categories:", error);
-      }
-    },
-
-    async updateMarketCategory(categoryId, updatedData) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.subCategoriesApiEndpoint + "update_subcategory.php";
-        const response = await $fetch(endpoint, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id: categoryId, ...updatedData }),
-          responseType: "json",
-        });
-        if (response.success) {
-          const index = this.categories.findIndex(
-            (category) => category.id === categoryId
-          );
-          if (index !== -1) {
-            this.subCategories[index] = {
-              ...this.subCategories[index],
-              ...updatedData,
-            };
+    fetchCategoryDetails(categoryId) {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.categoriesApiEndpoint +
+        "get_category.php?id=" +
+        encodeURIComponent(categoryId);
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          if (response) {
+            this.currentCategory = response;
+            // console.log("Fetched category details:", response);
+            return response;
+          } else {
+            console.error(`Category with ID ${categoryId} not found.`);
+            return null;
           }
-          // console.log("sub Category updated successfully");
-        } else {
-          console.error(
-            "API error during update:",
-            response.error || response.message || response
-          );
-        }
-      } catch (error) {
-        console.error("Error updating category:", error);
-        throw error;
-      }
-    },
-
-    async fetchCMarketCategoryDetails(marketCategoryId) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.subCategoriesApiEndpoint +
-          "get_subcategory.php?id=" +
-          encodeURIComponent(marketCategoryId);
-        const response = await $fetch(endpoint, { responseType: "json" });
-        if (Array.isArray(response) && response.length > 0) {
-          this.currentMarketCategory = response[0];
-        } else {
-          this.currentMarketCategory = response;
-        }
-        // console.log(
-        //   "Fetched sub category details:",
-        //   this.currentMarketCategory
-        // );
-      } catch (error) {
-        console.error("Error fetching sub category details:", error);
-      }
-    },
-
-    async deleteMarketCategory(marketCategoryId) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.subCategoriesApiEndpoint + "delete_subcategory.php";
-        const response = await $fetch(endpoint, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ id: marketCategoryId }),
-          responseType: "json",
+        })
+        .catch((error) => {
+          console.error("Error fetching category details:", error);
+          throw error;
         });
-        if (response.success) {
-          this.subCategories = this.subCategories.filter(
-            (marketCategory) => marketCategory.id !== marketCategoryId
-          );
+    },
+
+    updateCategory(categoryId, updatedData) {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.categoriesApiEndpoint + "update_category.php";
+      return $fetch(endpoint, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: categoryId, ...updatedData }),
+        responseType: "json",
+      })
+        .then((response) => {
+          if (response.success) {
+            const index = this.categories.findIndex(
+              (category) => category.id === categoryId
+            );
+            if (index !== -1) {
+              this.categories[index] = {
+                ...this.categories[index],
+                ...updatedData,
+              };
+            }
+            // console.log("Category updated successfully");
+          } else {
+            console.error(
+              "API error during update:",
+              response.error || response.message || response
+            );
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error updating category:", error);
+          throw error;
+        });
+    },
+
+    addCategory(title, titleAr, imgOne) {
+      const config = useRuntimeConfig();
+      const endpoint = config.public.categoriesApiEndpoint + "add_category.php";
+      return $fetch(endpoint, {
+        method: "POST",
+        body: { title, titleAr, imgOne },
+        responseType: "json",
+      })
+        .then((response) => {
+          const newCategory = { id: response.id, title, titleAr, imgOne };
+          this.categories.push(newCategory);
           this.updatePagination();
-          // console.log("sub Category deleted successfully");
-        } else {
-          console.error(
-            "API error during deletion:",
-            response.error || response.message || response
-          );
-        }
-      } catch (error) {
-        console.error("Error deleting sub category:", error);
-      }
+          // console.log("Category added:", newCategory);
+          return newCategory;
+        })
+        .catch((error) => {
+          console.error("Error adding category:", error);
+          throw error;
+        });
     },
 
-    async addSubCategory(title, titleAr) {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.subCategoriesApiEndpoint + "create_subcategory.php";
-        const response = await $fetch(endpoint, {
-          method: "POST",
-          body: { title, titleAr },
-          responseType: "json",
+    deleteCategory(categoryId) {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.categoriesApiEndpoint + "delete_category.php";
+      return $fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: categoryId }),
+        responseType: "json",
+      })
+        .then((response) => {
+          if (response.success) {
+            this.categories = this.categories.filter(
+              (category) => category.id !== categoryId
+            );
+            this.updatePagination();
+            // console.log("Category deleted successfully");
+          } else {
+            console.error(
+              "API error during deletion:",
+              response.error || response.message || response
+            );
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error deleting category:", error);
+          throw error;
         });
-        const newSubCategory = { id: response.id, title, titleAr };
-        this.subCategories.push(newSubCategory);
-        this.updatePagination();
-        // console.log("sub Category added:", newSubCategory);
-      } catch (error) {
-        console.error("Error adding sub category:", error);
-      }
+    },
+
+    fetchSubCategories() {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.subCategoriesApiEndpoint + "get_subcategories.php";
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          this.subCategories = response;
+          if (typeof this.updatePagination === "function") {
+            this.updatePagination();
+          }
+          // console.log("Fetched sub categories:", this.subCategories);
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error fetching sub categories:", error);
+          throw error;
+        });
+    },
+
+    updateMarketCategory(categoryId, updatedData) {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.subCategoriesApiEndpoint + "update_subcategory.php";
+      return $fetch(endpoint, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: categoryId, ...updatedData }),
+        responseType: "json",
+      })
+        .then((response) => {
+          if (response.success) {
+            const index = this.categories.findIndex(
+              (category) => category.id === categoryId
+            );
+            if (index !== -1) {
+              this.subCategories[index] = {
+                ...this.subCategories[index],
+                ...updatedData,
+              };
+            }
+            // console.log("Subcategory updated successfully");
+          } else {
+            console.error(
+              "API error during update:",
+              response.error || response.message || response
+            );
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error updating category:", error);
+          throw error;
+        });
+    },
+
+    fetchCMarketCategoryDetails(marketCategoryId) {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.subCategoriesApiEndpoint +
+        "get_subcategory.php?id=" +
+        encodeURIComponent(marketCategoryId);
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          if (Array.isArray(response) && response.length > 0) {
+            this.currentMarketCategory = response[0];
+          } else {
+            this.currentMarketCategory = response;
+          }
+          // console.log("Fetched sub category details:", this.currentMarketCategory);
+          return this.currentMarketCategory;
+        })
+        .catch((error) => {
+          console.error("Error fetching sub category details:", error);
+          throw error;
+        });
+    },
+
+    deleteMarketCategory(marketCategoryId) {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.subCategoriesApiEndpoint + "delete_subcategory.php";
+      return $fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: marketCategoryId }),
+        responseType: "json",
+      })
+        .then((response) => {
+          if (response.success) {
+            this.subCategories = this.subCategories.filter(
+              (marketCategory) => marketCategory.id !== marketCategoryId
+            );
+            this.updatePagination();
+            // console.log("Sub Category deleted successfully");
+          } else {
+            console.error(
+              "API error during deletion:",
+              response.error || response.message || response
+            );
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error deleting sub category:", error);
+          throw error;
+        });
+    },
+
+    addSubCategory(title, titleAr) {
+      const config = useRuntimeConfig();
+      const endpoint =
+        config.public.subCategoriesApiEndpoint + "create_subcategory.php";
+      return $fetch(endpoint, {
+        method: "POST",
+        body: { title, titleAr },
+        responseType: "json",
+      })
+        .then((response) => {
+          const newSubCategory = { id: response.id, title, titleAr };
+          this.subCategories.push(newSubCategory);
+          if (typeof this.updatePagination === "function") {
+            this.updatePagination();
+          }
+          // console.log("Sub Category added:", newSubCategory);
+          return newSubCategory;
+        })
+        .catch((error) => {
+          console.error("Error adding sub category:", error);
+          throw error;
+        });
     },
 
     updatePagination() {

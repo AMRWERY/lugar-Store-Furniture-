@@ -70,14 +70,20 @@ const fileInput = ref(null);
 const route = useRoute();
 const categoryId = route.query.id || route.params.id;
 
-onMounted(async () => {
+onMounted(() => {
   if (categoryId) {
-    await store.fetchCategoryDetails(categoryId);
-    if (store.currentCategory) {
-      newCategoryTitle.value = store.currentCategory.title || "";
-      newCategoryTitleAr.value = store.currentCategory.titleAr || "";
-      previewImage.value = store.currentCategory.imgOne || "";
-    }
+    store
+      .fetchCategoryDetails(categoryId)
+      .then(() => {
+        if (store.currentCategory) {
+          newCategoryTitle.value = store.currentCategory.title || "";
+          newCategoryTitleAr.value = store.currentCategory.titleAr || "";
+          previewImage.value = store.currentCategory.imgOne || "";
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching category details in onMounted:", error);
+      });
   }
 });
 
@@ -131,7 +137,7 @@ async function uploadFile() {
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 const { t } = useI18n()
 
-const handleUpdateCategory = async () => {
+const handleUpdateCategory = () => {
   if (!categoryId) return;
   loadingOne.value = true;
   const updatedData = {
@@ -139,27 +145,63 @@ const handleUpdateCategory = async () => {
     titleAr: newCategoryTitleAr.value,
     imgOne: uploadedImageUrl.value,
   };
-  try {
-    await store.updateCategory(categoryId, updatedData);
-    triggerToast({
-      title: t('toast.great'),
-      message: t('toast.category_updated'),
-      type: 'success',
-      icon: 'mdi:check-circle',
+  store
+    .updateCategory(categoryId, updatedData)
+    .then(() => {
+      triggerToast({
+        title: t('toast.great'),
+        message: t('toast.category_updated'),
+        type: 'success',
+        icon: 'mdi:check-circle',
+      });
+      return store.fetchCategoryDetails(categoryId);
+    })
+    .then(() => {
+      // Optionally, additional processing after fetching category details can be added here.
+    })
+    .catch((error) => {
+      // console.error("Error updating category:", error);
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.category_update_failed'),
+        type: 'error',
+        icon: 'mdi:alert-circle',
+      });
+    })
+    .finally(() => {
+      loadingOne.value = false;
     });
-    await store.fetchCategoryDetails(categoryId);
-  } catch (error) {
-    // console.error("Error updating category:", error);
-    triggerToast({
-      title: t('toast.error'),
-      message: t('toast.category_update_failed'),
-      type: 'error',
-      icon: 'mdi:alert-circle',
-    });
-  } finally {
-    loadingOne.value = false;
-  }
 };
+
+// const handleUpdateCategory = async () => {
+//   if (!categoryId) return;
+//   loadingOne.value = true;
+//   const updatedData = {
+//     title: newCategoryTitle.value,
+//     titleAr: newCategoryTitleAr.value,
+//     imgOne: uploadedImageUrl.value,
+//   };
+//   try {
+//     await store.updateCategory(categoryId, updatedData);
+//     triggerToast({
+//       title: t('toast.great'),
+//       message: t('toast.category_updated'),
+//       type: 'success',
+//       icon: 'mdi:check-circle',
+//     });
+//     await store.fetchCategoryDetails(categoryId);
+//   } catch (error) {
+//     // console.error("Error updating category:", error);
+//     triggerToast({
+//       title: t('toast.error'),
+//       message: t('toast.category_update_failed'),
+//       type: 'error',
+//       icon: 'mdi:alert-circle',
+//     });
+//   } finally {
+//     loadingOne.value = false;
+//   }
+// };
 
 definePageMeta({
   layout: 'dashboard'

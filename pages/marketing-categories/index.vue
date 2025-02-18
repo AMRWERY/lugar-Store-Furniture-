@@ -121,18 +121,33 @@ const { t } = useI18n()
 const deleteCat = ref(null);
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
-const handleDeleteMarketCategory = async (marketCategoryId) => {
+const handleDeleteMarketCategory = (marketCategoryId) => {
     deleteCat.value = marketCategoryId;
-    setTimeout(async () => {
-        await store.deleteMarketCategory(marketCategoryId);
-        triggerToast({
-            title: t('toast.great'),
-            message: t('toast.marketing_category_deleted_successfully'),
-            type: 'success',
-            icon: 'mdi:check-circle',
+    new Promise((resolve) => {
+        setTimeout(resolve, 3000);
+    })
+        .then(() => {
+            return store.deleteMarketCategory(marketCategoryId);
+        })
+        .then(() => {
+            triggerToast({
+                title: t('toast.great'),
+                message: t('toast.marketing_category_deleted_successfully'),
+                type: 'success',
+                icon: 'mdi:check-circle',
+            });
+            deleteCat.value = null;
+        })
+        .catch((error) => {
+            console.error("Error deleting market category:", error);
+            deleteCat.value = null;
+            triggerToast({
+                title: t('toast.error'),
+                message: t('toast.failed_to_delete_market_category'),
+                type: 'error',
+                icon: 'mdi:alert-circle',
+            });
         });
-        deleteCat.value = null;
-    }, 3000);
 };
 
 onMounted(async () => {

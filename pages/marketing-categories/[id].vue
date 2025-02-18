@@ -6,7 +6,7 @@
                 <div class="mb-4">
                     <label for="category-title" class="block text-sm font-medium text-gray-700">{{
                         $t('form.marketing_category_title')
-                    }}</label>
+                        }}</label>
                     <input id="category-title" type="text" v-model="newMarketCategoryTitle"
                         class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300" required />
                 </div>
@@ -14,7 +14,7 @@
                 <div class="mb-4">
                     <label for="category-title" class="block text-sm font-medium text-gray-700">{{
                         $t('form.marketing_category_title_ar')
-                    }}</label>
+                        }}</label>
                     <input id="category-title" type="text" v-model="newMarketCategoryTitleAr"
                         class="w-full p-2 mt-1 border rounded-lg focus:ring focus:ring-blue-300" required />
                 </div>
@@ -47,47 +47,54 @@ const newMarketCategoryTitleAr = ref('');
 const route = useRoute();
 const marketCategoryId = route.params.id
 
-onMounted(async () => {
+onMounted(() => {
     if (marketCategoryId) {
-        await store.fetchCMarketCategoryDetails(marketCategoryId);
-        // console.log(store.currentMarketCategory);
-        if (store.currentMarketCategory) {
-            newMarketCategoryTitle.value = store.currentMarketCategory.title || "";
-            newMarketCategoryTitleAr.value = store.currentMarketCategory.titleAr || "";
-        }
+        store.fetchCMarketCategoryDetails(marketCategoryId)
+            .then(() => {
+                if (store.currentMarketCategory) {
+                    newMarketCategoryTitle.value = store.currentMarketCategory.title || "";
+                    newMarketCategoryTitleAr.value = store.currentMarketCategory.titleAr || "";
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching market category details:", error);
+            });
     }
 });
 
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 const { t } = useI18n()
 
-const handleUpdateMarketCategory = async () => {
+const handleUpdateMarketCategory = () => {
     if (!marketCategoryId) return;
     loadingOne.value = true;
     const updatedData = {
         title: newMarketCategoryTitle.value,
         titleAr: newMarketCategoryTitleAr.value,
     };
-    try {
-        await store.updateMarketCategory(marketCategoryId, updatedData);
-        triggerToast({
-            title: t('toast.success'),
-            message: t('toast.marketing_category_updated'),
-            type: 'success',
-            icon: 'mdi:check-circle',
+    store
+        .updateMarketCategory(marketCategoryId, updatedData)
+        .then(() => {
+            triggerToast({
+                title: t('toast.success'),
+                message: t('toast.marketing_category_updated'),
+                type: 'success',
+                icon: 'mdi:check-circle',
+            });
+            return store.fetchCMarketCategoryDetails(marketCategoryId);
+        })
+        .catch((error) => {
+            // console.error("Error updating category:", error);
+            triggerToast({
+                title: t('toast.error'),
+                message: t('toast.marketing_category_update_failed'),
+                type: 'error',
+                icon: 'mdi:alert-circle',
+            });
+        })
+        .finally(() => {
+            loadingOne.value = false;
         });
-        await store.fetchCMarketCategoryDetails(marketCategoryId);
-    } catch (error) {
-        // console.error("Error updating category:", error);
-        triggerToast({
-            title: t('toast.error'),
-            message: t('toast.marketing_category_update_failed'),
-            type: 'error',
-            icon: 'mdi:alert-circle',
-        });
-    } finally {
-        loadingOne.value = false;
-    }
 };
 
 definePageMeta({
