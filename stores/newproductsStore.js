@@ -18,13 +18,11 @@ export const useNewProductsStoreStore = defineStore("new-products", {
   actions: {
     async fetchProducts() {
       try {
-        const querySnap = await getDocs(query(collection(db, "products")));
-        const allProducts = querySnap.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.products = allProducts;
-        // console.log(this.products);
+        const config = useRuntimeConfig();
+        const endpoint = config.public.productsApiEndpoint + "get_products.php";
+        const response = await $fetch(endpoint, { responseType: "json" });
+        this.products = response;
+        // console.log("Fetched products:", this.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -58,20 +56,20 @@ export const useNewProductsStoreStore = defineStore("new-products", {
         return null;
       }
       try {
-        const docRef = doc(db, "products", productId);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const product = { ...docSnap.data(), id: productId };
-          this.selectedProduct = product;
-          return product;
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.productsApiEndpoint +
+          "get_product.php?id=" +
+          encodeURIComponent(productId);
+        const response = await $fetch(endpoint, { responseType: "json" });
+        if (response) {
+          this.selectedProduct = response;
+          console.log("Fetched product details:", response);
         } else {
-          // console.error("No product found for ID:", productId);
-          this.selectedProduct = null;
-          return null;
+          console.error(`product with ID ${productId} not found.`);
         }
       } catch (error) {
         console.error("Error fetching product details:", error);
-        return null;
       }
     },
   },

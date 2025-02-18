@@ -19,10 +19,9 @@
             <!-- Fixed-height image container -->
             <div class="relative w-full overflow-hidden h-60">
               <img class="object-cover w-full h-full rounded-t-lg" :src="product.imgOne" alt="product image" />
-              <!-- Discount badge (if any) -->
               <span
                 class="absolute top-0 left-0 text-sm text-center text-white -rotate-45 -translate-x-6 translate-y-4 bg-black w-28"
-                v-if="product.discount">
+                v-if="Number(product.discount) > 0">
                 {{ product.discount }}% {{ $t('products.off') }}
               </span>
             </div>

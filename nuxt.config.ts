@@ -56,6 +56,7 @@ export default defineNuxtConfig({
       subCategoriesApiEndpoint:
         process.env.NUXT_PUBLIC_SUB_CATEGORIES_API_ENDPOINT,
       uploadImgApiEndpoint: process.env.NUXT_PUBLIC_UPLOAD_IMG_API_ENDPOINT,
+      productsApiEndpoint: process.env.NUXT_PUBLIC_PRODUCTS_API_ENDPOINT,
     },
   },
   app: {

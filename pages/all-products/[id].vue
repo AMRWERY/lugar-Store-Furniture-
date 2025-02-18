@@ -7,7 +7,7 @@
             <div class="relative overflow-hidden bg-gray-100 rounded-lg">
               <img :src="selectedImage" loading="lazy" class="object-cover object-center w-full h-full" />
               <span class="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm tracking-wider text-white"
-                v-if="selectedProduct?.discount">{{
+                v-if="Number(selectedProduct?.discount) > 0">{{
                   selectedProduct?.discount }}% {{ $t('products.off') }}</span>
             </div>
             <ClientOnly>
@@ -133,7 +133,7 @@ onMounted(() => {
   const productId = route.query.id;
   if (productId) {
     if (!store.products.length) {
-       store.fetchProducts();
+      store.fetchProducts();
     }
     selectedProduct.value = store.products.find((product) => product.id === productId);
   }
@@ -238,7 +238,7 @@ const decrementQuantity = () => {
 const updateQuantityInStore = (newQuantity) => {
   const productId = store.selectedProduct?.id;
   if (productId) {
-     cartStore.updateQuantityInCart(productId, newQuantity);
+    cartStore.updateQuantityInCart(productId, newQuantity);
   }
 };
 </script>
