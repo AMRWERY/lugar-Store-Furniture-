@@ -121,7 +121,7 @@ const config = {
   },
 };
 
-const store = useNewProductsStoreStore()
+const store = useProductsStore()
 const route = useRoute()
 const selectedImage = ref('');
 

@@ -159,9 +159,8 @@
 </template>
 
 <script setup>
-const store = useProductsStore()
-const categoryStore = useProductsStore()
-const productStore = useNewProductsStoreStore()
+const categoryStore = useCategoriesStore()
+const productStore = useProductsStore()
 const loading = ref(false);
 const categories = ref([])
 const subCategories = ref([])
@@ -247,7 +246,7 @@ const { t } = useI18n();
 
 const handleSubmit = () => {
   loading.value = true;
-  store.updateProduct(productId, product.value)
+  productStore.updateProduct(productId, product.value)
     .then(() => productStore.fetchProductDetail(productId))
     .then(updatedProduct => {
       product.value = updatedProduct;
@@ -275,35 +274,6 @@ const handleSubmit = () => {
       loading.value = false;
     });
 };
-
-// const handleSubmit = async () => {
-//   loading.value = true;
-//   try {
-//     await store.updateProduct(productId, product.value);
-//     const updatedProduct = await productStore.fetchProductDetail(productId);
-//     product.value = updatedProduct;
-//     triggerToast({
-//       title: t('toast.success'),
-//       message: t('toast.product_updated_successfully'),
-//       type: 'success',
-//       icon: 'mdi:check-circle',
-//     });
-//   } catch (error) {
-//     console.error("Error updating product:", error);
-//     showToast.value = true;
-//     toastTitle.value = "Error";
-//     toastMessage.value = "Failed to update product.";
-//     toastType.value = "error";
-//     triggerToast({
-//       title: t('toast.error'),
-//       message: t('toast.failed_to_update_product'),
-//       type: 'success',
-//       icon: 'mdi:check-circle',
-//     });
-//   } finally {
-//     loading.value = false;
-//   }
-// };
 
 const isValidInstagramUrl = (url) => {
   const regex = /^(https?:\/\/)?(www\.)?(instagram\.com|instagr\.am)\/p\/[A-Za-z0-9-_]+\/?$/;

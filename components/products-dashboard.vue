@@ -129,7 +129,7 @@
 </template>
 
 <script setup>
-const store = useNewProductsStoreStore();
+const store = useProductsStore();
 const productStore = useProductsStore()
 const categoryStore = useCategoriesStore()
 const currentPage = ref(1);

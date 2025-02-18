@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-const store = useNewProductsStoreStore()
+const store = useProductsStore()
 const cartStore = useCartStore();
 const route = useRoute();
 const loading = ref(true);

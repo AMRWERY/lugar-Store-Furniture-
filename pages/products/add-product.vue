@@ -159,6 +159,7 @@
 </template>
 
 <script setup>
+const categoryStore= useCategoriesStore() 
 const store = useProductsStore()
 const loading = ref(false);
 const categories = ref([])
@@ -287,11 +288,11 @@ const resetForm = () => {
 };
 
 onMounted(() => {
-  store.fetchCategories();
-  categories.value = store.categories;
+  categoryStore.fetchCategories();
+  categories.value = categoryStore.categories;
 
-  store.fetchSubCategories();
-  subCategories.value = store.subCategories;
+  categoryStore.fetchSubCategories();
+  subCategories.value = categoryStore.subCategories;
 });
 
 const { formatDecimal, enforceTwoDecimalPlaces } = useFormatter();

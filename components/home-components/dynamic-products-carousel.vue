@@ -78,7 +78,7 @@ const props = defineProps({
     },
 });
 
-const productsStore = useNewProductsStoreStore()
+const productsStore = useProductsStore()
 const categoryStore = useCategoriesStore()
 const products = ref([])
 const subCategories = ref([])

@@ -1,6 +1,7 @@
 export const useProductsStore = defineStore("products", {
   state: () => ({
     products: [],
+    selectedProduct: null,
     categories: [],
     subCategories: [],
     image1Url: "",
@@ -8,32 +9,6 @@ export const useProductsStore = defineStore("products", {
   }),
 
   actions: {
-    async fetchCategories() {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.categoriesApiEndpoint + "get_categories.php";
-        const response = await $fetch(endpoint, { responseType: "json" });
-        this.categories = response.data || response;
-        console.log("Fetched categories:", this.categories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    },
-
-    async fetchSubCategories() {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint =
-          config.public.subCategoriesApiEndpoint + "get_subcategories.php";
-        const response = await $fetch(endpoint, { responseType: "json" });
-        this.subCategories = response;
-        // console.log("Fetched sub categories:", this.subCategories);
-      } catch (error) {
-        console.error("Error fetching sub categories:", error);
-      }
-    },
-
     async createProduct(productData) {
       try {
         const config = useRuntimeConfig();
@@ -82,7 +57,7 @@ export const useProductsStore = defineStore("products", {
               ...updatedData,
             };
           }
-          console.log("Product updated successfully");
+          // console.log("Product updated successfully");
         } else {
           console.error(
             "API error during update:",
@@ -98,7 +73,8 @@ export const useProductsStore = defineStore("products", {
     async deleteProduct(productId) {
       try {
         const config = useRuntimeConfig();
-        const endpoint = config.public.productsApiEndpoint + "delete_product.php";
+        const endpoint =
+          config.public.productsApiEndpoint + "delete_product.php";
         const response = await $fetch(endpoint, {
           method: "DELETE",
           headers: {
@@ -111,7 +87,7 @@ export const useProductsStore = defineStore("products", {
           this.products = this.products.filter(
             (product) => product.id !== productId
           );
-          console.log("Product deleted successfully");
+          // console.log("Product deleted successfully");
           return response;
         } else {
           console.error(
@@ -124,6 +100,68 @@ export const useProductsStore = defineStore("products", {
         console.error("Error deleting product:", error);
         throw error;
       }
-    }
+    },
+
+    async fetchProducts() {
+      try {
+        const config = useRuntimeConfig();
+        const endpoint = config.public.productsApiEndpoint + "get_products.php";
+        const response = await $fetch(endpoint, { responseType: "json" });
+        this.products = response;
+        // console.log("Fetched products:", this.products);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    },
+
+    async fetchProductsByCategory(categoryId) {
+      if (!categoryId) {
+        // console.error("Category ID is required to fetch products by category");
+        return;
+      }
+      try {
+        const config = useRuntimeConfig();
+        const endpoint = config.public.productsApiEndpoint + "get_products.php";
+        const response = await $fetch(endpoint, { responseType: "json" });
+        this.products = response.filter(
+          (product) => String(product.categoryId) === String(categoryId)
+        );
+        // console.log("Filtered products:", this.products);
+      } catch (error) {
+        console.error("Error fetching products by category:", error);
+      }
+    },
+
+    async fetchProductDetail(productId) {
+      if (!productId) {
+        // console.error("Product ID is missing or invalid");
+        return null;
+      }
+      try {
+        const config = useRuntimeConfig();
+        const endpoint =
+          config.public.productsApiEndpoint +
+          "get_product.php?id=" +
+          encodeURIComponent(productId);
+        const response = await $fetch(endpoint, { responseType: "json" });
+        if (response) {
+          this.selectedProduct = response;
+          // console.log("Fetched product details:", response);
+          return response;
+        } else {
+          console.error(`product with ID ${productId} not found.`);
+        }
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    },
+  },
+
+  getters: {
+    inStockProducts() {
+      return this.products.filter(
+        (product) => product.availability === "In stock"
+      ).length;
+    },
   },
 });

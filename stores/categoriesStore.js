@@ -9,6 +9,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     subcategoriesPerPage: 6,
     currentCategory: null,
     currentMarketCategory: null,
+    image1Url: "",
+    image2Url: "",
   }),
 
   actions: {
@@ -20,7 +22,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         const response = await $fetch(endpoint, { responseType: "json" });
         this.categories = response.data || response;
         this.updatePagination();
-        console.log("Fetched categories:", this.categories);
+        // console.log("Fetched categories:", this.categories);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -69,7 +71,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
               ...updatedData,
             };
           }
-          console.log("Category updated successfully");
+          // console.log("Category updated successfully");
         } else {
           console.error(
             "API error during update:",
@@ -95,7 +97,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         const newCategory = { id: response.id, title, titleAr, imgOne };
         this.categories.push(newCategory);
         this.updatePagination();
-        console.log("Category added:", newCategory);
+        // console.log("Category added:", newCategory);
       } catch (error) {
         console.error("Error adding category:", error);
       }
@@ -119,7 +121,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
             (category) => category.id !== categoryId
           );
           this.updatePagination();
-          console.log("Category deleted successfully");
+          // console.log("Category deleted successfully");
         } else {
           console.error(
             "API error during deletion:",
@@ -168,7 +170,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
               ...updatedData,
             };
           }
-          console.log("sub Category updated successfully");
+          // console.log("sub Category updated successfully");
         } else {
           console.error(
             "API error during update:",
@@ -221,7 +223,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
             (marketCategory) => marketCategory.id !== marketCategoryId
           );
           this.updatePagination();
-          console.log("sub Category deleted successfully");
+          // console.log("sub Category deleted successfully");
         } else {
           console.error(
             "API error during deletion:",
@@ -246,7 +248,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
         const newSubCategory = { id: response.id, title, titleAr };
         this.subCategories.push(newSubCategory);
         this.updatePagination();
-        console.log("sub Category added:", newSubCategory);
+        // console.log("sub Category added:", newSubCategory);
       } catch (error) {
         console.error("Error adding sub category:", error);
       }
