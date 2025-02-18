@@ -322,7 +322,9 @@
     "s_information": "معلومات",
     "change_order_status": "تغيير حاله الطلب",
     "customer_messages": "رسائل العملاء",
-    "banners": "لافتات"
+    "banners": "لافتات",
+    "order_number": "رقم الطلب:",
+    "add_new_banner": "اضف لافته جديدة"
   },
   "pagination": {
     "previous": "السابق",

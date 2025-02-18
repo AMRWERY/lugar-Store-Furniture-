@@ -123,7 +123,7 @@
       </div>
     </div>
 
-    <!-- order-details-dialog component -->
+    <!-- message-dialog component -->
     <transition name="dialog">
       <message-dialog v-if="isDialogOpen" :message="selectedMessage" @close="closeDialog" />
     </transition>

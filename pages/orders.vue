@@ -169,7 +169,9 @@
 
         <!-- order-details-dialog component -->
         <transition name="dialog">
-            <order-details-dialog v-if="isDialogOpen" :order="selectedOrder" @close="closeDialog" />
+            <order-details-dialog :order="selectedOrder" v-if="isDialogOpen" :isOpen="isDialogOpen"
+                @close="closeDialog" />
+            <!-- <order-details-dialog v-if="isDialogOpen" :order="selectedOrder" @close="closeDialog" /> -->
         </transition>
 
         <!-- dynamic-toast component -->

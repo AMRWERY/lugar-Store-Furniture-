@@ -317,7 +317,9 @@
     "s_information": "'s Information",
     "change_order_status": "Change order status",
     "customer_messages": "Customer Message",
-    "banners": "Banners"
+    "banners": "Banners",
+    "order_number": "Order number:",
+    "add_new_banner": "Add New Banner"
   },
   "pagination": {
     "previous": "Previous",

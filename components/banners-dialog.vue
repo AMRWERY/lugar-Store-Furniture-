@@ -13,10 +13,10 @@
               enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
               leave-to="opacity-0 scale-95">
               <HeadlessDialogPanel
-                class="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                class="w-full max-w-md p-6 overflow-hidden align-middle transition-all transform bg-white shadow-xl text-start rounded-2xl">
                 <HeadlessDialogTitle as="h3" class="text-lg font-medium leading-6 text-gray-900">
                   <div class="flex justify-between mb-4">
-                    <p>Add New Banner</p>
+                    <p>{{ $t('dashboard.add_new_banner') }}</p>
                     <button role="button" @click="closeDialog">
                       <icon name="material-symbols:close-small-outline" />
                     </button>
