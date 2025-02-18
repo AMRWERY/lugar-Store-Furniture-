@@ -14,7 +14,7 @@ export default {
   corePlugins: {
     aspectRatio: false,
   },
-  darkMode: "class",
+  // darkMode: "class",
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
