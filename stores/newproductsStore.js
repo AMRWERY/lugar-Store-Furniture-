@@ -34,21 +34,40 @@ export const useNewProductsStoreStore = defineStore("new-products", {
         return;
       }
       try {
-        const querySnap = await getDocs(
-          query(
-            collection(db, "products"),
-            where("categoryId", "==", categoryId)
-          )
+        const config = useRuntimeConfig();
+        const endpoint = config.public.productsApiEndpoint + "get_products.php";
+        const response = await $fetch(endpoint, { responseType: "json" });
+        // Assume response is an array of product objects, each having a property "categoryId"
+        // Convert both sides to string to ensure proper comparison
+        this.products = response.filter(
+          (product) => String(product.categoryId) === String(categoryId)
         );
-        const filteredProducts = querySnap.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.products = filteredProducts;
+        console.log("Filtered products:", this.products);
       } catch (error) {
         console.error("Error fetching products by category:", error);
       }
     },
+    // async fetchProductsByCategory(categoryId) {
+    //   if (!categoryId) {
+    //     console.error("Category ID is required to fetch products by category");
+    //     return;
+    //   }
+    //   try {
+    //     const querySnap = await getDocs(
+    //       query(
+    //         collection(db, "products"),
+    //         where("categoryId", "==", categoryId)
+    //       )
+    //     );
+    //     const filteredProducts = querySnap.docs.map((doc) => ({
+    //       id: doc.id,
+    //       ...doc.data(),
+    //     }));
+    //     this.products = filteredProducts;
+    //   } catch (error) {
+    //     console.error("Error fetching products by category:", error);
+    //   }
+    // },
 
     async fetchProductDetail(productId) {
       if (!productId) {
