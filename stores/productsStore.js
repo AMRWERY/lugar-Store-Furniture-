@@ -14,7 +14,6 @@ export const useProductsStore = defineStore("products", {
         const config = useRuntimeConfig();
         const endpoint =
           config.public.productsApiEndpoint + "create_product.php";
-        // Call $fetch and then use .then() to process the response.
         $fetch(endpoint, {
           method: "POST",
           body: productData,
@@ -102,16 +101,20 @@ export const useProductsStore = defineStore("products", {
       }
     },
 
-    async fetchProducts() {
-      try {
-        const config = useRuntimeConfig();
-        const endpoint = config.public.productsApiEndpoint + "get_products.php";
-        const response = await $fetch(endpoint, { responseType: "json" });
-        this.products = response;
-        // console.log("Fetched products:", this.products);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
+    fetchProducts() {
+      const config = useRuntimeConfig();
+      const endpoint = config.public.productsApiEndpoint + "get_products.php";
+      return $fetch(endpoint, { responseType: "json" })
+        .then(response => {
+          this.products = response;
+          // Optionally log the response:
+          // console.log("Fetched products:", this.products);
+          return response;
+        })
+        .catch(error => {
+          console.error("Error fetching products:", error);
+          throw error;
+        });
     },
 
     async fetchProductsByCategory(categoryId) {

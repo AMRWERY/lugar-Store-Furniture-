@@ -23,7 +23,7 @@
                                         <img class="absolute top-0 object-cover w-full h-full transition-all duration-500 ease-in-out end-0"
                                             :src="card.imgOne" />
                                         <img class="absolute top-0 object-cover w-full h-full transition-all duration-500 ease-in-out opacity-0 end-0 group-hover:opacity-100"
-                                            :src="card.imgTwo" />
+                                            :src="card.imgTwo" v-if="card.imgTwo" />
                                     </div>
                                 </nuxt-link>
 
@@ -85,30 +85,52 @@ const subCategories = ref([])
 const selectedSubCategoryId = ref('')
 const categories = ref([])
 const selectedCategoryId = ref('')
-const filteredProducts = ref([])
 
-onMounted(async () => {
+onMounted(() => {
     if (props.subCategoryTitle) {
-        await categoryStore.fetchSubCategories();
-        subCategories.value = categoryStore.subCategories;
-        selectedSubCategoryId.value = subCategories.value.find((subCat) => subCat.title === props.subCategoryTitle)?.id;
-        // console.log('categoryStore.subCategories', categoryStore.subCategories);
-        await productsStore.fetchProducts();
-        products.value = productsStore.products.filter((product) => product.subCategoryId === selectedSubCategoryId.value);
+        categoryStore
+            .fetchSubCategories()
+            .then(() => {
+                subCategories.value = categoryStore.subCategories;
+                const foundSubCat = subCategories.value.find(
+                    (subCat) => subCat.title === props.subCategoryTitle
+                );
+                selectedSubCategoryId.value = foundSubCat ? foundSubCat.id : "";
+                return productsStore.fetchProducts();
+            })
+            .then(() => {
+                products.value = productsStore.products.filter(
+                    (product) => product.subCategoryId === selectedSubCategoryId.value
+                );
+            })
+            .catch((error) => {
+                console.error("Error in subcategory flow:", error);
+            });
     }
 
     if (props.categoryTitle) {
-        await categoryStore.fetchCategories().then(() => {
-            categories.value = categoryStore.categories;
-            selectedCategoryId.value = categories.value.find((cat) => cat.title == props.categoryTitle)?.id;
-            productsStore.fetchProducts().then(() => {
-                products.value = productsStore.products.filter((product) => product.categoryId === selectedCategoryId.value);
+        categoryStore
+            .fetchCategories()
+            .then(() => {
+                categories.value = categoryStore.categories;
+                const foundCat = categories.value.find(
+                    (cat) => cat.title === props.categoryTitle
+                );
+                selectedCategoryId.value = foundCat ? foundCat.id : "";
+                return productsStore.fetchProducts();
+            })
+            .then(() => {
+                products.value = productsStore.products.filter(
+                    (product) => product.categoryId === selectedCategoryId.value
+                );
+            })
+            .catch((error) => {
+                console.error("Error in category flow:", error);
             });
-        });
     }
 
     if (!props.categoryTitle && !props.subCategoryTitle) {
-        // console.log('Neither categoryTitle nor subCategoryTitle provided.');
+        // console.log("Neither categoryTitle nor subCategoryTitle provided.");
     }
 });
 </script>

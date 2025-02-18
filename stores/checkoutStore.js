@@ -33,6 +33,7 @@ export const useCheckoutStore = defineStore("checkout", {
           id: doc.id,
           ...doc.data(),
         }));
+        // console.log(this.status);
         // console.log(this.orders);
         this.updatePagination();
         // await this.fetchTotalCheckouts();

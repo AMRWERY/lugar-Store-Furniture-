@@ -34,7 +34,7 @@
                     <p class="flex items-center space-s-1">
                       <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{ $t('home.le') }}</span>
                       <span class="text-sm text-gray-500 line-through mt-0.5">{{ card.originalPrice }} {{ $t('home.le')
-                        }}</span>
+                      }}</span>
                     </p>
                   </div>
                 </div>
@@ -75,28 +75,49 @@ const selectedSubCategoryId = ref('')
 const categories = ref([])
 const selectedCategoryId = ref('')
 
-onMounted(async () => {
+onMounted(() => {
   if (props.subCategoryTitle) {
-    await categoryStore.fetchSubCategories();
-    subCategories.value = categoryStore.subCategories;
-    selectedSubCategoryId.value = subCategories.value.find((subCat) => subCat.title === props.subCategoryTitle)?.id;
-    // console.log('categoryStore.subCategories', categoryStore.subCategories);
-    await productsStore.fetchProducts();
-    products.value = productsStore.products.filter((product) => product.subCategoryId === selectedSubCategoryId.value);
+    categoryStore.fetchSubCategories()
+      .then(() => {
+        subCategories.value = categoryStore.subCategories;
+        const found = subCategories.value.find(
+          (subCat) => subCat.title === props.subCategoryTitle
+        );
+        selectedSubCategoryId.value = found ? found.id : "";
+        return productsStore.fetchProducts();
+      })
+      .then(() => {
+        products.value = productsStore.products.filter(
+          (product) => product.subCategoryId === selectedSubCategoryId.value
+        );
+      })
+      .catch(error => {
+        console.error("Error in subcategory flow:", error);
+      });
   }
 
   if (props.categoryTitle) {
-    await categoryStore.fetchCategories().then(() => {
-      categories.value = categoryStore.categories;
-      selectedCategoryId.value = categories.value.find((cat) => cat.title == props.categoryTitle)?.id;
-      productsStore.fetchProducts().then(() => {
-        products.value = productsStore.products.filter((product) => product.categoryId === selectedCategoryId.value);
+    categoryStore.fetchCategories()
+      .then(() => {
+        categories.value = categoryStore.categories;
+        const found = categories.value.find(
+          (cat) => cat.title == props.categoryTitle
+        );
+        selectedCategoryId.value = found ? found.id : "";
+        return productsStore.fetchProducts();
+      })
+      .then(() => {
+        products.value = productsStore.products.filter(
+          (product) => product.categoryId === selectedCategoryId.value
+        );
+      })
+      .catch(error => {
+        console.error("Error in category flow:", error);
       });
-    });
-  }
 
+  }
   if (!props.categoryTitle && !props.subCategoryTitle) {
-    // console.log('Neither categoryTitle nor subCategoryTitle provided.');
+    // console.log("No category or subcategory title provided.");
   }
 });
 </script>
