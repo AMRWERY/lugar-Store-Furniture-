@@ -265,7 +265,6 @@
     "your_wishlist": "Your Wishlist",
     "your_cart": "Your Cart",
     "delete_item": "Delete Item",
-    "download_pdf": "Download PDF",
     "back_to_home": "Back to Home",
     "edit_product": "Edit Product",
     "delete_product": "Delete Product",
@@ -286,33 +285,15 @@
   "cart": {
     "your_cart_is_currently_empty": "Your cart is currently empty.",
     "continue_shopping": "Continue Shopping",
-    "total": "Total",
     "your_cart": "Your Cart",
     "quantity": "Quantity:",
-    "secure_shopping_guarantee": "Secure Shopping Guarantee.",
-    "subtotal": "Subtotal",
-    "note": "Note",
-    "additional_comments": "Additional comments",
-    "get_shipping_estimates": "Get Shipping Estimates"
-  },
-  "wishlist": {
-    "wishlist": "Wishlist",
-    "product_image": "Product Image",
-    "product_name": "Product Name",
-    "unit_price": "Unit Price",
-    "your_wishlist_is_empty": "Your wishlist is empty."
+    "subtotal": "Subtotal"
   },
   "checkout": {
-    "checkout": "Checkout",
-    "payment": "Payment",
     "delivery_details": "Delivery Details",
-    "enter_a_gift_card_voucher_or_promotional_code": "Enter a gift card, voucher or promotional code",
     "subtotal": "Subtotal",
     "savings": "Savings",
-    "store_pickup": "Store Pickup",
-    "tax": "Tax",
-    "total": "Total",
-    "payment_details": "Payment Details"
+    "total": "Total"
   },
   "order_summary": {
     "order_summary": "Order Summary",
@@ -320,36 +301,13 @@
     "category": "Category",
     "subtotal": "Subtotal",
     "savings": "Savings",
-    "store_pickup": "Store Pickup",
-    "tax": "Tax",
     "total": "Total",
-    "email": "Email",
-    "phone_number": "Phone Number",
-    "state": "State",
-    "address": "Address",
     "order_details": "Order Details"
   },
-  "social_media": {
-    "share_my": "Share my",
-    "via": "via:"
-  },
-  "other": {
-    "you_may_also_like": "You may also like"
-  },
   "dashboard": {
-    "orders_placed": "Orders Placed",
-    "inventory": "Inventory",
-    "customers": "Customers",
-    "top_products": "Top Products",
     "orders": "Orders",
-    "no_products_available": "No products available",
-    "users": "Users",
     "email": "Email",
-    "first_name": "First Name",
-    "last_name": "Last Name",
     "status": "Status",
-    "blocked": "Blocked",
-    "active": "Active",
     "no_orders_available": "No orders available",
     "image": "Image",
     "order_id": "Order ID",
@@ -361,7 +319,6 @@
     "s_information": "'s Information",
     "change_order_status": "Change order status",
     "customer_messages": "Customer Message",
-    "no_messages_available": "No Messages Available",
     "banners": "Banners"
   },
   "pagination": {
@@ -375,21 +332,8 @@
     "failed_to_delete_the_product": "Failed to delete the product",
     "successfully_logged_in": "successfully Logged in!",
     "your_account_has_been_successfully_logged_in": "Your account has been successfully logged in.",
-    "ah_ah": "ah ah!",
-    "please_log_in_first_to_add_to_wishlist": "Please log in first to add to wishlist.",
-    "item_added_to_your_wishlist": "Item added to your wishlist",
-    "please_log_in_first_to_add_to_cart": "Please log in first to add to cart.",
     "item_added_to_your_cart": "Item added to your cart",
-    "welcome_to_our_website": "Welcome to our website!",
     "category_added_successfully": "Category added successfully",
-    "subcategory_added_successfully": "Subcategory added successfully",
-    "payment_successful": "Payment Successful",
-    "your_payment_was_processed_successfully_thank_you_for_your_purchase": "Your payment was processed successfully. Thank you for your purchase!",
-    "password_reset": "Password Reset!",
-    "please_check_your_email_inbox": "Please check your email inbox",
-    "account_created": "Account Created!",
-    "your_account_has_been_successfully_created": "Your account has been successfully created.",
-    "user_deleted_successfully": "User deleted successfully",
     "please_fill_all_required_fields": "Please fill all required fields.",
     "success": "Success",
     "product_updated_successfully": "Product updated successfully!",
@@ -413,11 +357,6 @@
     "login_failed_please_check_your_information_and_try_again": "Login failed. Please check your information and try again",
     "image_uploaded_successfully": "Image uploaded successfully",
     "faield_to_upload_image": "Faield to upload image"
-  },
-  "status": {
-    "pending": "Pending",
-    "confirmed": "Confirmed",
-    "delivered": "Delivered"
   },
   "products": {
     "products": "Products",

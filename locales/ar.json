@@ -270,7 +270,6 @@
     "your_wishlist": "قائمة الرغبات الخاصة بك",
     "your_cart": "عربتك",
     "delete_item": "حذف العنصر",
-    "download_pdf": "تنزيل PDF",
     "back_to_home": "العودة إلى الصفحة الرئيسية",
     "edit_product": "تعديل المنتج",
     "delete_product": "حذف المنتج",
@@ -291,33 +290,15 @@
   "cart": {
     "your_cart_is_currently_empty": "عربتك فارغة حاليًا.",
     "continue_shopping": "مواصلة التسوق",
-    "total": "الإجمالي",
     "your_cart": "عربة التسوق الخاصة بك",
     "quantity": "الكمية:",
-    "secure_shopping_guarantee": "ضمان التسوق الآمن.",
-    "subtotal": "الإجمالي الفرعي",
-    "note": "ملاحظة",
-    "additional_comments": "تعليقات إضافية",
-    "get_shipping_estimates": "احصل على تقديرات الشحن"
-  },
-  "wishlist": {
-    "wishlist": "قائمة الرغبات",
-    "product_image": "صورة المنتج",
-    "product_name": "اسم المنتج",
-    "unit_price": "سعر الوحدة",
-    "your_wishlist_is_empty": "قائمة الرغبات الخاصة بك فارغة."
+    "subtotal": "الإجمالي الفرعي"
   },
   "checkout": {
-    "checkout": "إتمام الشراء",
-    "payment": "الدفع",
     "delivery_details": "تفاصيل التسليم",
-    "enter_a_gift_card_voucher_or_promotional_code": "أدخل بطاقة هدية أو قسيمة أو رمزًا ترويجيًا",
     "subtotal": "الإجمالي الفرعي",
     "savings": "التوفير",
-    "store_pickup": "استلام من المتجر",
-    "tax": "الضريبة",
-    "total": "الإجمالي",
-    "payment_details": "تفاصيل الدفع"
+    "total": "الإجمالي"
   },
   "order_summary": {
     "order_summary": "ملخص الطلب",
@@ -325,32 +306,13 @@
     "category": "الفئة",
     "subtotal": "المجموع الفرعي",
     "savings": "التوفير",
-    "store_pickup": "الاستلام من المتجر",
-    "tax": "الضريبة",
     "total": "الإجمالي",
     "order_details": "تفاصيل الطلب"
   },
-  "social_media": {
-    "share_my": "شارك",
-    "via": "عن طريق:"
-  },
-  "other": {
-    "you_may_also_like": "قد يعجبك أيضًا"
-  },
   "dashboard": {
-    "orders_placed": "الطلبات المقدمة",
-    "inventory": "المخزون",
-    "customers": "العملاء",
-    "top_products": "المنتجات الأكثر مبيعًا",
     "orders": "الطلبات",
-    "no_products_available": "لا توجد منتجات متاحة",
-    "users": "المستخدمون",
     "email": "البريد الإلكتروني",
-    "first_name": "الاسم الأول",
-    "last_name": "الاسم الأخير",
     "status": "الحالة",
-    "blocked": "محظور",
-    "active": "نشط",
     "no_orders_available": "لا توجد طلبات متاحه حاليًا",
     "image": "الصوره",
     "order_id": "رقم الطلب",
@@ -362,7 +324,6 @@
     "s_information": "معلومات",
     "change_order_status": "تغيير حاله الطلب",
     "customer_messages": "رسائل العملاء",
-    "no_messages_available": "لا توجد رسائل متاحة",
     "banners": "لافتات"
   },
   "pagination": {
@@ -376,21 +337,8 @@
     "failed_to_delete_the_product": "فشل في حذف المنتج",
     "successfully_logged_in": "تم تسجيل الدخول بنجاح!",
     "your_account_has_been_successfully_logged_in": "تم تسجيل دخول حسابك بنجاح.",
-    "ah_ah": "آه آه!",
-    "please_log_in_first_to_add_to_wishlist": "يرجى تسجيل الدخول أولاً لإضافة إلى قائمة الأمنيات.",
-    "item_added_to_your_wishlist": "تم إضافة العنصر إلى قائمة رغباتك",
-    "please_log_in_first_to_add_to_cart": "يرجى تسجيل الدخول أولاً لإضافة العنصر إلى السلة.",
     "item_added_to_your_cart": "تمت إضافة العنصر إلى سلتك",
-    "welcome_to_our_website": "مرحبًا بك في موقعنا!",
     "category_added_successfully": "تم إضافة الفئة بنجاح",
-    "subcategory_added_successfully": "تم إضافة الفئة الفرعية بنجاح",
-    "payment_successful": "تمت عملية الدفع بنجاح",
-    "your_payment_was_processed_successfully_thank_you_for_your_purchase": "تمت معالجة دفعك بنجاح. شكراً لشرائك!",
-    "password_reset": "إعادة تعيين كلمة المرور!",
-    "please_check_your_email_inbox": "يرجى التحقق من صندوق الوارد في بريدك الإلكتروني",
-    "account_created": "تم إنشاء الحساب!",
-    "your_account_has_been_successfully_created": "تم إنشاء حسابك بنجاح.",
-    "user_deleted_successfully": "تم حذف المستخدم بنجاح",
     "please_fill_all_required_fields": "يرجى ملء جميع الحقول المطلوبة.",
     "success": "نجاح",
     "product_updated_successfully": "تم تحديث المنتج بنجاح!",
@@ -414,11 +362,6 @@
     "login_failed_please_check_your_information_and_try_again": "فشل تسجيل الدخول. يرجى التحقق من معلوماتك والمحاولة مرة أخرى",
     "image_uploaded_successfully": "تم تحميل الصورة بنجاح",
     "faield_to_upload_image": "فشل تحميل الصورة"
-  },
-  "status": {
-    "pending": "قيد الانتظار",
-    "confirmed": "مؤكد",
-    "delivered": "تم التوصيل"
   },
   "products": {
     "products": "المنتجات",
