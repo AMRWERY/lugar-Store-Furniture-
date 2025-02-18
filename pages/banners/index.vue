@@ -92,9 +92,7 @@
     </div>
 
     <!-- banners-dialog component -->
-    <transition name="dialog">
-      <banners-dialog v-if="isDialogOpen" @close="closeDialog" />
-    </transition>
+    <banners-dialog v-if="isDialogOpen" :isOpen="isDialogOpen" @close="closeDialog" />
   </div>
 </template>
 
