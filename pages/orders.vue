@@ -168,11 +168,7 @@
         </div>
 
         <!-- order-details-dialog component -->
-        <transition name="dialog">
-            <order-details-dialog :order="selectedOrder" v-if="isDialogOpen" :isOpen="isDialogOpen"
-                @close="closeDialog" />
-            <!-- <order-details-dialog v-if="isDialogOpen" :order="selectedOrder" @close="closeDialog" /> -->
-        </transition>
+        <order-details-dialog :order="selectedOrder" v-if="isDialogOpen" :isOpen="isDialogOpen" @close="closeDialog" />
 
         <!-- dynamic-toast component -->
         <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
@@ -300,15 +296,3 @@ useHead({
     titleTemplate: () => t("head.orders"),
 });
 </script>
-
-<style scoped>
-.dialog-enter-active,
-.dialog-leave-active {
-    transition: opacity 1.5s;
-}
-
-.dialog-enter,
-.dialog-leave-to {
-    opacity: 0;
-}
-</style>
