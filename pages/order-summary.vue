@@ -14,7 +14,7 @@
       </div>
 
       <!-- Product Details -->
-      <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b" v-for="(item, index) in orderSummary?.products || []"
+      <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b" v-for="(item, index) in orderSummary || []"
         :key="item.productId">
         <div class="col-span-2">
           <img :src="item.imgOne" class="w-full h-auto rounded-lg shadow-md" />
@@ -60,18 +60,19 @@
 </template>
 
 <script setup>
+const categoriesStore = useCategoriesStore();
 const orderSummary = ref(null);
 
 const subTotalAmount = computed(() => {
-  if (!orderSummary.value || !orderSummary.value.products) return "0.00";
-  return orderSummary.value.products.reduce((total, item) => {
+  if (!orderSummary.value || !orderSummary.value) return "0.00";
+  return orderSummary.value?.reduce((total, item) => {
     return total + (parseFloat(item.discountedPrice || 0) * (item.qty || item.quantity || 1));
   }, 0).toFixed(2);
 });
 
 const totalDiscount = computed(() => {
-  if (!orderSummary.value || !orderSummary.value.products) return 0;
-  return orderSummary.value.products.reduce((total, item) => {
+  if (!orderSummary.value || !orderSummary.value) return 0;
+  return orderSummary.value?.reduce((total, item) => {
     const discount = parseFloat(item.discount || 0);
     const quantity = item.qty || item.quantity || 1;
     return total + (discount * quantity);
@@ -79,8 +80,8 @@ const totalDiscount = computed(() => {
 });
 
 const averageDiscount = computed(() => {
-  if (!orderSummary.value || !orderSummary.value.products) return 0;
-  const totalItems = orderSummary.value.products.reduce((total, item) => total + (item.qty || item.quantity || 1), 0);
+  if (!orderSummary.value || !orderSummary.value) return 0;
+  const totalItems = orderSummary.value.reduce((total, item) => total + (item.qty || item.quantity || 1), 0);
   return totalItems > 0 ? (totalDiscount.value / totalItems).toFixed(2) : 0;
 });
 
@@ -91,14 +92,27 @@ const totalAmount = computed(() => {
   return (subtotal - savingsAmount).toFixed(2);
 });
 
-onMounted(() => {
+onMounted(async () => {
   const savedOrder = localStorage.getItem("order-summary");
   if (savedOrder) {
     try {
-      orderSummary.value = JSON.parse(savedOrder);
-      console.log("Loaded order summary from localStorage:", orderSummary.value);
+      const parsedOrder = JSON.parse(savedOrder);
+      // console.log("Loaded order summary from localStorage:", orderSummary.value);
+      if (categoriesStore.categories.length === 0) {
+        await categoriesStore.fetchCategories();
+      }
+      orderSummary.value = parsedOrder.map(product => {
+        const category = categoriesStore.categories.find(
+          cat => cat.id.toString() === product.categoryId.toString()
+        );
+        return {
+          ...product,
+          categoryTitle: category?.title || 'N/A',
+          categoryTitleAr: category?.titleAr || 'N/A'
+        };
+      });
     } catch (error) {
-      console.error("Error parsing order summary from localStorage:", error);
+      console.error("Error processing order summary:", error);
     }
   }
 });

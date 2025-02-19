@@ -301,7 +301,7 @@
   "order_summary": {
     "order_summary": "ملخص الطلب",
     "order_number": "رقم الطلب:",
-    "category": "الفئة",
+    "category": "الفئة:",
     "subtotal": "المجموع الفرعي",
     "savings": "التوفير",
     "total": "الإجمالي",
