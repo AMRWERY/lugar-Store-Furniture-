@@ -25,35 +25,38 @@ export const useCheckoutStore = defineStore("checkout", {
   }),
 
   actions: {
-    async fetchStatus() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "order-status"));
-        this.status = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        // console.log(this.status);
-        // console.log(this.orders);
-        this.updatePagination();
-        // await this.fetchTotalCheckouts();
-      } catch (e) {
-        console.error("Error fetching orders: ", e);
-      }
+    fetchStatus() {
+      const endpoint = "https://lugarstore.com/api/status/get_status_list.php";
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          const statusArray = Array.isArray(response)
+            ? response
+            : response.data;
+          this.status = statusArray;
+          this.updatePagination();
+          return statusArray;
+        })
+        .catch((error) => {
+          console.error("Error fetching status: ", error);
+          throw error;
+        });
     },
 
-    async fetchOrders() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "checkout"));
-        this.orders = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        // console.log(this.orders);
-        this.updatePagination();
-        await this.fetchTotalCheckouts();
-      } catch (e) {
-        console.error("Error fetching orders: ", e);
-      }
+    fetchOrders() {
+      const endpoint = "https://lugarstore.com/api/orders/get_orders.php";
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          const ordersArray = Array.isArray(response)
+            ? response
+            : response.data;
+          this.orders = ordersArray;
+          this.updatePagination();
+          return this.fetchTotalCheckouts();
+        })
+        .catch((error) => {
+          console.error("Error fetching orders:", error);
+          throw error;
+        });
     },
 
     updatePagination() {
