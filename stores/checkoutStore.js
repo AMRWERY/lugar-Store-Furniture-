@@ -90,32 +90,39 @@ export const useCheckoutStore = defineStore("checkout", {
       }
     },
 
-    generateOrderId() {
-      const timestamp = Date.now();
-      const randomNum = Math.floor(Math.random() * 10000);
-      return `ORDER-${timestamp}-${randomNum}`;
-    },
-
-    async saveCheckoutData(cartData) {
-      try {
-        const orderId = this.generateOrderId();
-        const currentDate = new Date().toLocaleDateString("en-CA");
-        const order = {
-          orderId: orderId,
-          name: this.name,
-          email: this.email,
-          state: this.state,
-          phoneNumber: this.phoneNumber,
-          address: this.address,
-          date: currentDate,
-          statusId: "xLNExrzubgZl81mrerlw",
-          cart: cartData,
-        };
-        const docRef = await addDoc(collection(db, "checkout"), order);
-        // console.log("Checkout data saved with ID:", docRef.id);
-      } catch (e) {
-        console.error("Error adding document:", e);
-      }
+    saveCheckoutData(cartData) {
+      const currentDate = new Date().toLocaleDateString("en-CA");
+      const products = cartData.map((item) => ({
+        productId: item.productId,
+        qty: item.quantity,
+      }));
+      const order = {
+        name: this.name,
+        email: this.email,
+        state: this.state,
+        phoneNumber: this.phoneNumber,
+        address: this.address,
+        date: currentDate,
+        statusId: "2",
+        products: products,
+      };
+      const endpoint = "https://lugarstore.com/api/orders/create_order.php";
+      return $fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: order,
+        responseType: "json",
+      })
+        .then((response) => {
+          console.log("Checkout data saved:", response);
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error saving checkout data:", error);
+          throw error;
+        });
     },
 
     async fetchTotalCheckouts() {

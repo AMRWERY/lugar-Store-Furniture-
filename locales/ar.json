@@ -369,7 +369,8 @@
     "order_deletion_failed": "فشل مسح الطلب",
     "failed_to_upload_banner": "فشل تحميل الصوره",
     "banner_deleted_successfully": "تم مسح الصوره بنجاح",
-    "failed_to_delete_banner": "فشل مسح الصوره"
+    "failed_to_delete_banner": "فشل مسح الصوره",
+    "order_submission_failed": "فشل تقديم الطلب"
   },
   "products": {
     "products": "المنتجات",

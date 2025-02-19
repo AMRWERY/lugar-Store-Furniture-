@@ -7,14 +7,14 @@
           <h2 class="text-2xl font-semibold text-gray-900">{{ $t('order_summary.order_summary') }}</h2>
           <ClientOnly>
             <p class="mt-1 text-sm text-gray-500">
-              {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">{{ orderId }}</span>
+              <!-- {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">{{ orderId }}</span> -->
             </p>
           </ClientOnly>
         </div>
       </div>
 
       <!-- Product Details -->
-      <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b" v-for="item in checkoutStore.orders[0]?.cart || []"
+      <div class="grid grid-cols-12 gap-6 pb-6 mb-6 border-b" v-for="(item, index) in orderSummary?.products || []"
         :key="item.productId">
         <div class="col-span-2">
           <img :src="item.imgOne" class="w-full h-auto rounded-lg shadow-md" />
@@ -22,7 +22,7 @@
         <div class="col-span-10">
           <p class="text-lg font-semibold text-gray-900">{{ $i18n.locale === 'ar' ? item.titleAr : item.title }}</p>
           <p class="text-sm font-semibold text-gray-700"><span class="me-1">{{ $t('order_summary.category') }} </span>{{
-           $i18n.locale === 'ar' ? item.categoryTitleAr : item.categoryTitle}}</p>
+            $i18n.locale === 'ar' ? item.categoryTitleAr : item.categoryTitle }}</p>
         </div>
       </div>
 
@@ -32,7 +32,7 @@
           <dt class="text-sm font-medium text-gray-500">{{ $t('order_summary.subtotal') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-sm font-medium text-gray-900">{{ subTotalAmount }}  {{ $t('products.le') }}</dd>
+          <dd class="text-sm font-medium text-gray-900">{{ subTotalAmount }} {{ $t('products.le') }}</dd>
         </div>
       </div>
 
@@ -52,7 +52,7 @@
           <dt class="text-xl">{{ $t('order_summary.total') }}</dt>
         </div>
         <div class="col-span-4 text-end">
-          <dd class="text-xl font-semibold text-gray-900">{{ totalAmount }}  {{ $t('products.le') }}</dd>
+          <dd class="text-xl font-semibold text-gray-900">{{ totalAmount }} {{ $t('products.le') }}</dd>
         </div>
       </div>
     </div>
@@ -60,48 +60,47 @@
 </template>
 
 <script setup>
-import { useCheckoutStore } from '@/stores/checkoutStore';
-
-const checkoutStore = useCheckoutStore();
-
-const orderId = checkoutStore.generateOrderId();
+const orderSummary = ref(null);
 
 const subTotalAmount = computed(() => {
-  return checkoutStore.orders[0]?.cart.reduce((total, item) => {
-    return total + (parseFloat(item.discountedPrice) * item.quantity);
-  }, 0).toFixed(2) || 0;
+  if (!orderSummary.value || !orderSummary.value.products) return "0.00";
+  return orderSummary.value.products.reduce((total, item) => {
+    return total + (parseFloat(item.discountedPrice || 0) * (item.qty || item.quantity || 1));
+  }, 0).toFixed(2);
 });
 
 const totalDiscount = computed(() => {
-  return checkoutStore.orders[0]?.cart.reduce((total, item) => {
-    const discount = parseFloat(item.discount);
-    const quantity = item.quantity;
-    if (isNaN(discount) || isNaN(quantity)) {
-      return total;
-    }
+  if (!orderSummary.value || !orderSummary.value.products) return 0;
+  return orderSummary.value.products.reduce((total, item) => {
+    const discount = parseFloat(item.discount || 0);
+    const quantity = item.qty || item.quantity || 1;
     return total + (discount * quantity);
-  }, 0) || 0;
+  }, 0);
 });
 
 const averageDiscount = computed(() => {
-  const totalItems = checkoutStore.orders[0]?.cart.reduce((total, item) => total + item.quantity, 0) || 0;
-  if (totalItems > 0) {
-    return (totalDiscount.value / totalItems).toFixed(2);
-  } else {
-    return 0;
-  }
+  if (!orderSummary.value || !orderSummary.value.products) return 0;
+  const totalItems = orderSummary.value.products.reduce((total, item) => total + (item.qty || item.quantity || 1), 0);
+  return totalItems > 0 ? (totalDiscount.value / totalItems).toFixed(2) : 0;
 });
 
 const totalAmount = computed(() => {
   const subtotal = parseFloat(subTotalAmount.value);
-  const discount = parseFloat(averageDiscount.value) || 0;
-  const savingsAmount = (subtotal * (discount / 100));
-  const total = subtotal - savingsAmount;
-  return total.toFixed(2);
+  const discountPercent = parseFloat(averageDiscount.value) || 0;
+  const savingsAmount = subtotal * (discountPercent / 100);
+  return (subtotal - savingsAmount).toFixed(2);
 });
 
-onMounted(async () => {
-  await checkoutStore.fetchOrders();
+onMounted(() => {
+  const savedOrder = localStorage.getItem("order-summary");
+  if (savedOrder) {
+    try {
+      orderSummary.value = JSON.parse(savedOrder);
+      console.log("Loaded order summary from localStorage:", orderSummary.value);
+    } catch (error) {
+      console.error("Error parsing order summary from localStorage:", error);
+    }
+  }
 });
 
 const { t } = useI18n()
