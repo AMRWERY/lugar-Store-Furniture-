@@ -46,17 +46,6 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  runtimeConfig: {
-    // Private variables (server only) go here
-    // ...
-    public: {
-      // Variables available on both client and server
-      subCategoriesApiEndpoint:
-        process.env.NUXT_PUBLIC_SUB_CATEGORIES_API_ENDPOINT,
-      uploadImgApiEndpoint: process.env.NUXT_PUBLIC_UPLOAD_IMG_API_ENDPOINT,
-      productsApiEndpoint: process.env.NUXT_PUBLIC_PRODUCTS_API_ENDPOINT,
-    },
-  },
   app: {
     head: {
       title: "Lugar Store",

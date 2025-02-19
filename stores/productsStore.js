@@ -8,8 +8,7 @@ export const useProductsStore = defineStore("products", {
 
   actions: {
     createProduct(productData) {
-      const config = useRuntimeConfig();
-      const endpoint = config.public.productsApiEndpoint + "create_product.php";
+      const endpoint = "https://lugarstore.com/api/products/create_product.php";
       return $fetch(endpoint, {
         method: "POST",
         body: productData,
@@ -28,8 +27,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     updateProduct(productId, updatedData) {
-      const config = useRuntimeConfig();
-      const endpoint = config.public.productsApiEndpoint + "update_product.php";
+      const endpoint = "https://lugarstore.com/api/products/update_product.php";
       return $fetch(endpoint, {
         method: "PUT",
         headers: {
@@ -65,8 +63,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     deleteProduct(productId) {
-      const config = useRuntimeConfig();
-      const endpoint = config.public.productsApiEndpoint + "delete_product.php";
+      const endpoint = "https://lugarstore.com/api/products/delete_product.php";
       return $fetch(endpoint, {
         method: "DELETE",
         headers: {
@@ -97,8 +94,7 @@ export const useProductsStore = defineStore("products", {
     },
 
     fetchProducts() {
-      const config = useRuntimeConfig();
-      const endpoint = config.public.productsApiEndpoint + "get_products.php";
+      const endpoint = "https://lugarstore.com/api/products/get_products.php";
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
           this.products = response;
@@ -117,8 +113,7 @@ export const useProductsStore = defineStore("products", {
         // console.error("Category ID is required to fetch products by category");
         return Promise.resolve();
       }
-      const config = useRuntimeConfig();
-      const endpoint = config.public.productsApiEndpoint + "get_products.php";
+      const endpoint = "https://lugarstore.com/api/products/get_products.php";
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
           this.products = response.filter(
@@ -138,10 +133,8 @@ export const useProductsStore = defineStore("products", {
         // console.error("Product ID is missing or invalid");
         return Promise.resolve(null);
       }
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.productsApiEndpoint +
-        "get_product.php?id=" +
+        "https://lugarstore.com/api/products/get_product.php?id=" +
         encodeURIComponent(productId);
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {

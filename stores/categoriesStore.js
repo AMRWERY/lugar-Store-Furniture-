@@ -140,7 +140,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     fetchSubCategories() {
       const endpoint =
-        "https://lugarstore.com/api/categories/get_subcategories.php";
+        "https://lugarstore.com/api/sub_categories/get_subcategories.php";
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
           this.subCategories = response;
@@ -158,7 +158,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     updateMarketCategory(categoryId, updatedData) {
       const endpoint =
-        "https://lugarstore.com/api/categories/update_subcategory.php";
+        "https://lugarstore.com/api/sub_categories/update_subcategory.php";
       return $fetch(endpoint, {
         method: "PUT",
         headers: {
@@ -195,7 +195,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     fetchCMarketCategoryDetails(marketCategoryId) {
       const endpoint =
-        "https://lugarstore.com/api/categories/get_subcategory.php?id=" +
+        "https://lugarstore.com/api/sub_categories/get_subcategory.php?id=" +
         encodeURIComponent(marketCategoryId);
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
@@ -215,7 +215,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     deleteMarketCategory(marketCategoryId) {
       const endpoint =
-        "https://lugarstore.com/api/categories/delete_subcategory.php";
+        "https://lugarstore.com/api/sub_categories/delete_subcategory.php";
       return $fetch(endpoint, {
         method: "DELETE",
         headers: {
@@ -247,7 +247,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
     addSubCategory(title, titleAr) {
       const endpoint =
-        "https://lugarstore.com/api/categories/create_subcategory.php";
+        "https://lugarstore.com/api/sub_categories/create_subcategory.php";
       return $fetch(endpoint, {
         method: "POST",
         body: { title, titleAr },

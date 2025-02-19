@@ -101,7 +101,7 @@ async function uploadFile() {
   formData.append('fileToUpload', file);
   try {
     const config = useRuntimeConfig();
-    const uploadEndpoint = config.public.uploadImgApiEndpoint;
+    const uploadEndpoint = "https://lugarstore.com/upload.php";
     const response = await fetch(uploadEndpoint, {
       method: 'POST',
       body: formData
