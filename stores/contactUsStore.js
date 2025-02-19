@@ -20,36 +20,45 @@ export const useContactStore = defineStore("contact", {
   }),
 
   actions: {
-    async submitForm(contactData) {
+    submitForm(contactData) {
       const currentDate = new Date().toLocaleDateString("en-CA");
-      try {
-        await addDoc(collection(db, "contact-us"), {
-          name: contactData.name,
-          email: contactData.email,
-          phone: contactData.phone,
-          message: contactData.message,
-          date: currentDate,
+      const payload = {
+        name: contactData.name,
+        email: contactData.email,
+        phone: contactData.phone,
+        message: contactData.message,
+        date: currentDate,
+      };
+      const endpoint = "https://lugarstore.com/api/messages/create_message.php";
+      return $fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+        responseType: "json",
+      })
+        .then((response) => {
+          // console.log("Message submitted:", response);
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error submitting message:", error);
+          throw error;
         });
-      } catch (e) {
-        // console.log(e);
-      } finally {
-        // console.log("Message saved");
-      }
     },
 
-    async fetchMessages() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "contact-us"));
-        const messages = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.messages = messages;
-        // console.log('messages', messages);
-        this.updatePagination();
-      } catch (e) {
-        // console.log("Error fetching messages: ", e);
-      }
+    fetchMessages() {
+      const endpoint = "https://lugarstore.com/api/messages/get_messages.php";
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          const messages = Array.isArray(response) ? response : response.data;
+          this.messages = messages;
+          this.updatePagination();
+          return messages;
+        })
+        .catch((e) => {
+          console.error("Error fetching messages: ", e);
+          throw e;
+        });
     },
 
     updatePagination() {
@@ -66,25 +75,43 @@ export const useContactStore = defineStore("contact", {
       }
     },
 
-    async deleteMessage(messageId) {
+    deleteMessage(messageId) {
       if (!messageId) {
         return;
       }
-      try {
-        const docRef = doc(db, "contact-us", messageId);
-        await deleteDoc(docRef);
-        this.messages = this.messages.filter(
-          (message) => message.messageId !== messageId
-        );
-        this.updatePagination();
-      } catch (error) {
-        console.error("Error removing from message:", error);
-      }
+      const endpoint = "https://lugarstore.com/api/messages/delete_message.php";
+      return $fetch(endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: messageId }),
+        responseType: "json",
+      })
+        .then((response) => {
+          if (response.success) {
+            this.messages = this.messages.filter(
+              (message) => message.id !== messageId
+            );
+            this.updatePagination();
+          } else {
+            console.error(
+              "API error during deletion:",
+              response.error || response.message || response
+            );
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error removing message:", error);
+          throw error;
+        });
     },
   },
 
   getters: {
     allMessages: (state) => state.messages,
+
     totalPages() {
       return Math.ceil(this.messages.length / this.messagesPerPage);
     },
