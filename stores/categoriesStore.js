@@ -13,9 +13,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
 
   actions: {
     fetchCategories() {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.categoriesApiEndpoint + "get_categories.php";
+        "https://lugarstore.com/api/categories/get_categories.php";
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
           this.categories = response.data || response;
@@ -32,10 +31,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     fetchCategoryDetails(categoryId) {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.categoriesApiEndpoint +
-        "get_category.php?id=" +
+        "https://lugarstore.com/api/categories/get_category.php?id=" +
         encodeURIComponent(categoryId);
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
@@ -55,9 +52,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     updateCategory(categoryId, updatedData) {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.categoriesApiEndpoint + "update_category.php";
+        "https://lugarstore.com/api/categories/update_category.php";
       return $fetch(endpoint, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -91,8 +87,7 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     addCategory(title, titleAr, imgOne) {
-      const config = useRuntimeConfig();
-      const endpoint = config.public.categoriesApiEndpoint + "add_category.php";
+      const endpoint = "https://lugarstore.com/api/categories/add_category.php";
       return $fetch(endpoint, {
         method: "POST",
         body: { title, titleAr, imgOne },
@@ -112,9 +107,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     deleteCategory(categoryId) {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.categoriesApiEndpoint + "delete_category.php";
+        "https://lugarstore.com/api/categories/delete_category.php";
       return $fetch(endpoint, {
         method: "DELETE",
         headers: {
@@ -145,9 +139,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     fetchSubCategories() {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.subCategoriesApiEndpoint + "get_subcategories.php";
+        "https://lugarstore.com/api/categories/get_subcategories.php";
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
           this.subCategories = response;
@@ -164,9 +157,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     updateMarketCategory(categoryId, updatedData) {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.subCategoriesApiEndpoint + "update_subcategory.php";
+        "https://lugarstore.com/api/categories/update_subcategory.php";
       return $fetch(endpoint, {
         method: "PUT",
         headers: {
@@ -202,10 +194,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     fetchCMarketCategoryDetails(marketCategoryId) {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.subCategoriesApiEndpoint +
-        "get_subcategory.php?id=" +
+        "https://lugarstore.com/api/categories/get_subcategory.php?id=" +
         encodeURIComponent(marketCategoryId);
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
@@ -224,9 +214,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     deleteMarketCategory(marketCategoryId) {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.subCategoriesApiEndpoint + "delete_subcategory.php";
+        "https://lugarstore.com/api/categories/delete_subcategory.php";
       return $fetch(endpoint, {
         method: "DELETE",
         headers: {
@@ -257,9 +246,8 @@ export const useCategoriesStore = defineStore("categoriesStore", {
     },
 
     addSubCategory(title, titleAr) {
-      const config = useRuntimeConfig();
       const endpoint =
-        config.public.subCategoriesApiEndpoint + "create_subcategory.php";
+        "https://lugarstore.com/api/categories/create_subcategory.php";
       return $fetch(endpoint, {
         method: "POST",
         body: { title, titleAr },
