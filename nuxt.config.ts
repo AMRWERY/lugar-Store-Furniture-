@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     "@formkit/nuxt",
     "@nuxtjs/i18n",
     "vue3-carousel-nuxt",
-    "@nuxt/icon",
     "@vueuse/nuxt",
   ],
   tailwindcss: {
@@ -64,7 +63,12 @@ export default defineNuxtConfig({
       title: "Lugar Store",
       script: [{}],
       noscript: [],
-      link: [{}],
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css",
+        },
+      ],
       meta: [
         {
           name: "viewport",

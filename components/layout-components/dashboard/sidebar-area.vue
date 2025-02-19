@@ -16,7 +16,7 @@
                 </nuxt-link>
 
                 <button class="block lg:hidden" @click="sidebarStore.isSidebarOpen = false">
-                    <icon name="ic:baseline-arrow-back-ios-new" class="w-5 h-5 mt-2 text-white fill-current" />
+                    <i class="mt-2 text-white fill-current fa-solid fa-arrow-left"></i>
                 </button>
             </div>
             <!-- SIDEBAR HEADER -->

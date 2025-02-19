@@ -80,7 +80,7 @@
                         <td colspan="10" class="p-4 text-center">
                             <!-- skeleton-loader component -->
                             <skeleton-loader />
-                            <!-- <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" /> -->
+                            <!-- <i class="fa-solid fa-spinner fa-spin-pulse fa-4x"></i> -->
                         </td>
                     </tr>
                 </tbody>
@@ -118,7 +118,7 @@
                         <td class="p-4 py-5">
                             <p class="text-sm text-blue-700 cursor-pointer" @click="openOrderDetails(order)">
                             <div class="flex items-center justify-center" v-if="order.loading">
-                                <icon name="svg-spinners:tadpole" />
+                                <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                             </div>
                             <span v-else>{{ $t('btn.view_details') }}</span>
                             </p>
@@ -135,8 +135,8 @@
                         </td>
                         <td class="p-4 py-5">
                             <button type="button" @click="deleteOrder(order.id)">
-                                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="order.loading" />
-                                <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                                <i class="text-blue-500 fa-solid fa-spinner fa-spin-pulse" v-if="order.loading"></i>
+                                <i class="text-red-700 fa-regular fa-trash-can" v-else></i>
                             </button>
                         </td>
                     </tr>
@@ -206,7 +206,7 @@ const updateOrderStatus = async (orderId, newStatus, newStatusAr) => {
             title: t('toast.great'),
             message: t('toast.order_status_updated'),
             type: 'success',
-            icon: 'mdi:check-circle',
+            icon: 'fa-solid fa-circle-check',
         });
     } catch (error) {
         console.error(error);
@@ -262,14 +262,14 @@ const deleteOrder = async (orderId) => {
             title: t('toast.great'),
             message: t('toast.order_deleted'),
             type: 'success',
-            icon: 'mdi:check-circle',
+            icon: 'fa-solid fa-circle-check',
         });
     } catch (error) {
         triggerToast({
             title: t('toast.error'),
             message: t('toast.order_deletion_failed'),
             type: 'error',
-            icon: 'mdi:alert-circle',
+            icon: 'fa-solid fa-triangle-exclamation',
         });
     } finally {
         setTimeout(() => {

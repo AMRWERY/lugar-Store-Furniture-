@@ -50,14 +50,14 @@
                 <div class="relative flex flex-row w-full h-10 bg-transparent rounded-lg">
                   <button @click="decrementQuantity"
                     class="w-32 h-full text-gray-600 bg-gray-100 border-r outline-none cursor-pointer rounded-s dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    <icon name="ic:baseline-minus" class="w-6 h-6 m-auto" />
+                    <i class="m-auto fa-solid fa-minus"></i>>
                   </button>
                   <input type="number" v-model="quantity"
                     class="flex items-center w-[70px] font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-100 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-md hover:text-black"
                     placeholder="1" />
                   <button @click="incrementQuantity"
                     class="w-32 h-full text-gray-600 bg-gray-100 border-r outline-none cursor-pointer rounded-e dark:border-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-gray-700 dark:bg-gray-900 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                    <icon name="material-symbols:add" class="w-6 h-6 m-auto" />
+                    <i class="m-auto fa-solid fa-plus"></i>
                   </button>
                 </div>
               </div>
@@ -67,11 +67,11 @@
               <button @click="handleAddToCart" class="w-[300px] h-10 btn-style flex items-center justify-center">
                 <div class="flex items-center justify-center" v-if="loading">
                   <span class="text-center me-2">{{ $t('loading_btn.adding_to_cart') }}...</span>
-                  <icon name="svg-spinners:270-ring-with-bg" />
+                  <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                 </div>
                 <div class="flex items-center" v-else>
                   <span>{{ $t('btn.add_to_cart') }}</span>
-                  <icon name="clarity:shopping-cart-line" class="ms-2" />
+                  <i class="fa-solid fa-cart-plus ms-2"></i>
                 </div>
               </button>
             </div>

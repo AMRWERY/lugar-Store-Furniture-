@@ -22,7 +22,7 @@
                 <button type="submit" class="w-full px-4 py-2 btn-style">
                     <div class="flex items-center justify-center" v-if="loadingOne">
                         <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
-                        <icon name="svg-spinners:270-ring-with-bg" />
+                        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                     </div>
                     <span v-else>{{ $t('btn.update_marketing_category') }}</span>
                 </button>
@@ -79,7 +79,7 @@ const handleUpdateMarketCategory = () => {
                 title: t('toast.success'),
                 message: t('toast.marketing_category_updated'),
                 type: 'success',
-                icon: 'mdi:check-circle',
+                icon: 'fa-solid fa-circle-check',
             });
             return store.fetchCMarketCategoryDetails(marketCategoryId);
         })
@@ -89,7 +89,7 @@ const handleUpdateMarketCategory = () => {
                 title: t('toast.error'),
                 message: t('toast.marketing_category_update_failed'),
                 type: 'error',
-                icon: 'mdi:alert-circle',
+                icon: 'fa-solid fa-triangle-exclamation',
             });
         })
         .finally(() => {

@@ -21,7 +21,7 @@
                   class="flex items-center justify-center p-2 text-gray-400 bg-white rounded-md -me-2 size-10"
                   @click="mobileFiltersOpen = false">
                   <span class="sr-only">Close menu</span>
-                  <icon name="material-symbols:close-small-rounded" aria-hidden="true" />
+                  <i class="fa-solid fa-xmark" aria-hidden="true"></i>
                 </button>
               </div>
 
@@ -34,8 +34,8 @@
                       class="flex items-center justify-between w-full px-2 py-3 text-gray-400 bg-white hover:text-gray-500">
                       <span class="font-medium text-gray-900">{{ section.name }}</span>
                       <span class="flex items-center ms-6">
-                        <icon name="material-symbols:add" aria-hidden="true" v-if="!open" />
-                        <icon name="ic:outline-minus" aria-hidden="true" v-else />
+                        <i class="fa-solid fa-plus" aria-hidden="true" v-if="!open"></i>
+                        <i class="fa-solid fa-minus" aria-hidden="true" v-else></i>
                       </span>
                     </HeadlessDisclosureButton>
                   </h3>
@@ -68,7 +68,7 @@
         <button type="button" class="p-2 -m-2 text-gray-400 ms-4 hover:text-gray-500 sm:ms-6 lg:hidden"
           @click="mobileFiltersOpen = true">
           <span class="sr-only">Filters</span>
-          <icon name="material-symbols:filter-alt" aria-hidden="true" />
+          <i class="fa-solid fa-filter" aria-hidden="true"></i>
         </button>
       </div>
 
@@ -85,8 +85,8 @@
                   class="flex items-center justify-between w-full py-3 text-sm text-gray-400 bg-white hover:text-gray-500">
                   <span class="font-medium text-gray-900">{{ section.name }}</span>
                   <span class="flex items-center ms-6">
-                    <icon name="material-symbols:add" aria-hidden="true" v-if="!open" />
-                    <icon name="ic:outline-minus" aria-hidden="true" v-else />
+                    <i class="fa-solid fa-plus" aria-hidden="true" v-if="!open"></i>
+                    <i class="fa-solid fa-minus" aria-hidden="true" v-else></i>
                   </span>
                 </HeadlessDisclosureButton>
               </h3>
@@ -101,7 +101,7 @@
                       </div>
                     </div>
                     <label :for="`filter-${section.id}-${optionIdx}`" class="text-sm text-gray-600">{{ option.label
-                      }}</label>
+                    }}</label>
                   </div>
                 </div>
               </HeadlessDisclosurePanel>

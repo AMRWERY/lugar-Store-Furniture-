@@ -5,7 +5,7 @@
         <h3 class="text-lg font-semibold text-slate-800">{{ $t('dashboard.banners') }}</h3>
       </div>
       <nuxt-link to="" type="button" class="flex items-center px-4 py-2.5 btn-style cursor-pointer" @click="openDialog">
-        <icon name="ep:plus" class="w-5 h-5 me-2" />
+        <i class="fa-solid fa-plus me-2"></i>
         <span>{{ $t('btn.add_banner') }}</span>
       </nuxt-link>
     </div>
@@ -39,7 +39,7 @@
                   <td colspan="10" class="p-4 text-center">
                     <!-- skeleton-loader component -->
                     <skeleton-loader />
-                    <!-- <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" /> -->
+                    <!-- <i class="fa-solid fa-spinner fa-spin-pulse fa-4x"></i> -->
                   </td>
                 </tr>
               </tbody>

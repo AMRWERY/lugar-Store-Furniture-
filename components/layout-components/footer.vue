@@ -21,20 +21,20 @@
 
                         <ul class="mt-8 space-y-1 text-sm">
                             <li class="flex items-center space-s-2">
-                                <icon name="material-symbols:add-location" class="w-5 h-5" />
+                                <i class="fa-solid fa-location-dot"></i>
                                 <span class="truncate">{{ $t('footer.factory_damietta_dam_road_angar_logar_furniture')
-                                    }}</span>
+                                }}</span>
                             </li>
                             <li class="flex items-center space-s-2">
-                                <icon name="material-symbols:add-location" class="w-5 h-5" />
+                                <i class="fa-solid fa-location-dot"></i>
                                 <span class="truncate">{{
                                     $t('footer.damietta_exhibition_port_said_road_behind_al_baqari_cars') }}</span>
                             </li>
                             <li class="flex items-center space-s-2">
-                                <icon name="material-symbols:add-location" class="w-6 h-6" />
+                                <i class="fa-solid fa-location-dot"></i>
                                 <span class="truncate">{{
                                     $t('footer.fifth_settlement_lotus_exhibition_iin_front_of_platinum_club_next_to_skyline_school')
-                                    }}</span>
+                                }}</span>
                             </li>
                         </ul>
 
@@ -43,7 +43,7 @@
                                 <nuxt-link to="https://www.facebook.com/lugarinv?mibextid=ZbWKwL" target="_blank"
                                     class="transition hover:opacity-75">
                                     <span class="sr-only">Facebook</span>
-                                    <icon name="logos:facebook" class="w-6 h-6" />
+                                    <i class="fa-brands fa-facebook text-2xl text-[#1877F2]"></i>
                                 </nuxt-link>
                             </li>
 
@@ -51,7 +51,7 @@
                                 <nuxt-link to="https://wa.me/201023351915" target="_blank"
                                     class="transition hover:opacity-75">
                                     <span class="sr-only">Whatsapp</span>
-                                    <icon name="logos:whatsapp-icon" class="w-6 h-6" />
+                                    <i class="fa-brands fa-whatsapp text-2xl text-[#25D366]"></i>
                                 </nuxt-link>
                             </li>
 
@@ -59,7 +59,10 @@
                                 <nuxt-link to="https://www.instagram.com/lugar_furniture" target="_blank"
                                     class="transition hover:opacity-75">
                                     <span class="sr-only">Instagram</span>
-                                    <icon name="skill-icons:instagram" class="w-6 h-6" />
+                                    <i class="fa-brands fa-instagram text-2xl
+   bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af]
+   bg-clip-text text-transparent">
+                                    </i>
                                 </nuxt-link>
                             </li>
 
@@ -67,7 +70,10 @@
                                 <nuxt-link to="https://www.tiktok.com/@lugarfurnitureinv?_t=8sj2O0ysXQo&_r=1"
                                     target="_blank" class="transition hover:opacity-75">
                                     <span class="sr-only">Tiktok</span>
-                                    <icon name="logos:tiktok-icon" class="w-6 h-6" />
+                                    <i class="fa-brands fa-tiktok text-2xl
+          bg-gradient-to-r from-[#69C9D0] via-white to-[#EE1D52]
+          bg-clip-text text-transparent">
+                                    </i>
                                 </nuxt-link>
                             </li>
                         </ul>

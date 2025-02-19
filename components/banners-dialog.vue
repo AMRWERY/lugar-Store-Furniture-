@@ -18,7 +18,7 @@
                   <div class="flex justify-between mb-4">
                     <p>{{ $t('dashboard.add_new_banner') }}</p>
                     <button role="button" @click="closeDialog">
-                      <icon name="material-symbols:close-small-outline" />
+                      <i class="fa-solid fa-xmark"></i>
                     </button>
                   </div>
                 </HeadlessDialogTitle>
@@ -31,7 +31,7 @@
                             class="relative flex items-center justify-center h-48 bg-gray-100 border-2 border-blue-700 border-dashed border-dotted rounded-lg">
                             <div class="absolute">
                               <div class="flex flex-col items-center">
-                                <icon name="material-symbols:add-photo-alternate" class="w-20 h-20 text-blue-700" />
+                                <i class="fa-solid fa-image fa-4x"></i>
                                 <span class="block font-normal text-gray-400">{{ $t('form.attach_your_files_here')
                                 }}</span>
                               </div>
@@ -54,7 +54,7 @@
                   <button class="px-6 py-2.5 btn-style" @click="uploadFile" :disabled="!selectedFile">
                     <div class="flex items-center justify-center" v-if="loading">
                       <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
-                      <icon name="svg-spinners:270-ring-with-bg" />
+                      <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                     </div>
                     <span v-else>{{ $t("btn.upload") }}</span>
                   </button>

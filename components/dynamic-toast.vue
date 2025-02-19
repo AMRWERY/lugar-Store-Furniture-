@@ -3,12 +3,12 @@
         <transition name="toast-slide">
             <div v-if="visible" :class="`relative w-full max-w-lg p-5 rounded-lg shadow sm:max-w-lg ${toastStyles}`">
                 <button @click="closeToast" class="absolute mt-2 text-gray-500 top-2 end-2 hover:text-gray-700">
-                    <icon name="material-symbols:close" class="w-5 h-5" />
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
 
                 <div class="flex items-start">
                     <div>
-                        <icon :name="toastIcon" :class="`w-6 h-6 ${iconColor}`" />
+                        <i :class="['toastIcon', iconColor]"></i>
                     </div>
                     <div class="ms-3">
                         <h2 class="font-semibold" :class="titleColor">{{ title }}</h2>

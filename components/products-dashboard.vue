@@ -42,7 +42,7 @@
         <div class="flex items-end justify-end">
           <nuxt-link to="/products/add-product" type="button"
             class="flex items-center px-4 py-2.5 btn-style w-full sm:w-auto justify-center">
-            <icon name="ep:plus" class="w-5 h-5 me-2" />
+            <i class="fa-solid fa-plus me-2"></i>
             <span>{{ $t('btn.add_product') }}</span>
           </nuxt-link>
         </div>
@@ -51,11 +51,11 @@
 
       <!-- Loading Spinner -->
       <!-- <div v-if="loading" class="flex items-center justify-center h-48 text-gray-600">
-        <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
+        <i class="fa-solid fa-spinner fa-spin-pulse fa-6x"></i>
       </div>
 
       <div v-else-if="!filteredProducts?.length" class="flex items-center justify-center h-48 text-gray-600">
-        <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" />
+        <i class="fa-solid fa-spinner fa-spin-pulse fa-6x"></i>
       </div> -->
 
       <div v-if="filteredProducts?.length === 0">
@@ -79,14 +79,13 @@
               <ClientOnly>
                 <nuxt-link :to="'/products/' + product.id" type="button"
                   class="absolute p-0.5 bg-white rounded-full shadow-lg top-2 end-2">
-                  <icon name="ep:edit" class="text-gray-600" />
+                  <i class="text-gray-600 fa-regular fa-pen-to-square"></i>
                 </nuxt-link>
               </ClientOnly>
               <button @click="deleteProduct(product.id)"
                 class="absolute p-0.5 bg-white rounded-full shadow-lg top-12 end-2">
-                <icon v-if="deleteProd === product.id" name="svg-spinners:6-dots-rotate" size="20px"
-                  class="text-red-500" />
-                <icon name="ep:delete" class="text-red-600" v-else />
+                  <i class="text-red-500 fa-solid fa-spinner fa-spin-pulse" v-if="deleteProd === product.id"></i>
+                  <i class="text-red-600 fa-regular fa-trash-can" v-else></i>
               </button>
             </nuxt-link>
             <div class="flex flex-col justify-end flex-grow px-5 pb-2 mt-6">
@@ -210,7 +209,7 @@ const deleteProduct = (productId) => {
         title: t('toast.great'),
         message: t('toast.product_deleted_successfully'),
         type: 'success',
-        icon: 'mdi-check-circle',
+        icon: 'fa-solid fa-circle-check',
       });
     })
     .catch((error) => {

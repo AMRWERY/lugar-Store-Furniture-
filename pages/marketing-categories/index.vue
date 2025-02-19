@@ -6,7 +6,7 @@
             </div>
             <nuxt-link to="/marketing-categories/add-marketing-categories" type="button"
                 class="flex items-center px-4 py-2.5 btn-style">
-                <icon name="ep:plus" class="w-5 h-5 me-2" />
+                <i class="fa-solid fa-plus me-2"></i>
                 <span>{{ $t('btn.add_marketing_category') }}</span>
             </nuxt-link>
         </div>
@@ -38,7 +38,7 @@
                         <td colspan="10" class="p-4 text-center">
                             <!-- skeleton-loader component -->
                             <skeleton-loader />
-                            <!-- <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" /> -->
+                            <!-- <i class="fa-solid fa-spinner fa-spin-pulse fa-4x"></i> -->
                         </td>
                     </tr>
                 </tbody>
@@ -60,14 +60,14 @@
                             <div class="flex items-center justify-center space-s-4">
                                 <nuxt-link :to="'/marketing-categories/' + subcategory.id" type="button"
                                     class="rounded-full">
-                                    <icon name="ep:edit" class="w-6 h-6 text-gray-600" />
+                                    <i class="text-gray-600 fa-regular fa-pen-to-square"></i>
                                 </nuxt-link>
 
                                 <button type="button" class="rounded-full"
                                     @click="handleDeleteMarketCategory(subcategory.id)">
-                                    <icon v-if="deleteCat === subcategory.id" name="svg-spinners:6-dots-rotate"
-                                        size="20px" class="text-red-500" />
-                                    <icon name="ep:delete" class="w-6 h-6 text-red-600" v-else />
+                                    <i class="text-red-500 fa-solid fa-spinner fa-spin-pulse"
+                                        v-if="deleteCat === subcategory.id"></i>
+                                    <i class="text-red-600 fa-regular fa-trash-can" v-else></i>
                                 </button>
                             </div>
                         </td>
@@ -132,7 +132,7 @@ const handleDeleteMarketCategory = (marketCategoryId) => {
                 title: t('toast.great'),
                 message: t('toast.marketing_category_deleted_successfully'),
                 type: 'success',
-                icon: 'mdi:check-circle',
+                icon: 'fa-solid fa-circle-check',
             });
             deleteCat.value = null;
         })
@@ -143,7 +143,7 @@ const handleDeleteMarketCategory = (marketCategoryId) => {
                 title: t('toast.error'),
                 message: t('toast.failed_to_delete_market_category'),
                 type: 'error',
-                icon: 'mdi:alert-circle',
+                icon: 'fa-solid fa-triangle-exclamation',
             });
         });
 };

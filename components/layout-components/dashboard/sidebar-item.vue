@@ -6,11 +6,10 @@
         @click.prevent="handleItemClick" :class="{
           'bg-black': sidebarStore.page === item.label
         }">
-        <icon :name="item.icon" />
+        <i :class="item.icon"></i>
         {{ item.label }}
-        <icon name="ic:baseline-keyboard-arrow-down"
-          class="absolute w-5 h-5 -translate-y-1/2 fill-current end-4 top-1/2"
-          :class="{ 'rotate-180': sidebarStore.page === item.label }" v-if="item.children" />
+        <i class="absolute -translate-y-1/2 fill-current fa-solid fa-angle-down end-4 top-1/2"
+          :class="{ 'rotate-180': sidebarStore.page === item.label }" v-if="item.children"></i>
       </nuxt-link>
 
       <!-- Dropdown Menu Start -->

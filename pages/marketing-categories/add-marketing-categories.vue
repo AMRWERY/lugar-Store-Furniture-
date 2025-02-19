@@ -30,7 +30,7 @@
                   class="relative flex items-center justify-center h-48 bg-gray-100 border-2 border-blue-700 border-dashed border-dotted rounded-lg">
                   <div class="absolute">
                     <div class="flex flex-col items-center">
-                      <icon name="material-symbols:add-photo-alternate" class="w-20 h-20 text-blue-700" />
+                      <i class="fa-solid fa-image fa-4x"></i>
                       <span class="block font-normal text-gray-400">{{ $t('form.attach_your_files_here') }}</span>
                     </div>
                   </div>
@@ -50,7 +50,7 @@
         <button type="submit" class="w-full px-4 py-2 btn-style">
           <div class="flex items-center justify-center" v-if="loadingTwo">
             <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
-            <icon name="svg-spinners:270-ring-with-bg" />
+            <i class="fa-solid fa-spinner fa-spin-pulse"></i>
           </div>
           <span v-else>{{ $t('btn.add_marketing_category') }}</span>
         </button>
@@ -89,7 +89,7 @@ const handleAddSubCategory = () => {
         title: t('toast.great'),
         message: t('toast.marketing_category_added_successfully'),
         type: 'success',
-        icon: 'mdi:check-circle',
+        icon: 'fa-solid fa-circle-check',
       });
     })
     .catch((error) => {
@@ -97,7 +97,7 @@ const handleAddSubCategory = () => {
         title: t('toast.error'),
         message: t('toast.subcategory_add_failed'),
         type: 'error',
-        icon: 'mdi:alert-circle',
+        icon: 'fa-solid fa-triangle-exclamation',
       });
     })
     .finally(() => {

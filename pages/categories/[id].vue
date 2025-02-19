@@ -25,7 +25,7 @@
                   class="relative flex items-center justify-center h-48 bg-gray-100 border-2 border-blue-700 border-dashed border-dotted rounded-lg">
                   <div class="absolute">
                     <div class="flex flex-col items-center">
-                      <icon name="material-symbols:add-photo-alternate" class="w-20 h-20 text-blue-700" />
+                      <i class="fa-solid fa-image fa-4x"></i>
                       <span class="block font-normal text-gray-400">{{ $t('form.attach_your_files_here') }}</span>
                     </div>
                   </div>
@@ -42,7 +42,7 @@
         <button type="submit" class="w-full px-4 py-2 btn-style">
           <div class="flex items-center justify-center" v-if="loadingOne">
             <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
-            <icon name="svg-spinners:270-ring-with-bg" />
+            <i class="fa-solid fa-spinner fa-spin-pulse"></i>
           </div>
           <span v-else>{{ $t('btn.edit_category') }}</span>
         </button>
@@ -116,7 +116,7 @@ async function uploadFile() {
         title: t('toast.great'),
         message: t('toast.image_uploaded_successfully'),
         type: 'success',
-        icon: 'mdi:check-circle',
+        icon: 'fa-solid fa-circle-check',
       });
       uploadedImageUrl.value = result.file_url;
       previewImage.value = result.file_url;
@@ -129,7 +129,7 @@ async function uploadFile() {
       title: t('toast.error'),
       message: t('toast.faield_to_upload_image'),
       type: 'error',
-      icon: 'mdi:alert-circle',
+      icon: 'fa-solid fa-triangle-exclamation',
     });
   }
 }
@@ -152,7 +152,7 @@ const handleUpdateCategory = () => {
         title: t('toast.great'),
         message: t('toast.category_updated'),
         type: 'success',
-        icon: 'mdi:check-circle',
+        icon: 'fa-solid fa-circle-check',
       });
       return store.fetchCategoryDetails(categoryId);
     })
@@ -165,7 +165,7 @@ const handleUpdateCategory = () => {
         title: t('toast.error'),
         message: t('toast.category_update_failed'),
         type: 'error',
-        icon: 'mdi:alert-circle',
+        icon: 'fa-solid fa-triangle-exclamation',
       });
     })
     .finally(() => {
@@ -187,7 +187,7 @@ const handleUpdateCategory = () => {
 //       title: t('toast.great'),
 //       message: t('toast.category_updated'),
 //       type: 'success',
-//       icon: 'mdi:check-circle',
+//       icon: 'fa-solid fa-circle-check',
 //     });
 //     await store.fetchCategoryDetails(categoryId);
 //   } catch (error) {
@@ -196,7 +196,7 @@ const handleUpdateCategory = () => {
 //       title: t('toast.error'),
 //       message: t('toast.category_update_failed'),
 //       type: 'error',
-//       icon: 'mdi:alert-circle',
+//       icon: 'fa-solid fa-triangle-exclamation',
 //     });
 //   } finally {
 //     loadingOne.value = false;

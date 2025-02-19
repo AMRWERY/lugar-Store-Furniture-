@@ -58,7 +58,7 @@
             <td colspan="10" class="p-4 text-center">
               <!-- skeleton-loader component -->
               <skeleton-loader />
-              <!-- <icon name="svg-spinners:blocks-shuffle-3" class="w-24 h-24" /> -->
+              <!-- <i class="fa-solid fa-spinner fa-spin-pulse fa-4x"></i> -->
             </td>
           </tr>
         </tbody>
@@ -87,15 +87,15 @@
             <td class="p-4 py-5">
               <p class="text-sm text-blue-700 cursor-pointer" @click="openMessageDetails(message)">
               <div class="flex items-center justify-center" v-if="message.loading">
-                <icon name="svg-spinners:tadpole" />
+                <i class="fa-solid fa-spinner fa-spin-pulse"></i>
               </div>
               <span v-else>{{ $t('btn.view_message') }}</span>
               </p>
             </td>
             <td class="p-4 py-5">
               <button type="button" @click="deleteMessage(message.id)">
-                <icon name="svg-spinners:tadpole" class="text-blue-500" v-if="message.loading" />
-                <icon name="material-symbols:delete-sharp" class="text-red-700" v-else />
+                <i class="text-blue-500 fa-solid fa-spinner fa-spin-pulse" v-if="message.loading"></i>
+                <i class="text-red-700 fa-regular fa-trash-can" v-else></i>
               </button>
             </td>
           </tr>
@@ -174,14 +174,14 @@ const deleteMessage = async (messageId) => {
       title: t('toast.great'),
       message: t('toast.message_deleted'),
       type: 'success',
-      icon: 'mdi:check-circle',
+      icon: 'fa-solid fa-circle-check',
     });
   } catch (error) {
     triggerToast({
       title: t('toast.error'),
       message: t('toast.message_deletion_failed'),
       type: 'error',
-      icon: 'mdi:alert-circle',
+      icon: 'fa-solid fa-triangle-exclamation',
     });
   } finally {
     setTimeout(() => {

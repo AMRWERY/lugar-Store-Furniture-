@@ -7,7 +7,7 @@
           <div class="flex gap-4 md:gap-6">
             <div
               class="flex items-center justify-center w-12 h-12 text-gray-700 rounded-lg shrink-0 md:h-14 md:w-14 md:rounded-xl">
-              <icon name="mdi-light:credit-card" class="w-10 h-10" />
+              <i class="fa-regular fa-credit-card fa-3x"></i>
             </div>
 
             <div>
@@ -21,7 +21,7 @@
           <div class="flex gap-4 md:gap-6">
             <div
               class="flex items-center justify-center w-12 h-12 text-gray-700 rounded-lg shrink-0 md:h-14 md:w-14 md:rounded-xl">
-              <icon name="mdi-light:cart" class="w-10 h-10" />
+              <i class="fa-solid fa-cart-shopping fa-3x"></i>
             </div>
 
             <div>
@@ -35,7 +35,7 @@
           <div class="flex gap-4 md:gap-6">
             <div
               class="flex items-center justify-center w-12 h-12 text-gray-700 rounded-lg shrink-0 md:h-14 md:w-14 md:rounded-xl">
-              <icon name="material-symbols:google-guarantee" class="w-10 h-10" />
+              <i class="fa-solid fa-award fa-3x"></i>
             </div>
 
             <div>

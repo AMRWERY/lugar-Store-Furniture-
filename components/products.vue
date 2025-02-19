@@ -3,7 +3,7 @@
     <div class="mx-auto max-w-7xl">
 
       <!-- <div v-if="loading" class="flex justify-center py-8">
-        <icon name="svg-spinners:blocks-scale" class="w-24 h-24 text-gray-600" />
+        <i class="fa-solid fa-spinner fa-spin-pulse fa-4x"></i>
       </div> -->
 
       <div v-if="paginatedProducts.length === 0">
@@ -46,10 +46,10 @@
                     <span class="text-center me-2">
                       {{ $t('loading_btn.adding_to_cart') }}...
                     </span>
-                    <icon name="svg-spinners:270-ring-with-bg"></icon>
+                    <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                   </div>
                   <div class="flex items-center" v-else>
-                    <icon name="clarity:shopping-cart-line" class="w-6 h-6 me-2"></icon>
+                    <i class="fa-solid fa-cart-arrow-down me-2"></i>
                     <span>{{ $t('btn.add_to_cart') }}</span>
                   </div>
                 </button>
@@ -149,7 +149,7 @@ const handleAddToCart = async (product) => {
       title: t('toast.great'),
       message: t('toast.item_added_to_your_cart'),
       type: 'success',
-      icon: 'clarity:shopping-cart-line',
+      icon: 'fa-solid fa-cart-shopping',
     });
   } catch (error) {
     console.error("Error adding product to cart:", error);

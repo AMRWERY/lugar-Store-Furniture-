@@ -33,7 +33,8 @@
                 v-model="data.password" />
               <button type="button" class="absolute inset-y-0 flex items-center text-gray-500 end-3 hover:text-gray-700"
                 @click="togglePassword">
-                <icon :name="showPassword ? 'mdi:eye-off' : 'mdi:eye'" class="w-5 h-5" />
+                <i v-if="showPassword" class="fa-solid fa-eye"></i>
+                <i v-else class="fa-solid fa-eye-slash"></i>
               </button>
             </div>
             <p v-if="passwordError" class="mt-1 text-sm font-semibold text-red-500">{{ passwordError }}</p>
@@ -43,7 +44,7 @@
             <button type="submit" :disabled="loading" class="block w-full px-4 py-2 btn-style">
               <div class="flex items-center justify-center" v-if="loading">
                 <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
-                <icon name="svg-spinners:270-ring-with-bg" />
+                <i class="fa-solid fa-spinner fa-spin-pulse"></i>
               </div>
               <span v-else>{{ $t('form.login') }}</span>
             </button>
@@ -110,7 +111,7 @@ const signIn = async () => {
       title: t('toast.successfully_logged_in'),
       message: t('toast.your_account_has_been_successfully_logged_in'),
       type: 'success',
-      icon: 'mdi:check-circle',
+      icon: 'fa-solid fa-circle-check',
     });
     setTimeout(() => {
       navigateTo('/products');

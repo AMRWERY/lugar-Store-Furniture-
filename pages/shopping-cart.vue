@@ -9,7 +9,7 @@
         <div class="flex items-center justify-between">
           <nuxt-link to="/all-products" class="inline-flex items-center text-sm cursor-pointer hover:underline ms-auto">
             {{ $t('cart.continue_shopping') }}
-            <icon name="material-symbols:keyboard-arrow-right" class="w-4 h-4 mt-0.5 rtl:rotate-180" />
+            <i class="fa-solid fa-arrow-right mt-0.5 rtl:rotate-180"></i>
           </nuxt-link>
         </div>
 
@@ -44,9 +44,8 @@
                     <div class="flex items-center gap-4">
                       <button type="button" @click="removeItem(item.docId)"
                         class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
-                        <icon v-if="removingItem === item.docId" name="svg-spinners:6-dots-rotate" size="20px"
-                          class="text-red-500" />
-                        <icon name="material-symbols:close-small-rounded" class="w-5 h-5 me-0.5" v-else />
+                        <i class="fa-solid fa-spinner fa-spin-pulse text-red-50" v-if="removingItem === item.docId"></i>
+                        <i class="fa-solid fa-xmark me-0.5" v-else></i>
                         {{ $t('btn.remove') }}
                       </button>
                       <label for="counter-input" class="sr-only">Choose quantity:</label>
@@ -58,8 +57,7 @@
                           <div class="flex items-center mt-2 space-x-2">
                             <button type="button" @click="decrementQuantity(item)"
                               class="inline-flex items-center justify-center w-5 h-5 bg-gray-100 border border-gray-300 rounded-md shrink-0 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                              <icon name="ic:twotone-minus" class="w-3 h-3 text-gray-900 dark:text-white"
-                                aria-hidden="true" />
+                                <i class="text-gray-900 fa-solid fa-minus dark:text-white" aria-hidden="true"></i>
                             </button>
                             <input type="number" v-model="quantity"
                               @change="updateQuantityInStore(item.id, item.quantity)"
@@ -67,8 +65,7 @@
                               placeholder="1" />
                             <button type="button" @click="incrementQuantity(item)"
                               class="inline-flex items-center justify-center w-5 h-5 bg-gray-100 border border-gray-300 rounded-md shrink-0 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                              <icon name="ic:twotone-plus" class="w-3 h-3 text-gray-900 dark:text-white"
-                                aria-hidden="true" />
+                                <i class="text-gray-900 fa-solid fa-plus dark:text-white" aria-hidden="true"></i>
                             </button>
                           </div>
                         </div>

@@ -56,7 +56,7 @@
                 class="flex items-center justify-center w-full btn-style px-5 py-2.5">
                 <div class="flex items-center justify-center" v-if="loading">
                   <span class="text-center me-2">{{ $t('loading_btn.please_wait') }}...</span>
-                  <icon name="svg-spinners:270-ring-with-bg" />
+                  <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                 </div>
                 <span v-else>{{
                   $t('btn.place_order') }}</span>
@@ -131,7 +131,7 @@ const submitCheckoutForm = async () => {
       title: t('toast.order_successful'),
       message: t('toast.your_order_was_processed_successfully_thank_you'),
       type: 'success',
-      icon: 'mdi:check-circle',
+      icon: 'fa-solid fa-circle-check',
     });
   } catch (error) {
     console.error("Error during checkout:", error);

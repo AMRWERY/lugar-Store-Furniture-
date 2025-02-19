@@ -18,7 +18,7 @@
                   <div class="flex justify-between mb-4">
                     <p>{{ $t('dashboard.order_number') }} <span class="font-semibold">{{ order.orderId }}</span></p>
                     <button role="button" @click="closeDialog">
-                      <icon name="material-symbols:close-small-outline" />
+                      <i class="fa-solid fa-xmark"></i>
                     </button>
                   </div>
                 </HeadlessDialogTitle>
@@ -57,8 +57,8 @@
                               :disabled="order.statusId === orderStatus[1]?.id || order.statusId === orderStatus[0]?.id || order.statusId === orderStatus[2]?.id"
                               @click="updateOrderStatus(order.id, orderStatus[1]?.id)"
                               class="text-green-700 border border-green-700 hover:bg-green-700 hover:text-white focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-green-600 dark:border-green-600 dark:hover:bg-green-600 dark:hover:text-white dark:focus:ring-green-800 disabled:opacity-50 disabled:cursor-not-allowed">
-                              <icon name="svg-spinners:90-ring"
-                                v-if="order.loading && order.targetStatus === orderStatus[1]?.id" />
+                              <i class="fa-solid fa-spinner fa-spin-pulse"
+                                v-if="order.loading && order.targetStatus === orderStatus[1]?.id"></i>
                               <span v-else>{{ $i18n.locale === 'ar' ? orderStatus[1]?.statusAr :
                                 orderStatus[1]?.status }}</span>
                             </button>
@@ -66,16 +66,16 @@
                               :disabled="order.statusId === orderStatus[2]?.id || order.statusId === orderStatus[0]?.id"
                               @click="updateOrderStatus(order.id, orderStatus[2]?.id)"
                               class="text-red-700 border border-red-700 hover:bg-red-700 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-red-600 dark:border-red-600 dark:hover:bg-red-600 dark:hover:text-white dark:focus:ring-red-900 disabled:opacity-50 disabled:cursor-not-allowed">
-                              <icon name="svg-spinners:90-ring"
-                                v-if="order.loading && order.targetStatus === orderStatus[2]?.id" />
+                              <i class="fa-solid fa-spinner fa-spin-pulse"
+                                v-if="order.loading && order.targetStatus === orderStatus[2]?.id"></i>
                               <span v-else>{{ $i18n.locale === 'ar' ? orderStatus[2]?.statusAr :
                                 orderStatus[2]?.status }}</span>
                             </button>
                             <button type="button" :disabled="order.statusId === orderStatus[0]?.id"
                               @click="updateOrderStatus(order.id, orderStatus[0].id)"
                               class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-blue-600 dark:border-blue-600 dark:hover:bg-blue-600 dark:hover:text-white dark:focus:ring-blue-800 disabled:opacity-50 disabled:cursor-not-allowed">
-                              <icon name="svg-spinners:90-ring"
-                                v-if="order.loading && order.targetStatus === orderStatus[0]?.id" />
+                              <i class="fa-solid fa-spinner fa-spin-pulse"
+                                v-if="order.loading && order.targetStatus === orderStatus[0]?.id"></i>
                               <span v-else>{{ $i18n.locale === 'ar' ? orderStatus[0]?.statusAr :
                                 orderStatus[0]?.status }}</span>
                             </button>
@@ -158,7 +158,7 @@ const updateOrderStatus = async (orderId, newStatus) => {
         title: t('toast.great'),
         message: t('toast.order_status_updated'),
         type: 'success',
-        icon: 'mdi-check-circle',
+        icon: 'fa-solid fa-circle-check',
       });
       order.loading = false
     })
@@ -168,7 +168,7 @@ const updateOrderStatus = async (orderId, newStatus) => {
         title: t('toast.error'),
         message: t('tooltip.failed_to_update_order'),
         type: 'error',
-        icon: 'mdi:alert-circle',
+        icon: 'fa-solid fa-triangle-exclamation',
       });
     })
     .finally(() => {

@@ -10,7 +10,7 @@
           <button class="z-50 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm lg:hidden"
             v-if="!isAuthPage" @click="() => { toggleSidebar() }">
             <span class="relative block h-[1.375rem] w-[1.375rem] cursor-pointer">
-              <icon name="material-symbols:menu-rounded" />
+              <i class="fa-solid fa-bars"></i>
             </span>
           </button>
         </div>

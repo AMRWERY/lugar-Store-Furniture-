@@ -7,11 +7,11 @@
                     <p class="pt-2 pb-4">{{ $t('contact_us.fill_in_the_form_to_start_a_conversation') }}</p>
                     <div class="space-y-4">
                         <p class="flex items-center">
-                            <icon name="material-symbols:location-on" class="w-5 h-5 me-2 sm:me-6" />
+                            <i class="fa-solid fa-location-dot me-2 sm:me-6"></i>
                             <span>{{ $t('footer.damietta') }}</span>
                         </p>
                         <p class="flex items-center">
-                            <icon name="material-symbols:call" class="w-5 h-5 me-2 sm:me-6" />
+                            <i class="fa-solid fa-phone-volume me-2 sm:me-6"></i>
                             <span>+2010-233-51915</span>
                         </p>
                     </div>
@@ -36,7 +36,7 @@
                             <button type="submit" class="w-[400px] px-4 py-2 btn-style" @click="sendMessage">
                                 <div class="flex items-center justify-center" v-if="loading">
                                     <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
-                                    <icon name="svg-spinners:270-ring-with-bg" />
+                                    <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                                 </div>
                                 <span v-else>{{ $t('btn.send_your_message') }}</span>
                             </button>
@@ -76,7 +76,7 @@ const sendMessage = async () => {
             title: t('toast.great'),
             message: t('toast.your_message_sent_successfully'),
             type: 'success',
-            icon: 'mdi:check-circle',
+            icon: 'fa-solid fa-circle-check',
         });
     } catch (error) {
         // console.log(error)
