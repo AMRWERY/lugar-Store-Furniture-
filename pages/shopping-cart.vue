@@ -39,12 +39,13 @@
                       <p class="text-[13px] italic text-gray-600" v-if="item.categoryTitle">{{ item.categoryTitle }}</p>
                       <span class="text-[13px] italic text-gray-600" v-if="item.subCategoryTitle">/</span>
                       <p class="text-[13px] italic text-gray-600" v-if="item.subCategoryTitle">{{ item.subCategoryTitle
-                        }}</p>
+                      }}</p>
                     </div>
                     <div class="flex items-center gap-4">
-                      <button type="button" @click="removeItem(item.docId)"
+                      <button type="button" @click="removeItem(item.productId)"
                         class="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500">
-                        <i class="fa-solid fa-spinner fa-spin-pulse text-red-50" v-if="removingItem === item.docId"></i>
+                        <i class="fa-solid fa-spinner fa-spin-pulse text-red-50"
+                          v-if="removingItem === item.productId"></i>
                         <i class="fa-solid fa-xmark me-0.5" v-else></i>
                         {{ $t('btn.remove') }}
                       </button>
@@ -57,7 +58,7 @@
                           <div class="flex items-center mt-2 space-x-2">
                             <button type="button" @click="decrementQuantity(item)"
                               class="inline-flex items-center justify-center w-5 h-5 bg-gray-100 border border-gray-300 rounded-md shrink-0 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                <i class="text-gray-900 fa-solid fa-minus dark:text-white" aria-hidden="true"></i>
+                              <i class="text-gray-900 fa-solid fa-minus dark:text-white" aria-hidden="true"></i>
                             </button>
                             <input type="number" v-model="quantity"
                               @change="updateQuantityInStore(item.id, item.quantity)"
@@ -65,7 +66,7 @@
                               placeholder="1" />
                             <button type="button" @click="incrementQuantity(item)"
                               class="inline-flex items-center justify-center w-5 h-5 bg-gray-100 border border-gray-300 rounded-md shrink-0 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700">
-                                <i class="text-gray-900 fa-solid fa-plus dark:text-white" aria-hidden="true"></i>
+                              <i class="text-gray-900 fa-solid fa-plus dark:text-white" aria-hidden="true"></i>
                             </button>
                           </div>
                         </div>
@@ -83,7 +84,7 @@
               <div class="text-center">
                 <p class="text-xl font-semibold text-gray-900 dark:text-white">{{ $t('cart.subtotal') }}</p>
                 <span class="text-xl font-semibold text-gray-900 dark:text-white">{{ totalAmount }} {{ $t('products.le')
-                  }}</span>
+                }}</span>
               </div>
               <nuxt-link to="/checkout" type="button" class="block w-full px-5 py-2 text-center btn-style">{{
                 $t('btn.proceed_to_checkout') }}</nuxt-link>
@@ -99,14 +100,14 @@
 const cartStore = useCartStore();
 const removingItem = ref(null);
 
-const removeItem = async (docId) => {
-  if (!docId) {
-    console.error("No docId provided for removal.");
+const removeItem = async (productId) => {
+  if (!productId) {
+    console.error("No productId provided for removal.");
     return;
   }
   try {
-    removingItem.value = docId;
-    await cartStore.removeFromCart(docId);
+    removingItem.value = productId;
+    await cartStore.removeFromCart(productId);
     setTimeout(() => {
       removingItem.value = null;
     }, 3000);
