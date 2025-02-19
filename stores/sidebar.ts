@@ -1,5 +1,4 @@
 import { useStorage } from "@vueuse/core";
-import { defineStore } from "pinia";
 
 export const useSidebarStore = defineStore("sidebar", () => {
   const isSidebarOpen = ref(false);

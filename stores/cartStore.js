@@ -1,4 +1,3 @@
-import { defineStore } from "pinia";
 import { db } from "@/firebase/config";
 import {
   collection,

@@ -74,32 +74,32 @@ const menuGroups = computed(() => [
     {
         menuItems: [
             {
-                icon: 'material-symbols:table-bar',
+                icon: 'fa-solid fa-list',
                 label: t('layout.products'),
                 route: '/products',
             },
             {
-                icon: 'material-symbols:calendar-month-sharp',
+                icon: 'fa-solid fa-layer-group',
                 label: t('layout.categories'),
                 route: '/categories',
             },
             {
-                icon: 'material-symbols:calendar-month-sharp',
+                icon: 'fa-solid fa-icons',
                 label: t('layout.marketing_categories'),
                 route: '/marketing-categories',
             },
             {
-                icon: 'mdi:order-bool-descending-variant',
+                icon: 'fa-solid fa-bag-shopping',
                 label: t('layout.orders'),
                 route: '/orders',
             },
             {
-                icon: 'material-symbols:attach-email-outline-sharp',
+                icon: 'fa-solid fa-envelope',
                 label: t('layout.customer_messages'),
                 route: '/customer-messages',
             },
             {
-                icon: 'material-symbols:image',
+                icon: 'fa-solid fa-image',
                 label: t('layout.banners'),
                 route: '/banners',
             },

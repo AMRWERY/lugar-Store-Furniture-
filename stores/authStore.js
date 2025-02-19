@@ -1,7 +1,3 @@
-import { auth, db } from "@/firebase/config";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-
 export const useAuthStore = defineStore("auth-store", {
   state: () => ({
     user: null,
@@ -9,45 +5,44 @@ export const useAuthStore = defineStore("auth-store", {
   }),
 
   actions: {
-    async init() {
-      auth.onAuthStateChanged(async (user) => {
-        if (user) {
-          this.user = user;
-          // Optional: Sync with Firestore
-          const docSnap = await getDoc(doc(db, "users", user.uid));
-          if (docSnap.exists()) {
-            localStorage.setItem("user", JSON.stringify(docSnap.data()));
-          }
-        } else {
-          this.user = null;
-          localStorage.removeItem("user");
-        }
-      });
+    init() {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        this.user = JSON.parse(storedUser);
+      }
     },
-
+    
     async loginUser({ email, password }) {
       this.isOverlayVisible = true;
       try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
+        const response = await $fetch(
+          "https://lugarstore.com/api/users/login.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: { email, password },
+            responseType: "json",
+          }
         );
-        const user = userCredential.user;
-        const userData = {
-          uid: user.uid,
-          email: user.email,
-          createdAt: new Date(),
-        };
-        this.user = user;
-        await setDoc(doc(db, "users", user.uid), userData);
-        localStorage.setItem("user", JSON.stringify(userData));
+        if (response.status === "success") {
+          this.user = { token: response.token, email };
+          localStorage.setItem("user", JSON.stringify(this.user));
+          this.error = null;
+        } else {
+          this.error = response.message || "Login failed";
+          throw new Error(this.error);
+        }
         setTimeout(() => {
           this.isOverlayVisible = false;
         }, 3000);
-        this.error = null;
+        return response;
       } catch (err) {
         this.error = err.message;
+        setTimeout(() => {
+          this.isOverlayVisible = false;
+        }, 3000);
         throw err;
       }
     },
@@ -55,11 +50,9 @@ export const useAuthStore = defineStore("auth-store", {
     async logoutUser() {
       this.isOverlayVisible = true;
       try {
-        await signOut(auth);
         this.user = null;
-        this.role = null;
-        this.error = null;
         localStorage.clear();
+        this.error = null;
         setTimeout(() => {
           this.isOverlayVisible = false;
         }, 3000);
