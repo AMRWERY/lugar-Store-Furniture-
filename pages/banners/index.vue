@@ -31,6 +31,8 @@
                   </th>
                   <th class="p-4 border-b border-slate-200 bg-slate-50">
                   </th>
+                  <th class="p-4 border-b border-slate-200 bg-slate-50">
+                  </th>
                 </tr>
               </thead>
 
@@ -59,6 +61,12 @@
                   </td>
                   <td class="p-4 py-5">
                     <img :src="banner.fileUrl" class="w-16 h-12 rounded-lg image-zoom">
+                  </td>
+                  <td class="p-4 py-5">
+                    <button type="button" class="rounded-full" @click="handleDeleteBanner(banner.id)">
+                      <i class="text-red-500 fa-solid fa-spinner fa-spin-pulse" v-if="deleteBanner === banner.id"></i>
+                      <i class="text-red-600 fa-regular fa-trash-can" v-else></i>
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -93,6 +101,14 @@
 
     <!-- banners-dialog component -->
     <banners-dialog v-if="isDialogOpen" :isOpen="isDialogOpen" @close="closeDialog" />
+
+    <!-- dynamic-toast component -->
+    <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
+      <div class="pointer-events-auto">
+        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
+          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -102,6 +118,38 @@ const bannersStore = useBannersStore();
 onMounted(() => {
   bannersStore.fetchBanners();
 });
+
+const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
+const deleteBanner = ref(null);
+
+const handleDeleteBanner = (bannerId) => {
+  deleteBanner.value = bannerId;
+  new Promise((resolve) => {
+    setTimeout(resolve, 3000);
+  })
+    .then(() => {
+      return bannersStore.deleteBanner(bannerId);
+    })
+    .then(() => {
+      triggerToast({
+        title: t('toast.great'),
+        message: t('toast.banner_deleted_successfully'),
+        type: 'success',
+        icon: 'fa-solid fa-circle-check',
+      });
+      deleteBanner.value = null;
+    })
+    .catch((error) => {
+      console.error("Error deleting banner:", error);
+      deleteBanner.value = null;
+      triggerToast({
+        title: t('toast.error'),
+        message: t('toast.failed_to_delete_banner'),
+        type: 'error',
+        icon: 'fa-solid fa-triangle-exclamation',
+      });
+    });
+};
 
 const isDialogOpen = ref(false);
 const { t } = useI18n()

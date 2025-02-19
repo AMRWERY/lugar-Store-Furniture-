@@ -361,7 +361,10 @@
     "failed_to_delete_category": "Failed to delete category",
     "failed_to_delete_market_category": "Failed to delete market category",
     "order_deleted": "Order deleted",
-    "order_deletion_failed": "Order deletion failed"
+    "order_deletion_failed": "Order deletion failed",
+    "failed_to_upload_banner": "Failed to upload banner",
+    "banner_deleted_successfully": "Banner deleted successfully",
+    "failed_to_delete_banner": "Failed to delete banner"
   },
   "products": {
     "products": "Products",

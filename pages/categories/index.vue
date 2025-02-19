@@ -112,8 +112,8 @@ onMounted(() => {
   store.fetchCategories();
 });
 
-const deleteCat = ref(null);
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
+const deleteCat = ref(null);
 
 const handleDeleteCategory = (categoryId) => {
   deleteCat.value = categoryId;

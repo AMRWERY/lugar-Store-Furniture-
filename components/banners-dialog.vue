@@ -86,30 +86,40 @@ const handleFileChange = (event) => {
   }
 };
 
+// Convert image to base64
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
 const uploadFile = () => {
   loading.value = true;
   if (selectedFile.value) {
-    bannerStore.addNewBanner(selectedFile.value)
-      .then((createBanner) => {
-        if (createBanner) {
-          let response = JSON.parse(createBanner);
-          if (response?.success && response?.file_url) {
-            loading.value = false;
-            closeDialog();
-            return bannerStore.uploadImageToBannerCollection(response.file_url);
-          }
-        }
-        return Promise.reject("Invalid response");
+    convertToBase64(selectedFile.value)
+      .then((base64Image) => {
+        return bannerStore.addNewBanner(base64Image);
       })
-      .then(() => bannerStore.fetchBanners())
-      .then(() => {
+      .then((response) => {
+        // console.log("Banner added, response:", response);
         closeDialog();
         selectedFile.value = null;
         previewImage.value = null;
       })
       .catch((error) => {
+        // console.error("Error during upload or saving:", error);
+        triggerToast({
+          title: t('toast.error'),
+          message: t('toast.failed_to_upload_banner'),
+          type: 'error',
+          icon: 'mdi:alert-circle',
+        });
+      })
+      .finally(() => {
         loading.value = false;
-        console.error("Error during upload or saving:", error);
       });
   }
 };

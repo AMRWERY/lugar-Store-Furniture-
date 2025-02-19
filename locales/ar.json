@@ -366,7 +366,10 @@
     "failed_to_delete_category": "فشل حذف الفئة",
     "failed_to_delete_market_category": "فشل حذف فئة التسويق",
     "order_deleted": "تم مسح الطلب",
-    "order_deletion_failed": "فشل مسح الطلب"
+    "order_deletion_failed": "فشل مسح الطلب",
+    "failed_to_upload_banner": "فشل تحميل الصوره",
+    "banner_deleted_successfully": "تم مسح الصوره بنجاح",
+    "failed_to_delete_banner": "فشل مسح الصوره"
   },
   "products": {
     "products": "المنتجات",
