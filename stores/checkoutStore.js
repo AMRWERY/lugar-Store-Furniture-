@@ -120,7 +120,7 @@ export const useCheckoutStore = defineStore("checkout", {
         responseType: "json",
       })
         .then((response) => {
-          console.log("Checkout data saved:", response);
+          // console.log("Checkout data saved:", response);
           return response;
         })
         .catch((error) => {
