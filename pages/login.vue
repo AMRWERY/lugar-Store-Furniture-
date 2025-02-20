@@ -1,8 +1,5 @@
 <template>
   <div>
-    <!-- overlay Component -->
-    <overlay :visible="authStore.isOverlayVisible" />
-
     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div class="max-w-md mx-auto">
         <img src="@/assets/Lugar_Furniture_Logo.svg" class="mx-auto w-36 h-36" />
@@ -29,7 +26,7 @@
             <div class="relative mt-1">
               <input :type="showPassword ? 'text' : 'password'" name="password" id="password"
                 autocomplete="current-password"
-                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 pr-10"
+                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 pe-10"
                 v-model="data.password" />
               <button type="button" class="absolute inset-y-0 flex items-center text-gray-500 end-3 hover:text-gray-700"
                 @click="togglePassword">
