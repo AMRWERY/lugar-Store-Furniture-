@@ -1,12 +1,3 @@
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
-import { db } from "@/firebase/config";
-
 export const useContactStore = defineStore("contact", {
   state: () => ({
     name: "",

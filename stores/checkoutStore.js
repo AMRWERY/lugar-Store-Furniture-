@@ -1,6 +1,3 @@
-import { doc, deleteDoc } from "firebase/firestore";
-import { db } from "@/firebase/config";
-
 export const useCheckoutStore = defineStore("checkout", {
   state: () => ({
     orders: [],
