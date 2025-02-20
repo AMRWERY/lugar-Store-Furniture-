@@ -1,21 +1,29 @@
 <template>
   <div>
-    <div class="flex items-center justify-between">
-      <h3 class="py-2 mt-5 mb-12 text-2xl font-bold text-start">{{ $t('dashboard.customer_messages') }}</h3>
-      <div class="flex items-end space-s-4">
-        <div class="flex flex-col">
-          <label class="mb-1 text-sm font-medium">{{ $t('form.start_date') }}</label>
-          <input type="date" v-model="startDate" class="p-2 border rounded" :placeholder="$t('form.start_date')" />
+    <div class="grid items-center grid-cols-12">
+      <div class="col-span-12 md:col-span-6">
+        <h3 class="py-2 mt-5 mb-2 text-2xl font-bold sm:mb-6 md:mb-12 text-start">
+          {{ $t('dashboard.customer_messages') }}
+        </h3>
+      </div>
+      <!-- filter section -->
+      <div class="grid grid-cols-1 col-span-12 gap-4 md:col-span-6 sm:grid-cols-3">
+        <div>
+          <label class="block mb-1 text-sm font-medium">{{ $t('form.start_date') }}</label>
+          <input type="date" v-model="startDate" class="w-full p-2 border rounded" />
         </div>
-        <div class="flex flex-col">
-          <label class="mb-1 text-sm font-medium">{{ $t('form.end_date') }}</label>
-          <input type="date" v-model="endDate" class="p-2 border rounded" :placeholder="$t('form.end_date')" />
+        <div>
+          <label class="block mb-1 text-sm font-medium">{{ $t('form.end_date') }}</label>
+          <input type="date" v-model="endDate" class="w-full p-2 border rounded" />
         </div>
-        <button @click="filterOrdersByDate" class="px-4 py-2 btn-style">
-          {{ $t('btn.filter') }}
-        </button>
+        <div class="flex items-end">
+          <button @click="filterOrdersByDate" class="px-4 py-2 btn-style">
+            {{ $t('btn.filter') }}
+          </button>
+        </div>
       </div>
     </div>
+
     <div
       class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white rounded-lg shadow-md bg-clip-border">
       <table class="w-full table-auto text-start min-w-max">
