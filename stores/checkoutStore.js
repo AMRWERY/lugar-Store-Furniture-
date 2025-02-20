@@ -147,20 +147,6 @@ export const useCheckoutStore = defineStore("checkout", {
           throw error;
         });
     },
-
-    async deleteOrder(orderId) {
-      if (!orderId) {
-        return;
-      }
-      try {
-        const docRef = doc(db, "checkout", orderId);
-        await deleteDoc(docRef);
-        this.orders = this.orders.filter((order) => order.orderId !== orderId);
-        this.updatePagination();
-      } catch (error) {
-        console.error("Error removing from order:", error);
-      }
-    },
   },
 
   getters: {

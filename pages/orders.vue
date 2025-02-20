@@ -70,8 +70,6 @@
                                 {{ $t('dashboard.status') }}
                             </p>
                         </th>
-                        <th class="p-4 border-b border-slate-200 bg-slate-50">
-                        </th>
                     </tr>
                 </thead>
 
@@ -132,12 +130,6 @@
                                 {{ $i18n.locale === 'ar' ? getStatusTitle(order.statusId)?.statusAr :
                                     getStatusTitle(order.statusId)?.status }}
                             </p>
-                        </td>
-                        <td class="p-4 py-5">
-                            <button type="button" @click="deleteOrder(order.id)">
-                                <i class="text-blue-500 fa-solid fa-spinner fa-spin-pulse" v-if="order.loading"></i>
-                                <i class="text-red-700 fa-regular fa-trash-can" v-else></i>
-                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -247,36 +239,6 @@ const filterOrdersByDate = () => {
         return orderDate >= new Date(startDate.value) && orderDate <= new Date(endDate.value);
     });
     checkoutStore.paginatedOrders = filteredOrders;
-};
-
-const deleteOrder = async (orderId) => {
-    const order = checkoutStore.paginatedOrders.find(o => o.id === orderId);
-    if (order) {
-        order.loading = true;
-    }
-    try {
-        await checkoutStore.deleteOrder(orderId);
-        checkoutStore.paginatedOrders = checkoutStore.paginatedOrders.filter(order => order.id !== orderId);
-        triggerToast({
-            title: t('toast.great'),
-            message: t('toast.order_deleted'),
-            type: 'success',
-            icon: 'fa-solid fa-circle-check',
-        });
-    } catch (error) {
-        triggerToast({
-            title: t('toast.error'),
-            message: t('toast.order_deletion_failed'),
-            type: 'error',
-            icon: 'fa-solid fa-triangle-exclamation',
-        });
-    } finally {
-        setTimeout(() => {
-            if (order) {
-                order.loading = false;
-            }
-        }, 3000);
-    }
 };
 
 const getStatusTitle = (statusId) => {
