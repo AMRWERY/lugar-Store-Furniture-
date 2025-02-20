@@ -53,7 +53,11 @@
     "sign_in_to_your_account": "تسجيل الدخول إلى حسابك",
     "email_is_required": "البريد الإلكتروني مطلوب",
     "email_must_end_with_lugar": "يجب أن ينتهي البريد الإلكتروني بـ @lugar.com",
-    "password_is_required": "كلمة المرور مطلوبة"
+    "password_is_required": "كلمة المرور مطلوبة",
+    "your_name_is_required": "اسمك مطلوب",
+    "your_phone_number_is_required": "رقم هاتفك مطلوب",
+    "your_governorate_is_required": "المحافظة مطلوبة",
+    "your_address_is_required": "عنوانك مطلوب"
   },
   "btn": {
     "logout": "تسجيل الخروج",

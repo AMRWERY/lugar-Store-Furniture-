@@ -53,7 +53,11 @@
     "sign_in_to_your_account": "Sign in to your account",
     "email_is_required": "Email is required",
     "email_must_end_with_lugar": "Email must end with @lugar.com",
-    "password_is_required": "Password is required"
+    "password_is_required": "Password is required",
+    "your_name_is_required": "Your name is required",
+    "your_phone_number_is_required": "Your phone number is required",
+    "your_governorate_is_required": "Your governorate is required",
+    "your_address_is_required": "Your address is required"
   },
   "btn": {
     "logout": "Logout",
