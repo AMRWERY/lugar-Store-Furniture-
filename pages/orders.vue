@@ -184,7 +184,6 @@
 const checkoutStore = useCheckoutStore();
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
-const currentStatus = ref('')
 const orderStatus = ref([])
 
 onMounted(async () => {
@@ -281,9 +280,7 @@ const deleteOrder = async (orderId) => {
 };
 
 const getStatusTitle = (statusId) => {
-    currentStatus.value = checkoutStore.status.find((s) => s.id === statusId);
-    // console.log(currentStatus.value)
-    return currentStatus.value
+    return checkoutStore.status.find((s) => s.id === statusId);
 }
 
 const { t } = useI18n()

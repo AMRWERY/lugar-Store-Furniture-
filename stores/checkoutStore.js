@@ -1,10 +1,4 @@
-import {
-  collection,
-  getDocs,
-  doc,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
+import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "@/firebase/config";
 
 export const useCheckoutStore = defineStore("checkout", {
@@ -72,21 +66,35 @@ export const useCheckoutStore = defineStore("checkout", {
       }
     },
 
-    async updateOrderStatus(orderId, newStatus) {
-      try {
-        const orderRef = doc(collection(db, "checkout"), orderId);
-        await updateDoc(orderRef, { statusId: newStatus });
-        const orderIndex = this.orders.findIndex(
-          (order) => order.id === orderId
-        );
-        if (orderIndex !== -1) {
-          this.orders[orderIndex].statusId = newStatus;
-        }
-        this.updatePagination();
-      } catch (error) {
-        // console.error("Error updating order status:", error);
-        throw error;
-      }
+    updateOrderStatus(orderId, newStatus) {
+      const endpoint = "https://lugarstore.com/api/orders/update_order.php";
+      return $fetch(endpoint, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: orderId, statusId: newStatus }),
+        responseType: "json",
+      })
+        .then((response) => {
+          if (response.success) {
+            const orderIndex = this.orders.findIndex(
+              (order) => order.id === orderId
+            );
+            if (orderIndex !== -1) {
+              this.orders[orderIndex].statusId = newStatus;
+            }
+            this.updatePagination();
+          } else {
+            console.error(
+              "API error during update:",
+              response.error || response.message || response
+            );
+          }
+          return response;
+        })
+        .catch((error) => {
+          console.error("Error updating order status:", error);
+          throw error;
+        });
     },
 
     saveCheckoutData(cartData) {
@@ -124,14 +132,20 @@ export const useCheckoutStore = defineStore("checkout", {
         });
     },
 
-    async fetchTotalCheckouts() {
-      try {
-        const querySnapshot = await getDocs(collection(db, "checkout"));
-        this.totalCheckouts = querySnapshot.size;
-        // console.log('orders', this.orders)
-      } catch (e) {
-        console.error("Error fetching total checkouts: ", e);
-      }
+    fetchTotalCheckouts() {
+      const endpoint = "https://lugarstore.com/api/orders/get_orders.php";
+      return $fetch(endpoint, { responseType: "json" })
+        .then((response) => {
+          const ordersArray = Array.isArray(response)
+            ? response
+            : response.data;
+          this.totalCheckouts = ordersArray.length;
+          return this.totalCheckouts;
+        })
+        .catch((error) => {
+          console.error("Error fetching total checkouts:", error);
+          throw error;
+        });
     },
 
     async deleteOrder(orderId) {
