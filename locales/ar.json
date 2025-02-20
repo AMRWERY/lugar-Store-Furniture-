@@ -57,7 +57,8 @@
     "your_name_is_required": "اسمك مطلوب",
     "your_phone_number_is_required": "رقم هاتفك مطلوب",
     "your_governorate_is_required": "المحافظة مطلوبة",
-    "your_address_is_required": "عنوانك مطلوب"
+    "your_address_is_required": "عنوانك مطلوب",
+    "your_message_is_required": "رسالتك مطلوبه"
   },
   "btn": {
     "logout": "تسجيل الخروج",

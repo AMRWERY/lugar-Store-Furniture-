@@ -17,23 +17,64 @@
                     </div>
                 </div>
 
-                <div class="p-4 space-y-4 rounded-lg shadow-lg w-[430px]">
-                    <ClientOnly>
-                        <dynamic-inputs :label="t('form.name')" :placeholder="t('form.enter_your_name')" type="text"
-                            :validation="('required|contains_alpha')" :required="true" v-model="data.name" />
+                <div class="w-full p-4 space-y-4 rounded-lg shadow-lg">
+                    <form @submit.prevent="sendMessage">
+                        <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                            <div class="col-span-full">
+                                <label for="your-name" class="block font-medium text-gray-900 text-sm/6">{{
+                                    $t('form.name') }}</label>
+                                <div class="mt-1">
+                                    <input type="text" name="your-name" id="your-name"
+                                        :placeholder="t('form.enter_your_name')" autocomplete="your-name"
+                                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        v-model="data.name" />
+                                </div>
+                                <p v-if="nameError" class="mt-1 text-sm font-semibold text-red-500">{{ nameError }}</p>
+                            </div>
 
-                        <dynamic-inputs :label="t('form.email')" :placeholder="t('form.enter_your_email')" type="email"
-                            :validation="('required|email')" :required="true" v-model="data.email" />
+                            <div class="col-span-full">
+                                <label for="your-email" class="block font-medium text-gray-900 text-sm/6">{{
+                                    $t('form.email') }}</label>
+                                <div class="mt-1">
+                                    <input type="email" name="your-email" id="your-email"
+                                        :placeholder="t('form.enter_your_email')" autocomplete="your-email"
+                                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        v-model="data.email" />
+                                </div>
+                                <p v-if="emailError" class="mt-1 text-sm font-semibold text-red-500">{{ emailError }}
+                                </p>
+                            </div>
 
-                        <dynamic-inputs :label="t('form.phone_number')" :placeholder="t('form.enter_your_phone')"
-                            type="tel" :validation="('required')" :required="true" v-model="data.phone" />
+                            <div class="col-span-full">
+                                <label for="your-email" class="block font-medium text-gray-900 text-sm/6">{{
+                                    $t('form.phone_number') }}</label>
+                                <div class="mt-1">
+                                    <input type="tel" name="your-phone" id="your-phone"
+                                        :placeholder="t('form.enter_your_phone')"
+                                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        v-model="data.phone" />
+                                </div>
+                                <p v-if="phoneError" class="mt-1 text-sm font-semibold text-red-500">{{ phoneError }}
+                                </p>
+                            </div>
 
-                        <dynamic-inputs :label="t('form.your_message')" :placeholder="t('form.enter_your_message')"
-                            type="textarea" :validation="'required|length:10,500'" :required="true"
-                            v-model="data.message" />
+                            <div class="col-span-full">
+                                <label for="about" class="block font-medium text-gray-900 text-sm/6">{{
+                                    $t('form.your_message')
+                                    }}</label>
+                                <div class="mt-1">
+                                    <textarea name="about" id="about" rows="3"
+                                        :placeholder="t('form.enter_your_message')" type="textarea"
+                                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        v-model="data.message" />
+                                </div>
+                                <p v-if="messageError" class="mt-1 text-sm font-semibold text-red-500">{{ messageError
+                                }}</p>
+                            </div>
 
+                        </div>
                         <div class="mt-6">
-                            <button type="submit" class="w-[400px] px-4 py-2 btn-style" @click="sendMessage">
+                            <button type="submit" class="w-full px-4 py-2 btn-style">
                                 <div class="flex items-center justify-center" v-if="loading">
                                     <span class="text-center me-2">{{ $t('loading_btn.sending') }}...</span>
                                     <i class="fa-solid fa-spinner fa-spin-pulse"></i>
@@ -41,7 +82,7 @@
                                 <span v-else>{{ $t('btn.send_your_message') }}</span>
                             </button>
                         </div>
-                    </ClientOnly>
+                    </form>
                 </div>
             </div>
         </section>
@@ -58,6 +99,7 @@
 
 <script setup>
 const store = useContactStore();
+const { t } = useI18n()
 const loading = ref(false);
 const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast();
 
@@ -68,7 +110,35 @@ const data = ref({
     message: ''
 });
 
+const nameError = ref('');
+const emailError = ref('');
+const phoneError = ref('');
+const messageError = ref('');
+
+const validateForm = () => {
+    nameError.value = '';
+    emailError.value = '';
+    phoneError.value = '';
+    messageError.value = '';
+    if (!data.value.name) {
+        nameError.value = t('form.your_name_is_required');
+    }
+    if (!data.value.email) {
+        emailError.value = t('form.email_is_required');
+    }
+    if (!data.value.phone) {
+        phoneError.value = t('form.your_phone_number_is_required');
+    }
+    if (!data.value.message) {
+        messageError.value = t('form.your_message_is_required');
+    }
+    return !nameError.value && !emailError.value && !phoneError.value && !messageError.value;
+};
+
 const sendMessage = async () => {
+    if (!validateForm()) {
+        return;
+    }
     loading.value = true;
     try {
         await store.submitForm(data.value);
@@ -84,8 +154,6 @@ const sendMessage = async () => {
         loading.value = false;
     }
 };
-
-const { t } = useI18n()
 
 useHead({
     titleTemplate: () => t("head.contact_us"),
