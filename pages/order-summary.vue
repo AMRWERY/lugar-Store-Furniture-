@@ -7,8 +7,11 @@
           <h2 class="text-2xl font-semibold text-gray-900">{{ $t('order_summary.order_summary') }}</h2>
           <ClientOnly>
             <p class="mt-1 text-sm text-gray-500">
-              {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">{{ orderSummary.orderId
-                }}</span>
+              {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">
+                <span
+                  class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs text-green-700 ring-1 ring-green-600/20 ring-inset font-semibold">{{
+                  orderSummary.orderId }}</span>
+              </span>
             </p>
           </ClientOnly>
         </div>
