@@ -358,130 +358,6 @@
   dependencies:
     levn "^0.4.1"
 
-"@formkit/addons@^1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/addons/-/addons-1.6.9.tgz"
-  integrity sha512-Qfq789kpQ5EYqFl6QPE32vMCs0qivbvR50NNRwUadC2hgfGcayKe8Gc43G8neW6HHPjmyzkHQHLknLxHrGni3Q==
-  dependencies:
-    "@formkit/auto-animate" latest
-    "@formkit/core" "1.6.9"
-    "@formkit/inputs" "1.6.9"
-    "@formkit/utils" "1.6.9"
-
-"@formkit/auto-animate@latest":
-  version "0.8.2"
-  resolved "https://registry.npmjs.org/@formkit/auto-animate/-/auto-animate-0.8.2.tgz"
-  integrity sha512-SwPWfeRa5veb1hOIBMdzI+73te5puUBHmqqaF1Bu7FjvxlYSz/kJcZKSa9Cg60zL0uRNeJL2SbRxV6Jp6Q1nFQ==
-
-"@formkit/barcode@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@formkit/barcode/-/barcode-1.0.2.tgz"
-  integrity sha512-nFCAPvujE1JWuRG7iEnTfIYUItxxSoGi/cWR2vSeVEhjPKCdMql1hJC8GIyd6YhtRs6wNFvKsvH5Jo4dPj92+A==
-  dependencies:
-    "@formkit/core" "^1.0.0"
-    "@formkit/inputs" "^1.0.0"
-    "@formkit/utils" "^1.0.0"
-    "@zxing/library" latest
-
-"@formkit/core@^1.0.0", "@formkit/core@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/core/-/core-1.6.9.tgz"
-  integrity sha512-Zb5OkYKMf7Rp1pd4iUMv0TJQvfgl1PdKtRRQoGiTA0XIFLB/7tcRMr1wc5isA2JS+hllfxMTh3RWF8N+64fTMg==
-  dependencies:
-    "@formkit/utils" "1.6.9"
-
-"@formkit/dev@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/dev/-/dev-1.6.9.tgz"
-  integrity sha512-4ueBpZAOiKr8/LZnq3mNePCX4ZB1j1JuJscBEwugWMnDeDwCNo5XWBrng1ER/LlitTRQ3mtEBNy2Qpm0yAHlwA==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/utils" "1.6.9"
-
-"@formkit/i18n@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/i18n/-/i18n-1.6.9.tgz"
-  integrity sha512-8NA5bALlspCBEwInuZVgBqgQr0lDfproZdmbs2LciQpGi2B15u74JCjAkEwaKlMs+qgf/ds3QcIgUv2ztyyVEA==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/utils" "1.6.9"
-    "@formkit/validation" "1.6.9"
-
-"@formkit/inputs@^1.0.0", "@formkit/inputs@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/inputs/-/inputs-1.6.9.tgz"
-  integrity sha512-k9gjV1e5F87NxSnu13JtKb30XYt6ndx2KGHZG8Xz0etoP75yJlMaeROHHPvlxdy2gZM6qH7Ex4it51W74Wh2Eg==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/utils" "1.6.9"
-
-"@formkit/nuxt@^1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/nuxt/-/nuxt-1.6.9.tgz"
-  integrity sha512-G2J20hg1XVvP9l0lcclqeH6xIzVbQ1V1XS0LmVTJ3xBXL2QhXV6EUwkN6FGMjjtBJdtK1SMRmTXDc9rcLJgS1A==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/i18n" "1.6.9"
-    "@formkit/vue" "1.6.9"
-    "@nuxt/kit" "^3.10.3"
-    chokidar "^3.6.0"
-    pathe "^1.1.2"
-    unplugin "^1.9.0"
-    unplugin-formkit "^0.2.13"
-
-"@formkit/observer@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/observer/-/observer-1.6.9.tgz"
-  integrity sha512-p3MCmzp6jwzXIuV3gI9uTJTJl+sN5689C7qf7gdrS8jb1fbX1snKiTyWA8FXOrBXu+ne5z/sA/yBWqYFTSLy8A==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/utils" "1.6.9"
-
-"@formkit/rules@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/rules/-/rules-1.6.9.tgz"
-  integrity sha512-5Vu3JACKyws1kw02qF+024WkS7L9kYZ0lmdSpsaTqg5Wf7+InsxWXFYaG6vCzqIh4Lk9NeffIzq/xyGpGxf5uQ==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/utils" "1.6.9"
-    "@formkit/validation" "1.6.9"
-
-"@formkit/themes@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/themes/-/themes-1.6.9.tgz"
-  integrity sha512-/UD+MehQEdcCEadt73eIBGGAMEK8ODN0yq9r9299WvQxIELCOP2MbcxuWCV/g2Vd15Xhl8YFdn4KCzQi4X7QXA==
-  dependencies:
-    "@formkit/core" "1.6.9"
-
-"@formkit/utils@^1.0.0", "@formkit/utils@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/utils/-/utils-1.6.9.tgz"
-  integrity sha512-vSFhB/Sm/A+SdwKdBi4WhJcdbePqSYRaB878Ol9HL8roTmmmgQpThvkv6EjLM6aRRP27Il5rS8XtIAIeh8vdTA==
-
-"@formkit/validation@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/validation/-/validation-1.6.9.tgz"
-  integrity sha512-9PGwN0ZDJt3hsrMyaL8KTG3diSQDik1OGogVG6/nFcZhWUycpeamFfXZSQ5pfzmwnvrTHsvyT0FtKitUnWWuPA==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/observer" "1.6.9"
-    "@formkit/utils" "1.6.9"
-
-"@formkit/vue@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.npmjs.org/@formkit/vue/-/vue-1.6.9.tgz"
-  integrity sha512-WrjAtEsKnFJzxQuATWsWKMpTAyJE15PUmRh9hwEAqgTDy2yMog1gxqxfZv3rEAdIdgXNp08tWmRVnQgDIF3vAQ==
-  dependencies:
-    "@formkit/core" "1.6.9"
-    "@formkit/dev" "1.6.9"
-    "@formkit/i18n" "1.6.9"
-    "@formkit/inputs" "1.6.9"
-    "@formkit/observer" "1.6.9"
-    "@formkit/rules" "1.6.9"
-    "@formkit/themes" "1.6.9"
-    "@formkit/utils" "1.6.9"
-    "@formkit/validation" "1.6.9"
-
 "@headlessui/vue@^1.7.18":
   version "1.7.23"
   resolved "https://registry.npmjs.org/@headlessui/vue/-/vue-1.7.23.tgz"
@@ -828,7 +704,7 @@
     which "^3.0.1"
     ws "^8.18.0"
 
-"@nuxt/kit@^3.10.3", "@nuxt/kit@^3.11.2", "@nuxt/kit@^3.12.4", "@nuxt/kit@^3.13.2", "@nuxt/kit@^3.14.1592", "@nuxt/kit@^3.15.0", "@nuxt/kit@^3.9.0", "@nuxt/kit@3.15.0":
+"@nuxt/kit@^3.11.2", "@nuxt/kit@^3.12.4", "@nuxt/kit@^3.13.2", "@nuxt/kit@^3.14.1592", "@nuxt/kit@^3.15.0", "@nuxt/kit@^3.9.0", "@nuxt/kit@3.15.0":
   version "3.15.0"
   resolved "https://registry.npmjs.org/@nuxt/kit/-/kit-3.15.0.tgz"
   integrity sha512-Q7k11wDTLIbBgoTfRYNrciK7PvjKklewrKd5PRMJCpn9Lmuqkq59HErNfJXFrBKHsE3Ld0DB6WUtpPGOvWJZoQ==
@@ -1548,20 +1424,6 @@
   integrity sha512-SRr4AZwv/giS+EmyA1ZIzn3/iALjjnWAGaBNmoDTMEob9JwQaevAocuaMDnPAvU7Z35Y5g3CFRusCWgp1gVJ3Q==
   dependencies:
     vue "^3.5.13"
-
-"@zxing/library@latest":
-  version "0.21.3"
-  resolved "https://registry.npmjs.org/@zxing/library/-/library-0.21.3.tgz"
-  integrity sha512-hZHqFe2JyH/ZxviJZosZjV+2s6EDSY0O24R+FQmlWZBZXP9IqMo7S3nb3+2LBWxodJQkSurdQGnqE7KXqrYgow==
-  dependencies:
-    ts-custom-error "^3.2.1"
-  optionalDependencies:
-    "@zxing/text-encoding" "~0.9.0"
-
-"@zxing/text-encoding@~0.9.0":
-  version "0.9.0"
-  resolved "https://registry.npmjs.org/@zxing/text-encoding/-/text-encoding-0.9.0.tgz"
-  integrity sha512-U/4aVJ2mxI0aDNI8Uq0wEhMgY+u4CNtEb0om3+y3+niDAsoTCOB33UF0sxpzqzdqXLqmvc+vZyAt4O8pPdfkwA==
 
 abbrev@^2.0.0:
   version "2.0.0"
@@ -5486,7 +5348,7 @@ tailwindcss-rtl@^0.9.0:
   resolved "https://registry.npmjs.org/tailwindcss-rtl/-/tailwindcss-rtl-0.9.0.tgz"
   integrity sha512-y7yC8QXjluDBEFMSX33tV6xMYrf0B3sa+tOB5JSQb6/G6laBU313a+Z+qxu55M1Qyn8tDMttjomsA8IsJD+k+w==
 
-tailwindcss@^3.2.0, tailwindcss@^3.4.17, "tailwindcss@>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1", "tailwindcss@>=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20", "tailwindcss@>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1", tailwindcss@>=3.2.0, tailwindcss@~3.4.13, "tailwindcss@1 || 2 || 2.0.1-compat || 3":
+tailwindcss@^3.4.17, "tailwindcss@>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1", "tailwindcss@>=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20", "tailwindcss@>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1", tailwindcss@>=3.2.0, tailwindcss@~3.4.13, "tailwindcss@1 || 2 || 2.0.1-compat || 3":
   version "3.4.17"
   resolved "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.4.17.tgz"
   integrity sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==
@@ -5633,11 +5495,6 @@ ts-api-utils@^1.3.0:
   resolved "https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-1.4.3.tgz"
   integrity sha512-i3eMG77UTMD0hZhgRS562pv83RC6ukSAC2GMNWc+9dieh/+jDM5u5YG+NHX6VNDRHQcHwmsTHctP9LhbC3WxVw==
 
-ts-custom-error@^3.2.1:
-  version "3.3.1"
-  resolved "https://registry.npmjs.org/ts-custom-error/-/ts-custom-error-3.3.1.tgz"
-  integrity sha512-5OX1tzOjxWEgsr/YEUWSuPrQ00deKLh6D7OTWcvNHm12/7QPyRh8SYpyWvA4IZv8H/+GQWQEh/kwo95Q9OVW1A==
-
 ts-interface-checker@^0.1.9:
   version "0.1.13"
   resolved "https://registry.npmjs.org/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz"
@@ -5759,14 +5616,6 @@ universalify@^2.0.0:
   resolved "https://registry.npmjs.org/universalify/-/universalify-2.0.1.tgz"
   integrity sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==
 
-unplugin-formkit@^0.2.13:
-  version "0.2.13"
-  resolved "https://registry.npmjs.org/unplugin-formkit/-/unplugin-formkit-0.2.13.tgz"
-  integrity sha512-qNHz7/0QDO0uVD5MoUZz49CI7q8cHM24RQDwbs5NfRJ6EiyZ1gBmWq9ta3QHR2nD7xacXV+yzmfDbnwlNpkzsg==
-  dependencies:
-    pathe "^1.1.1"
-    unplugin "^1.4.0"
-
 unplugin-vue-router@^0.10.8, unplugin-vue-router@^0.10.9:
   version "0.10.9"
   resolved "https://registry.npmjs.org/unplugin-vue-router/-/unplugin-vue-router-0.10.9.tgz"
@@ -5820,22 +5669,6 @@ unplugin@^1.14.1:
     webpack-virtual-modules "^0.6.2"
 
 unplugin@^1.16.0:
-  version "1.16.0"
-  resolved "https://registry.npmjs.org/unplugin/-/unplugin-1.16.0.tgz"
-  integrity sha512-5liCNPuJW8dqh3+DM6uNM2EI3MLLpCKp/KY+9pB5M2S2SR2qvvDHhKgBOaTWEbZTAws3CXfB0rKTIolWKL05VQ==
-  dependencies:
-    acorn "^8.14.0"
-    webpack-virtual-modules "^0.6.2"
-
-unplugin@^1.4.0:
-  version "1.16.0"
-  resolved "https://registry.npmjs.org/unplugin/-/unplugin-1.16.0.tgz"
-  integrity sha512-5liCNPuJW8dqh3+DM6uNM2EI3MLLpCKp/KY+9pB5M2S2SR2qvvDHhKgBOaTWEbZTAws3CXfB0rKTIolWKL05VQ==
-  dependencies:
-    acorn "^8.14.0"
-    webpack-virtual-modules "^0.6.2"
-
-unplugin@^1.9.0:
   version "1.16.0"
   resolved "https://registry.npmjs.org/unplugin/-/unplugin-1.16.0.tgz"
   integrity sha512-5liCNPuJW8dqh3+DM6uNM2EI3MLLpCKp/KY+9pB5M2S2SR2qvvDHhKgBOaTWEbZTAws3CXfB0rKTIolWKL05VQ==
@@ -6113,7 +5946,7 @@ vue-router@^4.4.0, vue-router@^4.4.5, vue-router@^4.5.0, vue-router@latest:
   dependencies:
     "@vue/devtools-api" "^6.6.4"
 
-"vue@^2.7.0 || ^3.0.0", "vue@^2.7.0 || ^3.2.25", "vue@^2.7.0 || ^3.5.11", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.25, vue@^3.3.4, vue@^3.4, vue@^3.4.0, vue@^3.5.13, "vue@>=2.7 || >=3", vue@3.5.13, vue@latest:
+"vue@^2.7.0 || ^3.0.0", "vue@^2.7.0 || ^3.2.25", "vue@^2.7.0 || ^3.5.11", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.2.0, vue@^3.2.25, vue@^3.3.4, vue@^3.4, vue@^3.5.13, "vue@>=2.7 || >=3", vue@3.5.13, vue@latest:
   version "3.5.13"
   resolved "https://registry.npmjs.org/vue/-/vue-3.5.13.tgz"
   integrity sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==

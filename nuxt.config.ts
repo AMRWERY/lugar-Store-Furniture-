@@ -7,7 +7,6 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "nuxt-headlessui",
     "@pinia/nuxt",
-    "@formkit/nuxt",
     "@nuxtjs/i18n",
     "vue3-carousel-nuxt",
     "@vueuse/nuxt",
@@ -28,10 +27,6 @@ export default defineNuxtConfig({
   },
   pinia: {
     storesDirs: ["./stores/**", "./custom-folder/stores/**"],
-  },
-  formkit: {
-    autoImport: true,
-    configFile: "./formkit.config.js",
   },
   i18n: {
     vueI18n: "./i18n.config.js",
