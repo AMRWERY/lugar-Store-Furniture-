@@ -8,7 +8,7 @@
         <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
           <!-- Hamburger Toggle BTN -->
           <button class="z-50 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm lg:hidden"
-            v-if="!isAuthPage" @click="() => { toggleSidebar() }">
+             @click="() => { toggleSidebar() }">
             <span class="relative block h-[1.375rem] w-[1.375rem] cursor-pointer">
               <i class="fa-solid fa-bars"></i>
             </span>
@@ -52,9 +52,6 @@ computed(() => {
   const storedLocale = localeStore.locale;
   setLocale(storedLocale);
 });
-
-//hide routes composable
-const { isAuthPage } = useAuthPage();
 
 onMounted(async () => {
   await authStore.init();

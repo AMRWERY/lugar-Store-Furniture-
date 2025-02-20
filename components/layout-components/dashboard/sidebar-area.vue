@@ -3,12 +3,18 @@
         <!-- overlay Component -->
         <overlay :visible="authStore.isOverlayVisible" />
 
-        <aside v-if="!isAuthPage"
-            class="absolute left-0 top-0 z-50 flex h-screen w-[230px] flex-col overflow-y-hidden bg-black duration-300 ease-linear lg:static lg:translate-x-0"
-            :class="{
-                'translate-x-0': sidebarStore.isSidebarOpen,
-                '-translate-x-full': !sidebarStore.isSidebarOpen
-            }" ref="target">
+        <aside
+            class="fixed top-0 z-50 flex h-screen w-[230px] flex-col overflow-y-hidden bg-black duration-300 ease-linear lg:static lg:translate-x-0"
+            :class="[
+                localeStore.isRTL ? 'right-0' : 'left-0',
+                {
+                    'translate-x-0': sidebarStore.isSidebarOpen,
+                    '-translate-x-full': !sidebarStore.isSidebarOpen && !localeStore.isRTL,
+                    'translate-x-full': !sidebarStore.isSidebarOpen && localeStore.isRTL,
+                    'lg:translate-x-0': true
+                }
+            ]" ref="target">
+
             <!-- SIDEBAR HEADER -->
             <div class="flex items-center justify-between gap-3 px-6 py-[1.375rem] lg:py-6.5">
                 <nuxt-link to="">
@@ -35,7 +41,7 @@
                 </nav>
                 <!-- Sidebar Menu -->
             </div>
-            <div class="px-6 pb-6 mt-auto">
+            <div class="px-3 pb-6 mt-auto">
                 <nuxt-link type="button" to="/login" @click="logout"
                     class="block py-2 text-center text-white transition-all duration-300 bg-transparent border-2 border-white rounded-md hover:bg-white hover:text-black">
                     {{ $t('btn.logout') }}
@@ -46,16 +52,21 @@
 </template>
 
 <script setup>
-const target = ref(null)
-
 const sidebarStore = useSidebarStore()
+const localeStore = useLocaleStore()
+const authStore = useAuthStore()
+const route = useRoute()
+const target = ref(null)
 
 onClickOutside(target, () => {
     sidebarStore.isSidebarOpen = false
 })
 
-const authStore = useAuthStore()
-const showOverlay = ref(false);
+watch(() => route.path, () => {
+    if (sidebarStore.isSidebarOpen) {
+        sidebarStore.isSidebarOpen = false
+    }
+})
 
 const logout = async () => {
     try {
@@ -65,8 +76,15 @@ const logout = async () => {
     }
 };
 
-//hide routes composable
-const { isAuthPage } = useAuthPage();
+const isLargeScreen = useMediaQuery('(min-width: 1024px)')
+
+watch(isLargeScreen, (isLarge) => {
+    if (isLarge) {
+        sidebarStore.isSidebarOpen = true
+    } else {
+        sidebarStore.isSidebarOpen = false
+    }
+})
 
 const { t } = useI18n()
 
