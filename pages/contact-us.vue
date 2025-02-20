@@ -35,7 +35,7 @@
                         <div class="mt-6">
                             <button type="submit" class="w-[400px] px-4 py-2 btn-style" @click="sendMessage">
                                 <div class="flex items-center justify-center" v-if="loading">
-                                    <span class="text-center me-2">{{ $t('loading_btn.logging') }}...</span>
+                                    <span class="text-center me-2">{{ $t('loading_btn.sending') }}...</span>
                                     <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                                 </div>
                                 <span v-else>{{ $t('btn.send_your_message') }}</span>

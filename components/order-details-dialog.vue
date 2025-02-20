@@ -166,7 +166,7 @@ const updateOrderStatus = async (orderId, newStatus) => {
       console.error(error);
       triggerToast({
         title: t('toast.error'),
-        message: t('tooltip.failed_to_update_order'),
+        message: t('toast.failed_to_update_order'),
         type: 'error',
         icon: 'fa-solid fa-triangle-exclamation',
       });

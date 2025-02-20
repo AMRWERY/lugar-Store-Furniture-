@@ -173,36 +173,6 @@ const handleUpdateCategory = () => {
     });
 };
 
-// const handleUpdateCategory = async () => {
-//   if (!categoryId) return;
-//   loadingOne.value = true;
-//   const updatedData = {
-//     title: newCategoryTitle.value,
-//     titleAr: newCategoryTitleAr.value,
-//     imgOne: uploadedImageUrl.value,
-//   };
-//   try {
-//     await store.updateCategory(categoryId, updatedData);
-//     triggerToast({
-//       title: t('toast.great'),
-//       message: t('toast.category_updated'),
-//       type: 'success',
-//       icon: 'fa-solid fa-circle-check',
-//     });
-//     await store.fetchCategoryDetails(categoryId);
-//   } catch (error) {
-//     // console.error("Error updating category:", error);
-//     triggerToast({
-//       title: t('toast.error'),
-//       message: t('toast.category_update_failed'),
-//       type: 'error',
-//       icon: 'fa-solid fa-triangle-exclamation',
-//     });
-//   } finally {
-//     loadingOne.value = false;
-//   }
-// };
-
 definePageMeta({
   layout: 'dashboard'
 })

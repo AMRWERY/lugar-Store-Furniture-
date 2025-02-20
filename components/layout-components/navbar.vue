@@ -104,8 +104,7 @@
                   class="absolute top-0 inline-flex items-center justify-center w-5 h-5 -mt-2 text-xs text-white bg-red-600 rounded-full -me-3 end-2">
                   {{ cartStore.cart.length }}
                 </span>
-                <button type="button" class="relative rounded-full" data-twe-toggle="tooltip"
-                  data-twe-placement="bottom" :title="$t('tooltip.your_cart')">
+                <button type="button" class="relative rounded-full">
                   <span class="absolute -inset-1.5" />
                   <span class="sr-only">View cart</span>
                   <i class="fa-solid fa-cart-shopping mt-0.5"></i>
