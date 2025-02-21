@@ -34,7 +34,11 @@ export default defineNuxtConfig({
   carousel: {
     prefix: "MyPrefix",
   },
-  css: ["~/assets/css/main.css", "~/assets/css/carousel-style.css"],
+  css: [
+    "~/assets/css/main.css",
+    "~/assets/css/carousel-style.css",
+    "vue3-carousel/dist/carousel.css",
+  ],
   components: [
     {
       path: "~/components",

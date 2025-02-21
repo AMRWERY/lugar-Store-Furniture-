@@ -60,35 +60,35 @@
               'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
             ]">
               <!--dynamic-products-cards component -->
-              <dynamic-products-cards :config="config" :categoryTitle="'Chairs'" />
+              <dynamic-products-cards :categoryTitle="'Sofa'" />
             </HeadlessTabPanel>
             <HeadlessTabPanel :class="[
               'rounded-xl bg-white p-3',
               'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
             ]">
               <!--dynamic-products-cards component -->
-              <dynamic-products-cards :config="config" :categoryTitle="'Chairs'" />
+              <dynamic-products-cards :categoryTitle="'Chairs'" />
             </HeadlessTabPanel>
             <HeadlessTabPanel :class="[
               'rounded-xl bg-white p-3',
               'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
             ]">
               <!--dynamic-products-cards component -->
-              <dynamic-products-cards :config="config" :categoryTitle="'Bedrooms'" />
+              <dynamic-products-cards :categoryTitle="'Bedrooms'" />
             </HeadlessTabPanel>
             <HeadlessTabPanel :class="[
               'rounded-xl bg-white p-3',
               'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
             ]">
               <!--dynamic-products-cards component -->
-              <dynamic-products-cards :config="config" :categoryTitle="'Living Room'" />
+              <dynamic-products-cards :categoryTitle="'Living Room'" />
             </HeadlessTabPanel>
             <HeadlessTabPanel :class="[
               'rounded-xl bg-white p-3',
               'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
             ]">
               <!--dynamic-products-cards component -->
-              <dynamic-products-cards :config="config" :categoryTitle="'Dining Room'" />
+              <dynamic-products-cards :categoryTitle="'Dining Room'" />
             </HeadlessTabPanel>
           </HeadlessTabPanels>
         </HeadlessTabGroup>
@@ -98,16 +98,5 @@
 </template>
 
 <script setup>
-const config = {
-  itemsToShow: 4,
-  wrapAround: false,
-  gap: 5,
-  snapAlign: 'center',
-  breakpoints: {
-    200: { itemsToShow: 1.5, snapAlign: 'center' },
-    400: { itemsToShow: 2, snapAlign: 'start' },
-    700: { itemsToShow: 3, snapAlign: 'center' },
-    1024: { itemsToShow: 4, snapAlign: 'start' },
-  },
-};
+
 </script>

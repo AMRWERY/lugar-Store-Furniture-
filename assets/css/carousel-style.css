@@ -22,5 +22,24 @@
 }
 
 .carousel__item {
-  width: 100%;
+  width: calc(100% - var(--gap) * 2);
+  margin: 0 calc(var(--gap) / 2);
+  transform: translateZ(0);
+}
+
+.wrapper-cards {
+  margin: 0 10px;
+}
+
+.carousel__prev,
+.carousel__next {
+  @apply p-1 text-white bg-gray-800 rounded-full hover:text-white;
+}
+
+.carousel__pagination-button {
+  @apply bg-gray-300;
+}
+
+.carousel__pagination-button--active {
+  @apply bg-gray-800;
 }

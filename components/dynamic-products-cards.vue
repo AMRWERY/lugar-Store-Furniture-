@@ -8,65 +8,66 @@
       </div>
 
       <ClientOnly v-else>
-        <Carousel v-bind="config">
+        <Carousel v-bind="carouselConfig" style="--gap: 10px">
           <Slide v-for="card in products" :key="card.id">
             <div class="carousel__item">
-
-              <div class="wrapper">
-                <nuxt-link class="container" :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }">
-                  <div class="top" :style="{
-                    backgroundImage: `url(${card.imgOne})`,
-                    backgroundSize: '100%',
-                    backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat'
-                  }"></div>
-                  <div :class="['bottom', { clicked: isClicked[card.id] }]">
-                    <div class="left">
-                      <div class="details">
-                        <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
-                          card.title }}</h1>
-                        <div
-                          class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
-                          <p class="flex items-center space-s-1">
-                            <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{ $t('home.le') }}</span>
-                            <span class="text-sm text-gray-500 line-through mt-0.5">{{ card.originalPrice }} {{
-                              $t('home.le')
-                              }}</span>
-                          </p>
+              <div class="p-2">
+                <div class="p-4 rounded-lg shadow-md wrapper wrapper-cards">
+                  <nuxt-link class="container" :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }">
+                    <div class="top" :style="{
+                      backgroundImage: `url(${card.imgOne})`,
+                      backgroundSize: '100%',
+                      backgroundPosition: 'center center',
+                      backgroundRepeat: 'no-repeat'
+                    }"></div>
+                    <div :class="['bottom', { clicked: isClicked[card.id] }]">
+                      <div class="left">
+                        <div class="details">
+                          <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
+                            card.title }}</h1>
+                          <div
+                            class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
+                            <p class="flex items-center space-s-1">
+                              <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{ $t('home.le') }}</span>
+                              <span class="text-sm text-gray-500 line-through mt-0.5">{{ card.originalPrice }} {{
+                                $t('home.le')
+                                }}</span>
+                            </p>
+                          </div>
+                        </div>
+                        <!-- Bind the click event to handleBuy -->
+                        <div role="button" class="buy" @click.stop.prevent="handleAddToCart(card)">
+                          <i class="fa-solid fa-cart-plus"></i>
                         </div>
                       </div>
-                      <!-- Bind the click event to handleBuy -->
-                      <div role="button" class="buy" @click.stop.prevent="handleAddToCart(card)">
-                        <i class="fa-solid fa-cart-plus"></i>
+                      <div class="right">
+                        <div class="done">
+                          <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="details">
+                          <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
+                            card.title }}</h1>
+                          <p>Added to your cart</p>
+                        </div>
+                        <!-- Bind the click event to handleRemove -->
+                        <div class="remove" @click.stop.prevent="removeItem(card.id)">
+                          <i class="fa-solid fa-xmark"></i>
+                        </div>
                       </div>
                     </div>
-                    <div class="right">
-                      <div class="done">
-                        <i class="fa-solid fa-check"></i>
-                      </div>
-                      <div class="details">
-                        <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
-                          card.title }}</h1>
-                        <p>Added to your cart</p>
-                      </div>
-                      <!-- Bind the click event to handleRemove -->
-                      <div class="remove" @click.stop.prevent="removeItem(card.id)">
-                        <i class="fa-solid fa-xmark"></i>
-                      </div>
+                  </nuxt-link>
+                  <div class="inside">
+                    <div class="icon">
+                      <i class="fa-solid fa-circle-exclamation"></i>
                     </div>
-                  </div>
-                </nuxt-link>
-                <div class="inside">
-                  <div class="icon">
-                    <i class="fa-solid fa-circle-exclamation"></i>
-                  </div>
-                  <div class="contents">
-                    <table>
-                      <tr>
-                        <th>{{ $i18n.locale === 'ar' ? card.descriptionAr :
-                          card.description }}</th>
-                      </tr>
-                    </table>
+                    <div class="contents">
+                      <table>
+                        <tr>
+                          <th>{{ $i18n.locale === 'ar' ? card.descriptionAr :
+                            card.description }}</th>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -83,11 +84,9 @@
 </template>
 
 <script setup>
+const { carouselConfig } = useCarousel();
+
 const props = defineProps({
-  config: {
-    type: Object,
-    required: true
-  },
   categoryTitle: {
     type: String,
     default: ''

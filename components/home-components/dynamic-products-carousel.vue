@@ -13,7 +13,7 @@
             </div>
 
             <ClientOnly>
-                <Carousel v-bind="config">
+                <Carousel v-bind="carouselConfig">
                     <Slide v-for="card in products" :key="card.id">
                         <div class="carousel__item">
 
@@ -36,7 +36,7 @@
                                                     <p class="flex items-center space-s-1">
                                                         <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{
                                                             $t('home.le')
-                                                        }}</span>
+                                                            }}</span>
                                                         <span class="text-sm text-gray-500 line-through mt-0.5">{{
                                                             card.originalPrice }} {{ $t('home.le')
                                                             }}</span>
@@ -91,11 +91,9 @@
 </template>
 
 <script setup>
+const { carouselConfig } = useCarousel();
+
 const props = defineProps({
-    config: {
-        type: Object,
-        required: true
-    },
     categoryTitle: {
         type: String,
         default: ''
