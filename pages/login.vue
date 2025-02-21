@@ -53,14 +53,6 @@
         </form>
       </div>
     </div>
-
-    <!-- dynamic-toast component -->
-    <div class="fixed z-50 pointer-events-none bottom-5 start-5 w-96">
-      <div class="pointer-events-auto">
-        <dynamic-toast v-if="showToast" :title="toastTitle" :message="toastMessage" :toastType="toastType"
-          :duration="5000" :toastIcon="toastIcon" @toastClosed="showToast = false" />
-      </div>
-    </div>
   </div>
 </template>
 
@@ -69,8 +61,6 @@ const authStore = useAuthStore()
 const loading = ref(false);
 const errorMessage = ref('');
 const { t } = useI18n()
-
-const { showToast, toastTitle, toastMessage, toastType, toastIcon, triggerToast } = useToast()
 
 const data = ref({
   email: '',
@@ -103,12 +93,6 @@ const signIn = async () => {
     await authStore.loginUser({
       email: data.value.email,
       password: data.value.password,
-    });
-    triggerToast({
-      title: t('toast.successfully_logged_in'),
-      message: t('toast.your_account_has_been_successfully_logged_in'),
-      type: 'success',
-      icon: 'fa-solid fa-circle-check',
     });
     setTimeout(() => {
       navigateTo('/products');
