@@ -6,7 +6,7 @@
     <div v-if="!isLoginPage">
       <header class="sticky inset-0 text-white bg-black h-14">
         <nav
-          class="flex items-center justify-between h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
+          class="flex items-center justify-center h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
           <!-- Announcement -->
           <div class="hidden text-sm gap-7 md:flex">
             <div class="flex items-center space-s-2.5">
@@ -71,14 +71,14 @@
       </header>
 
       <nav class="bg-white shadow-md">
-        <div class="flex items-center justify-between px-10">
+        <div class="flex items-center justify-center px-10">
           <div>
             <nuxt-link to="/">
               <img class="h-16 cursor-pointer w-[100px]"
                 src="https://justfields.com/storage/projects/7M5rV059/LOGO1-lugar.png" />
             </nuxt-link>
           </div>
-          <ul class="flex items-center mx-auto space-s-8">
+          <ul class="flex items-center gap-5 mx-auto">
             <li><nuxt-link to="/" class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{
               $t('layout.home') }}</nuxt-link>
             </li>
@@ -87,17 +87,17 @@
                 }}</nuxt-link></li>
             <li>
               <nuxt-link to="/hot-deals"
-                class="inline-flex items-center font-semibold text-gray-700 capitalize text-md hover:text-blue-500">
+                class="inline-flex items-center font-semibold text-center text-gray-700 capitalize text-md hover:text-blue-500">
                 {{ $t('layout.hot_deals') }}
                 <i class="text-red-500 ms-2 fa-solid fa-fire-flame-curved fa-lg"></i>
               </nuxt-link>
             </li>
-            <li><nuxt-link to="/contact-us"
-                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{ $t('layout.contact_us')
+            <li class="text-center"><nuxt-link to="/contact-us"
+                class="font-semibold text-center text-gray-700 capitalize text-md hover:text-blue-500">{{ $t('layout.contact_us')
                 }}</nuxt-link></li>
-          </ul>
-          <!-- cart -->
-          <div>
+          <li>
+
+            <div>
             <span class="flex items-center space-s-1">
               <nuxt-link to="/shopping-cart" class="relative">
                 <span
@@ -112,6 +112,10 @@
               </nuxt-link>
             </span>
           </div>
+          </li>  
+        </ul>
+          <!-- cart -->
+         
         </div>
       </nav>
     </div>
