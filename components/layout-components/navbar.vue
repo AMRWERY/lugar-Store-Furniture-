@@ -4,7 +4,7 @@
     <overlay :visible="localeStore.isOverlayVisible" />
 
     <div v-if="!isLoginPage">
-      <header class="sticky inset-0 text-white bg-black h-14">
+      <header class="sticky inset-0 z-50 text-white bg-black h-14">
         <nav
           class="flex items-center justify-center h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">
           <!-- Announcement -->
@@ -93,29 +93,30 @@
               </nuxt-link>
             </li>
             <li class="text-center"><nuxt-link to="/contact-us"
-                class="font-semibold text-center text-gray-700 capitalize text-md hover:text-blue-500">{{ $t('layout.contact_us')
+                class="font-semibold text-center text-gray-700 capitalize text-md hover:text-blue-500">{{
+                  $t('layout.contact_us')
                 }}</nuxt-link></li>
-          <li>
+            <li>
 
-            <div>
-            <span class="flex items-center space-s-1">
-              <nuxt-link to="/shopping-cart" class="relative">
-                <span
-                  class="absolute top-0 inline-flex items-center justify-center w-5 h-5 -mt-2 text-xs text-white bg-red-600 rounded-full -me-3 end-2">
-                  {{ cartStore.cart.length }}
+              <div>
+                <span class="flex items-center space-s-1">
+                  <nuxt-link to="/shopping-cart" class="relative">
+                    <span
+                      class="absolute top-0 inline-flex items-center justify-center w-5 h-5 -mt-2 text-xs text-white bg-red-600 rounded-full -me-3 end-2">
+                      {{ cartStore.cart.length }}
+                    </span>
+                    <button type="button" class="relative rounded-full">
+                      <span class="absolute -inset-1.5" />
+                      <span class="sr-only">View cart</span>
+                      <i class="fa-solid fa-cart-shopping mt-0.5"></i>
+                    </button>
+                  </nuxt-link>
                 </span>
-                <button type="button" class="relative rounded-full">
-                  <span class="absolute -inset-1.5" />
-                  <span class="sr-only">View cart</span>
-                  <i class="fa-solid fa-cart-shopping mt-0.5"></i>
-                </button>
-              </nuxt-link>
-            </span>
-          </div>
-          </li>  
-        </ul>
+              </div>
+            </li>
+          </ul>
           <!-- cart -->
-         
+
         </div>
       </nav>
     </div>
