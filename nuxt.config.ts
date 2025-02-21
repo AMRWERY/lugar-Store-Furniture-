@@ -45,6 +45,14 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  router: {
+    options: {
+      // scrollBehaviorType: 'smooth'
+  //     scrollBehavior() {
+  //   return { top: 0, left: 0, behavior: "instant" };
+  // },
+    }
+  },
   app: {
     head: {
       title: "Lugar Store",
