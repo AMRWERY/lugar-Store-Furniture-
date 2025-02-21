@@ -100,7 +100,7 @@
                       </div>
                     </div>
                     <label :for="`filter-${section.id}-${optionIdx}`" class="text-sm text-gray-600">{{ option.label
-                    }}</label>
+                      }}</label>
                   </div>
                 </div>
               </HeadlessDisclosurePanel>
