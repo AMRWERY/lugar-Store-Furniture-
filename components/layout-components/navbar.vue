@@ -86,7 +86,7 @@
                 class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{ $t('layout.products')
                 }}</nuxt-link></li>
             <li>
-              <nuxt-link to=""
+              <nuxt-link to="/hot-deals"
                 class="inline-flex items-center font-semibold text-gray-700 capitalize text-md hover:text-blue-500">
                 {{ $t('layout.hot_deals') }}
                 <i class="text-red-500 ms-2 fa-solid fa-fire-flame-curved fa-lg"></i>
