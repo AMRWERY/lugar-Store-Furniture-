@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="flex justify-center">
         <div class="text-gray-800 bg-gray-100 dark:bg-gray-900 dark:text-white">
             <ClientOnly>
                 <div class="mx-auto max-w-7xl">

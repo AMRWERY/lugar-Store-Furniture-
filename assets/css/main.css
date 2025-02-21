@@ -64,7 +64,7 @@
         float: left;
 
         .details {
-          padding: 20px;
+          padding: 7px;
           float: left;
           width: calc(70% - 40px);
         }

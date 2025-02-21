@@ -29,18 +29,20 @@
                                     <div :class="['bottom', { clicked: isClicked[card.id] }]">
                                         <div class="left">
                                             <div class="details">
-                                                <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
-                                                    card.title }}</h1>
+
                                                 <div
-                                                    class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
-                                                    <p class="flex items-center space-s-1">
+                                                    class="flex flex-col items-center pb-2 text-center ">
+                                                    <div class="font-normal ">
+                                                        {{ $i18n.locale === 'ar' ? card.titleAr : card.title }}
+                                                    </div>
+                                                    <div class="flex items-center gap-2 font-semibold " @v-if="card.discount > 0"  >
                                                         <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{
                                                             $t('home.le')
                                                             }}</span>
                                                         <span class="text-sm text-gray-500 line-through mt-0.5">{{
                                                             card.originalPrice }} {{ $t('home.le')
                                                             }}</span>
-                                                    </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <!-- Bind the click event to handleBuy -->
@@ -64,7 +66,7 @@
                                         </div>
                                     </div>
                                 </nuxt-link>
-                                <div class="inside">
+                                <!-- <div class="inside">
                                     <div class="icon">
                                         <i class="fa-solid fa-circle-exclamation"></i>
                                     </div>
@@ -76,7 +78,7 @@
                                             </tr>
                                         </table>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </Slide>

@@ -14,8 +14,8 @@
                 :title="$t('home.24h_delivery_items')" />
 
             <!-- dynamic-products-carousel component -->
-            <dynamic-products-carousel :config="config" :subCategoryTitle="'Special Offers'"
-                :title="$t('home.special_offers')" />
+            <!-- <dynamic-products-carousel :config="config" :subCategoryTitle="'Special Offers'"
+                :title="$t('home.special_offers')" /> -->
 
             <!-- categories-cards component-->
             <categories-cards />

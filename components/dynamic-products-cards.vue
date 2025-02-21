@@ -56,7 +56,7 @@
                       </div>
                     </div>
                   </nuxt-link>
-                  <div class="inside">
+                  <!-- <div class="inside">
                     <div class="icon">
                       <i class="fa-solid fa-circle-exclamation"></i>
                     </div>
@@ -68,7 +68,7 @@
                         </tr>
                       </table>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
