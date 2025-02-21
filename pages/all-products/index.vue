@@ -63,7 +63,7 @@
     </HeadlessTransitionRoot>
 
     <main class="px-4 mx-auto max-w-9xl sm:px-6 lg:px-8">
-      <div class="flex items-baseline justify-between pt-24 pb-6 border-b border-gray-200">
+      <div class="flex items-baseline justify-between pt-12 pb-6 border-b border-gray-200">
         <h1 class="text-4xl font-bold tracking-tight text-gray-900 capitalize">{{ $t('products.products') }}</h1>
         <button type="button" class="p-2 -m-2 text-gray-400 ms-4 hover:text-gray-500 sm:ms-6 lg:hidden"
           @click="mobileFiltersOpen = true">
@@ -72,14 +72,13 @@
         </button>
       </div>
 
-      <section aria-labelledby="products-heading" class="pt-6 pb-24">
+      <section aria-labelledby="products-heading" class="pt-6 pb-12">
         <h2 id="products-heading" class="sr-only">{{ $t('products.products') }}</h2>
-
-        <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-[250px_1fr]">
           <!-- Filters -->
           <form class="hidden lg:block">
             <HeadlessDisclosure as="div" v-for="section in filters" :key="section.id"
-              class="py-6 border-b border-gray-200" v-slot="{ open }">
+              class="py-6 border-b border-gray-200" :defaultOpen="true" v-slot="{ open }">
               <h3 class="flow-root -my-3">
                 <HeadlessDisclosureButton
                   class="flex items-center justify-between w-full py-3 text-sm text-gray-400 bg-white hover:text-gray-500">
@@ -109,7 +108,7 @@
           </form>
 
           <!-- Product grid -->
-          <div class="lg:col-span-3">
+          <div>
             <!-- products component -->
             <products />
           </div>
