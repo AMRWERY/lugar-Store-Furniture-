@@ -98,7 +98,6 @@ export const useProductsStore = defineStore("products", {
       return $fetch(endpoint, { responseType: "json" })
         .then((response) => {
           this.products = response;
-          // Optionally log the response:
           // console.log("Fetched products:", this.products);
           return response;
         })
