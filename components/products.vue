@@ -74,6 +74,13 @@ const cartStore = useCartStore();
 const route = useRoute();
 const loading = ref(true);
 
+const props = defineProps({
+  selectedCategories: {
+    type: Array,
+    default: () => []
+  }
+});
+
 onMounted(() => {
   const categoryId = route.query.categoryId;
   loading.value = true;
@@ -83,16 +90,17 @@ onMounted(() => {
         loading.value = false;
       })
       .catch((error) => {
-        console.error("Error fetching products:", error);
+        // console.error("Error fetching products:", error);
         loading.value = false;
       });
   } else {
     store.fetchProducts()
       .then(() => {
+        // console.log("Fetched products:", store.products);
         loading.value = false;
       })
       .catch((error) => {
-        console.error("Error fetching products:", error);
+        // console.error("Error fetching products:", error);
         loading.value = false;
       });
   }
@@ -102,7 +110,21 @@ const currentPage = ref(1);
 const perPage = 10;
 
 const filteredProducts = computed(() => {
-  return store.products;
+  const allProducts = store.products || [];
+  if (props.selectedCategories.length === 0) return allProducts;
+  return allProducts.filter(product => {
+    const prodCat = (product.categoryId || '').toLowerCase();
+    // console.log('selected category', product.categoryId)
+    // console.log('selected category', props.selectedCategories)
+    return props.selectedCategories.some(
+      cat => prodCat === cat.toLowerCase()
+    );
+  });
+});
+
+
+watch(() => props.selectedCategories, () => {
+  currentPage.value = 1;
 });
 
 const totalPages = computed(() => {

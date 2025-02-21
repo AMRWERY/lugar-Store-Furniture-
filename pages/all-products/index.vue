@@ -95,7 +95,7 @@
                     <div class="flex items-center h-5 shrink-0">
                       <div class="grid grid-cols-1 group size-4">
                         <input :id="`filter-${section.id}-${optionIdx}`" :name="`${section.id}[]`" :value="option.value"
-                          type="checkbox" :checked="option.checked"
+                          type="checkbox" :checked="option.checked" v-model="selectedCategories"
                           class="col-start-1 row-start-1 bg-white border border-gray-300 rounded appearance-none checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
                       </div>
                     </div>
@@ -110,7 +110,7 @@
           <!-- Product grid -->
           <div>
             <!-- products component -->
-            <products />
+            <products :selected-categories="selectedCategories" />
           </div>
         </div>
       </section>
@@ -120,19 +120,25 @@
 
 <script setup>
 const { t } = useI18n()
+const selectedCategories = ref([]);
+
+const filterOptions = computed(() => [
+  { value: '1', label: t('products.chairs') },
+  { value: '2', label: t('products.bed_rooms') },
+  { value: '3', label: t('products.sofa') },
+  { value: '6', label: t('products.living_rooms') },
+  { value: '8', label: t('products.dining_rooms') }
+])
 
 const filters = computed(() => [
   {
     id: 'categories',
     name: t('products.categories'),
-    options: [
-      { value: 'chairs', label: t('products.chairs'), checked: false },
-      { value: 'bedrooms', label: t('products.bed_rooms'), checked: false },
-      { value: 'sofa', label: t('products.sofa'), checked: true },
-      { value: 'living room', label: t('products.living_rooms'), checked: false },
-      { value: 'dining room', label: t('products.dining_rooms'), checked: false },
-    ],
-  },
+    options: filterOptions.value.map(opt => ({
+      ...opt,
+      checked: selectedCategories.value.includes(opt.value)
+    }))
+  }
 ]);
 
 const mobileFiltersOpen = ref(false)
