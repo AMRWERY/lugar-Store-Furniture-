@@ -16,33 +16,65 @@
                 <Carousel v-bind="config">
                     <Slide v-for="card in products" :key="card.id">
                         <div class="carousel__item">
-                            <div class="relative flex flex-col w-[300px] max-w-xs overflow-hidden bg-white group">
-                                <nuxt-link class="relative flex mx-3 mt-3 overflow-hidden h-60 rounded-xl"
+
+                            <div class="wrapper">
+                                <nuxt-link class="container"
                                     :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }">
-                                    <div class="relative w-full h-full">
-                                        <img class="absolute top-0 object-cover w-full h-full transition-all duration-500 ease-in-out end-0"
-                                            :src="card.imgOne" />
-                                        <img class="absolute top-0 object-cover w-full h-full transition-all duration-500 ease-in-out opacity-0 end-0 group-hover:opacity-100"
-                                            :src="card.imgTwo" v-if="card.imgTwo" />
+                                    <div class="top" :style="{
+                                        backgroundImage: `url(${card.imgOne})`,
+                                        backgroundSize: '100%',
+                                        backgroundPosition: 'center center',
+                                        backgroundRepeat: 'no-repeat'
+                                    }"></div>
+                                    <div :class="['bottom', { clicked: isClicked[card.id] }]">
+                                        <div class="left">
+                                            <div class="details">
+                                                <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
+                                                    card.title }}</h1>
+                                                <div
+                                                    class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
+                                                    <p class="flex items-center space-s-1">
+                                                        <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{
+                                                            $t('home.le')
+                                                        }}</span>
+                                                        <span class="text-sm text-gray-500 line-through mt-0.5">{{
+                                                            card.originalPrice }} {{ $t('home.le')
+                                                            }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!-- Bind the click event to handleBuy -->
+                                            <div role="button" class="buy" @click.stop.prevent="handleAddToCart(card)">
+                                                <i class="fa-solid fa-cart-plus"></i>
+                                            </div>
+                                        </div>
+                                        <div class="right">
+                                            <div class="done">
+                                                <i class="fa-solid fa-check"></i>
+                                            </div>
+                                            <div class="details">
+                                                <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
+                                                    card.title }}</h1>
+                                                <p>Added to your cart</p>
+                                            </div>
+                                            <!-- Bind the click event to handleRemove -->
+                                            <div class="remove" @click.stop.prevent="removeItem(card.id)">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </nuxt-link>
-
-                                <div class="px-5 pb-5 mt-4">
-                                    <nuxt-link :to="card.link" class="capitalize">
-                                        <h5 class="font-bold tracking-tight truncate text-md text-slate-900">
-                                            {{ $i18n.locale === 'ar' ? card.titleAr :
-                                                card.title }}
-                                        </h5>
-                                    </nuxt-link>
-                                    <div
-                                        class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
-                                        <p class="flex items-center space-s-1">
-                                            <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{ $t('home.le')
-                                                }}</span>
-                                            <span class="text-sm text-gray-500 line-through mt-0.5">{{
-                                                card.originalPrice }} {{ $t('home.le')
-                                                }}</span>
-                                        </p>
+                                <div class="inside">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-circle-exclamation"></i>
+                                    </div>
+                                    <div class="contents">
+                                        <table>
+                                            <tr>
+                                                <th>{{ $i18n.locale === 'ar' ? card.descriptionAr :
+                                                    card.description }}</th>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -75,11 +107,12 @@ const props = defineProps({
     title: {
         type: String,
         required: true,
-    },
+    }
 });
 
 const productsStore = useProductsStore()
 const categoryStore = useCategoriesStore()
+const cartStore = useCartStore();
 const products = ref([])
 const subCategories = ref([])
 const selectedSubCategoryId = ref('')
@@ -133,4 +166,47 @@ onMounted(() => {
         // console.log("Neither categoryTitle nor subCategoryTitle provided.");
     }
 });
+
+const quantity = ref(1)
+
+const handleAddToCart = async (product) => {
+    if (!product) {
+        return
+    }
+    try {
+        isClicked[product.id] = true
+        await cartStore.addToCart(
+            product.id,
+            product.title,
+            product.titleAr,
+            product.discountedPrice,
+            product.originalPrice,
+            product.imgOne,
+            product.categoryId,
+            product.subCategoryId,
+            product.discount,
+            quantity.value
+        )
+    } catch (error) {
+        console.error("Error adding product to cart:", error)
+    }
+}
+
+const removingItem = ref(null);
+
+const removeItem = async (productId) => {
+    if (!productId) {
+        return;
+    }
+    try {
+        removingItem.value = productId;
+        await cartStore.removeFromCart(productId);
+        removingItem.value = null;
+        isClicked[productId] = false
+    } catch (error) {
+        console.error("Error removing item:", error);
+    }
+};
+
+const isClicked = reactive({})
 </script>
