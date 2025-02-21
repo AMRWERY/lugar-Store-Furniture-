@@ -28,7 +28,7 @@
               <!-- Filters -->
               <form class="mt-4 border-t border-gray-200">
                 <HeadlessDisclosure as="div" v-for="section in filters" :key="section.id"
-                  class="px-4 py-6 border-t border-gray-200" v-slot="{ open }">
+                  class="px-4 py-6 border-t border-gray-200" :defaultOpen="true" v-slot="{ open }">
                   <h3 class="flow-root -mx-2 -my-3">
                     <HeadlessDisclosureButton
                       class="flex items-center justify-between w-full px-2 py-3 text-gray-400 bg-white hover:text-gray-500">
@@ -45,7 +45,7 @@
                         <div class="flex items-center h-5 shrink-0">
                           <div class="grid grid-cols-1 group size-4">
                             <input :id="`filter-mobile-${section.id}-${optionIdx}`" :name="`${section.id}[]`"
-                              :value="option.value" type="checkbox"
+                              :value="option.value" type="checkbox" v-model="selectedCategories"
                               class="col-start-1 row-start-1 bg-white border border-gray-300 rounded appearance-none checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" />
                           </div>
                         </div>
@@ -74,7 +74,7 @@
 
       <section aria-labelledby="products-heading" class="pt-6 pb-12">
         <h2 id="products-heading" class="sr-only">{{ $t('products.products') }}</h2>
-        <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-[250px_1fr]">
+        <div class="grid grid-cols-1 gap-y-10 lg:grid-cols-5">
           <!-- Filters -->
           <form class="hidden lg:block">
             <HeadlessDisclosure as="div" v-for="section in filters" :key="section.id"
@@ -108,7 +108,7 @@
           </form>
 
           <!-- Product grid -->
-          <div>
+          <div class="lg:col-span-4">
             <!-- products component -->
             <products :selected-categories="selectedCategories" />
           </div>
