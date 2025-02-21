@@ -29,7 +29,7 @@
                                     <nuxt-link to="/all-products">{{ $t('footer.products') }}</nuxt-link>
                                 </li>
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page">
-                                    <nuxt-link to="/contact-us.vue">{{ $t('footer.contact_us') }}</nuxt-link>
+                                    <nuxt-link to="/contact-us">{{ $t('footer.contact_us') }}</nuxt-link>
                                 </li>
                             </ul>
                         </div>
