@@ -7,7 +7,7 @@
         <div class="w-1/12 h-1 border-t-2 border-gray-700"></div>
       </div>
 
-      <div class="w-full max-w-full px-2 py-16 sm:px-0">
+      <div class="w-full max-w-full px-2 pb-16 sm:px-0">
         <HeadlessTabGroup>
           <div class="flex justify-center">
             <HeadlessTabList class="flex flex-row flex-wrap mx-auto mb-5 list-none border-b-0 ps-0 space-s-6">
