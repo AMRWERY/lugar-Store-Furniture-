@@ -35,11 +35,11 @@
                                                     <div class="font-normal ">
                                                         {{ $i18n.locale === 'ar' ? card.titleAr : card.title }}
                                                     </div>
-                                                    <div class="flex items-center gap-2 font-semibold " @v-if="card.discount > 0"  >
-                                                        <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{
+                                                    <div class="flex items-center gap-2 font-semibold " >
+                                                        <!-- <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{
                                                             $t('home.le')
-                                                            }}</span>
-                                                        <span class="text-sm text-gray-500 line-through mt-0.5">{{
+                                                            }}</span> -->
+                                                        <span class="text-sm text-gray-500 mt-0.5">{{
                                                             card.originalPrice }} {{ $t('home.le')
                                                             }}</span>
                                                     </div>
