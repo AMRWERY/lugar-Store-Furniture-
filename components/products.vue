@@ -1,11 +1,6 @@
 <template>
   <div>
     <div class="mx-auto max-w-7xl">
-
-      <!-- <div v-if="loading" class="flex justify-center py-8">
-        <i class="fa-solid fa-spinner fa-spin-pulse fa-4x"></i>
-      </div> -->
-
       <div v-if="paginatedProducts.length === 0">
         <!-- skeleton-loader component -->
         <skeleton-loader />
