@@ -244,7 +244,9 @@
     "off": "خصم",
     "le": "ج م",
     "quantity": "الكمية",
-    "description": "الوصف"
+    "description": "الوصف",
+    "exclusive_special_offers": "عروض خاصة حصرية",
+    "special_offer": "عرض خاص"
   },
   "contact_us": {
     "get_in_touch": "تواصل معنا",

@@ -244,7 +244,9 @@
     "off": "off",
     "le": "LE",
     "quantity": "Quantity",
-    "description": "Description"
+    "description": "Description",
+    "exclusive_special_offers": "Exclusive Special Offers",
+    "special_offer": "Special Offer"
   },
   "contact_us": {
     "get_in_touch": "Get in touch",
