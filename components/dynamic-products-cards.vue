@@ -12,7 +12,7 @@
           <Slide v-for="card in products" :key="card.id">
             <div class="carousel__item">
               <div class="p-2">
-                <div class="p-4 rounded-lg shadow-md wrapper wrapper-cards">
+                <div class="rounded-lg shadow-md wrapper wrapper-cards">
                   <nuxt-link class="container" :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }">
                     <div class="top" :style="{
                       backgroundImage: `url(${card.imgOne})`,

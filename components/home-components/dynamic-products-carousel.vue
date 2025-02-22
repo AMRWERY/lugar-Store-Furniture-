@@ -17,7 +17,8 @@
                     <Slide v-for="card in products" :key="card.id">
                         <div class="carousel__item">
 
-                            <div class="wrapper">
+                            <div class="p-2">
+                                <div class="rounded-lg shadow-md wrapper wrapper-cards">
                                 <nuxt-link class="container"
                                     :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }">
                                     <div class="top" :style="{
@@ -79,6 +80,7 @@
                                         </table>
                                     </div>
                                 </div> -->
+                            </div>
                             </div>
                         </div>
                     </Slide>
