@@ -33,18 +33,16 @@
             <nuxt-link to="https://www.instagram.com/lugar_furniture" target="_blank"
               class="transition hover:opacity-75">
               <span class="sr-only">Instagram</span>
-              <i class="fa-brands fa-instagram text-2xl
-   bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af]
-   bg-clip-text text-transparent">
+              <i
+                class="fa-brands fa-instagram text-2xl bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] bg-clip-text text-transparent">
               </i>
             </nuxt-link>
 
             <nuxt-link to="https://www.tiktok.com/@lugarfurnitureinv?_t=8sj2O0ysXQo&_r=1" target="_blank"
               class="transition hover:opacity-75">
               <span class="sr-only">Tiktok</span>
-              <i class="fa-brands fa-tiktok text-2xl
-          bg-gradient-to-r from-[#69C9D0] via-white to-[#EE1D52]
-          bg-clip-text text-transparent">
+              <i
+                class="fa-brands fa-tiktok text-2xl bg-gradient-to-r from-[#69C9D0] via-white to-[#EE1D52] bg-clip-text text-transparent">
               </i>
             </nuxt-link>
 
@@ -70,34 +68,55 @@
         </nav>
       </header>
 
-      <nav class="bg-white shadow-md">
-        <div class="flex items-center justify-center px-10">
-          <div>
-            <nuxt-link to="/">
-              <img class="h-16 cursor-pointer w-[100px]"
-                src="https://justfields.com/storage/projects/7M5rV059/LOGO1-lugar.png" />
-            </nuxt-link>
-          </div>
-          <ul class="flex items-center gap-5 mx-auto">
-            <li><nuxt-link to="/" class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{
-              $t('layout.home') }}</nuxt-link>
-            </li>
-            <li><nuxt-link to="/all-products"
-                class="font-semibold text-gray-700 capitalize text-md hover:text-blue-500">{{ $t('layout.products')
-                }}</nuxt-link></li>
-            <li>
-              <nuxt-link to="/hot-deals"
-                class="inline-flex items-center font-semibold text-center text-gray-700 capitalize text-md hover:text-blue-500">
-                {{ $t('layout.hot_deals') }}
-                <i class="text-red-500 ms-2 fa-solid fa-fire-flame-curved fa-lg"></i>
-              </nuxt-link>
-            </li>
-            <li class="text-center"><nuxt-link to="/contact-us"
-                class="font-semibold text-center text-gray-700 capitalize text-md hover:text-blue-500">{{
-                  $t('layout.contact_us')
-                }}</nuxt-link></li>
-            <li>
 
+      <HeadlessDisclosure as="nav" class="bg-white shadow-xl" v-slot="{ open }">
+        <div class="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div class="relative flex items-center justify-between h-16">
+            <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+              <!-- Mobile menu button-->
+              <HeadlessDisclosureButton
+                class="relative inline-flex items-center justify-center p-2 text-gray-700 rounded-md hover:text-gray-800">
+                <span class="absolute -inset-0.5" />
+                <span class="sr-only">Open main menu</span>
+                <i class="block fa-solid fa-bars" aria-hidden="true" v-if="!open"></i>
+                <i class="block fa-solid fa-xmark" aria-hidden="true" v-else></i>
+              </HeadlessDisclosureButton>
+            </div>
+            <div class="flex items-center justify-center flex-1 sm:items-center sm:justify-start">
+              <!-- Logo container -->
+              <div class="flex items-center shrink-0">
+                <nuxt-link to="/">
+                  <img class="w-[100px] h-16" src="https://justfields.com/storage/projects/7M5rV059/LOGO1-lugar.png"
+                    alt="lugar logo" />
+                </nuxt-link>
+              </div>
+
+              <!-- Navigation links container (visible on sm and above) -->
+              <div class="hidden sm:ms-6 sm:block">
+                <div class="flex flex-row items-center space-s-4">
+                  <nuxt-link to="/" class="text-gray-700 capitalize"
+                    active-class="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md" exact>
+                    {{ $t('layout.home') }}
+                  </nuxt-link>
+                  <nuxt-link to="/all-products" class="text-gray-700 capitalize"
+                    active-class="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md" exact>
+                    {{ $t('layout.products') }}
+                  </nuxt-link>
+                  <nuxt-link to="/hot-deals" class="text-gray-700 capitalize"
+                    active-class="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md" exact>
+                    {{ $t('layout.hot_deals') }}
+                    <i class="ml-2 text-red-500 fa-solid fa-fire-flame-curved fa-lg"></i>
+                  </nuxt-link>
+                  <nuxt-link to="/contact-us" class="text-gray-700 capitalize"
+                    active-class="px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-md" exact>
+                    {{ $t('layout.contact_us') }}
+                  </nuxt-link>
+                </div>
+              </div>
+            </div>
+
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pe-0">
+              <!-- cart -->
               <div>
                 <span class="flex items-center space-s-1">
                   <nuxt-link to="/shopping-cart" class="relative">
@@ -113,12 +132,41 @@
                   </nuxt-link>
                 </span>
               </div>
-            </li>
-          </ul>
-          <!-- cart -->
-
+            </div>
+          </div>
         </div>
-      </nav>
+
+        <HeadlessDisclosurePanel class="sm:hidden">
+          <div class="px-2 pt-2 pb-3 space-y-2">
+            <HeadlessDisclosureButton class="block w-full text-start">
+              <nuxt-link to="/" exact
+                class="block w-full px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-700 hover:text-white"
+                active-class="text-white bg-gray-900">{{ $t('layout.home') }}</nuxt-link>
+            </HeadlessDisclosureButton>
+
+            <HeadlessDisclosureButton class="block w-full text-start">
+              <nuxt-link to="/all-products" exact
+                class="px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-700 hover:text-white text-start hover:block hover:w-full"
+                active-class="block w-full text-white bg-gray-900 text-start">{{ $t('layout.products') }}</nuxt-link>
+            </HeadlessDisclosureButton>
+
+            <HeadlessDisclosureButton class="block w-full text-start">
+              <nuxt-link to="/hot-deals" exact
+                class="inline-flex items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-700 hover:text-white text-start hover:block hover:w-full"
+                active-class="block w-full text-white bg-gray-900 text-start">
+                {{ $t('layout.hot_deals') }}
+                <i class="text-red-500 ms-2 fa-solid fa-fire-flame-curved fa-lg"></i>
+              </nuxt-link>
+            </HeadlessDisclosureButton>
+
+            <HeadlessDisclosureButton class="block w-full text-start">
+              <nuxt-link to="/contact-us" exact
+                class="px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-700 hover:text-white text-start hover:block hover:w-full"
+                active-class="block w-full text-white bg-gray-900 text-start">{{ $t('layout.contact_us') }}</nuxt-link>
+            </HeadlessDisclosureButton>
+          </div>
+        </HeadlessDisclosurePanel>
+      </HeadlessDisclosure>
     </div>
   </div>
 </template>
