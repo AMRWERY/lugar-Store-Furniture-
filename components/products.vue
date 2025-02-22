@@ -7,7 +7,7 @@
       </div>
 
       <div class="w-full pb-8" v-else>
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           <!-- Loop over products -->
           <nuxt-link v-for="product in paginatedProducts" :key="product.id" :to="`/all-products/${product.id}`"
             class="relative w-full max-w-xs m-10 overflow-hidden bg-white rounded-lg shadow-md">
@@ -35,21 +35,21 @@
                     {{ product.originalPrice }} {{ $t('products.le') }}
                   </span>
                 </div>
-               <div>
-                <button type="button" @click.stop.prevent="handleAddToCart(product)"
-                  class="flex items-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
-                  <div class="flex items-center justify-center" v-if="loadingProductId[product.id]">
-                    <span class="text-center me-2">
-                      {{ $t('loading_btn.adding_to_cart') }}...
-                    </span>
-                    <i class="fa-solid fa-spinner fa-spin-pulse"></i>
-                  </div>
-                  <div class="flex items-center" v-else>
-                    <i class="fa-solid fa-cart-arrow-down me-2"></i>
-                    <span>{{ $t('btn.add_to_cart') }}</span>
-                  </div>
-                </button>
-               </div>
+                <div>
+                  <button type="button" @click.stop.prevent="handleAddToCart(product)"
+                    class="flex items-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                    <div class="flex items-center justify-center" v-if="loadingProductId[product.id]">
+                      <span class="text-center me-2">
+                        {{ $t('loading_btn.adding_to_cart') }}...
+                      </span>
+                      <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+                    </div>
+                    <div class="flex items-center" v-else>
+                      <i class="fa-solid fa-cart-arrow-down me-2"></i>
+                      <span>{{ $t('btn.add_to_cart') }}</span>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
           </nuxt-link>
