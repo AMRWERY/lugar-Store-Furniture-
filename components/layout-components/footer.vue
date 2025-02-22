@@ -20,7 +20,7 @@
                     </div>
                     <div class="footer-content-column">
                         <div class="footer-menu">
-                            <h2 class="footer-menu-name">Quick Links</h2>
+                            <h2 class="footer-menu-name">{{ $t('footer.quick_links') }}</h2>
                             <ul id="menu-company" class="footer-menu-list">
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page">
                                     <nuxt-link to="/">{{ $t('footer.home') }}</nuxt-link>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="footer-content-column">
                         <div class="footer-menu">
-                            <h2 class="footer-menu-name">Categories</h2>
+                            <h2 class="footer-menu-name">{{ $t('footer.categories') }}</h2>
                             <ul id="menu-quick-links" class="footer-menu-list">
                                 <li class="menu-item menu-item-type-custom menu-item-object-custom"
                                     v-for="card in store.categories" :key="card">
@@ -45,7 +45,7 @@
                                             === 'ar'
                                             ?
                                             card?.titleAr :
-                                        card?.title }}</nuxt-link>
+                                            card?.title }}</nuxt-link>
                                 </li>
                             </ul>
                         </div>
@@ -75,7 +75,7 @@
                             </div>
                         </h2>
                         <div class="footer-call-to-action">
-                            <h2 class="footer-call-to-action-title">You Call Us</h2>
+                            <h2 class="footer-call-to-action-title">{{ $t('footer.you_call_us') }}</h2>
                             <p class="footer-call-to-action-link-wrapper">
                                 <nuxt-link class="footer-call-to-action-link" to="tel:0124-64XXXX" target="_self">+20
                                     122 409 1737</nuxt-link>
