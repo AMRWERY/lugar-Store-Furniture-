@@ -77,6 +77,7 @@ onMounted(async () => {
 }
 </style>
 
+<!-- coming soon -->
 <!-- <template>
     <div>
         <section class="flex items-center justify-center bg-gray-200 hover:bg-gray-400 transition-colors duration-300
