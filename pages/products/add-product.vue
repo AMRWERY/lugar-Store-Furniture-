@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+    
     <div class="max-w-2xl px-8 py-6 mx-auto my-8 bg-white border rounded-lg">
       <h2 class="mb-4 text-2xl font-medium text-center">{{ $t('form.add_product')
       }}</h2>

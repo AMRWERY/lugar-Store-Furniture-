@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+
     <section class="py-8 dark:bg-gray-900 md:py-7">
       <div class="p-4 space-y-4" v-if="cartStore.cart.length === 0">
         <p class="text-lg font-semibold text-center text-gray-800">{{ $t('cart.your_cart_is_currently_empty') }}</p>
@@ -98,6 +101,7 @@
 
 <script setup>
 const cartStore = useCartStore();
+const { t } = useI18n();
 const removingItem = ref(null);
 
 const removeItem = async (productId) => {
@@ -145,4 +149,8 @@ const updateQuantityInStore = (productId, newQuantity) => {
     cartStore.updateQuantityInCart(productId, newQuantity);
   }
 };
+
+useHead({
+  titleTemplate: () => t('head.shopping_cart'),
+});
 </script>

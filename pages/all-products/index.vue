@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+
     <!-- Mobile filter dialog -->
     <HeadlessTransitionRoot as="template" :show="mobileFiltersOpen">
       <HeadlessDialog class="relative z-40 lg:hidden" @close="mobileFiltersOpen = false">
@@ -100,7 +103,7 @@
                       </div>
                     </div>
                     <label :for="`filter-${section.id}-${optionIdx}`" class="text-sm text-gray-600">{{ option.label
-                      }}</label>
+                    }}</label>
                   </div>
                 </div>
               </HeadlessDisclosurePanel>

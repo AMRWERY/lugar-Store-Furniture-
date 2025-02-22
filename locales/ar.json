@@ -102,7 +102,9 @@
     "add_marketing_category": "اضافه فئه التسوق",
     "contact_us": "اتصل بنا",
     "customer_messages": "رسائل العملاء",
-    "banners": "لافتات"
+    "banners": "لافتات",
+    "hot_deals": "عروض خاصة حصرية",
+    "shopping_cart": "عربة التسوق"
   },
   "layout": {
     "sign_in": "تسجيل الدخول",
@@ -254,5 +256,28 @@
   "contact_us": {
     "get_in_touch": "تواصل معنا",
     "fill_in_the_form_to_start_a_conversation": "املأ النموذج لبدء محادثة"
+  },
+  "breadcrumb": {
+    "home": "الصفحة الرئيسية",
+    "login": "تسجيل الدخول",
+    "all_products": "المنتجات",
+    "categories": "الفئات",
+    "checkout": "الدفع",
+    "edit_product": "تعديل منتج",
+    "products_add_product": "اضافه منتج",
+    "order_summary": "ملخص الطلب",
+    "orders": "الطلبات",
+    "edit_category": "تعديل الفئة",
+    "categories_add_category": "اضافه فئه",
+    "edit_marketing_category": "تعديل فئة التسويق",
+    "marketing_categories": "فئات التسويق",
+    "marketing_categories_add_marketing_categories": "اضافه فئه التسوق",
+    "contact_us": "اتصل بنا",
+    "customer_messages": "رسائل العملاء",
+    "banners": "لافتات",
+    "product_details": "تفاصيل المنتج",
+    "hot_deals": "عروض خاصة حصرية",
+    "shopping_cart": "عربة التسوق",
+    "products": "المنتجات"
   }
 }

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+
     <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 md:grid-cols-4">
         <div>
@@ -84,8 +87,8 @@
               </ClientOnly>
               <button @click="deleteProduct(product.id)"
                 class="absolute p-0.5 bg-white rounded-full shadow-lg top-12 end-2">
-                  <i class="text-red-500 fa-solid fa-spinner fa-spin-pulse" v-if="deleteProd === product.id"></i>
-                  <i class="text-red-600 fa-regular fa-trash-can" v-else></i>
+                <i class="text-red-500 fa-solid fa-spinner fa-spin-pulse" v-if="deleteProd === product.id"></i>
+                <i class="text-red-600 fa-regular fa-trash-can" v-else></i>
               </button>
             </nuxt-link>
             <div class="flex flex-col justify-end flex-grow px-5 pb-2 mt-6">

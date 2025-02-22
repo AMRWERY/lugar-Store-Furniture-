@@ -102,7 +102,9 @@
     "add_marketing_category": "Add Marketing Category",
     "contact_us": "Contact Us",
     "customer_messages": "Customers Messages",
-    "banners": "Banners"
+    "banners": "Banners",
+    "hot_deals": "Hot Deals",
+    "shopping_cart": "Shopping Cart"
   },
   "layout": {
     "sign_in": "Sign In",
@@ -254,5 +256,28 @@
   "contact_us": {
     "get_in_touch": "Get in touch",
     "fill_in_the_form_to_start_a_conversation": "Fill in the form to start a conversation"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "login": "Login",
+    "all_products": "Products",
+    "categories": "Categories",
+    "checkout": "Checkout",
+    "edit_product": "Edit Product",
+    "products_add_product": "Add Product",
+    "order_summary": "Order Summary",
+    "orders": "Orders",
+    "edit_category": "Edit Category",
+    "categories_add_category": "Add Category",
+    "edit_marketing_category": "Edit Marketing Category",
+    "marketing_categories": "Marketing Categories",
+    "marketing_categories_add_marketing_categories": "Add Marketing Category",
+    "contact_us": "Contact Us",
+    "customer_messages": "Customers Messages",
+    "banners": "Banners",
+    "product_details": "Product details",
+    "hot_deals": "Hot Deals",
+    "shopping_cart": "Shopping Cart",
+    "products": "Products"
   }
 }

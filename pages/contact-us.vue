@@ -1,5 +1,8 @@
 <template>
     <div>
+        <!--breadcrumb component -->
+        <breadcrumb />
+
         <section class="py-6">
             <div class="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
                 <div class="py-6 md:py-0 md:px-6">
@@ -61,7 +64,7 @@
                             <div class="col-span-full">
                                 <label for="about" class="block font-medium text-gray-900 text-sm/6">{{
                                     $t('form.your_message')
-                                    }}</label>
+                                }}</label>
                                 <div class="mt-1">
                                     <textarea name="about" id="about" rows="3"
                                         :placeholder="t('form.enter_your_message')" type="textarea"
@@ -69,7 +72,7 @@
                                         v-model="data.message" />
                                 </div>
                                 <p v-if="messageError" class="mt-1 text-sm font-semibold text-red-500">{{ messageError
-                                }}</p>
+                                    }}</p>
                             </div>
 
                         </div>

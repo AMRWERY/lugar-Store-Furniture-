@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+
     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div class="max-w-md mx-auto">
         <img src="@/assets/Lugar_Furniture_Logo.svg" class="mx-auto w-36 h-36" />

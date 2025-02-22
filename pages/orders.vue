@@ -1,5 +1,8 @@
 <template>
     <div>
+        <!--breadcrumb component -->
+    <breadcrumb />
+    
         <div class="grid items-center grid-cols-12">
             <div class="col-span-12 md:col-span-6">
                 <h3 class="py-2 mt-5 mb-2 text-2xl font-bold sm:mb-6 md:mb-12 text-start">

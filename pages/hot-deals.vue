@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+    
     <div class="min-h-screen py-8 bg-gradient-to-e from-blue-50 to-purple-50">
       <div class="max-w-6xl px-4 mx-auto">
         <h1 class="mb-12 text-4xl font-extrabold text-center text-gray-800">
@@ -94,4 +97,8 @@ const handleAddToCart = async (product) => {
     loadingProductId.value[product.id] = false;
   }
 };
+
+useHead({
+  titleTemplate: () => t('head.hot_deals'),
+});
 </script>

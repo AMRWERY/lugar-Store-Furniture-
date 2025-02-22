@@ -1,5 +1,8 @@
 <template>
     <div>
+         <!--breadcrumb component -->
+    <breadcrumb />
+    
         <div class="flex items-center justify-between w-full mt-1 mb-3 ps-3">
             <div class="flex items-center">
                 <h3 class="text-lg font-semibold text-slate-800">{{ $t('layout.marketing_categories') }}</h3>

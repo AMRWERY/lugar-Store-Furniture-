@@ -1,5 +1,8 @@
 <template>
   <div>
+     <!--breadcrumb component -->
+     <breadcrumb />
+     
     <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
 
       <h2 class="mt-8 mb-4 text-xl font-bold">{{ $t('form.add_marketing_category') }}</h2>

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+    
     <section class="mx-auto bg-white dark:bg-gray-900 md:py-16 max-w-7xl">
       <form @submit.prevent="submitCheckoutForm">
         <div class="grid grid-cols-12 gap-6">

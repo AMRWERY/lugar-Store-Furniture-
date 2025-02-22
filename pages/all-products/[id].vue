@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+
     <div class="py-6 bg-white sm:py-8 lg:py-12">
       <div class="max-w-screen-lg px-4 mx-auto">
         <div class="grid gap-8 md:grid-cols-2">
@@ -175,7 +178,7 @@ const setSelectedImage = (image) => {
 
 const cartStore = useCartStore();
 const itemAdded = ref('')
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const loading = ref(false);
 
 const isInCart = computed(() =>
@@ -241,4 +244,21 @@ const updateQuantityInStore = (newQuantity) => {
     cartStore.updateQuantityInCart(productId, newQuantity);
   }
 };
+
+const productName = computed(() => {
+  return selectedProduct.value
+    ? locale.value === 'ar'
+      ? selectedProduct.value.titleAr
+      : selectedProduct.value.title
+    : '';
+});
+
+useHead({
+  title: productName,
+  titleTemplate: (titleChunk) => {
+    return titleChunk
+      ? `${titleChunk}`
+      : 'Lugar Store';
+  }
+});
 </script>

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!--breadcrumb component -->
+    <breadcrumb />
+    
     <div class="max-w-4xl p-6 mx-auto my-10 bg-white rounded-lg shadow-lg">
       <!-- Order Number -->
       <div class="flex items-center justify-between mb-12">
@@ -9,7 +12,7 @@
             <p class="mt-1 text-sm text-gray-500">
               {{ $t('order_summary.order_number') }} <span class="font-semibold text-gray-900">
                 <span
-                  class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs text-green-700 ring-1 ring-green-600/20 ring-inset font-semibold">{{
+                  class="inline-flex items-center px-2 py-1 text-xs font-semibold text-green-700 rounded-md bg-green-50 ring-1 ring-green-600/20 ring-inset">{{
                   orderSummary.orderId }}</span>
               </span>
             </p>

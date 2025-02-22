@@ -1,5 +1,8 @@
 <template>
     <div>
+         <!--breadcrumb component -->
+    <breadcrumb />
+    
         <div class="max-w-2xl p-6 mx-auto mt-5 bg-white border rounded-lg">
             <h2 class="mb-4 text-xl font-bold">{{ $t('form.edit_marketing_category') }}</h2>
             <form @submit.prevent="handleUpdateMarketCategory">
