@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button v-if="isVisible" @click="scrollToTop"
+        <button v-if="isVisible" @click="scrollToTop" data-aos="zoom-out-up"
             class="fixed z-50 flex items-center justify-center px-4 py-4 border rounded-full shadow-lg btn-style bottom-20 end-8"
             aria-label="Scroll to top">
             <i class="fa-solid fa-arrow-up"></i>

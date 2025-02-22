@@ -127,7 +127,7 @@
                     <button type="button" class="relative rounded-full">
                       <span class="absolute -inset-1.5" />
                       <span class="sr-only">View cart</span>
-                      <i class="fa-solid fa-cart-shopping mt-0.5"></i>
+                      <i class="fa-solid fa-cart-shopping mt-0.5 text-gray-700 text-2xl"></i>
                     </button>
                   </nuxt-link>
                 </span>
