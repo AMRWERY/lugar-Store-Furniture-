@@ -1,34 +1,38 @@
 <template>
-    <div class="flex justify-center">
-        <div class="text-gray-800 bg-gray-100 dark:bg-gray-900 dark:text-white">
-            <ClientOnly>
-                <div class="mx-auto max-w-7xl">
-                    <!-- Carousel Wrapper -->
-                    <div class="overflow-hidden rounded-lg shadow-lg">
-                        <!-- Carousel -->
-                        <div class="carousel">
-                            <!-- Slide -->
-                            <div class="bg-white carousel-item dark:bg-gray-800" v-for="banner in filteredBanners"
-                                :key="banner.id">
-                                <img :src="banner?.fileUrl" class="object-cover w-full rounded-md h-96">
+    <div>
+        <div class="flex justify-center">
+            <!-- Full-width container with responsive max-width on larger screens -->
+            <div class="w-full text-gray-800">
+                <ClientOnly>
+                    <div class="w-full mx-auto sm:max-w-7xl">
+                        <!-- Carousel Wrapper -->
+                        <div class="overflow-hidden rounded-lg shadow-lg">
+                            <!-- Carousel -->
+                            <div class="carousel">
+                                <!-- Slide -->
+                                <div class="bg-white carousel-item" v-for="banner in filteredBanners" :key="banner.id">
+                                    <img :src="banner?.fileUrl" alt="banner"
+                                        class="object-fill w-full h-64 rounded-md sm:h-96" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </ClientOnly>
+                </ClientOnly>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
 const bannersStore = useBannersStore();
-let filteredBanners = ref([]);
+const filteredBanners = ref([]);
 
-onMounted(async () => {
-    await bannersStore.fetchBanners();
-    filteredBanners.value = bannersStore.banners.filter(banner => banner.visible && banner.selected);
-
-    // console.log('Filtered Banners:', filteredBanners.value.length);
+onMounted(() => {
+    bannersStore.fetchBanners().then(() => {
+        filteredBanners.value = bannersStore.banners.filter(
+            (banner) => banner.visible && banner.selected
+        );
+    });
 });
 </script>
 
@@ -76,6 +80,7 @@ onMounted(async () => {
     flex: 0 0 100%;
 }
 </style>
+
 
 <!-- coming soon -->
 <!-- <template>
