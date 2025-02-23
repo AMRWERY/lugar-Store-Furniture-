@@ -7,9 +7,9 @@
       <div class="max-w-screen-lg px-4 mx-auto">
         <div class="grid gap-8 md:grid-cols-2">
           <div class="space-y-4">
-            <div class="relative overflow-hidden bg-gray-100 rounded-lg">
+            <div class="relative overflow-hidden bg-gray-100 rounded-lg aspect-square h-96">
               <img :src="selectedImage" loading="lazy" class="object-cover object-center w-full h-full" />
-              <span class="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm tracking-wider text-white"
+              <span class="absolute start-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm tracking-wider text-white"
                 v-if="Number(selectedProduct?.discount) > 0">{{
                   selectedProduct?.discount }}% {{ $t('products.off') }}</span>
             </div>
