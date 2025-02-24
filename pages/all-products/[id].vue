@@ -63,7 +63,7 @@
             <hr class="my-6 border-gray-300" />
 
             <div class="flex flex-wrap gap-4 mt-6">
-              <button @click="handleAddToCart" class="w-[300px] h-10 btn-style flex items-center justify-center">
+              <button @click="handleAddToCart" class="px-4 py-3 w-[45%] border border-purple-600 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold flex items-center justify-center">
                 <div class="flex items-center justify-center" v-if="loading">
                   <span class="text-center me-2">{{ $t('loading_btn.adding_to_cart') }}...</span>
                   <i class="fa-solid fa-spinner fa-spin-pulse"></i>
