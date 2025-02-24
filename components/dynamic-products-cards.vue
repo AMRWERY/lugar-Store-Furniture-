@@ -11,7 +11,8 @@
         <Carousel v-bind="carouselConfig">
           <Slide v-for="card in products" :key="card.id">
             <div class="carousel__item">
-              <div class="rounded-lg shadow-md">
+              
+              
                 <nuxt-link :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }"
                   class="relative w-full max-w-xl overflow-hidden rounded-lg shadow-md">
                   <!-- Fixed-height image container -->
@@ -54,7 +55,6 @@
                     </div>
                   </div>
                 </nuxt-link>
-              </div>
             </div>
           </Slide>
 
