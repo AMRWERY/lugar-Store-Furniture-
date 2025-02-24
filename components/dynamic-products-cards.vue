@@ -8,68 +8,52 @@
       </div>
 
       <ClientOnly v-else>
-        <Carousel v-bind="carouselConfig" style="--gap: 10px">
+        <Carousel v-bind="carouselConfig">
           <Slide v-for="card in products" :key="card.id">
             <div class="carousel__item">
-              <div class="p-2">
-                <div class="rounded-lg shadow-md wrapper wrapper-cards">
-                  <nuxt-link class="container" :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }">
-                    <div class="top" :style="{
-                      backgroundImage: `url(${card.imgOne})`,
-                      backgroundSize: '100%',
-                      backgroundPosition: 'center center',
-                      backgroundRepeat: 'no-repeat'
-                    }"></div>
-                    <div :class="['bottom', { clicked: isClicked[card.id] }]">
-                      <div class="left">
-                        <div class="details">
-                          <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
-                            card.title }}</h1>
-                          <div
-                            class="flex flex-col items-center justify-between mt-2 mb-5 font-semibold text-center ms-1">
-                            <p class="flex items-center space-s-1">
-                              <span class="text-gray-900 me-1">{{ card.discountedPrice }} {{ $t('home.le') }}</span>
-                              <span class="text-sm text-gray-500 line-through mt-0.5">{{ card.originalPrice }} {{
-                                $t('home.le')
-                                }}</span>
-                            </p>
+              <div class="rounded-lg shadow-md">
+                <nuxt-link :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }"
+                  class="relative w-full max-w-xl overflow-hidden bg-white rounded-lg shadow-md">
+                  <!-- Fixed-height image container -->
+                  <div class="relative w-full h-auto overflow-hidden">
+                    <img class="object-cover w-full h-full rounded-t-lg" :src="card.imgOne" alt="product image" />
+                  </div>
+
+                  <!-- Product details -->
+                  <div class="px-5 pb-5 mt-4">
+                    <h5 class="text-xl font-semibold tracking-tight truncate text-slate-900">
+                      {{ $i18n.locale === 'ar' ? card.titleAr :
+                        card.title }}
+                    </h5>
+                    <div class="flex items-center justify-between mt-4">
+                      <div class="flex flex-col">
+                        <span class="text-xl font-bold text-slate-900">
+                          {{ card.discountedPrice }} {{ $t('home.le') }}
+                        </span>
+                        <span class="text-sm line-through text-slate-900" v-if="card.originalPrice">
+                          {{ card.originalPrice }} {{
+                            $t('home.le')
+                          }}
+                        </span>
+                      </div>
+                      <div>
+                        <button type="button" @click.stop.prevent="handleAddToCart(card)"
+                          class="flex items-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                          <div class="flex items-center justify-center" v-if="loadingProduct[card.id]">
+                            <span class="text-center me-2">
+                              {{ $t('loading_btn.adding_to_cart') }}...
+                            </span>
+                            <i class="fa-solid fa-spinner fa-spin-pulse"></i>
                           </div>
-                        </div>
-                        <!-- Bind the click event to handleBuy -->
-                        <div role="button" class="buy" @click.stop.prevent="handleAddToCart(card)">
-                          <i class="fa-solid fa-cart-plus"></i>
-                        </div>
-                      </div>
-                      <div class="right">
-                        <div class="done">
-                          <i class="fa-solid fa-check"></i>
-                        </div>
-                        <div class="details">
-                          <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
-                            card.title }}</h1>
-                          <p>Added to your cart</p>
-                        </div>
-                        <!-- Bind the click event to handleRemove -->
-                        <div class="remove" @click.stop.prevent="removeItem(card.id)">
-                          <i class="fa-solid fa-xmark"></i>
-                        </div>
+                          <div class="flex items-center" v-else>
+                            <i class="fa-solid fa-cart-arrow-down me-2"></i>
+                            <span>{{ $t('btn.add_to_cart') }}</span>
+                          </div>
+                        </button>
                       </div>
                     </div>
-                  </nuxt-link>
-                  <!-- <div class="inside">
-                    <div class="icon">
-                      <i class="fa-solid fa-circle-exclamation"></i>
-                    </div>
-                    <div class="contents">
-                      <table>
-                        <tr>
-                          <th>{{ $i18n.locale === 'ar' ? card.descriptionAr :
-                            card.description }}</th>
-                        </tr>
-                      </table>
-                    </div>
-                  </div> -->
-                </div>
+                  </div>
+                </nuxt-link>
               </div>
             </div>
           </Slide>
@@ -98,12 +82,14 @@ const props = defineProps({
 });
 
 const productsStore = useProductsStore()
+const cartStore = useCartStore();
 const products = ref([])
 const categoryStore = useCategoriesStore()
 const subCategories = ref([])
 const selectedSubCategoryId = ref('')
 const categories = ref([])
 const selectedCategoryId = ref('')
+const loadingProduct = ref({});
 
 onMounted(() => {
   if (props.subCategoryTitle) {
@@ -158,7 +144,7 @@ const handleAddToCart = async (product) => {
     return
   }
   try {
-    isClicked[product.id] = true
+    loadingProduct.value[product.id] = true;
     await cartStore.addToCart(
       product.id,
       product.title,
@@ -173,24 +159,8 @@ const handleAddToCart = async (product) => {
     )
   } catch (error) {
     console.error("Error adding product to cart:", error)
+  } finally {
+    loadingProduct.value[product.id] = false;
   }
 }
-
-const removingItem = ref(null);
-
-const removeItem = async (productId) => {
-  if (!productId) {
-    return;
-  }
-  try {
-    removingItem.value = productId;
-    await cartStore.removeFromCart(productId);
-    removingItem.value = null;
-    isClicked[productId] = false
-  } catch (error) {
-    console.error("Error removing item:", error);
-  }
-};
-
-const isClicked = reactive({})
 </script>

@@ -46,6 +46,10 @@
   @apply p-1 text-white bg-gray-800 rounded-full hover:text-white;
 }
 
+.carousel__viewport {
+  overflow: visible !important;
+}
+
 .carousel__pagination-button {
   @apply bg-gray-300;
 }
@@ -54,55 +58,12 @@
   @apply bg-gray-800;
 }
 
-@media screen and (max-width: 768px) {
-  .carousel__slide {
-    margin: 15px;
-    width: unset !important
-  }
-}
-/* Small devices (phones, up to 600px) */
-@media screen and (max-width: 600px) {
-  .carousel__slide {
-    margin: 30px;
-    width: unset !important
-  }
+.carousel__slide {
+  min-width: 200px; /* Set your minimum slide width */
+  padding: 0 10px; /* Add gap between slides */
 }
 
-@media screen and (max-width: 480px) {
-  .carousel__slide {
-    margin: 20px;
-    width: unset !important
-  }
+.carousel__viewport {
+  overflow: hidden !important;
 }
 
-/* iPhone SE (320px x 568px) */
-@media screen and (max-width: 320px) {
-  .carousel__slide {
-    margin: 20px;
-    width: unset !important
-  }
-}
-
-/* iPhone XR, 11, 12 Mini, 13 Mini (375px x 812px) */
-@media screen and (max-width: 375px) {
-  .carousel__slide {
-    margin: 20px;
-    width: unset !important
-  }
-}
-
-/* iPhone X, 11 Pro, 12, 13, 14, 15 (390px x 844px) */
-@media screen and (max-width: 390px) {
-  .carousel__slide {
-    margin: 20px;
-    width: unset !important
-  }
-}
-
-/* iPhone 11 Pro Max, 12 Pro Max, 13 Pro Max, 14 Plus, 15 Plus (414px x 896px) */
-@media screen and (max-width: 414px) {
-  .carousel__slide {
-    margin: 50px;
-    width: unset !important
-  }
-}
