@@ -251,7 +251,8 @@
     "quantity": "الكمية",
     "description": "الوصف",
     "exclusive_special_offers": "عروض خاصة حصرية",
-    "special_offer": "عرض خاص"
+    "special_offer": "عرض خاص",
+    "product_information": "معلومات المنتج"
   },
   "contact_us": {
     "get_in_touch": "تواصل معنا",
