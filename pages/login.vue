@@ -1,11 +1,8 @@
 <template>
   <div>
-    <!--breadcrumb component -->
-    <breadcrumb />
-
     <div class="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-      <div class="max-w-md mx-auto">
-        <img src="@/assets/Lugar_Furniture_Logo.svg" class="mx-auto w-36 h-36" />
+      <div class="max-w-md p-6 mx-auto bg-white border border-gray-300 rounded-lg shadow-md">
+        <img src="@/assets/Lugar_Furniture_Logo.svg" class="mx-auto -mt-12 w-36 h-36" />
         <h1 class="text-2xl font-bold text-center text-black sm:text-3xl">
           {{ $t('form.get_started_today') }}
         </h1>
