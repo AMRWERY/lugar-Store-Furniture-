@@ -77,6 +77,22 @@
           </div>
         </div>
       </div>
+
+      <div class="px-6 py-12 mt-12 bg-gray-100">
+        <div class="max-w-screen-lg mx-auto xl:max-w-screen-xl">
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div class="space-y-6">
+              <h3 class="text-lg font-bold text-gray-800">PRODUCT INFORMATION</h3>
+              <div>
+                <h3 class="text-sm font-bold text-gray-800">{{ $i18n.locale === 'ar' ?
+                  selectedProduct?.descriptionAr
+                  :
+                  selectedProduct?.description }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- dynamic-toast component -->
