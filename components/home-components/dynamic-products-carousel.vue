@@ -18,9 +18,9 @@
                         <div class="carousel__item">
 
                             <nuxt-link :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }"
-                                class="relative w-full max-w-xs m-10 overflow-hidden bg-white rounded-lg shadow-md">
+                                class="relative w-full max-w-full overflow-hidden bg-white rounded-lg shadow-md">
                                 <!-- Fixed-height image container -->
-                                <div class="relative w-full overflow-hidden h-60">
+                                <div class="relative w-full h-auto overflow-hidden">
                                     <img class="object-cover w-full h-full rounded-t-lg" :src="card.imgOne"
                                         alt="product image" />
                                 </div>
@@ -58,55 +58,6 @@
                                     </div>
                                 </div>
                             </nuxt-link>
-
-
-                            <!-- <div class="p-2">
-                                <div class="rounded-lg shadow-md wrapper wrapper-cards">
-                                    <nuxt-link class="container"
-                                        :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }">
-                                        <div class="top" :style="{
-                                            backgroundImage: `url(${card.imgOne})`,
-                                            backgroundSize: '100%',
-                                            backgroundPosition: 'center center',
-                                            backgroundRepeat: 'no-repeat'
-                                        }"></div>
-                                        <div :class="['bottom', { clicked: isClicked[card.id] }]">
-                                            <div class="left">
-                                                <div class="details">
-
-                                                    <div class="flex flex-col items-center pb-2 text-center ">
-                                                        <div class="font-normal ">
-                                                            {{ $i18n.locale === 'ar' ? card.titleAr : card.title }}
-                                                        </div>
-                                                        <div class="flex items-center gap-2 font-semibold">
-                                                            <span class="text-sm text-gray-500 mt-0.5">{{
-                                                                card.originalPrice }} {{ $t('home.le')
-                                                                }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div role="button" class="buy"
-                                                    @click.stop.prevent="handleAddToCart(card)">
-                                                    <i class="fa-solid fa-cart-plus"></i>
-                                                </div>
-                                            </div>
-                                            <div class="right">
-                                                <div class="done">
-                                                    <i class="fa-solid fa-check"></i>
-                                                </div>
-                                                <div class="details">
-                                                    <h1>{{ $i18n.locale === 'ar' ? card.titleAr :
-                                                        card.title }}</h1>
-                                                    <p>Added to your cart</p>
-                                                </div>
-                                                <div class="remove" @click.stop.prevent="removeItem(card.id)">
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </nuxt-link>
-                                </div>
-                            </div> -->
                         </div>
                     </Slide>
 
