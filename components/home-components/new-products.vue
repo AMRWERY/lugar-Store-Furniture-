@@ -27,7 +27,7 @@
 
           <HeadlessTabPanels class="mt-2">
             <HeadlessTabPanel v-for="(tab, index) in tabs" :key="index"
-              class="p-3 bg-white rounded-xl ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
+              class="p-3 rounded-xl ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2">
               <dynamic-products-cards :categoryTitle="tab.category" />
             </HeadlessTabPanel>
           </HeadlessTabPanels>

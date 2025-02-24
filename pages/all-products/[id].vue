@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="">
     <!--breadcrumb component -->
     <breadcrumb />
 
-    <div class="font-[sans-serif] p-4">
+    <div class="font-[sans-serif] p-4 mt-4">
       <div class="max-w-xl mx-auto xl:max-w-screen-xl lg:max-w-screen-lg">
         <div class="grid items-start grid-cols-1 gap-8 lg:grid-cols-5 max-lg:gap-12 max-sm:gap-8">
           <div class="top-0 w-full lg:sticky lg:col-span-3">
@@ -84,7 +84,7 @@
             <div class="space-y-6">
               <h3 class="text-lg font-bold text-gray-800">{{ $t('products.product_information') }}</h3>
               <div>
-                <h3 class="text-sm font-bold text-gray-800">{{ $i18n.locale === 'ar' ?
+                <h3 class="text-sm text-gray-500">{{ $i18n.locale === 'ar' ?
                   selectedProduct?.descriptionAr
                   :
                   selectedProduct?.description }}</h3>

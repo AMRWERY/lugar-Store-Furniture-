@@ -22,7 +22,7 @@
                                         20%</p>
                                     <!-- Underline element: initial width 0, animates to full container width -->
                                     <span
-                                        class="block h-0.5 bg-white w-0 group-hover:w-full transition-all duration-300">
+                                        class="block h-0.5 w-0 group-hover:w-full transition-all duration-300">
                                     </span>
                                 </div>
                             </div>

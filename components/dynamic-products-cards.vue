@@ -13,7 +13,7 @@
             <div class="carousel__item">
               <div class="rounded-lg shadow-md">
                 <nuxt-link :to="{ path: `/all-products/${card.id}`, query: { id: card.id } }"
-                  class="relative w-full max-w-xl overflow-hidden bg-white rounded-lg shadow-md">
+                  class="relative w-full max-w-xl overflow-hidden rounded-lg shadow-md">
                   <!-- Fixed-height image container -->
                   <div class="relative w-full h-auto overflow-hidden">
                     <img class="object-cover w-full h-full rounded-t-lg" :src="card.imgOne" alt="product image" />

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="py-6 bg-white sm:py-8 lg:py-12" data-aos="zoom-in-up">
+    <div class="py-6 sm:py-8 lg:py-12" data-aos="zoom-in-up">
       <div class="max-w-4xl px-4 mx-auto">
         <div class="grid gap-8 sm:grid-cols-2 md:gap-12 xl:grid-cols-3 xl:gap-16">
           <!-- feature - start -->
