@@ -43,14 +43,18 @@ const localeStore = useLocaleStore();
 const authStore = useAuthStore()
 const { locale } = useI18n();
 
+onMounted(() => {
+    locale.value = localeStore.locale;
+});
+
 const setLocale = (value) => {
-  locale.value = value;
-  localeStore.updateLocale(value);
+    locale.value = value;
+    localeStore.updateLocale(value);
 };
 
 computed(() => {
-  const storedLocale = localeStore.locale;
-  setLocale(storedLocale);
+    const storedLocale = localeStore.locale;
+    setLocale(storedLocale);
 });
 
 onMounted(async () => {

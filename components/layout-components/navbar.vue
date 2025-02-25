@@ -178,14 +178,18 @@ const authStore = useAuthStore()
 const route = useRoute();
 const { locale } = useI18n();
 
+onMounted(() => {
+    locale.value = localeStore.locale;
+});
+
 const setLocale = (value) => {
-  locale.value = value;
-  localeStore.updateLocale(value);
+    locale.value = value;
+    localeStore.updateLocale(value);
 };
 
 computed(() => {
-  const storedLocale = localeStore.locale;
-  setLocale(storedLocale);
+    const storedLocale = localeStore.locale;
+    setLocale(storedLocale);
 });
 
 const logout = async () => {
