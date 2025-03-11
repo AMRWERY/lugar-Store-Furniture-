@@ -3,7 +3,7 @@
     <!-- overlay Component -->
     <overlay :visible="localeStore.isOverlayVisible" />
 
-    <div v-if="!isLoginPage">
+    <div>
       <header class="sticky inset-0 z-50 text-white bg-black h-14">
         <nav
           class="flex items-center justify-center h-full gap-8 px-6 mx-auto transition-all duration-200 ease-in-out lg:px-20">

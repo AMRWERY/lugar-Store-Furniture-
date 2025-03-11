@@ -1108,11 +1108,6 @@
   resolved "https://registry.npmjs.org/@types/resolve/-/resolve-1.20.2.tgz"
   integrity sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==
 
-"@types/web-bluetooth@^0.0.20":
-  version "0.0.20"
-  resolved "https://registry.npmjs.org/@types/web-bluetooth/-/web-bluetooth-0.0.20.tgz"
-  integrity sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==
-
 "@typescript-eslint/scope-manager@^8.13.0":
   version "8.18.2"
   resolved "https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.18.2.tgz"
@@ -1382,48 +1377,6 @@
   version "3.5.13"
   resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.5.13.tgz"
   integrity sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==
-
-"@vueuse/components@^12.2.0":
-  version "12.2.0"
-  resolved "https://registry.npmjs.org/@vueuse/components/-/components-12.2.0.tgz"
-  integrity sha512-Oc4sXiwb3E5McBBKqtltWYLWpr0t7tLKFyxUpau7PQRLE/u4yCeWvdSGSzCXHmUcNIdpq4JjwOyIOxiqk0jMuQ==
-  dependencies:
-    "@vueuse/core" "12.2.0"
-    "@vueuse/shared" "12.2.0"
-    vue "^3.5.13"
-
-"@vueuse/core@^12.2.0", "@vueuse/core@12.2.0":
-  version "12.2.0"
-  resolved "https://registry.npmjs.org/@vueuse/core/-/core-12.2.0.tgz"
-  integrity sha512-jksyNu+5EGwggNkRWd6xX+8qBkYbmrwdFQMgCABsz+wq8bKF6w3soPFLB8vocFp3wFIzn0OYkSPM9JP+AFKwsg==
-  dependencies:
-    "@types/web-bluetooth" "^0.0.20"
-    "@vueuse/metadata" "12.2.0"
-    "@vueuse/shared" "12.2.0"
-    vue "^3.5.13"
-
-"@vueuse/metadata@12.2.0":
-  version "12.2.0"
-  resolved "https://registry.npmjs.org/@vueuse/metadata/-/metadata-12.2.0.tgz"
-  integrity sha512-x6zynZtTh1l52m0y8d/EgzpshnMjg8cNZ2KWoncJ62Z5qPSGoc4FUunmMVrrRM/I/5542rTEY89CGftngZvrkQ==
-
-"@vueuse/nuxt@^12.2.0":
-  version "12.2.0"
-  resolved "https://registry.npmjs.org/@vueuse/nuxt/-/nuxt-12.2.0.tgz"
-  integrity sha512-ffAQOeIahFmp7NmI3dDrKeo3pLMV8S58p+TuEbNYPZ25gET7R3PRq0DpxaWghHXtVXOKVYR+U1nimx9XtpAVyg==
-  dependencies:
-    "@nuxt/kit" "^3.14.1592"
-    "@vueuse/core" "12.2.0"
-    "@vueuse/metadata" "12.2.0"
-    local-pkg "^0.5.1"
-    vue "^3.5.13"
-
-"@vueuse/shared@12.2.0":
-  version "12.2.0"
-  resolved "https://registry.npmjs.org/@vueuse/shared/-/shared-12.2.0.tgz"
-  integrity sha512-SRr4AZwv/giS+EmyA1ZIzn3/iALjjnWAGaBNmoDTMEob9JwQaevAocuaMDnPAvU7Z35Y5g3CFRusCWgp1gVJ3Q==
-  dependencies:
-    vue "^3.5.13"
 
 abbrev@^2.0.0:
   version "2.0.0"
@@ -4096,7 +4049,7 @@ nuxt-headlessui@^1.2.0:
     "@nuxt/kit" "^3.11.2"
     pathe "^1.1.2"
 
-nuxt@^3.0.0, nuxt@^3.15.0:
+nuxt@^3.15.0:
   version "3.15.0"
   resolved "https://registry.npmjs.org/nuxt/-/nuxt-3.15.0.tgz"
   integrity sha512-pjP/2zEjr57ensZZ1F4b7KldocM9S4SOtukgi9zau1OFlyolUmEgMFbHnwmEKqzuZ1OPTaRS3/1S6B7GUVbbRg==
