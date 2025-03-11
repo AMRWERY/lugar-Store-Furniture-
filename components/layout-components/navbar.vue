@@ -46,12 +46,12 @@
               </i>
             </nuxt-link>
 
-            <ClientOnly>
+            <!-- <ClientOnly>
               <nuxt-link to="/login" role="button" class="text-sm font-medium font-dm"
                 v-if="!authStore.isAuthenticated">{{ $t('layout.sign_in') }}</nuxt-link>
               <nuxt-link to="" role="button" class="text-sm font-medium font-dm" @click="logout"
                 v-if="authStore.isAuthenticated">{{ $t('btn.logout') }}</nuxt-link>
-            </ClientOnly>
+            </ClientOnly> -->
 
             <!-- toggle locales -->
             <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-if="localeStore.isRTL">
@@ -174,35 +174,19 @@
 <script setup>
 const localeStore = useLocaleStore();
 const cartStore = useCartStore();
-const authStore = useAuthStore()
-const route = useRoute();
 const { locale } = useI18n();
 
 onMounted(() => {
-    locale.value = localeStore.locale;
+  locale.value = localeStore.locale;
 });
 
 const setLocale = (value) => {
-    locale.value = value;
-    localeStore.updateLocale(value);
+  locale.value = value;
+  localeStore.updateLocale(value);
 };
 
 computed(() => {
-    const storedLocale = localeStore.locale;
-    setLocale(storedLocale);
-});
-
-const logout = async () => {
-  try {
-    await authStore.logoutUser();
-  } catch (err) {
-    console.error('Error during logout:', err);
-  }
-};
-
-const isLoginPage = computed(() => route.path === '/login')
-
-onMounted(async () => {
-  await authStore.init();
+  const storedLocale = localeStore.locale;
+  setLocale(storedLocale);
 });
 </script>
