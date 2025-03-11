@@ -46,13 +46,6 @@
               </i>
             </nuxt-link>
 
-            <!-- <ClientOnly>
-              <nuxt-link to="/login" role="button" class="text-sm font-medium font-dm"
-                v-if="!authStore.isAuthenticated">{{ $t('layout.sign_in') }}</nuxt-link>
-              <nuxt-link to="" role="button" class="text-sm font-medium font-dm" @click="logout"
-                v-if="authStore.isAuthenticated">{{ $t('btn.logout') }}</nuxt-link>
-            </ClientOnly> -->
-
             <!-- toggle locales -->
             <nuxt-link to="" class="font-semibold text-white me-4" role="button" v-if="localeStore.isRTL">
               <span class="[&>svg]:w-5" @click="setLocale('en')">
